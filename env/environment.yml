@@ -1,0 +1,26 @@
+name: circadian-conv
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - iqtree>=2.2          # trees, branch lengths, gCF/sCF
+  - trimal               # alignment trimming
+  - mafft                # (re)alignment if needed
+  - pal2nal              # protein alignment -> codon alignment
+  - hyphy                # Contrast-FEL, RELAX, aBSREL, BUSTED
+  - openjdk>=11          # TDG09 (Java)
+  - pandas
+  - numpy
+  - biopython
+  - plotly
+  - python-kaleido       # Plotly -> vector PDF export
+  - ete3                 # tree pruning / bipartition matching
+  - r-base>=4.2
+  - r-ape
+  - r-phytools
+  - r-corhmm
+# Installed separately (not on conda):
+#   - PCOC            docker pull carinerey/pcoc
+#   - RERconverge     R: remotes::install_github("nclark-lab/RERconverge")
+#   - TDG09           download tdg09.jar from its release, place in tools/
