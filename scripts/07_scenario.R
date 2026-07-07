@@ -14,7 +14,7 @@ suppressMessages({
   library(ape); library(phytools); library(corHMM)
 })
 
-proj <- Sys.getenv("PROJ", unset = normalizePath(file.path(dirname(sys.frame(1)$ofile), "..")))
+proj <- Sys.getenv("PROJ", unset = getwd())
 res  <- file.path(proj, "results", "scenario")
 tree <- read.tree(file.path(proj, "data", "species_tree.nwk"))
 diel <- read.csv(file.path(proj, "data", "diel_activity.csv"), stringsAsFactors = FALSE)

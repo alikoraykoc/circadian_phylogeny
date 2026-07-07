@@ -2,26 +2,30 @@
 # 11_rerconverge.R
 # Gene-level test: which of the 18 genes has relative evolutionary rates
 # associated with the diel trait. Consumes the collected fixed-topology trees
-# (04, one shared model) and the binary trait (07).
+# (step 05, uniform model Q.MAMMAL+F+R6) and the binary trait (step 07).
 
-suppressMessages(library(RERconverge))   # install from GitHub: nclark-lab/RERconverge
+suppressMessages({
+  library(RERconverge)
+  library(ape)
+})
 
-proj <- Sys.getenv("PROJ")
+proj <- Sys.getenv("PROJ", unset = getwd())
 res  <- file.path(proj, "results", "rerconverge")
 dir.create(res, showWarnings = FALSE, recursive = TRUE)
 
-# rer_input.trees is "<gene>\t<newick>" per line, built in step 04.
+# rer_input.trees is "<gene>\t<newick>" per line, built in step 05.
 trees <- readTrees(file.path(proj, "results", "branchlengths", "rer_input.trees"))
 
 # relative evolutionary rates across all genes
-RERmat <- getAllResiduals(trees, transform = "sqrt", weighted = TRUE, scale = TRUE)
+RERmat <- getAllResiduals(trees, transform = "sqrt")
 
-# ---- foreground: the diurnal (or reversal) tips/branches ----
-# EDIT: list the foreground tip labels (independently derived state).
-fg_tips <- c()  # e.g. c("Macaca_mulatta","Rattus_norvegicus_diurnal_relative", ...)
-stopifnot(length(fg_tips) > 0)
+# ---- foreground: diurnal tips (the derived convergent state) ----
+diel <- read.csv(file.path(proj, "data", "diel_activity.csv"))
+fg_tips <- diel$species[diel$activity == "diurnal"]
 
-fgTree <- foreground2Tree(fg_tips, trees, clade = "terminal")   # or "all"/"ancestral"
+# Use "terminal" for tip branches only (conservative);
+# "all" would also include ancestral branches leading to diurnal clades.
+fgTree <- foreground2Tree(fg_tips, trees, clade = "terminal")
 paths  <- tree2Paths(fgTree, trees)
 
 cor <- correlateWithBinaryPhenotype(RERmat, paths,

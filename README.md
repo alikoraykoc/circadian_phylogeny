@@ -42,8 +42,8 @@ scripts/00_check_inputs.sh
 scripts/01_trim_alignments.sh
 scripts/02_codon_alignments.sh        # optional, selection track only
 scripts/03_genetrees_qc.sh
-scripts/04_branchlengths_fixed.sh      # the required tree step
-scripts/05_supermatrix.sh
+scripts/04_supermatrix.sh              # picks RER uniform model
+scripts/05_branchlengths_fixed.sh      # builds PCOC (MFP) + RER (uniform) trees
 scripts/06_concordance.sh
 Rscript scripts/07_scenario.R
 python  scripts/08_flag_discordant_branches.py

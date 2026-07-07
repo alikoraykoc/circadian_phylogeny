@@ -7,10 +7,10 @@
 set -euo pipefail
 source "$(dirname "$0")/../config.sh"
 
-iqtree2 -t "$SPTREE" \
+iqtree -t "$SPTREE" \
         --gcf "$RES/genetrees_qc/all_gene_trees.treefile" \
-        -p "$RES/supermatrix/parts" --scf 100 \
-        --prefix "$RES/concordance/concord" -T "$THREADS" -redo
+        -s "$RES/supermatrix/parts" --scf 100 \
+        --prefix "$RES/concordance/concord" -T 4 -redo
 
 echo
 echo "Outputs:"

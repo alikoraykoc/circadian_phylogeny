@@ -11,7 +11,7 @@ source "$(dirname "$0")/../config.sh"
 
 for g in $GENES; do
   echo "== unconstrained ML: $g =="
-  iqtree2 -s "$RES/trim/$g.trim.$AAEXT" \
+  iqtree -s "$RES/trim/$g.trim.$AAEXT" \
           -m MFP -B 1000 \
           -pre "$RES/genetrees_qc/$g" -T "$THREADS" -redo
   cat "$RES/genetrees_qc/$g.treefile" >> "$RES/genetrees_qc/all_gene_trees.treefile"

@@ -7,7 +7,7 @@ set -euo pipefail
 source "$(dirname "$0")/../config.sh"
 
 for g in $GENES; do
-  in="$ALN/$g.$AAEXT"
+  in="$ALN/${g}${AASUFFIX}.$AAEXT"
   out="$RES/trim/$g.trim.$AAEXT"
   colmap="$RES/trim/$g.colnumbering.txt"
 

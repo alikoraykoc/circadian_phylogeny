@@ -10,7 +10,7 @@ echo "== Checking inputs =="
 
 missing=0
 for g in $GENES; do
-  f="$ALN/$g.$AAEXT"
+  f="$ALN/${g}${AASUFFIX}.$AAEXT"
   if [[ ! -f "$f" ]]; then echo "MISSING alignment: $f"; missing=1; fi
 done
 [[ $missing -eq 0 ]] || { echo "Fix missing alignments before continuing."; exit 1; }

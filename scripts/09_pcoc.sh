@@ -1,37 +1,38 @@
 #!/usr/bin/env bash
 # 09_pcoc.sh
-# Convergence detection with PCOC (Docker image), per gene, plus a power/FPR
-# simulation on your actual tree + scenario. Runs on the fixed-topology gene
-# trees (04) and the trimmed protein alignments (01), using the scenario (07).
+# Convergence detection with PCOC (Docker image), per gene.
+# Uses per-gene scenario strings (from prep_pcoc_scenarios.py) that map
+# species-tree transition branches onto each gene tree's PCOC node numbering.
 set -euo pipefail
 source "$(dirname "$0")/../config.sh"
 
-PCOC_IMG="carinerey/pcoc"           # docker pull carinerey/pcoc
-SCEN="$(cat "$RES/scenario/pcoc_scenario.txt")"
+PCOC_IMG="carinerey/pcoc"
+SCEN_DIR="$RES/pcoc/scenarios"
 
-run_pcoc () {  # $1 = docker mount root ; runs pcoc inside container
-  docker run --rm -v "$PROJ":/proj "$PCOC_IMG" "$@"
-}
-
-# ---- power / FPR simulation FIRST (calibrate the posterior threshold) ----
-# Use one representative gene tree; the scenario drives power more than the gene.
-echo "== PCOC power simulation =="
-run_pcoc pcoc_sim.py \
-  -td /proj/results/branchlengths \
-  -o  /proj/results/pcoc/sim \
-  -m  "$SCEN"  || echo "Check pcoc_sim.py flags for your image version (-h)."
+if [[ ! -d "$SCEN_DIR" ]]; then
+  echo "Run prep_pcoc_scenarios.py first to generate per-gene scenarios."
+  exit 1
+fi
 
 # ---- detection per gene ----
 for g in $GENES; do
+  SCEN="$(cat "$SCEN_DIR/$g.scenario")"
+  if [[ -z "$SCEN" ]]; then
+    echo "SKIP $g: no scenario"
+    continue
+  fi
   echo "== PCOC detect: $g =="
-  run_pcoc pcoc_det.py \
-    -t  "/proj/results/branchlengths/$g.treefile" \
+  docker run --rm -v "$PROJ":/proj "$PCOC_IMG" pcoc_det.py \
+    -t  "/proj/results/branchlengths/pcoc/$g.treefile" \
     -aa "/proj/results/trim/$g.trim.$AAEXT" \
     -m  "$SCEN" \
     -o  "/proj/results/pcoc/$g" \
-    --plot  || echo "Check pcoc_det.py flags for your image version (-h)."
+    -f  0.8 \
+    --gamma \
+    --no_cleanup \
+    2>&1 | tail -5
+  echo "  done: $g"
 done
 
 echo
 echo "Per-site PCOC/PC/OC posteriors in results/pcoc/<gene>/"
-echo "Apply the threshold chosen from the simulation, not a fixed 0.8 by default."

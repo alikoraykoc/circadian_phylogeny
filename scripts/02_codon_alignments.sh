@@ -24,7 +24,7 @@ for g in $GENES; do
   # protein alignment here so codon coordinates stay consistent, then trim the
   # codon alignment afterwards if desired, OR feed the trimmed protein alignment
   # if your pal2nal build supports gapped input cleanly. Check with -h.
-  pal2nal.pl "$ALN/$g.$AAEXT" "$CDS/$g.$CDSEXT" -output fasta > "$RES/codon/$g.codon.fasta"
+  pal2nal.pl "$ALN/${g}${AASUFFIX}.$AAEXT" "$CDS/$g.$CDSEXT" -output fasta > "$RES/codon/$g.codon.fasta"
   echo "codon alignment: $g"
 done
 

@@ -20,7 +20,7 @@ import plotly.graph_objects as go
 PROJ = os.environ.get("PROJ", os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 RES = os.path.join(PROJ, "results")
 REF_SPECIES = os.environ.get("REF_SPECIES", "Homo_sapiens")
-GENES = os.environ.get("GENES", "").split()
+GENES = os.environ.get("GENES", "CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41").split()
 
 PCOC_THRESHOLD = 0.90          # EDIT: use the value calibrated by pcoc_sim (step 09)
 MIN_METHODS = 2                # a site is "high confidence" if backed by >= this many

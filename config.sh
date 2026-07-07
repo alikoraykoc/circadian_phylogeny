@@ -15,20 +15,29 @@ export DIEL="$DATA/diel_activity.csv"    # columns: species,activity
 export REF_SPECIES="Homo_sapiens"    # EDIT: exact tip label used in your alignments/tree
 
 # ---- gene list (18 genes) ----
-# EDIT: file basenames must match, e.g. $ALN/CLOCK.faa
+# EDIT: file basenames must match, e.g. $ALN/CLOCK_aligned.fa
 export GENES="CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41"
 
 # ---- alignment file extensions ----
-export AAEXT="faa"          # protein alignment extension
+export AASUFFIX="_aligned"  # suffix between gene name and extension
+export AAEXT="fa"           # protein alignment extension
 export CDSEXT="fna"         # CDS extension
 
 # ---- compute ----
 export THREADS="AUTO"       # or an integer for IQ-TREE / HyPhy
 
-# ---- models ----
-# One shared model across all fixed-topology gene trees keeps RERconverge's
-# cross-gene rate comparison clean. LG+G4 is the defensible default here.
-export FIXED_MODEL="LG+G4"
+# ---- models (two tracks) ----
+# PCOC / TDG09 trees: per-gene MFP. These are independent per-gene analyses
+# with no cross-gene comparison, so each gene gets its best-fit branch lengths.
+export PCOC_MODEL="MFP"
+
+# RERconverge trees: one uniform model across all genes, data-driven from the
+# supermatrix (step 05). RER normalizes scale but NOT model-driven shape
+# differences (long-vs-short branch ratios from different rate-heterogeneity
+# choices). A shared model prevents that confound.
+# Step 05 writes the winner to $RES/supermatrix/best_model.txt; step 04 reads it.
+export RER_MODEL_FILE="$RES/supermatrix/best_model.txt"
+export RER_MODEL_FALLBACK="Q.MAMMAL+R4"
 
 # ---- helper ----
 mkdir -p "$RES"/{trim,codon,genetrees_qc,branchlengths,supermatrix,concordance,scenario,pcoc,tdg09,rerconverge,selection,consensus,figures}

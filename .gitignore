@@ -24,3 +24,8 @@ __pycache__/
 
 # Tools (external binaries)
 tools/
+tdg09-1.1.2/
+
+# Misc artifacts
+*.xlsx
+Rplots.pdf

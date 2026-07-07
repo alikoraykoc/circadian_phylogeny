@@ -12,6 +12,19 @@ and phenotype-associated genes, interpreted against protein structure and functi
 Genes: CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 RORA RORB RORC
 CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41.
 
+## Environment Constraints
+
+When installing software that requires `sudo` (e.g., Docker, brew cask installs),
+provide the exact commands for the user to run in their external terminal rather
+than attempting to run them directly. Claude's terminal cannot handle interactive
+sudo prompts.
+
+## Pipeline Execution
+
+For long-running bioinformatics tools (Docker containers, RERconverge, PCOC), check
+if the process is still running before assuming failure. Use `docker ps`,
+`ps aux | grep`, or log file tailing to monitor progress.
+
 ## Status snapshot
 
 Ready:
