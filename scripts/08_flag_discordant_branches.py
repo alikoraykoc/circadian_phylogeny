@@ -2,10 +2,13 @@
 """
 08_flag_discordant_branches.py
 
-Cross-reference the diel transition branches (from 07) with the gene-concordance
-factors (from 06). A diel transition sitting on a low-gCF branch is where
-hemiplasy is most likely to manufacture false convergence, so those branches get
-flagged for extra scrutiny or exclusion from the scenario.
+Cross-reference the diel transition branches (from 07) with the concordance
+factors (from 06). A diel transition sitting on a branch that is weakly
+supported by both gene trees (low gCF) and sites (low sCFL) is where hemiplasy
+is most likely to manufacture false convergence, so those branches get flagged
+for extra scrutiny or exclusion from the scenario. Requiring both metrics to be
+low (not either alone) keeps the flag specific, since each metric alone is often
+just estimation noise on that axis.
 
 Matching strategy: both corHMM (step 07) and IQ-TREE concordance (step 06)
 reference the same Upham topology, but use different internal node numbering.
@@ -22,15 +25,40 @@ RES = os.path.join(PROJ, "results")
 
 trans_csv = os.path.join(RES, "scenario", "transition_branches.csv")
 cf_stat = os.path.join(RES, "concordance", "concord.cf.stat")
-cf_branch = os.path.join(RES, "concordance", "concord.cf.tree")
+# concord.cf.branch labels internal nodes with the integer branch IDs that match
+# concord.cf.stat; concord.cf.tree labels them with support/gCF strings, which do
+# NOT parse as IDs. We need the branch-ID tree here.
+cf_branch = os.path.join(RES, "concordance", "concord.cf.branch")
 sptree_path = os.path.join(PROJ, "data", "species_tree.nwk")
 
+# A transition branch is flagged for hemiplasy risk only when it is weakly
+# supported by BOTH lines of evidence: few gene trees recover it (low gCF) AND
+# few sites support it (low sCFL). Either one alone is usually just estimation
+# noise on that axis; both together is where gene-tree/species-tree discordance
+# can manufacture false convergence. sCFL's no-signal baseline is ~33% (random
+# among three resolutions), so 50% is a conservative "weak" cutoff.
 GCF_FLAG_THRESHOLD = 50.0
+SCFL_FLAG_THRESHOLD = 50.0
 
 
 def get_descendant_tips(node):
     """Return frozenset of leaf names under a node."""
     return frozenset(l.name for l in node.get_leaves())
+
+
+def canonical_bip(tips, all_tips, ref):
+    """Canonical form of a bipartition, invariant to how the tree is rooted.
+
+    A branch splits the taxa into a set and its complement; which side is the
+    "descendant" set depends on the rooting. We always keep the side that does
+    NOT contain a fixed reference tip, so the corHMM/ape tree and the IQ-TREE
+    concordance tree map the same branch to the same frozenset even if they are
+    rooted differently.
+    """
+    tips = frozenset(tips)
+    if ref in tips:
+        return frozenset(all_tips) - tips
+    return tips
 
 
 def build_ape_bipartitions(tree_path):
@@ -75,8 +103,22 @@ def build_ape_bipartitions(tree_path):
     return bip_map, t
 
 
+def _to_float(val):
+    """Merged concord.cf.stat uses 'NA' for branches missing in one run."""
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return None
+
+
 def parse_cf_stat(cf_stat_path):
-    """Parse concord.cf.stat into a dict of branch_id -> gCF, sCF."""
+    """Parse the merged concord.cf.stat (from step 06) into
+    branch_id -> {gCF, sCFL, gN}.
+
+    Step 06 writes both gene-concordance (gCF) and likelihood-based site-
+    concordance (sCFL) columns per branch; either may be 'NA' where a branch
+    is present in only one of the two IQ-TREE runs.
+    """
     cf_data = {}
     with open(cf_stat_path) as f:
         header = None
@@ -90,12 +132,14 @@ def parse_cf_stat(cf_stat_path):
             row = dict(zip(header, parts))
             try:
                 bid = int(row["ID"])
-                gcf = float(row["gCF"])
-                scf = float(row["sCF"])
-                gn = int(row["gN"])
-                cf_data[bid] = {"gCF": gcf, "sCF": scf, "gN": gn}
             except (ValueError, KeyError):
                 continue
+            gn = _to_float(row.get("gN"))
+            cf_data[bid] = {
+                "gCF": _to_float(row.get("gCF")),
+                "sCFL": _to_float(row.get("sCFL")),
+                "gN": int(gn) if gn is not None else None,
+            }
     return cf_data
 
 
@@ -129,11 +173,18 @@ def main():
     iqt_bip = build_iqtree_bipartitions(cf_branch)
     cf_data = parse_cf_stat(cf_stat)
 
-    # 3. Build IQ-TREE bipartition -> (branch_id, gCF, sCF) lookup
+    # Shared taxon set and a fixed reference tip, used to canonicalize
+    # bipartitions so ape and IQ-TREE branches match regardless of rooting.
+    all_tips = frozenset().union(*iqt_bip.values()) if iqt_bip else frozenset()
+    ref_tip = min(all_tips) if all_tips else None
+
+    # 3. Build IQ-TREE bipartition -> (branch_id, gCF, sCFL) lookup, keyed by the
+    #    rooting-invariant canonical bipartition.
     bip_to_cf = {}
     for bid, tips in iqt_bip.items():
         if bid in cf_data:
-            bip_to_cf[tips] = {"iqtree_id": bid, **cf_data[bid]}
+            key = canonical_bip(tips, all_tips, ref_tip)
+            bip_to_cf[key] = {"iqtree_id": bid, **cf_data[bid]}
 
     # 4. Match each transition branch to its concordance values
     results = []
@@ -142,28 +193,46 @@ def main():
         child_tips = ape_bip.get(child_node, frozenset())
         child_label = tr["child_label"] if tr["child_label"] != "" else None
 
-        matched = bip_to_cf.get(child_tips)
-        if matched:
+        key = canonical_bip(child_tips, all_tips, ref_tip) if child_tips else child_tips
+        matched = bip_to_cf.get(key)
+        is_internal = matched is not None
+        if is_internal:
             gcf = matched["gCF"]
-            scf = matched["sCF"]
+            scfl = matched["sCFL"]
             gn = matched["gN"]
-            flag = gcf < GCF_FLAG_THRESHOLD
+            # Flag only when BOTH support metrics are low. If either value is
+            # missing (NA), we cannot confirm both are low, so do not flag.
+            flag = (
+                gcf is not None and scfl is not None
+                and gcf < GCF_FLAG_THRESHOLD
+                and scfl < SCFL_FLAG_THRESHOLD
+            )
         else:
-            # Tip branches don't have concordance factors
+            # Terminal transition branch: no bipartition, so no concordance factors.
             gcf = None
-            scf = None
+            scfl = None
             gn = None
             flag = False
+
+        # Display: "tip" means the branch is terminal (no CF exists); "NA" means the
+        # branch matched an internal concordance branch but that metric is undefined
+        # (e.g. no gene tree was decisive there). These are different, so do not
+        # collapse them.
+        def show(val):
+            if not is_internal:
+                return "tip"
+            return f"{val:.1f}" if val is not None else "NA"
 
         results.append({
             "edge_id": tr["edge_id"],
             "parent": tr["parent"],
             "child": tr["child"],
             "child_label": child_label or "",
+            "branch_type": "internal" if is_internal else "tip",
             "child_tips": ",".join(sorted(child_tips)) if len(child_tips) <= 10 else f"{len(child_tips)} taxa",
-            "gCF": f"{gcf:.1f}" if gcf is not None else "tip",
-            "sCF": f"{scf:.1f}" if scf is not None else "tip",
-            "gN": str(gn) if gn is not None else "tip",
+            "gCF": show(gcf),
+            "sCFL": show(scfl),
+            "gN": (str(gn) if gn is not None else "NA") if is_internal else "tip",
             "hemiplasy_flag": flag,
         })
 
@@ -175,18 +244,18 @@ def main():
         writer.writerows(results)
 
     # 6. Report
-    n_internal = sum(1 for r in results if r["gCF"] != "tip")
+    n_internal = sum(1 for r in results if r["branch_type"] == "internal")
     n_flagged = sum(1 for r in results if r["hemiplasy_flag"])
-    n_tip = sum(1 for r in results if r["gCF"] == "tip")
+    n_tip = sum(1 for r in results if r["branch_type"] == "tip")
 
     print(f"Transition branches: {len(results)} total ({n_internal} internal, {n_tip} tip)")
-    print(f"gCF threshold: {GCF_FLAG_THRESHOLD}%")
+    print(f"Flag criterion: gCF < {GCF_FLAG_THRESHOLD}% AND sCFL < {SCFL_FLAG_THRESHOLD}%")
     print(f"Flagged for hemiplasy risk: {n_flagged}")
     print()
     for r in results:
         marker = " ** FLAGGED" if r["hemiplasy_flag"] else ""
         label = r["child_label"] or r["child_tips"]
-        print(f"  edge {r['edge_id']:>3}: gCF={r['gCF']:>5}  sCF={r['sCF']:>5}  {label}{marker}")
+        print(f"  edge {r['edge_id']:>3}: gCF={r['gCF']:>5}  sCFL={r['sCFL']:>5}  {label}{marker}")
 
     print(f"\nOutput: {out_path}")
 
