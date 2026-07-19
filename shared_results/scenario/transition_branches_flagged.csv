@@ -1,0 +1,16 @@
+edge_id,parent,child,child_label,branch_type,child_tips,gCF,sCFL,gN,hemiplasy_flag
+3,63,64,NA,internal,24 taxa,38.9,75.7,18,False
+4,64,65,NA,internal,"Pipistrellus_pipistrellus,Saccopteryx_bilineata",56.2,48.1,16,False
+16,67,71,NA,internal,"Acinonyx_jubatus,Caracal_caracal,Hyaena_hyaena,Leopardus_geoffroyi,Paguma_larvata,Panthera_pardus,Puma_concolor,Suricata_suricatta",50.0,42.0,18,False
+20,73,8,Suricata_suricatta,tip,Suricata_suricatta,tip,tip,tip,False
+27,77,11,Acinonyx_jubatus,tip,Acinonyx_jubatus,tip,tip,tip,False
+34,79,16,Tapirus_terrestris,tip,Tapirus_terrestris,tip,tip,tip,False
+46,85,22,Tragelaphus_eurycerus,tip,Tragelaphus_eurycerus,tip,tip,tip,False
+60,89,93,NA,internal,"Aotus_nancymaae,Callithrix_jacchus,Cebus_imitator,Gorilla_gorilla,Homo_sapiens,Hylobates_pileatus,Pan_troglodytes,Plecturocebus_cupreus",55.6,60.8,18,False
+67,95,32,Aotus_nancymaae,tip,Aotus_nancymaae,tip,tip,tip,False
+79,101,39,Ochotona_princeps,tip,Ochotona_princeps,tip,tip,tip,False
+82,103,104,NA,internal,"Cynomys_ludovicianus,Ictidomys_tridecemlineatus,Sciurus_vulgaris,Xerus_rutilus",58.8,55.4,17,False
+89,103,44,Octodon_degus,tip,Octodon_degus,tip,tip,tip,False
+98,111,48,Arvicanthis_niloticus,tip,Arvicanthis_niloticus,tip,tip,tip,False
+104,113,52,Rhynchocyon_petersi,tip,Rhynchocyon_petersi,tip,tip,tip,False
+112,117,56,Myrmecobius_fasciatus,tip,Myrmecobius_fasciatus,tip,tip,tip,False

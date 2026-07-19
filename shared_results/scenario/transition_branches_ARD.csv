@@ -1,0 +1,17 @@
+"edge_id","parent","child","from","to","direction","child_label","n_desc_tips"
+1,61,62,"nocturnal","diurnal","gain",NA,54
+4,64,65,"diurnal","nocturnal","reversal",NA,2
+16,67,71,"diurnal","nocturnal","reversal",NA,8
+20,73,8,"nocturnal","diurnal","gain","Suricata_suricatta",1
+27,77,11,"nocturnal","diurnal","gain","Acinonyx_jubatus",1
+34,79,16,"diurnal","nocturnal","reversal","Tapirus_terrestris",1
+46,85,22,"diurnal","nocturnal","reversal","Tragelaphus_eurycerus",1
+53,89,90,"diurnal","nocturnal","reversal",NA,4
+67,95,32,"diurnal","nocturnal","reversal","Aotus_nancymaae",1
+75,88,37,"diurnal","nocturnal","reversal","Cynocephalus_volans",1
+78,101,38,"diurnal","nocturnal","reversal","Sylvilagus_floridanus",1
+90,102,107,"diurnal","nocturnal","reversal",NA,6
+98,111,48,"nocturnal","diurnal","gain","Arvicanthis_niloticus",1
+101,62,112,"diurnal","nocturnal","reversal",NA,4
+104,113,52,"nocturnal","diurnal","gain","Rhynchocyon_petersi",1
+112,117,56,"nocturnal","diurnal","gain","Myrmecobius_fasciatus",1
