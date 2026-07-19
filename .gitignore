@@ -29,6 +29,3 @@ tdg09-1.1.2/
 # Misc artifacts
 *.xlsx
 Rplots.pdf
-
-# Local working notes (not for the repo)
-PROGRESS_REPORT.md

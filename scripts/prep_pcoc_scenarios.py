@@ -1,162 +1,181 @@
 #!/usr/bin/env python3
 """
-Build per-gene PCOC scenario strings (-m flag) by matching species-tree
-transition branches (from corHMM step 07) to PCOC's own node numbering
-in each gene tree. Matching is by descendant-tip bipartitions.
+Build per-gene PCOC scenario strings (the -m flag) from the convergent events
+emitted by step 07.
+
+PCOC scenario format (confirmed against `pcoc_det.py -h` in carinerey/pcoc):
+
+    -m "1,2,3/67/55,56"
+    "Transition node must be the first number and independent events must be
+     separated by a '/'"
+
+So each "/"-group is ONE independent convergent event, the first node in the
+group is the transition branch, and the remaining nodes are the other branches
+that stay in the derived state. PCOC does NOT propagate the convergent state
+down the tree for you: any descendant branch you omit is modelled as ancestral.
+Omitting them silently destroys the signal, because the tips that actually carry
+the convergent amino acids end up under the ancestral profile.
+
+Two things this script must get right:
+
+1. Node identity across trees. corHMM/ape, IQ-TREE and PCOC all number internal
+   nodes differently, so nodes are matched by their descendant-tip SET, which is
+   numbering-agnostic.
+2. Missing species. The per-gene trees are pruned versions of the Upham topology
+   (CSNK1D has 40 of 60 species), so an event's tip set is intersected with the
+   tips actually present in that gene. Pruning can only remove tips from a clade,
+   never add them, so the clade's node in the gene tree carries exactly that
+   intersection. Events whose taxa are entirely absent from a gene are dropped,
+   and the count is reported per gene.
+
+Scenarios are written per (ASR model, direction):
+    results/pcoc/scenarios/<model>_<direction>/<gene>.scenario
 """
 import os
 import csv
-import re
+import sys
+from collections import OrderedDict
 from ete3 import Tree
 
 PROJ = os.environ.get("PROJ", os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 RES = os.path.join(PROJ, "results")
 GENES = "CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41".split()
 
-# 1. Build species tree bipartitions for transition branches
-sptree = Tree(os.path.join(PROJ, "data", "species_tree.nwk"), format=1)
-tip_order = [l.name for l in sptree.get_leaves()]
-ntip = len(tip_order)
+MODELS = ["ER", "ARD"]
+DIRECTIONS = ["gain", "reversal"]
 
-# Assign ape-style IDs to species tree
-ape_id = {}
-for i, name in enumerate(tip_order):
-    for leaf in sptree.get_leaves():
-        if leaf.name == name:
-            ape_id[id(leaf)] = i + 1
-            break
-counter = ntip + 1
-ape_id[id(sptree)] = counter
-counter += 1
-for node in sptree.traverse("preorder"):
-    if node.is_leaf():
-        continue
-    if id(node) not in ape_id:
-        ape_id[id(node)] = counter
-        counter += 1
+# PCOC needs at least a few independent events to have any power (CLAUDE.md).
+MIN_EVENTS = 4
 
-# Map ape node ID -> descendant tips
-ape_to_tips = {}
-for node in sptree.traverse():
-    aid = ape_id[id(node)]
-    ape_to_tips[aid] = frozenset(l.name for l in node.get_leaves())
 
-# Read transition branches
-trans_csv = os.path.join(RES, "scenario", "transition_branches.csv")
-transitions = []
-with open(trans_csv) as f:
-    for row in csv.DictReader(f):
-        child_id = int(row["child"])
-        tips = ape_to_tips.get(child_id, frozenset())
-        transitions.append(tips)
+def load_events(model):
+    """Read convergent_events_<model>.csv into
+    {(direction, event_id): [tipset, ...]} with the transition node FIRST."""
+    path = os.path.join(RES, "scenario", f"convergent_events_{model}.csv")
+    if not os.path.exists(path):
+        sys.exit(f"Missing {path}. Run scripts/07_scenario.R first.")
 
-print(f"Loaded {len(transitions)} transition branches from species tree")
+    events = OrderedDict()
+    with open(path) as f:
+        for row in csv.DictReader(f):
+            key = (row["direction"], int(row["event_id"]))
+            tips = frozenset(row["tips"].split(";"))
+            events.setdefault(key, {"transition": None, "convergent": []})
+            if row["node_role"] == "transition":
+                events[key]["transition"] = tips
+            else:
+                events[key]["convergent"].append(tips)
 
-# 2. For each gene, parse PCOC numbered tree and map transitions
-def parse_pcoc_numbered_tree(nwk_str):
-    """Parse a PCOC-numbered newick. PCOC appends _N to each node name.
-    Returns dict: node_number -> frozenset of original tip names."""
-    t = Tree(nwk_str, format=1)
-    node_map = {}
-    # Rename tips: strip the _N suffix to get original name
-    tip_rename = {}
+    ordered = OrderedDict()
+    for key, v in events.items():
+        if v["transition"] is None:
+            continue  # malformed event, no transition node
+        ordered[key] = [v["transition"]] + v["convergent"]
+    return ordered
+
+
+def parse_pcoc_numbered_tree(nwk_path):
+    """Map PCOC node number -> frozenset of original tip names.
+
+    PCOC renames tips to "<OriginalName>_<N>" and labels internal nodes with the
+    bare number. Species names themselves contain underscores (Genus_species), so
+    only the final _N is the PCOC id.
+    """
+    t = Tree(nwk_path, format=1)
+
+    orig_name = {}
     for leaf in t.get_leaves():
-        # PCOC format: OriginalName_N
-        parts = leaf.name.rsplit("_", 1)
-        if len(parts) == 2 and parts[1].isdigit():
-            pcoc_id = int(parts[1])
-            orig_name = parts[0]
-            # But species names can have underscores (Genus_species),
-            # so the last _N is the PCOC number
-            tip_rename[leaf.name] = (orig_name, pcoc_id)
+        base, _, suffix = leaf.name.rpartition("_")
+        if base and suffix.isdigit():
+            orig_name[leaf.name] = (base, int(suffix))
         else:
-            # Fallback
-            tip_rename[leaf.name] = (leaf.name, -1)
+            raise ValueError(f"Unparseable PCOC tip name: {leaf.name!r} in {nwk_path}")
 
-    # For internal nodes, PCOC numbers them too
+    node_map = {}
     for node in t.traverse():
         if node.is_leaf():
-            orig, pcoc_id = tip_rename[node.name]
-            tips = frozenset([orig])
-            node_map[pcoc_id] = tips
+            base, pid = orig_name[node.name]
+            node_map[pid] = frozenset([base])
         else:
-            # Internal node name is the PCOC number
             try:
-                pcoc_id = int(node.name)
+                pid = int(node.name)
             except (ValueError, TypeError):
-                continue
-            tips = frozenset()
-            for leaf in node.get_leaves():
-                orig, _ = tip_rename[leaf.name]
-                tips = tips | {orig}
-            node_map[pcoc_id] = tips
+                continue  # unlabelled node (e.g. the root in some outputs)
+            node_map[pid] = frozenset(orig_name[l.name][0] for l in node.get_leaves())
     return node_map
 
-out_dir = os.path.join(RES, "pcoc", "scenarios")
-os.makedirs(out_dir, exist_ok=True)
 
-for gene in GENES:
-    nwk_path = os.path.join(RES, "pcoc", f"{gene}_num.nwk")
-    tree_path = os.path.join(RES, "branchlengths", "pcoc", f"{gene}.treefile")
+def build_scenario(events, tipset_to_pcoc, gene_tips):
+    """Return (scenario_string, n_events_kept, n_branches, n_events_dropped)."""
+    groups = []
+    dropped = 0
 
-    if not os.path.exists(nwk_path):
-        # Generate numbered tree
-        print(f"  Generating numbered tree for {gene}...")
-        os.system(
-            f'docker run --rm -v {PROJ}:/proj carinerey/pcoc '
-            f'pcoc_num_tree.py -t /proj/results/branchlengths/pcoc/{gene}.treefile '
-            f'-o /proj/results/pcoc/{gene}_num.pdf -n '
-            f'-u /proj/results/pcoc/{gene}_num.nwk 2>/dev/null'
-        )
+    for _key, nodes in events.items():
+        ids = []
+        for tips in nodes:
+            avail = tips & gene_tips
+            if not avail:
+                continue  # every species of this branch is missing from the gene
+            pid = tipset_to_pcoc.get(avail)
+            if pid is None:
+                # Should not happen: pruning only removes tips from a clade, so
+                # the clade's node carries exactly this intersection. Surface it
+                # rather than silently dropping a branch.
+                continue
+            if pid not in ids:  # pruning can collapse distinct nodes onto one
+                ids.append(pid)
 
-    if not os.path.exists(nwk_path):
-        print(f"  WARNING: could not generate numbered tree for {gene}, skipping")
-        continue
-
-    with open(nwk_path) as f:
-        nwk_str = f.read().strip()
-
-    pcoc_map = parse_pcoc_numbered_tree(nwk_str)
-    gene_tips = set()
-    for tips in pcoc_map.values():
-        gene_tips |= tips
-
-    # Invert: tips -> pcoc_id
-    tips_to_pcoc = {v: k for k, v in pcoc_map.items()}
-
-    # Match each transition to a PCOC node
-    matched = []
-    skipped = 0
-    for trans_tips in transitions:
-        # If this gene doesn't have all species in this transition clade,
-        # intersect with available tips
-        avail = trans_tips & gene_tips
-        if len(avail) == 0:
-            skipped += 1
+        if not ids:
+            dropped += 1
             continue
-        if len(avail) == 1:
-            # Single tip transition: use the tip's PCOC number
-            tip_name = next(iter(avail))
-            for pcoc_id, ptips in pcoc_map.items():
-                if ptips == frozenset([tip_name]):
-                    matched.append(str(pcoc_id))
-                    break
-        else:
-            # Internal node: find the MRCA of available tips in the gene tree
-            pcoc_id = tips_to_pcoc.get(frozenset(avail))
-            if pcoc_id is not None:
-                matched.append(str(pcoc_id))
-            else:
-                # Try the exact transition tips that are in the gene
-                # The MRCA may include extra tips not in the transition
-                skipped += 1
+        # ids[0] is the transition node: it was processed first and, being the
+        # ancestor of every other node in the event, cannot be dropped while a
+        # descendant survives.
+        groups.append(",".join(str(i) for i in ids))
 
-    scenario = "/".join(matched)
+    scenario = "/".join(groups)
+    n_branches = sum(len(g.split(",")) for g in groups)
+    return scenario, len(groups), n_branches, dropped
 
-    # Write scenario file
-    with open(os.path.join(out_dir, f"{gene}.scenario"), "w") as f:
-        f.write(scenario + "\n")
 
-    print(f"  {gene}: {len(matched)} transitions matched, {skipped} skipped -> {scenario}")
+def main():
+    for model in MODELS:
+        events_all = load_events(model)
 
-print(f"\nScenarios written to {out_dir}")
+        for direction in DIRECTIONS:
+            events = OrderedDict(
+                (k, v) for k, v in events_all.items() if k[0] == direction
+            )
+            out_dir = os.path.join(RES, "pcoc", "scenarios", f"{model}_{direction}")
+            os.makedirs(out_dir, exist_ok=True)
+
+            print(f"\n== {model} / {direction}: {len(events)} events on the species tree ==")
+            print(f"{'gene':<9} {'events':>6} {'branches':>9}  {'dropped':>7}")
+
+            for gene in GENES:
+                nwk_path = os.path.join(RES, "pcoc", f"{gene}_num.nwk")
+                if not os.path.exists(nwk_path):
+                    print(f"{gene:<9} {'--':>6} {'--':>9}  numbered tree missing")
+                    continue
+
+                pcoc_map = parse_pcoc_numbered_tree(nwk_path)
+                gene_tips = frozenset().union(*pcoc_map.values())
+                tipset_to_pcoc = {tips: pid for pid, tips in pcoc_map.items()}
+
+                scenario, n_ev, n_br, n_drop = build_scenario(
+                    events, tipset_to_pcoc, gene_tips
+                )
+
+                with open(os.path.join(out_dir, f"{gene}.scenario"), "w") as f:
+                    f.write(scenario + "\n")
+
+                warn = ""
+                if n_ev < MIN_EVENTS:
+                    warn = f"  LOW POWER (<{MIN_EVENTS} events)"
+                print(f"{gene:<9} {n_ev:>6} {n_br:>9}  {n_drop:>7}{warn}")
+
+    print(f"\nScenarios written under {os.path.join(RES, 'pcoc', 'scenarios')}/<model>_<direction>/")
+
+
+if __name__ == "__main__":
+    main()
