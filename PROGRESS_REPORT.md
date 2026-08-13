@@ -256,6 +256,55 @@ Two caveats before wiring it in:
    `full_tree_transitions=14` in their `transition_report.csv`; it does not match
    our ER reconstruction of 10 gains plus 5 reversals.
 
+### 0A.6b Selection track: RELAX is not reliably estimable on this dataset
+
+The selection track was run for the first time on 2026-08-13/14 using the
+`codon_export` data. Contrast-FEL (site-level, is dN/dS different on diurnal
+branches) behaves well. RELAX (gene-level selection intensity K) does not, and
+the reason matters for how it should be reported.
+
+**A near miss worth recording.** RELAX returned **K = 0.352, p < 0.0001** for
+NPAS2, relaxed selection in diurnal lineages, significant after correction. That
+would have been the first and only positive result in the project, and NPAS2 is
+the CLOCK paralog, so a contrast against CLOCK's null K = 0.983 would have made a
+compelling story.
+
+It does not replicate. Re-run on identical inputs, **NPAS2 succeeded 1 time in 9
+attempts**, and the K = 0.352 fit was that single success. Supporting evidence
+that the estimate is an optimizer excursion rather than biology:
+
+- HyPhy's own diagnostic during the fits: "Potential convergence issues due to
+  flat likelihood surfaces; checking to see whether K > 1 or K < 1 is robustly
+  inferred";
+- interim rate classes reaching dN/dS 210, then 8406, then 175268, which are
+  numerically pathological rather than biological;
+- ARNTL returned K exactly 1.000 with p exactly 1.0000, a degenerate fit in which
+  the optimizer never moved K off its starting value. ARNTL has the shortest
+  branches in the dataset and 33 near-zero branches, so its surface is flattest;
+- RELAX fits a separate rate parameter per branch (185 on NPAS2), so it is far
+  more heavily parameterised than Contrast-FEL, which converged on every gene.
+
+**This is not fixable by adjusting the input tree.** HyPhy re-estimates branch
+lengths from the codon data BEFORE deleting zero-length branches, so the input
+lengths are irrelevant to the deletions. The branches it removes carry no codon
+substitutions at all. The weak identifiability of K is a property of the data.
+
+**How to report it.** RELAX should be described as not reliably estimable here,
+citing the failure rate, the degenerate ARNTL fit, and the flat-surface
+diagnostics. That is consistent with the rest of the study rather than a gap:
+there is too little selective contrast between diurnal and non-diurnal branches
+for a per-branch intensity parameter to be identified. Any RELAX K quoted from a
+single run should be treated as unsupported.
+
+**The general lesson.** A single RELAX run per gene, which is how these analyses
+are normally run and what the original `12_selection_hyphy.sh` did, would have
+put NPAS2 in the manuscript as significantly relaxed at p < 0.0001. Replication
+of a positive result on identical inputs is what caught it.
+
+`scripts/12_selection_hyphy.sh` now runs Contrast-FEL to completion first and
+RELAX second as best effort, with up to 3 attempts per gene and per-attempt logs,
+so a gene that only succeeds sometimes stays visible.
+
 ### 0A.7 Biological reading
 
 A null here is not a failure, and it is biologically plausible. The core clock is
