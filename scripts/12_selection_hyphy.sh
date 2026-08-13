@@ -31,7 +31,7 @@ if [[ ! -d "$TREES" ]]; then
   echo "No labelled trees. Run: python scripts/prep_selection_inputs.py" >&2
   exit 1
 fi
-mkdir -p "$OUT"
+mkdir -p "$OUT" "$OUT/logs"
 
 # HyPhy saturates the cores it is given and both analyses are per gene, so genes
 # run sequentially rather than in parallel.
@@ -48,13 +48,19 @@ for g in $GENES; do
 
   # Resumable: a finished JSON means the gene is done. HyPhy writes the JSON
   # only on success, so a partial run leaves nothing and is cleanly redone.
+  # Full per-gene logs. An earlier version piped through `tail -3`, which threw
+  # away the diagnostic for a RELAX failure and left only "Check errors.log",
+  # by which time the next gene had already truncated errors.log. Keep
+  # everything; these logs are small and are the only record of why a gene died.
   cf="$OUT/$g.contrastfel.json"
   if [[ -s "$cf" ]]; then
     echo "SKIP $g contrast-fel (done)"
   else
     echo "== Contrast-FEL: $g == $(date)"
     hyphy CPU="$CPU" contrast-fel --alignment "$aln" --tree "$tre" \
-          --branch-set Foreground --output "$cf" 2>&1 | tail -3
+          --branch-set Foreground --output "$cf" > "$OUT/logs/$g.contrastfel.log" 2>&1 \
+      || echo "  FAILED contrast-fel $g, see $OUT/logs/$g.contrastfel.log"
+    tail -2 "$OUT/logs/$g.contrastfel.log"
   fi
 
   rx="$OUT/$g.relax.json"
@@ -63,7 +69,9 @@ for g in $GENES; do
   else
     echo "== RELAX: $g == $(date)"
     hyphy CPU="$CPU" relax --alignment "$aln" --tree "$tre" \
-          --test Foreground --output "$rx" 2>&1 | tail -3
+          --test Foreground --output "$rx" > "$OUT/logs/$g.relax.log" 2>&1 \
+      || echo "  FAILED relax $g, see $OUT/logs/$g.relax.log"
+    tail -2 "$OUT/logs/$g.relax.log"
   fi
 done
 
