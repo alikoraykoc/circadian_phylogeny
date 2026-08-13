@@ -37,7 +37,24 @@ mkdir -p "$OUT" "$OUT/logs"
 # run sequentially rather than in parallel.
 CPU="${HYPHY_CPU:-4}"
 
-echo "== selection track == $(date)"
+# Two passes rather than both analyses per gene.
+#
+# Contrast-FEL is reliable here (every gene attempted has converged) and it is
+# the analysis that matters most: it works site by site and feeds the step 13
+# consensus. RELAX is unreliable on this data, roughly half its attempts fail on
+# flat likelihood surfaces, and each attempt costs 30 to 45 minutes. Interleaving
+# them lets a stuck RELAX block the site-level results for every later gene.
+#
+#   bash scripts/12_selection_hyphy.sh contrastfel   run the reliable pass first
+#   bash scripts/12_selection_hyphy.sh relax         then best-effort RELAX
+#   bash scripts/12_selection_hyphy.sh both          original interleaved behaviour
+MODE="${1:-both}"
+case "$MODE" in
+  contrastfel|relax|both) ;;
+  *) echo "usage: $0 [contrastfel|relax|both]" >&2; exit 1 ;;
+esac
+
+echo "== selection track ($MODE) == $(date)"
 for g in $GENES; do
   aln="$CODON/$g.codon.fasta"
   tre="$TREES/$g.labelled.nwk"
@@ -53,7 +70,9 @@ for g in $GENES; do
   # by which time the next gene had already truncated errors.log. Keep
   # everything; these logs are small and are the only record of why a gene died.
   cf="$OUT/$g.contrastfel.json"
-  if [[ -s "$cf" ]]; then
+  if [[ "$MODE" == "relax" ]]; then
+    :
+  elif [[ -s "$cf" ]]; then
     echo "SKIP $g contrast-fel (done)"
   else
     echo "== Contrast-FEL: $g == $(date)"
@@ -71,7 +90,9 @@ for g in $GENES; do
   # wander off. Retry rather than lose the gene, and treat any K that only
   # appears on some attempts as unreliable (see results/selection/replicates/).
   rx="$OUT/$g.relax.json"
-  if [[ -s "$rx" ]]; then
+  if [[ "$MODE" == "contrastfel" ]]; then
+    :
+  elif [[ -s "$rx" ]]; then
     echo "SKIP $g relax (done)"
   else
     for attempt in 1 2 3; do
