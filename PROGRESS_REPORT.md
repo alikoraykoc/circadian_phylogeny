@@ -1,7 +1,7 @@
 # Circadian Gene Convergent Evolution Analysis: Progress Report
 
 **Date**: 2026-08-13 (updated; earlier passes 2026-07-14 and 2026-07-07)
-**Status**: Steps 00-08, 10, 11 complete. Step 09 (PCOC) primary run (ER / gains
+**Status**: Steps 00-08, 10, 11 complete. PCOC power calibration complete (all 18 genes). Step 09 (PCOC) primary run (ER / gains
 of diurnality) complete and returning a null. The 2026-08-13 session was devoted
 to establishing whether that null is real, using a power calibration and three
 independent cross-checks. Three sensitivity sweeps remain scaffolded but unrun.
@@ -46,15 +46,28 @@ default of 0 (`pcoc_sim.py:496`; the deletion happens in
 real event count, verified by diffing the simulated annotated tree against the
 scenario node by node (10 transitions, 52 branches, exact match).
 
-Result: power 1.000 and FPR 0.0000 at every threshold from 0.7 to 0.99, in every
-gene tested, including ARNTL, whose branches are the shortest in the dataset.
+Sweep COMPLETE, all 18 genes, 10 profile couples each, 100 simulated convergent
+sites and 100 null sites per couple:
 
-> **SWEEP INCOMPLETE at the time of writing: 10 of 18 genes.** Done: CLOCK,
-> NPAS2, ARNTL, PER1, PER2, PER3, CRY1, CRY2, NR1D1, NR1D2. Remaining: RORA,
-> RORB, RORC, CSNK1D, CSNK1E, FBXL3, BHLHE40, BHLHE41. Every gene finished so
-> far gives power 1.000 (worst single profile couple 0.970, PER2) and FPR
-> 0.0000. Re-run `python scripts/summarize_pcoc_sim.py ER_gain` once the sweep
-> completes and replace this note with the final table.
+| threshold | worst-gene FPR | worst-gene power | mean power |
+|---|---|---|---|
+| 0.70 | 0.0000 | 0.997 | 1.000 |
+| 0.80 | 0.0000 | 0.997 | 1.000 |
+| 0.85 | 0.0000 | 0.997 | 1.000 |
+| 0.90 | 0.0000 | 0.997 | 1.000 |
+| 0.95 | 0.0000 | 0.997 | 1.000 |
+| 0.99 | 0.0000 | 0.997 | 1.000 |
+
+17 of 18 genes score power exactly 1.000 with every profile couple. PER2 is the
+only exception at 0.997 (worst couple 0.970). FPR is 0.0000 everywhere. ARNTL
+and CSNK1D, the two genes with the least evolutionary opportunity (0A.5), score
+1.000 like the rest, which is precisely the OneChange caveat below in action:
+the simulation guarantees the substitution those genes would rarely get in
+reality.
+
+Figure: `results/figures/pcoc_sim_power_ER_gain.pdf`.
+Tables: `results/pcoc_sim/ER_gain/summary_by_gene.csv`,
+`summary_by_distance.csv`, `threshold_choice.txt`.
 
 **Threshold.** Because power and FPR are both saturated across the whole tested
 range, the calibration does NOT identify a threshold. `summarize_pcoc_sim.py`

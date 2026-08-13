@@ -35,3 +35,37 @@ but not run; they are not here yet.
   descendant branches that stay derived); the exact input to the PCOC scenario.
 - `node_states_ER.csv` reconstructed nocturnal/diurnal state for every tree node.
 - `transition_branches_flagged.csv` step 08 hemiplasy output: 0 of 15 flagged.
+
+## pcoc_sim_calibration/
+
+Evidence that the zero-site PCOC result is a real negative rather than an
+underpowered one. See PROGRESS_REPORT.md section 0A for the full write-up.
+
+- `summary_by_gene.csv` power and FPR per gene per threshold, from simulating a
+  known convergent signal on the real tree at the real transition branches.
+  Power 1.000 in 17 of 18 genes (PER2 0.997), FPR 0.0000 everywhere.
+- `summary_by_distance.csv` power binned by how far apart the ancestral and
+  convergent amino acid profiles are, i.e. how subtle a shift is detectable.
+- `threshold_choice.txt` posterior threshold derivation. Power and FPR are
+  saturated across 0.70 to 0.99, so the calibration does NOT identify a
+  threshold; the strictest value is taken because it costs no power. Moot here,
+  since the highest posterior in the real data is 0.30.
+- `pcoc_sim_power_ER_gain.pdf` the two panels above as a figure.
+
+Read the power numbers with one caveat: pcoc_sim builds the convergent shift
+with Bio++'s OneChange model, which CONDITIONS on a substitution occurring on
+each transition branch. Power is therefore conditional on convergence having
+happened, not evidence that there was time for it. The next three files address
+that from the data side.
+
+- `model_free_summary.csv` per-column diurnal-vs-nocturnal residue
+  diagnosticity, no evolutionary model at all. At the null in all 18 genes.
+- `observed_convergent_substitutions.csv` direct parsimony count of
+  substitutions on transition branches. Use `obs_same_residue_rate` and
+  `p_rate`, NOT `p_count_confounded`: real transition branches carry far more
+  substitutions of any kind than matched random branches, so the raw count
+  measures branch length rather than convergence. Pooled, 206 of 639
+  opportunity sites are same-residue, against a null rate of 0.336. No excess.
+- `transition_opportunity.csv` branch-length estimate of how many sites could
+  have shown convergence. Only ARNTL and CSNK1D are genuinely
+  opportunity-starved; their nulls should be treated as uninformative.
