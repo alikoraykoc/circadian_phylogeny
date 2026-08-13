@@ -117,6 +117,21 @@ fit_and_write <- function(model, tag) {
   )
   write.csv(ns, file.path(res, sprintf("node_states_%s.csv", tag)), row.names = FALSE)
 
+  # Same states, keyed by DESCENDANT TIP SET rather than by node id. ape,
+  # ete3/IQ-TREE and PCOC each number nodes differently, and a node id is
+  # meaningless once a tree is pruned to a gene's taxa. The tip set is the one
+  # key that survives both renumbering and pruning, so every downstream consumer
+  # (HyPhy foreground labelling, TDG09 node labels, step 08) should join on this
+  # rather than re-deriving states from the transition list.
+  nts <- data.frame(
+    node   = ns$node,
+    state  = ns$state,
+    is_tip = ns$is_tip,
+    tips   = vapply(ns$node, function(n) paste(sort(tips_of(n)), collapse = ";"), ""),
+    stringsAsFactors = FALSE
+  )
+  write.csv(nts, file.path(res, sprintf("node_tipsets_%s.csv", tag)), row.names = FALSE)
+
   # transition table with direction
   tb <- data.frame(
     edge_id = trans,

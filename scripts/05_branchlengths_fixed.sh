@@ -64,6 +64,17 @@ t.write(outfile='$sp', format=5)
         >> "$RES/branchlengths/rer_input.trees"
 done
 
+# Re-root to the Upham rooting. IQ-TREE emits an UNROOTED tree (a trifurcating
+# basal node), and scenario building matches species-tree clades onto these trees
+# by descendant tip set, which is not preserved across a different rooting. This
+# step used to be a printed reminder rather than an action, and the result was
+# that three nodes of the largest gain event failed to match in every gene, one
+# of them that event's transition branch, so PCOC was handed a group whose first
+# entry was a descendant rather than the transition it requires.
+echo
+echo "== re-rooting per-gene trees to the Upham rooting =="
+python "$PROJ/scripts/reroot_gene_trees.py"
+
 echo
 echo "PCOC/TDG09 trees: $RES/branchlengths/pcoc/"
 echo "RER trees:        $RES/branchlengths/rer/"
@@ -71,4 +82,5 @@ echo "RER collection:   $RES/branchlengths/rer_input.trees"
 echo
 echo "SANITY: branch lengths should be small decimals (subs/site), NOT the"
 echo "million-year scale of the Upham tree, and no branch should be 0."
-echo "RE-ROOT each *.treefile to the Upham rooting before scenario building (07)."
+echo "Node numbering follows the rooting, so regenerate the PCOC numbered trees"
+echo "(pcoc_num_tree.py -n -u) and the scenarios after this step."
