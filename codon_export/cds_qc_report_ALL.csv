@@ -1,0 +1,1042 @@
+ARNTL,Acinonyx_jubatus,XP_026928895.1,refseq,1881,626,PASS,exact | coded_by:XM_027073094.2:494..2374
+ARNTL,Acomys_cahirinus,,miniprot,2196,731,PASS,exact | miniprot-local
+ARNTL,Aepyceros_melampus,,miniprot,2173,722,DROP,cds not x3 (trim 1); 39 internal stop(s); len aa=724 prot=722 | miniprot-local
+ARNTL,Aotus_nancymaae,XP_064221225.1,refseq,1881,626,PASS,exact | coded_by:XM_064365155.1:345..2225
+ARNTL,Arvicanthis_niloticus,XP_076797187.1,refseq,1881,626,PASS,exact | coded_by:XM_076941072.1:1..1881
+ARNTL,Bos_taurus,NP_001178099.1,refseq,1881,626,PASS,exact | coded_by:NM_001191170.1:433..2313
+ARNTL,Callithrix_jacchus,JAB43433.1,refseq,1881,626,PASS,exact | coded_by:GAMP01009322.1:322..2202
+ARNTL,Camelus_bactrianus,XP_074228464.1,refseq,1881,626,PASS,exact | coded_by:XM_074372363.1:500..2380
+ARNTL,Caracal_caracal,,miniprot,2214,735,DROP,2 internal stop(s); len aa=737 prot=735 | miniprot-local
+ARNTL,Cebus_imitator,XP_037593420.1,refseq,1896,631,PASS,exact | coded_by:XM_037737492.1:157..2052
+ARNTL,Choloepus_hoffmanni,,miniprot,2098,697,DROP,cds not x3 (trim 1); 41 internal stop(s); len aa=699 prot=697 | miniprot-local
+ARNTL,Cynocephalus_volans,XP_062951639.1,refseq,1881,626,PASS,exact | coded_by:XM_063095569.1:309..2189
+ARNTL,Cynomys_ludovicianus,,miniprot,2162,718,DROP,cds not x3 (trim 2); 36 internal stop(s); len aa=720 prot=718 | miniprot-local
+ARNTL,Dasypus_novemcinctus,XP_004472591.1,refseq,1881,626,PASS,exact | coded_by:XM_004472534.5:558..2438
+ARNTL,Daubentonia_madagascariensis,,miniprot,2197,727,DROP,cds not x3 (trim 1); 40 internal stop(s); len aa=732 prot=727 | miniprot-local
+ARNTL,Eira_barbara,,miniprot,2223,739,DROP,2 internal stop(s); len aa=740 prot=739 | miniprot-local
+ARNTL,Equus_caballus,NP_001075390.1,refseq,1881,626,PASS,exact | coded_by:NM_001081921.2:129..2009
+ARNTL,Giraffa_tippelskirchi,,miniprot,2227,739,DROP,cds not x3 (trim 1); 39 internal stop(s); len aa=742 prot=739 | miniprot-local
+ARNTL,Gorilla_gorilla_gorilla,XP_030863535.1,refseq,1881,626,PASS,exact | coded_by:XM_031007675.3:146..2026
+ARNTL,Homo_sapiens,NP_001338744.1,refseq,1878,625,PASS,exact | coded_by:NM_001351815.2:216..2093
+ARNTL,Hyaena_hyaena,XP_039096790.1,refseq,1902,633,PASS,exact | coded_by:XM_039240859.1:383..2284
+ARNTL,Hylobates_pileatus,,miniprot,2199,732,PASS,exact | miniprot-local
+ARNTL,Ictidomys_tridecemlineatus,XP_077902579.1,refseq,1881,626,PASS,exact | coded_by:XM_078046453.1:492..2372
+ARNTL,Jaculus_jaculus,XP_045000957.1,refseq,1881,626,PASS,exact | coded_by:XM_045145022.1:450..2330
+ARNTL,Lagorchestes_hirsutus,,miniprot,1902,633,PASS,exact | miniprot-local
+ARNTL,Leopardus_geoffroyi,XP_045340525.1,refseq,1917,638,PASS,exact | coded_by:XM_045484569.1:419..2335
+ARNTL,Macrotis_lagotis,XP_074086440.1,refseq,1902,633,PASS,exact | coded_by:XM_074230339.1:8624..10525
+ARNTL,Martes_flavigula,,miniprot,2223,739,DROP,2 internal stop(s); len aa=740 prot=739 | miniprot-local
+ARNTL,Microcebus_murinus,XP_075858275.1,refseq,1881,626,PASS,exact | coded_by:XM_076002160.1:523..2403
+ARNTL,Mirza_zaza,,miniprot,1858,616,DROP,cds not x3 (trim 1); 18 internal stop(s); len aa=619 prot=616 | miniprot-local
+ARNTL,Myrmecobius_fasciatus,,miniprot,1881,626,PASS,exact | miniprot-local
+ARNTL,Nanger_dama,,miniprot,2222,736,DROP,cds not x3 (trim 2); 34 internal stop(s); len aa=740 prot=736 | miniprot-local
+ARNTL,Nasua_narica,,miniprot,2225,738,DROP,cds not x3 (trim 2); 39 internal stop(s); len aa=741 prot=738 | miniprot-local
+ARNTL,Nycticebus_coucang,XP_053416691.1,refseq,1881,626,PASS,exact | coded_by:XM_053560716.1:352..2232
+ARNTL,Ochotona_princeps,XP_058519339.1,refseq,1881,626,PASS,exact | coded_by:XM_058663356.1:537..2417
+ARNTL,Octodon_degus,XP_023575156.1,refseq,1899,632,PASS,exact | coded_by:XM_023719388.1:458..2356
+ARNTL,Orycteropus_afer,XP_042638763.1,refseq,1902,633,PASS,exact | coded_by:XM_042782829.1:1..1902
+ARNTL,Paguma_larvata,,miniprot,2196,730,DROP,2 internal stop(s); len aa=731 prot=730 | miniprot-local
+ARNTL,Pan_troglodytes,XP_016775903.2,refseq,2199,732,PASS,exact | coded_by:XM_016920414.3:94..2292
+ARNTL,Panthera_pardus,XP_019311921.1,refseq,1881,626,PASS,exact | coded_by:XM_019456376.2:440..2320
+ARNTL,Peromyscus_eremicus,XP_059124666.1,refseq,1881,626,PASS,exact | coded_by:XM_059268683.1:482..2362
+ARNTL,Phacochoerus_africanus,XP_047632210.1,refseq,1881,626,PASS,exact | coded_by:XM_047776254.1:471..2351
+ARNTL,Phalanger_gymnotis,,miniprot,1641,548,DROP,len aa=547 prot=548 | miniprot-local
+ARNTL,Pipistrellus_pipistrellus,,miniprot,2215,737,DROP,cds not x3 (trim 1); 37 internal stop(s); len aa=738 prot=737 | miniprot-local
+ARNTL,Plecturocebus_cupreus,,miniprot,2199,731,DROP,1 internal stop(s); len aa=732 prot=731 | miniprot-local
+ARNTL,Pseudocheirus_occidentalis,,miniprot,1908,635,PASS,exact | miniprot-local
+ARNTL,Puma_concolor,XP_025784271.1,refseq,1896,631,PASS,exact | coded_by:XM_025928486.1:1..1896
+ARNTL,Rattus_norvegicus,NP_077338.2,refseq,1881,626,PASS,exact | coded_by:NM_024362.2:589..2469
+ARNTL,Rhynchocyon_petersi,KAM6157575.1,refseq,1881,626,PASS,"exact | coded_by:join(JBHNZN010000012.1:79114657..79114796, JBHNZN010000012.1:79116963..79117001, JBHNZN010000012.1:79117311..79117352, JBHNZN010000012.1:79119806..79119963, JBHNZN010000012.1:79121929..79122008, JBHNZN010000012.1:79126347..79126439, JBHNZN010000012.1:79127596..79127713, JBHNZN010000012.1:79130993..79131142, JBHNZN010000012.1:79134580..79134826, JBHNZN010000012.1:79136106..79136212, JBHNZN010000012.1:79137063..79137213, JBHNZN010000012.1:79138031..79138119, JBHNZN010000012.1:79139558..79139666, JBHNZN010000012.1:79144851..79144944, JBHNZN010000012.1:79150682..79150784, JBHNZN010000012.1:79151352..79151512)"
+ARNTL,Saccopteryx_bilineata,XP_066107095.1,refseq,1881,626,PASS,exact | coded_by:XM_066250998.1:489..2369
+ARNTL,Sarcophilus_harrisii,XP_031797447.1,refseq,1902,633,PASS,exact | coded_by:XM_031941587.1:17..1918
+ARNTL,Sciurus_vulgaris,XP_078958828.1,refseq,1881,626,PASS,exact | coded_by:XM_079102702.1:487..2367
+ARNTL,Speothos_venaticus,,miniprot,2189,727,DROP,cds not x3 (trim 2); 35 internal stop(s); len aa=729 prot=727 | miniprot-local
+ARNTL,Suricata_suricatta,XP_029812043.1,refseq,1881,626,PASS,exact | coded_by:XM_029956183.1:446..2326
+ARNTL,Sylvilagus_floridanus,,miniprot,2201,731,DROP,cds not x3 (trim 2); 37 internal stop(s); len aa=733 prot=731 | miniprot-local
+ARNTL,Tapirus_terrestris,,miniprot,2240,743,DROP,cds not x3 (trim 2); 35 internal stop(s); len aa=746 prot=743 | miniprot-local
+ARNTL,Tragelaphus_eurycerus,,miniprot,2224,738,DROP,cds not x3 (trim 1); 41 internal stop(s); len aa=741 prot=738 | miniprot-local
+ARNTL,Uromys_caudimaculatus,,miniprot,1878,625,PASS,exact | miniprot-local
+ARNTL,Vicugna_pacos,XP_072825635.1,refseq,1881,626,PASS,exact | coded_by:XM_072969534.1:432..2312
+ARNTL,Xerus_rutilus,,miniprot,2204,730,DROP,cds not x3 (trim 2); 36 internal stop(s); len aa=734 prot=730 | miniprot-local
+BHLHE40,Acinonyx_jubatus,XP_014932196.2,refseq,1239,412,PASS,exact | coded_by:XM_015076710.3:271..1509
+BHLHE40,Acomys_cahirinus,,miniprot,1777,589,DROP,cds not x3 (trim 1); 16 internal stop(s); len aa=592 prot=589 | miniprot-local
+BHLHE40,Aepyceros_melampus,,miniprot,1541,510,DROP,cds not x3 (trim 2); 8 internal stop(s); len aa=513 prot=510 | miniprot-local
+BHLHE40,Aotus_nancymaae,XP_012327584.1,refseq,1284,427,PASS,exact | coded_by:XM_012472161.2:36..1319
+BHLHE40,Arvicanthis_niloticus,XP_034367738.1,refseq,1236,411,PASS,exact | coded_by:XM_034511847.2:556..1791
+BHLHE40,Bos_taurus,NP_001020100.1,refseq,1239,412,PASS,exact | coded_by:NM_001024929.1:227..1465
+BHLHE40,Callithrix_jacchus,XP_002758633.1,refseq,1239,412,PASS,exact | coded_by:XM_002758587.6:280..1518
+BHLHE40,Camelus_bactrianus,XP_010960691.1,refseq,1236,411,PASS,exact | coded_by:XM_010962389.3:322..1557
+BHLHE40,Caracal_caracal,,miniprot,1710,568,DROP,len aa=569 prot=568 | miniprot-local
+BHLHE40,Cebus_imitator,XP_017368119.1,refseq,1239,412,PASS,exact | coded_by:XM_017512630.2:315..1553
+BHLHE40,Choloepus_hoffmanni,,miniprot,1723,572,DROP,cds not x3 (trim 1); 18 internal stop(s); len aa=574 prot=572 | miniprot-local
+BHLHE40,Cynocephalus_volans,XP_062971151.1,refseq,1239,412,PASS,exact | coded_by:XM_063115081.1:869..2107
+BHLHE40,Cynomys_ludovicianus,,miniprot,1732,575,DROP,cds not x3 (trim 1); 16 internal stop(s); len aa=577 prot=575 | miniprot-local
+BHLHE40,Dasypus_novemcinctus,XP_004483159.2,refseq,1239,412,PASS,exact | coded_by:XM_004483102.5:915..2153
+BHLHE40,Daubentonia_madagascariensis,,miniprot,1731,574,DROP,1 internal stop(s); len aa=576 prot=574 | miniprot-local
+BHLHE40,Eira_barbara,,miniprot,1753,581,DROP,cds not x3 (trim 1); 20 internal stop(s); len aa=584 prot=581 | miniprot-local
+BHLHE40,Equus_caballus,XP_001496332.2,refseq,1737,578,PASS,exact | coded_by:XM_001496282.7:292..2028
+BHLHE40,Giraffa_tippelskirchi,,miniprot,1742,577,DROP,cds not x3 (trim 2); 15 internal stop(s); len aa=580 prot=577 | miniprot-local
+BHLHE40,Gorilla_gorilla_gorilla,XP_004033573.1,refseq,1239,412,PASS,exact | coded_by:XM_004033525.5:457..1695
+BHLHE40,Homo_sapiens,NP_003661.1,refseq,1239,412,PASS,exact | coded_by:NM_003670.3:283..1521
+BHLHE40,Hyaena_hyaena,XP_039096217.1,refseq,1239,412,PASS,exact | coded_by:XM_039240286.1:254..1492
+BHLHE40,Hylobates_pileatus,,miniprot,1742,579,DROP,cds not x3 (trim 2); 14 internal stop(s); len aa=580 prot=579 | miniprot-local
+BHLHE40,Ictidomys_tridecemlineatus,XP_005331021.1,refseq,1236,411,PASS,exact | coded_by:XM_005330964.5:928..2163
+BHLHE40,Jaculus_jaculus,XP_004651545.1,refseq,1233,410,PASS,exact | coded_by:XM_004651488.2:309..1541
+BHLHE40,Lagorchestes_hirsutus,,miniprot,855,284,PASS,exact | miniprot-local
+BHLHE40,Leopardus_geoffroyi,XP_045349571.1,refseq,1239,412,PASS,exact | coded_by:XM_045493615.1:760..1998
+BHLHE40,Macrotis_lagotis,XP_074054775.1,refseq,1218,405,PASS,exact | coded_by:XM_074198674.1:276..1493
+BHLHE40,Martes_flavigula,,miniprot,1755,583,DROP,1 internal stop(s); len aa=584 prot=583 | miniprot-local
+BHLHE40,Microcebus_murinus,XP_012616616.1,refseq,1242,413,PASS,exact | coded_by:XM_012761162.3:310..1551
+BHLHE40,Mirza_zaza,,miniprot,1682,559,DROP,cds not x3 (trim 2); 9 internal stop(s); len aa=560 prot=559 | miniprot-local
+BHLHE40,Myrmecobius_fasciatus,,miniprot,1233,410,PASS,exact | miniprot-local
+BHLHE40,Nanger_dama,,miniprot,1737,576,DROP,1 internal stop(s); len aa=578 prot=576 | miniprot-local
+BHLHE40,Nasua_narica,,miniprot,1752,582,DROP,len aa=583 prot=582 | miniprot-local
+BHLHE40,Nycticebus_coucang,XP_053455582.1,refseq,1239,412,PASS,exact | coded_by:XM_053599607.1:115..1353
+BHLHE40,Ochotona_princeps,XP_004581332.2,refseq,1206,401,PASS,exact | coded_by:XM_004581275.2:949..2154
+BHLHE40,Octodon_degus,XP_004629592.1,refseq,1239,412,PASS,exact | coded_by:XM_004629535.2:284..1522
+BHLHE40,Orycteropus_afer,XP_007952252.1,refseq,1239,412,PASS,exact | coded_by:XM_007954061.2:1..1239
+BHLHE40,Paguma_larvata,,miniprot,1741,578,DROP,cds not x3 (trim 1); 18 internal stop(s); len aa=580 prot=578 | miniprot-local
+BHLHE40,Pan_troglodytes,XP_516248.3,refseq,1239,412,PASS,exact | coded_by:XM_516248.9:485..1723
+BHLHE40,Panthera_pardus,XP_019284312.1,refseq,1239,412,PASS,exact | coded_by:XM_019428767.2:315..1553
+BHLHE40,Peromyscus_eremicus,XP_059114292.1,refseq,1236,411,PASS,exact | coded_by:XM_059258309.1:309..1544
+BHLHE40,Phacochoerus_africanus,XP_047635543.1,refseq,1239,412,PASS,exact | coded_by:XM_047779587.1:267..1505
+BHLHE40,Phalanger_gymnotis,,miniprot,1236,411,PASS,exact | miniprot-local
+BHLHE40,Pipistrellus_pipistrellus,,miniprot,1716,569,DROP,len aa=571 prot=569 | miniprot-local
+BHLHE40,Plecturocebus_cupreus,,miniprot,1745,579,DROP,cds not x3 (trim 2); 15 internal stop(s); len aa=581 prot=579 | miniprot-local
+BHLHE40,Pseudocheirus_occidentalis,,miniprot,1236,411,PASS,exact | miniprot-local
+BHLHE40,Puma_concolor,XP_025777950.1,refseq,1239,412,PASS,exact | coded_by:XM_025922165.1:1..1239
+BHLHE40,Rattus_norvegicus,NP_445780.2,refseq,1236,411,PASS,exact | coded_by:NM_053328.2:320..1555
+BHLHE40,Rhynchocyon_petersi,KAM6170508.1,refseq,1227,408,PASS,"exact | coded_by:join(JBHNZN010000009.1:28097132..28097202, JBHNZN010000009.1:28097282..28097351, JBHNZN010000009.1:28097546..28097653, JBHNZN010000009.1:28098349..28098472, JBHNZN010000009.1:28099869..28100722)"
+BHLHE40,Saccopteryx_bilineata,XP_066100766.1,refseq,1263,420,PASS,exact | coded_by:XM_066244669.1:487..1749
+BHLHE40,Sarcophilus_harrisii,XP_031810191.1,refseq,1233,410,PASS,exact | coded_by:XM_031954331.1:282..1514
+BHLHE40,Sciurus_vulgaris,XP_078978325.1,refseq,1233,410,PASS,exact | coded_by:XM_079122199.1:342..1574
+BHLHE40,Speothos_venaticus,,miniprot,1743,579,DROP,len aa=580 prot=579 | miniprot-local
+BHLHE40,Suricata_suricatta,XP_029774348.1,refseq,1239,412,PASS,exact | coded_by:XM_029918488.1:254..1492
+BHLHE40,Sylvilagus_floridanus,,miniprot,1667,553,DROP,cds not x3 (trim 2); 12 internal stop(s); len aa=555 prot=553 | miniprot-local
+BHLHE40,Tapirus_terrestris,,miniprot,1734,576,DROP,3 internal stop(s); len aa=577 prot=576 | miniprot-local
+BHLHE40,Tragelaphus_eurycerus,,miniprot,1748,581,DROP,cds not x3 (trim 2); 15 internal stop(s); len aa=582 prot=581 | miniprot-local
+BHLHE40,Uromys_caudimaculatus,,miniprot,1756,582,DROP,cds not x3 (trim 1); 17 internal stop(s); len aa=585 prot=582 | miniprot-local
+BHLHE40,Vicugna_pacos,XP_006196574.2,refseq,1236,411,PASS,exact | coded_by:XM_006196512.4:304..1539
+BHLHE40,Xerus_rutilus,,miniprot,1738,577,DROP,cds not x3 (trim 1); 14 internal stop(s); len aa=579 prot=577 | miniprot-local
+BHLHE41,Acinonyx_jubatus,XP_026891586.2,refseq,1455,484,PASS,exact | coded_by:XM_027035785.2:728..2182
+BHLHE41,Acomys_cahirinus,,miniprot,1236,411,PASS,exact | miniprot-local
+BHLHE41,Aepyceros_melampus,,miniprot,1537,508,DROP,cds not x3 (trim 1); 22 internal stop(s); len aa=512 prot=508 | miniprot-local
+BHLHE41,Aotus_nancymaae,XP_021522528.2,refseq,1440,479,PASS,exact | coded_by:XM_021666853.2:301..1740
+BHLHE41,Arvicanthis_niloticus,XP_034367894.1,refseq,1230,409,PASS,exact | coded_by:XM_034512003.2:326..1555
+BHLHE41,Bos_taurus,NP_001069765.1,refseq,1125,374,PASS,exact | coded_by:NM_001076297.1:156..1280
+BHLHE41,Callithrix_jacchus,XP_035111916.1,refseq,1431,476,PASS,exact | coded_by:XM_035256025.3:265..1695
+BHLHE41,Camelus_bactrianus,XP_010944839.2,refseq,1461,486,PASS,exact | coded_by:XM_010946537.3:506..1966
+BHLHE41,Caracal_caracal,,miniprot,1783,592,DROP,cds not x3 (trim 1); 9 internal stop(s); len aa=594 prot=592 | miniprot-local
+BHLHE41,Cebus_imitator,XP_017362524.1,refseq,1440,479,PASS,exact | coded_by:XM_017507035.2:342..1781
+BHLHE41,Choloepus_hoffmanni,,miniprot,1696,562,DROP,cds not x3 (trim 1); 24 internal stop(s); len aa=565 prot=562 | miniprot-local
+BHLHE41,Cynocephalus_volans,XP_062932007.1,refseq,1446,481,PASS,exact | coded_by:XM_063075937.1:1255..2700
+BHLHE41,Cynomys_ludovicianus,,miniprot,1770,587,DROP,8 internal stop(s); len aa=589 prot=587 | miniprot-local
+BHLHE41,Dasypus_novemcinctus,XP_058138907.1,refseq,1314,437,PASS,exact | coded_by:XM_058282924.2:309..1622
+BHLHE41,Daubentonia_madagascariensis,,miniprot,1787,593,DROP,cds not x3 (trim 2); 20 internal stop(s); len aa=595 prot=593 | miniprot-local
+BHLHE41,Eira_barbara,,miniprot,1798,598,DROP,cds not x3 (trim 1); 9 internal stop(s); len aa=599 prot=598 | miniprot-local
+BHLHE41,Equus_caballus,XP_070127194.1,refseq,1761,586,PASS,exact | coded_by:XM_070271093.1:652..2412
+BHLHE41,Giraffa_tippelskirchi,,miniprot,1789,594,DROP,cds not x3 (trim 1); 7 internal stop(s); len aa=596 prot=594 | miniprot-local
+BHLHE41,Gorilla_gorilla_gorilla,XP_030856706.1,refseq,1755,584,PASS,exact | coded_by:XM_031000846.3:1000..2754
+BHLHE41,Homo_sapiens,NP_110389.1,refseq,1449,482,PASS,exact | coded_by:NM_030762.3:259..1707
+BHLHE41,Hyaena_hyaena,XP_039096736.1,refseq,1470,489,PASS,exact | coded_by:XM_039240805.1:286..1755
+BHLHE41,Hylobates_pileatus,,miniprot,1746,581,PASS,exact | miniprot-local
+BHLHE41,Ictidomys_tridecemlineatus,XP_077871169.1,refseq,1446,481,PASS,exact | coded_by:XM_078015043.1:348..1793
+BHLHE41,Jaculus_jaculus,XP_012805565.2,refseq,1371,456,PASS,exact | coded_by:XM_012950111.2:82..1452
+BHLHE41,Lagorchestes_hirsutus,,miniprot,1512,503,PASS,exact | miniprot-local
+BHLHE41,Leopardus_geoffroyi,XP_045319539.1,refseq,1788,595,PASS,exact | coded_by:XM_045463583.1:3..1790
+BHLHE41,Martes_flavigula,,miniprot,1792,596,DROP,cds not x3 (trim 1); 9 internal stop(s); len aa=597 prot=596 | miniprot-local
+BHLHE41,Microcebus_murinus,XP_012594991.2,refseq,1458,485,PASS,exact | coded_by:XM_012739537.3:366..1823
+BHLHE41,Mirza_zaza,,miniprot,1798,598,DROP,cds not x3 (trim 1); 6 internal stop(s); len aa=599 prot=598 | miniprot-local
+BHLHE41,Myrmecobius_fasciatus,,miniprot,1500,499,PASS,exact | miniprot-local
+BHLHE41,Nanger_dama,,miniprot,1784,592,DROP,cds not x3 (trim 2); 2 internal stop(s); len aa=594 prot=592 | miniprot-local
+BHLHE41,Nasua_narica,,miniprot,1786,594,DROP,cds not x3 (trim 1); 8 internal stop(s); len aa=595 prot=594 | miniprot-local
+BHLHE41,Nycticebus_coucang,XP_053410848.1,refseq,1428,475,PASS,exact | coded_by:XM_053554873.1:368..1795
+BHLHE41,Ochotona_princeps,XP_058511824.1,refseq,1416,471,PASS,exact | coded_by:XM_058655841.1:213..1628
+BHLHE41,Octodon_degus,XP_023574789.1,refseq,1386,461,PASS,exact | coded_by:XM_023719021.1:966..2351
+BHLHE41,Orycteropus_afer,XP_007947987.1,refseq,969,322,PASS,exact | coded_by:XM_007949796.1:1..969
+BHLHE41,Paguma_larvata,,miniprot,1786,593,DROP,cds not x3 (trim 1); 7 internal stop(s); len aa=595 prot=593 | miniprot-local
+BHLHE41,Pan_troglodytes,XP_520805.2,refseq,1449,482,PASS,exact | coded_by:XM_520805.9:5614..7062
+BHLHE41,Panthera_pardus,XP_019307813.2,refseq,1785,594,PASS,exact | coded_by:XM_019452268.2:4..1788
+BHLHE41,Peromyscus_eremicus,XP_059112978.1,refseq,1227,408,PASS,exact | coded_by:XM_059256995.1:284..1510
+BHLHE41,Phacochoerus_africanus,XP_047643308.1,refseq,1455,484,PASS,exact | coded_by:XM_047787352.1:381..1835
+BHLHE41,Phalanger_gymnotis,,miniprot,1533,510,PASS,exact | miniprot-local
+BHLHE41,Pipistrellus_pipistrellus,,miniprot,1794,595,DROP,1 internal stop(s); len aa=597 prot=595 | miniprot-local
+BHLHE41,Plecturocebus_cupreus,,miniprot,1741,578,DROP,cds not x3 (trim 1); 6 internal stop(s); len aa=580 prot=578 | miniprot-local
+BHLHE41,Pseudocheirus_occidentalis,,miniprot,1635,544,PASS,exact | miniprot-local
+BHLHE41,Rattus_norvegicus,NP_579837.2,refseq,1233,410,PASS,exact | coded_by:NM_133303.2:268..1500
+BHLHE41,Rhynchocyon_petersi,KAM6215139.1,refseq,1407,468,PASS,exact | elink+fasta_cds_na
+BHLHE41,Saccopteryx_bilineata,XP_066121044.1,refseq,1407,468,PASS,exact | coded_by:XM_066264947.1:1357..2763
+BHLHE41,Sarcophilus_harrisii,XP_031794343.1,refseq,1503,500,PASS,exact | coded_by:XM_031938483.1:400..1902
+BHLHE41,Sciurus_vulgaris,XP_078998911.1,refseq,1449,482,PASS,exact | coded_by:XM_079142785.1:309..1757
+BHLHE41,Speothos_venaticus,,miniprot,1853,616,DROP,cds not x3 (trim 2); 21 internal stop(s); len aa=617 prot=616 | miniprot-local
+BHLHE41,Suricata_suricatta,XP_029811382.1,refseq,870,289,PASS,exact | coded_by:XM_029955522.1:1..870
+BHLHE41,Sylvilagus_floridanus,,miniprot,1683,560,PASS,exact | miniprot-local
+BHLHE41,Tapirus_terrestris,,miniprot,1759,585,DROP,cds not x3 (trim 1); 8 internal stop(s); len aa=586 prot=585 | miniprot-local
+BHLHE41,Tragelaphus_eurycerus,,miniprot,1790,595,DROP,cds not x3 (trim 2); 22 internal stop(s); len aa=596 prot=595 | miniprot-local
+BHLHE41,Uromys_caudimaculatus,,miniprot,1233,410,PASS,exact | miniprot-local
+BHLHE41,Vicugna_pacos,XP_031526379.2,refseq,1464,487,PASS,exact | coded_by:XM_031670519.2:313..1776
+BHLHE41,Xerus_rutilus,,miniprot,1773,589,DROP,1 internal stop(s); len aa=590 prot=589 | miniprot-local
+CLOCK,Acinonyx_jubatus,XP_053073323.1,refseq,2532,843,PASS,exact | coded_by:XM_053217348.1:293..2824
+CLOCK,Acomys_cahirinus,,miniprot,2601,866,PASS,exact | miniprot-local
+CLOCK,Aepyceros_melampus,,miniprot,2095,696,DROP,cds not x3 (trim 1); 15 internal stop(s); len aa=698 prot=696 | miniprot-local
+CLOCK,Aotus_nancymaae,XP_064223339.1,refseq,2547,848,PASS,exact | coded_by:XM_064367269.1:435..2981
+CLOCK,Arvicanthis_niloticus,XP_076794784.1,refseq,2607,868,PASS,exact | coded_by:XM_076938669.1:527..3133
+CLOCK,Bos_taurus,NP_001276698.1,refseq,2538,845,PASS,exact | coded_by:NM_001289769.1:1..2538
+CLOCK,Callithrix_jacchus,XP_017826047.3,refseq,2553,850,PASS,exact | coded_by:XM_017970558.5:393..2945
+CLOCK,Camelus_bactrianus,XP_074203709.1,refseq,2619,872,PASS,exact | coded_by:XM_074347608.1:1420..4038
+CLOCK,Caracal_caracal,,miniprot,2535,844,DROP,cds not x3 (trim 2); 25 internal stop(s) | miniprot-local
+CLOCK,Cebus_imitator,XP_037598523.1,refseq,2538,845,PASS,exact | coded_by:XM_037742595.1:421..2958
+CLOCK,Choloepus_hoffmanni,,miniprot,1344,447,PASS,exact | miniprot-local
+CLOCK,Cynocephalus_volans,XP_062963355.1,refseq,2541,846,PASS,exact | coded_by:XM_063107285.1:221..2761
+CLOCK,Cynomys_ludovicianus,,miniprot,2589,862,PASS,exact | miniprot-local
+CLOCK,Dasypus_novemcinctus,XP_023445203.1,refseq,2559,852,PASS,exact | coded_by:XM_023589435.3:266..2824
+CLOCK,Daubentonia_madagascariensis,,miniprot,2556,851,PASS,exact | miniprot-local
+CLOCK,Eira_barbara,,miniprot,2523,840,PASS,exact | miniprot-local
+CLOCK,Equus_caballus,NP_001295238.1,refseq,2544,847,PASS,exact | coded_by:NM_001308309.3:597..3140
+CLOCK,Giraffa_tippelskirchi,,miniprot,2538,845,PASS,exact | miniprot-local
+CLOCK,Gorilla_gorilla_gorilla,XP_055241040.2,refseq,2547,848,PASS,exact | coded_by:XM_055385065.2:837..3383
+CLOCK,Homo_sapiens,NP_001254772.1,refseq,2541,846,PASS,exact | coded_by:NM_001267843.2:927..3467
+CLOCK,Hyaena_hyaena,XP_039104958.1,refseq,2532,843,PASS,exact | coded_by:XM_039249027.1:327..2858
+CLOCK,Hylobates_pileatus,,miniprot,2556,851,PASS,exact | miniprot-local
+CLOCK,Ictidomys_tridecemlineatus,XP_077877434.1,refseq,2592,863,PASS,exact | coded_by:XM_078021308.1:340..2931
+CLOCK,Jaculus_jaculus,XP_045017339.1,refseq,2580,859,PASS,exact | coded_by:XM_045161404.1:221..2800
+CLOCK,Lagorchestes_hirsutus,,miniprot,2556,851,PASS,exact | miniprot-local
+CLOCK,Leopardus_geoffroyi,XP_045329957.1,refseq,2535,844,PASS,exact | coded_by:XM_045474001.1:696..3230
+CLOCK,Macrotis_lagotis,XP_074085507.1,refseq,2628,875,PASS,exact | coded_by:XM_074229406.1:3718..6345
+CLOCK,Martes_flavigula,,miniprot,2523,840,PASS,exact | miniprot-local
+CLOCK,Microcebus_murinus,XP_075853987.1,refseq,2532,843,PASS,exact | coded_by:XM_075997872.1:342..2873
+CLOCK,Mirza_zaza,,miniprot,1752,583,PASS,exact | miniprot-local
+CLOCK,Myrmecobius_fasciatus,,miniprot,2526,841,PASS,exact | miniprot-local
+CLOCK,Nanger_dama,,miniprot,2539,845,DROP,cds not x3 (trim 1); 22 internal stop(s); len aa=846 prot=845 | miniprot-local
+CLOCK,Nasua_narica,,miniprot,2538,845,PASS,exact | miniprot-local
+CLOCK,Nycticebus_coucang,XP_053433512.1,refseq,2562,853,PASS,exact | coded_by:XM_053577537.1:161..2722
+CLOCK,Ochotona_princeps,XP_058522644.1,refseq,2562,853,PASS,exact | coded_by:XM_058666661.1:<1..2562
+CLOCK,Octodon_degus,XP_023566683.1,refseq,2571,856,PASS,exact | coded_by:XM_023710915.1:502..3072
+CLOCK,Orycteropus_afer,XP_042637634.1,refseq,2547,848,PASS,exact | coded_by:XM_042781700.1:1..2547
+CLOCK,Paguma_larvata,,miniprot,2535,844,PASS,exact | miniprot-local
+CLOCK,Pan_troglodytes,XP_063665688.1,refseq,2544,847,PASS,exact | coded_by:XM_063809618.1:301..2844
+CLOCK,Panthera_pardus,XP_053757541.1,refseq,2535,844,PASS,exact | coded_by:XM_053901566.1:63..2597
+CLOCK,Peromyscus_eremicus,XP_059132021.1,refseq,2577,858,PASS,exact | coded_by:XM_059276038.1:346..2922
+CLOCK,Phacochoerus_africanus,XP_047654711.1,refseq,2568,855,PASS,exact | coded_by:XM_047798755.1:642..3209
+CLOCK,Phalanger_gymnotis,,miniprot,2577,858,PASS,exact | miniprot-local
+CLOCK,Pipistrellus_pipistrellus,,miniprot,2622,875,DROP,len aa=874 prot=875 | miniprot-local
+CLOCK,Plecturocebus_cupreus,,miniprot,2547,848,PASS,exact | miniprot-local
+CLOCK,Puma_concolor,XP_025777170.1,refseq,2532,843,PASS,exact | coded_by:XM_025921385.1:387..2918
+CLOCK,Rattus_norvegicus,NP_068628.2,refseq,2592,863,PASS,exact | coded_by:NM_021856.3:44..2635
+CLOCK,Rhynchocyon_petersi,KAM6220772.1,refseq,2520,839,PASS,exact | elink+fasta_cds_na
+CLOCK,Saccopteryx_bilineata,XP_066136131.1,refseq,2544,847,PASS,exact | coded_by:XM_066280034.1:920..3463
+CLOCK,Sarcophilus_harrisii,XP_031799875.1,refseq,2562,853,PASS,exact | coded_by:XM_031944015.1:937..3498
+CLOCK,Sciurus_vulgaris,XP_079009893.1,refseq,2571,856,PASS,exact | coded_by:XM_079153767.1:184..2754
+CLOCK,Speothos_venaticus,,miniprot,1560,521,DROP,len aa=520 prot=521 | miniprot-local
+CLOCK,Suricata_suricatta,XP_029801541.1,refseq,2532,843,PASS,exact | coded_by:XM_029945681.1:607..3138
+CLOCK,Sylvilagus_floridanus,,miniprot,2556,851,PASS,exact | miniprot-local
+CLOCK,Tapirus_terrestris,,miniprot,2604,869,DROP,len aa=868 prot=869 | miniprot-local
+CLOCK,Tragelaphus_eurycerus,,miniprot,2538,845,PASS,exact | miniprot-local
+CLOCK,Uromys_caudimaculatus,,miniprot,2610,869,PASS,exact | miniprot-local
+CLOCK,Vicugna_pacos,XP_072799718.1,refseq,2811,936,PASS,exact | coded_by:XM_072943617.1:655..3465
+CLOCK,Xerus_rutilus,,miniprot,2577,858,PASS,exact | miniprot-local
+CRY1,Acinonyx_jubatus,XP_053082676.1,refseq,1764,587,PASS,exact | coded_by:XM_053226701.1:874..2637
+CRY1,Acomys_cahirinus,,miniprot,1764,587,PASS,exact | miniprot-local
+CRY1,Aepyceros_melampus,,miniprot,1496,497,DROP,cds not x3 (trim 2); 19 internal stop(s); len aa=498 prot=497 | miniprot-local
+CRY1,Aotus_nancymaae,XP_012324588.3,refseq,1761,586,PASS,exact | coded_by:XM_012469165.3:589..2349
+CRY1,Arvicanthis_niloticus,XP_076775918.1,refseq,1767,588,PASS,exact | coded_by:XM_076919803.1:887..2653
+CRY1,Bos_taurus,NP_001098885.1,refseq,1764,587,PASS,exact | coded_by:NM_001105415.1:8..1771
+CRY1,Callithrix_jacchus,XP_035114419.2,refseq,1761,586,PASS,exact | coded_by:XM_035258528.3:627..2387
+CRY1,Camelus_bactrianus,XP_010968776.1,refseq,1761,586,PASS,exact | coded_by:XM_010970474.3:600..2360
+CRY1,Caracal_caracal,,miniprot,1901,634,DROP,cds not x3 (trim 2); 4 internal stop(s); len aa=633 prot=634 | miniprot-local
+CRY1,Cebus_imitator,XP_017396510.1,refseq,1761,586,PASS,exact | coded_by:XM_017541021.2:737..2497
+CRY1,Choloepus_hoffmanni,,miniprot,1898,632,DROP,cds not x3 (trim 2); 3 internal stop(s) | miniprot-local
+CRY1,Cynocephalus_volans,XP_062930896.1,refseq,1764,587,PASS,exact | coded_by:XM_063074826.1:861..2624
+CRY1,Cynomys_ludovicianus,,miniprot,1903,632,DROP,cds not x3 (trim 1); 1 internal stop(s); len aa=634 prot=632 | miniprot-local
+CRY1,Dasypus_novemcinctus,XP_023438815.1,refseq,1764,587,PASS,exact | coded_by:XM_023583047.3:883..2646
+CRY1,Daubentonia_madagascariensis,,miniprot,1894,632,DROP,cds not x3 (trim 1); 27 internal stop(s); len aa=631 prot=632 | miniprot-local
+CRY1,Eira_barbara,,miniprot,1900,633,DROP,cds not x3 (trim 1); 3 internal stop(s) | miniprot-local
+CRY1,Equus_caballus,XP_001499263.1,refseq,1764,587,PASS,exact | coded_by:XM_001499213.6:958..2721
+CRY1,Giraffa_tippelskirchi,,miniprot,1902,634,DROP,1 internal stop(s) | miniprot-local
+CRY1,Gorilla_gorilla_gorilla,XP_063550353.1,refseq,1761,586,PASS,exact | coded_by:XM_063694283.1:589..2349
+CRY1,Homo_sapiens,NP_001400387.1,refseq,1821,606,PASS,exact | coded_by:NM_001413458.1:589..2409
+CRY1,Hyaena_hyaena,XP_039086368.1,refseq,1764,587,PASS,exact | coded_by:XM_039230437.1:598..2361
+CRY1,Hylobates_pileatus,,miniprot,1899,632,PASS,exact | miniprot-local
+CRY1,Ictidomys_tridecemlineatus,XP_077909007.1,refseq,1764,587,PASS,exact | coded_by:XM_078052881.1:894..2657
+CRY1,Jaculus_jaculus,XP_045009281.1,refseq,1764,587,PASS,exact | coded_by:XM_045153346.1:642..2405
+CRY1,Lagorchestes_hirsutus,,miniprot,1845,614,PASS,exact | miniprot-local
+CRY1,Leopardus_geoffroyi,XP_045321371.1,refseq,1764,587,PASS,exact | coded_by:XM_045465415.1:888..2651
+CRY1,Macrotis_lagotis,XP_074082874.1,refseq,1848,615,PASS,exact | coded_by:XM_074226773.1:127..1974
+CRY1,Martes_flavigula,,miniprot,1900,633,DROP,cds not x3 (trim 1); 3 internal stop(s) | miniprot-local
+CRY1,Microcebus_murinus,XP_012628233.1,refseq,1764,587,PASS,exact | coded_by:XM_012772779.2:658..2421
+CRY1,Mirza_zaza,,miniprot,912,305,DROP,len aa=304 prot=305 | miniprot-local
+CRY1,Myrmecobius_fasciatus,,miniprot,1842,613,PASS,exact | miniprot-local
+CRY1,Nanger_dama,,miniprot,1901,633,DROP,cds not x3 (trim 2); 38 internal stop(s) | miniprot-local
+CRY1,Nasua_narica,,miniprot,1902,634,DROP,1 internal stop(s) | miniprot-local
+CRY1,Nycticebus_coucang,XP_053442629.1,refseq,1764,587,PASS,exact | coded_by:XM_053586654.1:850..2613
+CRY1,Ochotona_princeps,XP_004589630.2,refseq,1764,587,PASS,exact | coded_by:XM_004589573.2:874..2637
+CRY1,Octodon_degus,XP_023572918.1,refseq,1764,587,PASS,exact | coded_by:XM_023717150.1:147..1910
+CRY1,Orycteropus_afer,XP_007946421.1,refseq,1764,587,PASS,exact | coded_by:XM_007948230.2:1..1764
+CRY1,Paguma_larvata,,miniprot,1900,634,DROP,cds not x3 (trim 1); 1 internal stop(s); len aa=633 prot=634 | miniprot-local
+CRY1,Pan_troglodytes,XP_016779596.2,refseq,1899,632,PASS,exact | coded_by:XM_016924107.4:941..2839
+CRY1,Panthera_pardus,XP_019302235.1,refseq,1764,587,PASS,exact | coded_by:XM_019446690.2:860..2623
+CRY1,Peromyscus_eremicus,XP_059101453.1,refseq,1764,587,PASS,exact | coded_by:XM_059245470.1:675..2438
+CRY1,Phacochoerus_africanus,XP_047642420.1,refseq,1767,588,PASS,exact | coded_by:XM_047786464.1:18..1784
+CRY1,Phalanger_gymnotis,,miniprot,1851,616,PASS,exact | miniprot-local
+CRY1,Pipistrellus_pipistrellus,,miniprot,1902,632,DROP,3 internal stop(s); len aa=634 prot=632 | miniprot-local
+CRY1,Plecturocebus_cupreus,,miniprot,1899,630,DROP,2 internal stop(s); len aa=632 prot=630 | miniprot-local
+CRY1,Pseudocheirus_occidentalis,,miniprot,1689,562,PASS,exact | miniprot-local
+CRY1,Puma_concolor,XP_025782500.1,refseq,1764,587,PASS,exact | coded_by:XM_025926715.1:1..1764
+CRY1,Rattus_norvegicus,NP_942045.2,refseq,1767,588,PASS,exact | coded_by:NM_198750.2:537..2303
+CRY1,Rhynchocyon_petersi,KAM6214761.1,refseq,1764,587,PASS,exact | elink+fasta_cds_na
+CRY1,Sarcophilus_harrisii,XP_031794404.1,refseq,1842,613,PASS,exact | coded_by:XM_031938544.1:388..2229
+CRY1,Sciurus_vulgaris,XP_078999220.1,refseq,1764,587,PASS,exact | coded_by:XM_079143094.1:916..2679
+CRY1,Speothos_venaticus,,miniprot,1632,544,DROP,1 internal stop(s) | miniprot-local
+CRY1,Suricata_suricatta,XP_029811092.1,refseq,1764,587,PASS,exact | coded_by:XM_029955232.1:619..2382
+CRY1,Sylvilagus_floridanus,,miniprot,1901,632,DROP,cds not x3 (trim 2); 6 internal stop(s); len aa=633 prot=632 | miniprot-local
+CRY1,Tapirus_terrestris,,miniprot,1896,633,DROP,len aa=632 prot=633 | miniprot-local
+CRY1,Tragelaphus_eurycerus,,miniprot,1904,634,DROP,cds not x3 (trim 2); 5 internal stop(s) | miniprot-local
+CRY1,Uromys_caudimaculatus,,miniprot,1767,588,PASS,exact | miniprot-local
+CRY1,Vicugna_pacos,XP_006205926.1,refseq,1764,587,PASS,exact | coded_by:XM_006205864.3:732..2495
+CRY1,Xerus_rutilus,,miniprot,1903,632,DROP,cds not x3 (trim 1); 1 internal stop(s); len aa=634 prot=632 | miniprot-local
+CRY2,Acinonyx_jubatus,XP_026928625.1,refseq,1782,593,PASS,exact | coded_by:XM_027072824.2:29..1810
+CRY2,Acomys_cahirinus,,miniprot,1839,612,PASS,exact | miniprot-local
+CRY2,Aepyceros_melampus,,miniprot,1758,584,DROP,1 internal stop(s); len aa=585 prot=584 | miniprot-local
+CRY2,Aotus_nancymaae,XP_012307855.1,refseq,1782,593,PASS,exact | coded_by:XM_012452432.2:18..1799
+CRY2,Arvicanthis_niloticus,XP_076785412.1,refseq,1839,612,PASS,exact | coded_by:XM_076929297.1:57..1895
+CRY2,Bos_taurus,NP_001276715.1,refseq,1758,585,PASS,exact | coded_by:NM_001289786.1:1..1758
+CRY2,Callithrix_jacchus,XP_002755255.1,refseq,1782,593,PASS,exact | coded_by:XM_002755209.6:14..1795
+CRY2,Camelus_bactrianus,XP_010962930.2,refseq,1782,593,PASS,exact | coded_by:XM_010964628.3:44..1825
+CRY2,Caracal_caracal,,miniprot,1785,594,PASS,exact | miniprot-local
+CRY2,Cebus_imitator,XP_017384856.1,refseq,1782,593,PASS,exact | coded_by:XM_017529367.2:86..1867
+CRY2,Choloepus_hoffmanni,,miniprot,1692,564,PASS,exact | miniprot-local
+CRY2,Cynocephalus_volans,XP_062949558.1,refseq,1788,595,PASS,exact | coded_by:XM_063093488.1:32..1819
+CRY2,Cynomys_ludovicianus,,miniprot,1782,593,PASS,exact | miniprot-local
+CRY2,Dasypus_novemcinctus,XP_058161466.1,refseq,1767,588,PASS,exact | coded_by:XM_058305483.1:74..1840
+CRY2,Daubentonia_madagascariensis,,miniprot,1845,614,PASS,exact | miniprot-local
+CRY2,Eira_barbara,,miniprot,1788,595,PASS,exact | miniprot-local
+CRY2,Equus_caballus,XP_023509705.2,refseq,1785,594,PASS,exact | coded_by:XM_023653937.2:16..1800
+CRY2,Giraffa_tippelskirchi,,miniprot,1857,618,PASS,exact | miniprot-local
+CRY2,Gorilla_gorilla_gorilla,XP_055210718.1,refseq,1845,614,PASS,exact | coded_by:XM_055354743.2:43..1887
+CRY2,Homo_sapiens,NP_066940.3,refseq,1782,593,PASS,exact | coded_by:NM_021117.5:17..1798
+CRY2,Hyaena_hyaena,XP_039082709.1,refseq,1782,593,PASS,exact | coded_by:XM_039226778.1:10..1791
+CRY2,Hylobates_pileatus,,miniprot,1608,536,PASS,exact | miniprot-local
+CRY2,Ictidomys_tridecemlineatus,XP_021585313.2,refseq,1782,593,PASS,exact | coded_by:XM_021729638.3:32..1813
+CRY2,Jaculus_jaculus,XP_044990642.1,refseq,1569,522,PASS,exact | coded_by:XM_045134707.1:202..1770
+CRY2,Lagorchestes_hirsutus,,miniprot,1788,597,DROP,len aa=596 prot=597 | miniprot-local
+CRY2,Leopardus_geoffroyi,XP_045342584.1,refseq,1782,593,PASS,exact | coded_by:XM_045486628.1:29..1810
+CRY2,Macrotis_lagotis,XP_074086628.1,refseq,1830,609,PASS,exact | coded_by:XM_074230527.1:1..1830
+CRY2,Martes_flavigula,,miniprot,1788,595,PASS,exact | miniprot-local
+CRY2,Microcebus_murinus,XP_075858118.1,refseq,1782,593,PASS,exact | coded_by:XM_076002003.1:43..1824
+CRY2,Mirza_zaza,,miniprot,1134,377,PASS,exact | miniprot-local
+CRY2,Myrmecobius_fasciatus,,miniprot,1317,438,PASS,exact | miniprot-local
+CRY2,Nanger_dama,,miniprot,1760,584,DROP,cds not x3 (trim 2); 12 internal stop(s); len aa=586 prot=584 | miniprot-local
+CRY2,Nasua_narica,,miniprot,1782,593,PASS,exact | miniprot-local
+CRY2,Nycticebus_coucang,XP_053416024.1,refseq,1839,612,PASS,exact | coded_by:XM_053560049.1:15..1853
+CRY2,Ochotona_princeps,XP_004585434.2,refseq,1770,589,PASS,exact | coded_by:XM_004585377.2:43..1812
+CRY2,Octodon_degus,XP_004627070.1,refseq,1782,593,PASS,exact | coded_by:XM_004627013.2:44..1825
+CRY2,Orycteropus_afer,XP_007944720.1,refseq,1776,591,PASS,exact | coded_by:XM_007946529.2:1..1776
+CRY2,Paguma_larvata,,miniprot,1788,595,PASS,exact | miniprot-local
+CRY2,Pan_troglodytes,XP_016776215.1,refseq,1845,614,PASS,exact | coded_by:XM_016920726.3:104..1948
+CRY2,Panthera_pardus,XP_019267810.1,refseq,1785,594,PASS,exact | coded_by:XM_019412265.2:24..1808
+CRY2,Peromyscus_eremicus,XP_059116958.1,refseq,1779,592,PASS,exact | coded_by:XM_059260975.1:60..1838
+CRY2,Phacochoerus_africanus,XP_047631868.1,refseq,1788,595,PASS,exact | coded_by:XM_047775912.1:16..1803
+CRY2,Phalanger_gymnotis,,miniprot,1821,608,DROP,len aa=607 prot=608 | miniprot-local
+CRY2,Pipistrellus_pipistrellus,,miniprot,1863,620,PASS,exact | miniprot-local
+CRY2,Plecturocebus_cupreus,,miniprot,1845,614,PASS,exact | miniprot-local
+CRY2,Pseudocheirus_occidentalis,,miniprot,1812,605,DROP,len aa=604 prot=605 | miniprot-local
+CRY2,Puma_concolor,XP_025784175.1,refseq,1782,593,PASS,exact | coded_by:XM_025928390.1:1..1782
+CRY2,Rattus_norvegicus,NP_596896.2,refseq,1785,594,PASS,exact | coded_by:NM_133405.2:3..1787
+CRY2,Rhynchocyon_petersi,KAM6158859.1,refseq,1782,593,PASS,"exact | coded_by:join(JBHNZN010000012.1:51954348..51954562, JBHNZN010000012.1:51963561..51963669, JBHNZN010000012.1:51966076..51966218, JBHNZN010000012.1:51967726..51967910, JBHNZN010000012.1:51970042..51970130, JBHNZN010000012.1:51975432..51975572, JBHNZN010000012.1:51976605..51976916, JBHNZN010000012.1:51977158..51977309, JBHNZN010000012.1:51977404..51977606, JBHNZN010000012.1:51977937..51978029, JBHNZN010000012.1:51978947..51979086)"
+CRY2,Saccopteryx_bilineata,XP_066107456.1,refseq,1782,593,PASS,exact | coded_by:XM_066251359.1:24..1805
+CRY2,Sarcophilus_harrisii,XP_031799863.1,refseq,1800,599,PASS,exact | coded_by:XM_031944003.1:65..1864
+CRY2,Sciurus_vulgaris,XP_078959157.1,refseq,1782,593,PASS,exact | coded_by:XM_079103031.1:33..1814
+CRY2,Speothos_venaticus,,miniprot,1782,593,PASS,exact | miniprot-local
+CRY2,Suricata_suricatta,XP_029812990.1,refseq,1782,593,PASS,exact | coded_by:XM_029957130.1:15..1796
+CRY2,Sylvilagus_floridanus,,miniprot,1860,618,DROP,1 internal stop(s); len aa=619 prot=618 | miniprot-local
+CRY2,Tapirus_terrestris,,miniprot,1842,613,PASS,exact | miniprot-local
+CRY2,Tragelaphus_eurycerus,,miniprot,1758,585,PASS,exact | miniprot-local
+CRY2,Uromys_caudimaculatus,,miniprot,1839,612,PASS,exact | miniprot-local
+CRY2,Vicugna_pacos,XP_006212376.2,refseq,1782,593,PASS,exact | coded_by:XM_006212314.4:86..1867
+CRY2,Xerus_rutilus,,miniprot,1782,593,PASS,exact | miniprot-local
+CSNK1D,Acinonyx_jubatus,XP_026908171.2,refseq,1584,527,PASS,exact | coded_by:XM_027052370.2:226..1809
+CSNK1D,Arvicanthis_niloticus,XP_076791410.1,refseq,1287,428,PASS,exact | coded_by:XM_076935295.1:317..1603
+CSNK1D,Bos_taurus,NP_001095550.1,refseq,1230,409,PASS,exact | coded_by:NM_001102080.2:320..1549
+CSNK1D,Callithrix_jacchus,XP_008996204.1,refseq,1284,427,PASS,exact | coded_by:XM_008997956.5:51..1334
+CSNK1D,Camelus_bactrianus,XP_074200158.1,refseq,1287,428,PASS,exact | coded_by:XM_074344057.1:329..1615
+CSNK1D,Cebus_imitator,XP_017380238.1,refseq,1248,415,PASS,exact | coded_by:XM_017524749.2:358..1605
+CSNK1D,Cynocephalus_volans,XP_062937370.1,refseq,1248,415,PASS,exact | coded_by:XM_063081300.1:327..1574
+CSNK1D,Dasypus_novemcinctus,XP_004463737.1,refseq,1248,415,PASS,exact | coded_by:XM_004463680.5:306..1553
+CSNK1D,Equus_caballus,XP_023507484.1,refseq,1287,428,PASS,exact | coded_by:XM_023651716.2:427..1713
+CSNK1D,Gorilla_gorilla_gorilla,XP_055245327.1,refseq,1353,450,PASS,exact | coded_by:XM_055389352.2:333..1685
+CSNK1D,Homo_sapiens,NP_001884.2,refseq,1248,415,PASS,exact | coded_by:NM_001893.6:320..1567
+CSNK1D,Hyaena_hyaena,XP_039082341.1,refseq,1287,428,PASS,exact | coded_by:XM_039226410.1:303..1589
+CSNK1D,Ictidomys_tridecemlineatus,XP_077897490.1,refseq,1371,456,PASS,exact | coded_by:XM_078041364.1:290..1660
+CSNK1D,Jaculus_jaculus,XP_004655096.1,refseq,1248,415,PASS,exact | coded_by:XM_004655039.3:303..1550
+CSNK1D,Lagorchestes_hirsutus,,miniprot,1614,538,DROP,identity 25.8% < threshold | miniprot-local
+CSNK1D,Leopardus_geoffroyi,XP_045345912.1,refseq,1548,515,PASS,exact | coded_by:XM_045489956.1:322..1869
+CSNK1D,Macrotis_lagotis,XP_074080909.1,refseq,1353,450,PASS,exact | coded_by:XM_074224808.1:273..1625
+CSNK1D,Martes_flavigula,,miniprot,1466,487,DROP,cds not x3 (trim 2); 2 internal stop(s); len aa=488 prot=487 | miniprot-local
+CSNK1D,Microcebus_murinus,XP_012632716.1,refseq,1287,428,PASS,exact | coded_by:XM_012777262.3:320..1606
+CSNK1D,Mirza_zaza,,miniprot,1749,584,DROP,len aa=583 prot=584 | miniprot-local
+CSNK1D,Myrmecobius_fasciatus,,miniprot,1606,535,DROP,cds not x3 (trim 1); 30 internal stop(s) | miniprot-local
+CSNK1D,Nanger_dama,,miniprot,1603,534,DROP,cds not x3 (trim 1); 7 internal stop(s) | miniprot-local
+CSNK1D,Nycticebus_coucang,XP_053424244.1,refseq,1287,428,PASS,exact | coded_by:XM_053568269.1:368..1654
+CSNK1D,Ochotona_princeps,XP_058531477.1,refseq,1287,428,PASS,exact | coded_by:XM_058675494.1:301..1587
+CSNK1D,Octodon_degus,XP_023555061.1,refseq,1287,428,PASS,exact | coded_by:XM_023699293.1:329..1615
+CSNK1D,Orycteropus_afer,XP_007957747.1,refseq,1248,415,PASS,exact | coded_by:XM_007959556.2:1..1248
+CSNK1D,Panthera_pardus,XP_019321378.2,refseq,1584,527,PASS,exact | coded_by:XM_019465833.2:327..1910
+CSNK1D,Peromyscus_eremicus,XP_059128307.1,refseq,1287,428,PASS,exact | coded_by:XM_059272324.1:330..1616
+CSNK1D,Phacochoerus_africanus,XP_047614350.1,refseq,1248,415,PASS,exact | coded_by:XM_047758394.1:334..1581
+CSNK1D,Phalanger_gymnotis,,miniprot,1605,535,DROP,identity 25.2% < threshold | miniprot-local
+CSNK1D,Pseudocheirus_occidentalis,,miniprot,1616,539,DROP,cds not x3 (trim 2); 17 internal stop(s); len aa=538 prot=539 | miniprot-local
+CSNK1D,Puma_concolor,XP_025783426.1,refseq,1116,371,PASS,exact | coded_by:XM_025927641.1:96..1211
+CSNK1D,Rattus_norvegicus,NP_620691.2,refseq,1248,415,PASS,exact | coded_by:NM_139060.3:315..1562
+CSNK1D,Rhynchocyon_petersi,KAM6164063.1,refseq,1248,415,PASS,"exact | coded_by:join(JBHNZN010000010.1:1180215..1180290, JBHNZN010000010.1:1183579..1183689, JBHNZN010000010.1:1190763..1190911, JBHNZN010000010.1:1191220..1191448, JBHNZN010000010.1:1191628..1191798, JBHNZN010000010.1:1192248..1192396, JBHNZN010000010.1:1193559..1193730, JBHNZN010000010.1:1194231..1194370, JBHNZN010000010.1:1197097..1197147)"
+CSNK1D,Saccopteryx_bilineata,XP_066092461.1,refseq,1287,428,PASS,exact | coded_by:XM_066236364.1:331..1617
+CSNK1D,Sarcophilus_harrisii,KAM9006180.1,refseq,1248,415,PASS,exact | elink+fasta_cds_na
+CSNK1D,Sciurus_vulgaris,XP_078987146.1,refseq,1287,428,PASS,exact | coded_by:XM_079131020.1:317..1603
+CSNK1D,Suricata_suricatta,XP_029784685.1,refseq,1287,428,PASS,exact | coded_by:XM_029928825.1:297..1583
+CSNK1D,Uromys_caudimaculatus,,miniprot,1831,611,DROP,cds not x3 (trim 1); 20 internal stop(s); len aa=610 prot=611 | miniprot-local
+CSNK1D,Vicugna_pacos,XP_072796029.1,refseq,1302,433,PASS,exact | coded_by:XM_072939928.1:326..1627
+CSNK1E,Acinonyx_jubatus,XP_026926534.1,refseq,1374,457,PASS,exact | coded_by:XM_027070733.2:67..1440
+CSNK1E,Acomys_cahirinus,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Aepyceros_melampus,,miniprot,1401,466,PASS,exact | miniprot-local
+CSNK1E,Aotus_nancymaae,XP_064224116.1,refseq,1296,431,PASS,exact | coded_by:XM_064368046.1:196..1491
+CSNK1E,Arvicanthis_niloticus,XP_076767745.1,refseq,1296,431,PASS,exact | coded_by:XM_076911630.1:38..1333
+CSNK1E,Bos_taurus,NP_001071577.1,refseq,1401,466,PASS,exact | coded_by:NM_001078109.1:86..1486
+CSNK1E,Callithrix_jacchus,XP_078196733.1,refseq,1296,431,PASS,exact | coded_by:XM_078340607.1:705..2000
+CSNK1E,Camelus_bactrianus,XP_074231636.1,refseq,1377,458,PASS,exact | coded_by:XM_074375535.1:60..1436
+CSNK1E,Caracal_caracal,,miniprot,1374,457,PASS,exact | miniprot-local
+CSNK1E,Choloepus_hoffmanni,,miniprot,1377,458,PASS,exact | miniprot-local
+CSNK1E,Cynocephalus_volans,XP_062931056.1,refseq,1251,416,PASS,exact | coded_by:XM_063074986.1:212..1462
+CSNK1E,Cynomys_ludovicianus,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Dasypus_novemcinctus,XP_004466285.1,refseq,1251,416,PASS,exact | coded_by:XM_004466228.4:170..1420
+CSNK1E,Daubentonia_madagascariensis,,miniprot,1276,426,DROP,cds not x3 (trim 1); 2 internal stop(s); len aa=425 prot=426 | miniprot-local
+CSNK1E,Eira_barbara,,miniprot,1377,458,PASS,exact | miniprot-local
+CSNK1E,Equus_caballus,XP_023487431.1,refseq,1296,431,PASS,exact | coded_by:XM_023631663.2:174..1469
+CSNK1E,Giraffa_tippelskirchi,,miniprot,1431,476,PASS,exact | miniprot-local
+CSNK1E,Gorilla_gorilla_gorilla,XP_018873811.2,refseq,1362,453,PASS,exact | coded_by:XM_019018266.3:367..1728
+CSNK1E,Homo_sapiens,NP_001885.1,refseq,1251,416,PASS,exact | coded_by:NM_001894.5:112..1362
+CSNK1E,Hylobates_pileatus,,miniprot,1362,453,PASS,exact | miniprot-local
+CSNK1E,Ictidomys_tridecemlineatus,XP_077908859.1,refseq,1296,431,PASS,exact | coded_by:XM_078052733.1:131..1426
+CSNK1E,Lagorchestes_hirsutus,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Macrotis_lagotis,XP_074083029.1,refseq,1125,374,PASS,exact | coded_by:XM_074226928.1:6274..7398
+CSNK1E,Martes_flavigula,,miniprot,1377,458,PASS,exact | miniprot-local
+CSNK1E,Microcebus_murinus,XP_075863103.1,refseq,1251,416,PASS,exact | coded_by:XM_076006988.1:339..1589
+CSNK1E,Mirza_zaza,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Myrmecobius_fasciatus,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Nanger_dama,,miniprot,1401,465,DROP,2 internal stop(s); len aa=466 prot=465 | miniprot-local
+CSNK1E,Nasua_narica,,miniprot,1377,458,PASS,exact | miniprot-local
+CSNK1E,Nycticebus_coucang,XP_053440415.1,refseq,1296,431,PASS,exact | coded_by:XM_053584440.1:254..1549
+CSNK1E,Ochotona_princeps,XP_058529101.1,refseq,1296,431,PASS,exact | coded_by:XM_058673118.1:81..1376
+CSNK1E,Paguma_larvata,,miniprot,1377,458,PASS,exact | miniprot-local
+CSNK1E,Pan_troglodytes,XP_054531720.2,refseq,1326,441,PASS,exact | coded_by:XM_054675745.2:344..1669
+CSNK1E,Panthera_pardus,XP_053750663.1,refseq,1251,416,PASS,exact | coded_by:XM_053894688.1:256..1506
+CSNK1E,Peromyscus_eremicus,XP_059103612.1,refseq,1254,417,PASS,exact | coded_by:XM_059247629.1:115..1368
+CSNK1E,Phacochoerus_africanus,XP_047642212.1,refseq,1365,454,PASS,exact | coded_by:XM_047786256.1:72..1436
+CSNK1E,Phalanger_gymnotis,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Pipistrellus_pipistrellus,,miniprot,1284,429,DROP,len aa=428 prot=429 | miniprot-local
+CSNK1E,Plecturocebus_cupreus,,miniprot,1362,453,PASS,exact | miniprot-local
+CSNK1E,Pseudocheirus_occidentalis,,miniprot,1278,427,DROP,len aa=426 prot=427 | miniprot-local
+CSNK1E,Puma_concolor,XP_025782835.1,refseq,1251,416,PASS,exact | coded_by:XM_025927050.1:1..1251
+CSNK1E,Rattus_norvegicus,NP_113805.1,refseq,1251,416,PASS,exact | coded_by:NM_031617.3:173..1423
+CSNK1E,Rhynchocyon_petersi,KAM6215785.1,refseq,1251,416,PASS,exact | elink+fasta_cds_na
+CSNK1E,Saccopteryx_bilineata,XP_066114345.1,refseq,1296,431,PASS,exact | coded_by:XM_066258248.1:32..1327
+CSNK1E,Sarcophilus_harrisii,XP_031795734.1,refseq,1296,431,PASS,exact | coded_by:XM_031939874.1:68..1363
+CSNK1E,Speothos_venaticus,,miniprot,1305,434,PASS,exact | miniprot-local
+CSNK1E,Sylvilagus_floridanus,,miniprot,1293,432,DROP,len aa=431 prot=432 | miniprot-local
+CSNK1E,Tapirus_terrestris,,miniprot,1362,453,PASS,exact | miniprot-local
+CSNK1E,Tragelaphus_eurycerus,,miniprot,1401,466,PASS,exact | miniprot-local
+CSNK1E,Uromys_caudimaculatus,,miniprot,1293,432,DROP,len aa=431 prot=432 | miniprot-local
+CSNK1E,Vicugna_pacos,XP_072829613.1,refseq,1377,458,PASS,exact | coded_by:XM_072973512.1:36..1412
+CSNK1E,Xerus_rutilus,,miniprot,1356,453,DROP,len aa=452 prot=453 | miniprot-local
+FBXL3,Acinonyx_jubatus,XP_026920831.1,refseq,1287,428,PASS,exact | coded_by:XM_027065030.2:344..1630
+FBXL3,Acomys_cahirinus,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Aepyceros_melampus,,miniprot,1289,428,DROP,cds not x3 (trim 2); 7 internal stop(s); len aa=429 prot=428 | miniprot-local
+FBXL3,Aotus_nancymaae,XP_012327438.1,refseq,1287,428,PASS,exact | coded_by:XM_012472015.3:339..1625
+FBXL3,Arvicanthis_niloticus,XP_034353164.1,refseq,1287,428,PASS,exact | coded_by:XM_034497273.2:226..1512
+FBXL3,Bos_taurus,NP_001095716.1,refseq,966,321,PASS,exact | coded_by:NM_001102246.1:230..1195
+FBXL3,Callithrix_jacchus,XP_035151782.1,refseq,1287,428,PASS,exact | coded_by:XM_035295891.3:162..1448
+FBXL3,Camelus_bactrianus,XP_074234462.1,refseq,1293,430,PASS,exact | coded_by:XM_074378361.1:1200..2492
+FBXL3,Caracal_caracal,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Cebus_imitator,XP_017354322.1,refseq,1287,428,PASS,exact | coded_by:XM_017498833.2:180..1466
+FBXL3,Choloepus_hoffmanni,,miniprot,1290,429,PASS,exact | miniprot-local
+FBXL3,Cynocephalus_volans,XP_062958383.1,refseq,1143,380,PASS,exact | coded_by:XM_063102313.1:86..1228
+FBXL3,Cynomys_ludovicianus,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Dasypus_novemcinctus,XP_004482027.1,refseq,1314,437,PASS,exact | coded_by:XM_004481970.5:398..1711
+FBXL3,Daubentonia_madagascariensis,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Eira_barbara,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Equus_caballus,XP_023477469.1,refseq,1287,428,PASS,exact | coded_by:XM_023621701.2:137..1423
+FBXL3,Giraffa_tippelskirchi,,miniprot,1290,429,PASS,exact | miniprot-local
+FBXL3,Gorilla_gorilla_gorilla,XP_030857134.1,refseq,1287,428,PASS,exact | coded_by:XM_031001274.3:144..1430
+FBXL3,Homo_sapiens,NP_036290.1,refseq,1287,428,PASS,exact | coded_by:NM_012158.4:335..1621
+FBXL3,Hyaena_hyaena,XP_039108380.1,refseq,1290,429,PASS,exact | coded_by:XM_039252449.1:288..1577
+FBXL3,Hylobates_pileatus,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Ictidomys_tridecemlineatus,XP_077871896.1,refseq,1287,428,PASS,exact | coded_by:XM_078015770.1:136..1422
+FBXL3,Jaculus_jaculus,XP_045001429.1,refseq,1284,427,PASS,exact | coded_by:XM_045145494.1:122..1405
+FBXL3,Lagorchestes_hirsutus,,miniprot,1296,431,PASS,exact | miniprot-local
+FBXL3,Leopardus_geoffroyi,XP_045335867.1,refseq,1287,428,PASS,exact | coded_by:XM_045479911.1:428..1714
+FBXL3,Macrotis_lagotis,XP_074047952.1,refseq,1320,439,PASS,exact | coded_by:XM_074191851.1:333..1652
+FBXL3,Martes_flavigula,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Microcebus_murinus,XP_012592530.1,refseq,1287,428,PASS,exact | coded_by:XM_012737076.2:184..1470
+FBXL3,Mirza_zaza,,miniprot,645,214,PASS,exact | miniprot-local
+FBXL3,Myrmecobius_fasciatus,,miniprot,1296,431,PASS,exact | miniprot-local
+FBXL3,Nanger_dama,,miniprot,1289,428,DROP,cds not x3 (trim 2); 13 internal stop(s); len aa=429 prot=428 | miniprot-local
+FBXL3,Nasua_narica,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Nycticebus_coucang,XP_053419412.1,refseq,1287,428,PASS,exact | coded_by:XM_053563437.1:375..1661
+FBXL3,Ochotona_princeps,XP_058526594.1,refseq,1284,427,PASS,exact | coded_by:XM_058670611.1:24..1307
+FBXL3,Octodon_degus,XP_004626336.1,refseq,1284,427,PASS,exact | coded_by:XM_004626279.2:651..1934
+FBXL3,Orycteropus_afer,XP_007939698.1,refseq,1287,428,PASS,exact | coded_by:XM_007941507.2:34..1320
+FBXL3,Paguma_larvata,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Pan_troglodytes,NP_001267277.1,refseq,1287,428,PASS,exact | coded_by:NM_001280348.1:340..1626
+FBXL3,Panthera_pardus,XP_019299687.1,refseq,1287,428,PASS,exact | coded_by:XM_019444142.2:3388..4674
+FBXL3,Peromyscus_eremicus,XP_059129235.1,refseq,1287,428,PASS,exact | coded_by:XM_059273252.1:132..1418
+FBXL3,Phacochoerus_africanus,XP_047611913.1,refseq,1290,429,PASS,exact | coded_by:XM_047755957.1:135..1424
+FBXL3,Phalanger_gymnotis,,miniprot,1293,430,PASS,exact | miniprot-local
+FBXL3,Pipistrellus_pipistrellus,,miniprot,1290,429,PASS,exact | miniprot-local
+FBXL3,Plecturocebus_cupreus,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Pseudocheirus_occidentalis,,miniprot,1296,431,PASS,exact | miniprot-local
+FBXL3,Puma_concolor,XP_025779367.1,refseq,1287,428,PASS,exact | coded_by:XM_025923582.1:1..1287
+FBXL3,Rattus_norvegicus,NP_001094038.1,refseq,1287,428,PASS,exact | coded_by:NM_001100568.1:151..1437
+FBXL3,Rhynchocyon_petersi,KAM6178123.1,refseq,1293,430,PASS,"exact | coded_by:join(JBHNZN010000008.1:212456055..212456408, JBHNZN010000008.1:212459725..212459847, JBHNZN010000008.1:212464686..212464857, JBHNZN010000008.1:212484808..212485451)"
+FBXL3,Saccopteryx_bilineata,XP_066092506.1,refseq,1287,428,PASS,exact | coded_by:XM_066236409.1:308..1594
+FBXL3,Sarcophilus_harrisii,XP_031814379.1,refseq,1296,431,PASS,exact | coded_by:XM_031958519.1:242..1537
+FBXL3,Sciurus_vulgaris,XP_078993061.1,refseq,1287,428,PASS,exact | coded_by:XM_079136935.1:392..1678
+FBXL3,Speothos_venaticus,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Suricata_suricatta,XP_029792447.1,refseq,1287,428,PASS,exact | coded_by:XM_029936587.1:96..1382
+FBXL3,Sylvilagus_floridanus,,miniprot,1287,428,PASS,exact | miniprot-local
+FBXL3,Tapirus_terrestris,,miniprot,1290,429,PASS,exact | miniprot-local
+FBXL3,Tragelaphus_eurycerus,,miniprot,1290,429,PASS,exact | miniprot-local
+FBXL3,Uromys_caudimaculatus,,miniprot,1284,427,PASS,exact | miniprot-local
+FBXL3,Vicugna_pacos,XP_072832471.1,refseq,1290,429,PASS,exact | coded_by:XM_072976370.1:238..1527
+FBXL3,Xerus_rutilus,,miniprot,1287,428,PASS,exact | miniprot-local
+NPAS2,Acinonyx_jubatus,XP_026925107.1,refseq,2463,820,PASS,exact | coded_by:XM_027069306.2:2118..4580
+NPAS2,Acomys_cahirinus,,miniprot,2439,814,DROP,len aa=813 prot=814 | miniprot-local
+NPAS2,Aepyceros_melampus,,miniprot,2057,685,DROP,cds not x3 (trim 2); 20 internal stop(s) | miniprot-local
+NPAS2,Aotus_nancymaae,XP_012333061.1,refseq,2556,851,PASS,exact | coded_by:XM_012477638.3:23..2578
+NPAS2,Arvicanthis_niloticus,XP_076771129.1,refseq,2451,816,PASS,exact | coded_by:XM_076915014.1:282..2732
+NPAS2,Bos_taurus,NP_001077232.1,refseq,2415,804,PASS,exact | coded_by:NM_001083763.1:105..2519
+NPAS2,Callithrix_jacchus,XP_035127654.3,refseq,2703,900,PASS,exact | coded_by:XM_035271763.3:187..2889
+NPAS2,Camelus_bactrianus,XP_074210815.1,refseq,2451,816,PASS,exact | coded_by:XM_074354714.1:601..3051
+NPAS2,Caracal_caracal,,miniprot,2583,860,DROP,cds not x3 (trim 2); 29 internal stop(s) | miniprot-local
+NPAS2,Cebus_imitator,XP_017403411.1,refseq,2643,880,PASS,exact | coded_by:XM_017547922.2:219..2861
+NPAS2,Choloepus_hoffmanni,,miniprot,2602,866,DROP,cds not x3 (trim 1); 21 internal stop(s); len aa=867 prot=866 | miniprot-local
+NPAS2,Cynocephalus_volans,XP_062934272.1,refseq,2457,818,PASS,exact | coded_by:XM_063078202.1:99..2555
+NPAS2,Cynomys_ludovicianus,,miniprot,2445,814,PASS,exact | miniprot-local
+NPAS2,Dasypus_novemcinctus,XP_058134181.1,refseq,2484,827,PASS,exact | coded_by:XM_058278198.2:586..3069
+NPAS2,Daubentonia_madagascariensis,,miniprot,2634,876,DROP,2 internal stop(s); len aa=877 prot=876 | miniprot-local
+NPAS2,Eira_barbara,,miniprot,2484,827,PASS,exact | miniprot-local
+NPAS2,Equus_caballus,XP_070092177.1,refseq,2604,867,PASS,exact | coded_by:XM_070236076.1:329..2932
+NPAS2,Giraffa_tippelskirchi,,miniprot,2415,804,PASS,exact | miniprot-local
+NPAS2,Gorilla_gorilla_gorilla,XP_055234406.1,refseq,2670,889,PASS,exact | coded_by:XM_055378431.2:102..2771
+NPAS2,Homo_sapiens,NP_002509.2,refseq,2475,824,PASS,exact | coded_by:NM_002518.4:299..2773
+NPAS2,Hyaena_hyaena,XP_039109040.1,refseq,2523,840,PASS,exact | coded_by:XM_039253109.1:96..2618
+NPAS2,Hylobates_pileatus,,miniprot,2669,888,DROP,cds not x3 (trim 2); 35 internal stop(s); len aa=889 prot=888 | miniprot-local
+NPAS2,Ictidomys_tridecemlineatus,XP_077884694.1,refseq,2445,814,PASS,exact | coded_by:XM_078028568.1:155..2599
+NPAS2,Jaculus_jaculus,XP_045003848.1,refseq,2496,831,PASS,exact | coded_by:XM_045147913.1:37..2532
+NPAS2,Lagorchestes_hirsutus,,miniprot,2487,828,PASS,exact | miniprot-local
+NPAS2,Leopardus_geoffroyi,XP_045301644.1,refseq,2463,820,PASS,exact | coded_by:XM_045445688.1:148..2610
+NPAS2,Macrotis_lagotis,XP_074069908.1,refseq,2496,831,PASS,exact | coded_by:XM_074213807.1:265..2760
+NPAS2,Martes_flavigula,,miniprot,2483,826,DROP,cds not x3 (trim 2); len aa=827 prot=826 | miniprot-local
+NPAS2,Microcebus_murinus,XP_012595914.2,refseq,2442,813,PASS,exact | coded_by:XM_012740460.2:305..2746
+NPAS2,Mirza_zaza,,miniprot,1431,476,PASS,exact | miniprot-local
+NPAS2,Myrmecobius_fasciatus,,miniprot,1326,443,DROP,len aa=442 prot=443 | miniprot-local
+NPAS2,Nanger_dama,,miniprot,2420,804,DROP,cds not x3 (trim 2); 30 internal stop(s); len aa=806 prot=804 | miniprot-local
+NPAS2,Nasua_narica,,miniprot,2433,810,PASS,exact | miniprot-local
+NPAS2,Nycticebus_coucang,XP_053445914.1,refseq,2457,818,PASS,exact | coded_by:XM_053589939.1:44..2500
+NPAS2,Ochotona_princeps,XP_058523491.1,refseq,2466,821,PASS,exact | coded_by:XM_058667508.1:20..2485
+NPAS2,Octodon_degus,XP_023573313.1,refseq,2910,969,PASS,exact | coded_by:XM_023717545.1:775..3684
+NPAS2,Orycteropus_afer,XP_042639421.1,refseq,2454,817,PASS,exact | coded_by:XM_042783487.1:1..2454
+NPAS2,Paguma_larvata,,miniprot,2613,869,DROP,17 internal stop(s); len aa=870 prot=869 | miniprot-local
+NPAS2,Pan_troglodytes,XP_016804612.1,refseq,2577,858,PASS,exact | coded_by:XM_016949123.4:76..2652
+NPAS2,Panthera_pardus,XP_053746545.1,refseq,2505,834,PASS,exact | coded_by:XM_053890570.1:7..2511
+NPAS2,Phacochoerus_africanus,XP_047637375.1,refseq,2391,796,PASS,exact | coded_by:XM_047781419.1:42..2432
+NPAS2,Phalanger_gymnotis,,miniprot,2496,831,PASS,exact | miniprot-local
+NPAS2,Pipistrellus_pipistrellus,,miniprot,2448,816,DROP,1 internal stop(s) | miniprot-local
+NPAS2,Plecturocebus_cupreus,,miniprot,2643,880,PASS,exact | miniprot-local
+NPAS2,Puma_concolor,XP_025788540.1,refseq,2583,860,PASS,exact | coded_by:XM_025932755.1:1..2583
+NPAS2,Rattus_norvegicus,NP_001101684.2,refseq,2451,816,PASS,exact | coded_by:NM_001108214.3:546..2996
+NPAS2,Rhynchocyon_petersi,KAM6178795.1,refseq,2460,819,PASS,"exact | coded_by:join(JBHNZN010000008.1:224317739..224317770, JBHNZN010000008.1:224365331..224365479, JBHNZN010000008.1:224391535..224391626, JBHNZN010000008.1:224396639..224396728, JBHNZN010000008.1:224423325..224423445, JBHNZN010000008.1:224424482..224424592, JBHNZN010000008.1:224443618..224443736, JBHNZN010000008.1:224445739..224445821, JBHNZN010000008.1:224446521..224446627, JBHNZN010000008.1:224452073..224452220, JBHNZN010000008.1:224456398..224456482, JBHNZN010000008.1:224461776..224461917, JBHNZN010000008.1:224462405..224462514, JBHNZN010000008.1:224467761..224467850, JBHNZN010000008.1:224476802..224476948, JBHNZN010000008.1:224493063..224493260, JBHNZN010000008.1:224497399..224497589, JBHNZN010000008.1:224497954..224498046, JBHNZN010000008.1:224501523..224501700, JBHNZN010000008.1:224505009..224505182)"
+NPAS2,Saccopteryx_bilineata,XP_066124329.1,refseq,2544,847,PASS,exact | coded_by:XM_066268232.1:498..3041
+NPAS2,Sarcophilus_harrisii,XP_031815006.1,refseq,2517,838,PASS,exact | coded_by:XM_031959146.1:731..3247
+NPAS2,Sciurus_vulgaris,XP_078967134.1,refseq,2460,819,PASS,exact | coded_by:XM_079111008.1:681..3140
+NPAS2,Speothos_venaticus,,miniprot,1659,554,DROP,len aa=553 prot=554 | miniprot-local
+NPAS2,Suricata_suricatta,XP_029792998.1,refseq,2502,833,PASS,exact | coded_by:XM_029937138.1:45..2546
+NPAS2,Sylvilagus_floridanus,,miniprot,2661,886,PASS,exact | miniprot-local
+NPAS2,Tapirus_terrestris,,miniprot,2517,840,DROP,len aa=839 prot=840 | miniprot-local
+NPAS2,Tragelaphus_eurycerus,,miniprot,2415,804,PASS,exact | miniprot-local
+NPAS2,Uromys_caudimaculatus,,miniprot,2451,816,PASS,exact | miniprot-local
+NPAS2,Vicugna_pacos,XP_072807409.1,refseq,2481,826,PASS,exact | coded_by:XM_072951308.1:174..2654
+NPAS2,Xerus_rutilus,,miniprot,2662,886,DROP,cds not x3 (trim 1); 30 internal stop(s); len aa=887 prot=886 | miniprot-local
+NR1D1,Acinonyx_jubatus,XP_014934031.2,refseq,1833,610,PASS,exact | coded_by:XM_015078545.3:631..2463
+NR1D1,Acomys_cahirinus,,miniprot,1857,618,PASS,exact | miniprot-local
+NR1D1,Aepyceros_melampus,,miniprot,1845,614,PASS,exact | miniprot-local
+NR1D1,Aotus_nancymaae,XP_012307431.1,refseq,1848,615,PASS,exact | coded_by:XM_012452008.3:638..2485
+NR1D1,Arvicanthis_niloticus,XP_034361521.1,refseq,1842,613,PASS,exact | coded_by:XM_034505630.2:541..2382
+NR1D1,Bos_taurus,NP_001071568.1,refseq,1842,613,PASS,exact | coded_by:NM_001078100.2:535..2376
+NR1D1,Callithrix_jacchus,XP_035155575.1,refseq,1845,614,PASS,exact | coded_by:XM_035299684.2:537..2381
+NR1D1,Camelus_bactrianus,XP_010958757.1,refseq,1845,614,PASS,exact | coded_by:XM_010960455.3:595..2439
+NR1D1,Caracal_caracal,,miniprot,1833,610,PASS,exact | miniprot-local
+NR1D1,Cebus_imitator,XP_017352606.1,refseq,1848,615,PASS,exact | coded_by:XM_017497117.2:631..2478
+NR1D1,Choloepus_hoffmanni,,miniprot,1833,610,PASS,exact | miniprot-local
+NR1D1,Cynocephalus_volans,XP_062966647.1,refseq,1842,613,PASS,exact | coded_by:XM_063110577.1:571..2412
+NR1D1,Cynomys_ludovicianus,,miniprot,1827,608,PASS,exact | miniprot-local
+NR1D1,Dasypus_novemcinctus,XP_004450154.2,refseq,1851,616,PASS,exact | coded_by:XM_004450097.5:593..2443
+NR1D1,Daubentonia_madagascariensis,,miniprot,1849,615,DROP,cds not x3 (trim 1); 8 internal stop(s); len aa=616 prot=615 | miniprot-local
+NR1D1,Eira_barbara,,miniprot,1842,613,PASS,exact | miniprot-local
+NR1D1,Equus_caballus,XP_005597494.1,refseq,1848,615,PASS,exact | coded_by:XM_005597437.4:855..2702
+NR1D1,Giraffa_tippelskirchi,,miniprot,1848,615,PASS,exact | miniprot-local
+NR1D1,Gorilla_gorilla_gorilla,XP_004041798.1,refseq,1845,614,PASS,exact | coded_by:XM_004041750.4:660..2504
+NR1D1,Homo_sapiens,NP_068370.1,refseq,1845,614,PASS,exact | coded_by:NM_021724.5:496..2340
+NR1D1,Hyaena_hyaena,XP_039083647.1,refseq,1839,612,PASS,exact | coded_by:XM_039227716.1:592..2430
+NR1D1,Hylobates_pileatus,,miniprot,1845,614,PASS,exact | miniprot-local
+NR1D1,Ictidomys_tridecemlineatus,XP_005321865.1,refseq,1836,611,PASS,exact | coded_by:XM_005321808.4:563..2398
+NR1D1,Jaculus_jaculus,XP_004655509.2,refseq,1296,431,PASS,exact | coded_by:XM_004655452.2:612..1907
+NR1D1,Lagorchestes_hirsutus,,miniprot,1872,623,PASS,exact | miniprot-local
+NR1D1,Leopardus_geoffroyi,XP_045344687.1,refseq,1833,610,PASS,exact | coded_by:XM_045488731.1:635..2467
+NR1D1,Macrotis_lagotis,XP_074080097.1,refseq,1863,620,PASS,exact | coded_by:XM_074223996.1:594..2456
+NR1D1,Martes_flavigula,,miniprot,1842,613,PASS,exact | miniprot-local
+NR1D1,Microcebus_murinus,XP_012621327.1,refseq,1842,613,PASS,exact | coded_by:XM_012765873.3:568..2409
+NR1D1,Mirza_zaza,,miniprot,1812,603,PASS,exact | miniprot-local
+NR1D1,Myrmecobius_fasciatus,,miniprot,1728,577,DROP,len aa=576 prot=577 | miniprot-local
+NR1D1,Nanger_dama,,miniprot,1849,615,DROP,cds not x3 (trim 1); 8 internal stop(s); len aa=616 prot=615 | miniprot-local
+NR1D1,Nasua_narica,,miniprot,1842,613,PASS,exact | miniprot-local
+NR1D1,Nycticebus_coucang,XP_053424128.1,refseq,1845,614,PASS,exact | coded_by:XM_053568153.1:600..2444
+NR1D1,Ochotona_princeps,XP_004591297.2,refseq,1383,460,PASS,exact | coded_by:XM_004591240.2:1..1383
+NR1D1,Octodon_degus,XP_023573983.1,refseq,2142,713,PASS,exact | coded_by:XM_023718215.1:598..2739
+NR1D1,Orycteropus_afer,XP_007940251.1,refseq,1827,608,PASS,exact | coded_by:XM_007942060.2:1..1827
+NR1D1,Paguma_larvata,,miniprot,1839,612,PASS,exact | miniprot-local
+NR1D1,Pan_troglodytes,XP_511468.2,refseq,1845,614,PASS,exact | coded_by:XM_511468.6:920..2764
+NR1D1,Panthera_pardus,XP_019271600.1,refseq,1833,610,PASS,exact | coded_by:XM_019416055.2:595..2427
+NR1D1,Peromyscus_eremicus,XP_059127689.1,refseq,1863,620,PASS,exact | coded_by:XM_059271706.1:547..2409
+NR1D1,Phacochoerus_africanus,XP_047613193.1,refseq,1854,617,PASS,exact | coded_by:XM_047757237.1:626..2479
+NR1D1,Phalanger_gymnotis,,miniprot,1869,622,PASS,exact | miniprot-local
+NR1D1,Pipistrellus_pipistrellus,,miniprot,1836,611,PASS,exact | miniprot-local
+NR1D1,Plecturocebus_cupreus,,miniprot,1845,614,PASS,exact | miniprot-local
+NR1D1,Pseudocheirus_occidentalis,,miniprot,1866,621,PASS,exact | miniprot-local
+NR1D1,Puma_concolor,XP_025773317.1,refseq,1836,611,PASS,exact | coded_by:XM_025917532.1:1..1836
+NR1D1,Rattus_norvegicus,NP_001106893.2,refseq,1845,614,PASS,exact | coded_by:NM_001113422.2:484..2328
+NR1D1,Rhynchocyon_petersi,KAM6164545.1,refseq,1827,608,PASS,"exact | coded_by:join(JBHNZN010000010.1:30051400..30051430, JBHNZN010000010.1:30053990..30054307, JBHNZN010000010.1:30054583..30054671, JBHNZN010000010.1:30054774..30054918, JBHNZN010000010.1:30055244..30055890, JBHNZN010000010.1:30056195..30056380, JBHNZN010000010.1:30057058..30057268, JBHNZN010000010.1:30057917..30058116)"
+NR1D1,Saccopteryx_bilineata,XP_066119813.1,refseq,1839,612,PASS,exact | coded_by:XM_066263716.1:630..2468
+NR1D1,Sarcophilus_harrisii,XP_031822074.1,refseq,1854,617,PASS,exact | coded_by:XM_031966214.1:753..2606
+NR1D1,Sciurus_vulgaris,XP_078991369.1,refseq,1839,612,PASS,exact | coded_by:XM_079135243.1:616..2454
+NR1D1,Speothos_venaticus,,miniprot,1839,612,PASS,exact | miniprot-local
+NR1D1,Suricata_suricatta,XP_029784951.1,refseq,1839,612,PASS,exact | coded_by:XM_029929091.1:74..1912
+NR1D1,Sylvilagus_floridanus,,miniprot,1854,617,PASS,exact | miniprot-local
+NR1D1,Tapirus_terrestris,,miniprot,1839,612,PASS,exact | miniprot-local
+NR1D1,Tragelaphus_eurycerus,,miniprot,1845,614,PASS,exact | miniprot-local
+NR1D1,Uromys_caudimaculatus,,miniprot,1854,617,PASS,exact | miniprot-local
+NR1D1,Vicugna_pacos,XP_072794866.1,refseq,1854,617,PASS,exact | coded_by:XM_072938765.1:455..2308
+NR1D1,Xerus_rutilus,,miniprot,1848,615,PASS,exact | miniprot-local
+NR1D2,Acinonyx_jubatus,XP_026896752.1,refseq,1731,576,PASS,exact | coded_by:XM_027040951.2:277..2007
+NR1D2,Acomys_cahirinus,,miniprot,1740,579,PASS,exact | miniprot-local
+NR1D2,Aepyceros_melampus,,miniprot,1754,581,DROP,cds not x3 (trim 2); 28 internal stop(s); len aa=584 prot=581 | miniprot-local
+NR1D2,Aotus_nancymaae,XP_064234685.1,refseq,1740,579,PASS,exact | coded_by:XM_064378615.1:293..2032
+NR1D2,Arvicanthis_niloticus,XP_034353481.1,refseq,1737,578,PASS,exact | coded_by:XM_034497590.2:308..2044
+NR1D2,Bos_taurus,NP_001276722.1,refseq,1758,585,PASS,exact | coded_by:NM_001289793.1:1..1758
+NR1D2,Callithrix_jacchus,XP_035133626.1,refseq,1740,579,PASS,exact | coded_by:XM_035277735.3:279..2018
+NR1D2,Camelus_bactrianus,XP_074227523.1,refseq,1737,578,PASS,exact | coded_by:XM_074371422.1:306..2042
+NR1D2,Caracal_caracal,,miniprot,1731,576,PASS,exact | miniprot-local
+NR1D2,Cebus_imitator,XP_037592135.1,refseq,1098,365,PASS,exact | coded_by:XM_037736207.1:313..1410
+NR1D2,Choloepus_hoffmanni,,miniprot,1716,571,PASS,exact | miniprot-local
+NR1D2,Cynocephalus_volans,XP_062969729.1,refseq,1758,585,PASS,exact | coded_by:XM_063113659.1:306..2063
+NR1D2,Cynomys_ludovicianus,,miniprot,1725,574,PASS,exact | miniprot-local
+NR1D2,Dasypus_novemcinctus,XP_058146797.1,refseq,1731,576,PASS,exact | coded_by:XM_058290814.2:208..1938
+NR1D2,Daubentonia_madagascariensis,,miniprot,1722,573,PASS,exact | miniprot-local
+NR1D2,Eira_barbara,,miniprot,1731,576,PASS,exact | miniprot-local
+NR1D2,Equus_caballus,XP_023476620.1,refseq,1776,591,PASS,exact | coded_by:XM_023620852.2:351..2126
+NR1D2,Giraffa_tippelskirchi,,miniprot,1734,577,PASS,exact | miniprot-local
+NR1D2,Gorilla_gorilla_gorilla,XP_004033775.1,refseq,1740,579,PASS,exact | coded_by:XM_004033727.5:325..2064
+NR1D2,Homo_sapiens,NP_005117.3,refseq,1740,579,PASS,exact | coded_by:NM_005126.5:294..2033
+NR1D2,Hyaena_hyaena,XP_039110510.1,refseq,1731,576,PASS,exact | coded_by:XM_039254579.1:273..2003
+NR1D2,Hylobates_pileatus,,miniprot,1725,574,PASS,exact | miniprot-local
+NR1D2,Ictidomys_tridecemlineatus,XP_077894421.1,refseq,1740,579,PASS,exact | coded_by:XM_078038295.1:310..2049
+NR1D2,Jaculus_jaculus,XP_044991757.1,refseq,1728,575,PASS,exact | coded_by:XM_045135822.1:57..1784
+NR1D2,Lagorchestes_hirsutus,,miniprot,1716,571,PASS,exact | miniprot-local
+NR1D2,Leopardus_geoffroyi,XP_045292264.1,refseq,1731,576,PASS,exact | coded_by:XM_045436308.1:327..2057
+NR1D2,Macrotis_lagotis,XP_074051804.1,refseq,1725,574,PASS,exact | coded_by:XM_074195703.1:57..1781
+NR1D2,Martes_flavigula,,miniprot,1731,576,PASS,exact | miniprot-local
+NR1D2,Microcebus_murinus,XP_012600788.1,refseq,1737,578,PASS,exact | coded_by:XM_012745334.3:294..2030
+NR1D2,Mirza_zaza,,miniprot,1029,344,DROP,len aa=343 prot=344 | miniprot-local
+NR1D2,Myrmecobius_fasciatus,,miniprot,1731,576,PASS,exact | miniprot-local
+NR1D2,Nanger_dama,,miniprot,1759,583,DROP,cds not x3 (trim 1); 22 internal stop(s); len aa=586 prot=583 | miniprot-local
+NR1D2,Nasua_narica,,miniprot,1770,589,PASS,exact | miniprot-local
+NR1D2,Nycticebus_coucang,XP_053455524.1,refseq,1734,577,PASS,exact | coded_by:XM_053599549.1:381..2114
+NR1D2,Ochotona_princeps,XP_058513031.1,refseq,1776,591,PASS,exact | coded_by:XM_058657048.1:60..1835
+NR1D2,Octodon_degus,XP_004649121.3,refseq,1752,583,PASS,exact | coded_by:XM_004649064.3:1..1752
+NR1D2,Orycteropus_afer,XP_007934640.1,refseq,1734,577,PASS,exact | coded_by:XM_007936449.2:1..1734
+NR1D2,Paguma_larvata,,miniprot,1731,576,PASS,exact | miniprot-local
+NR1D2,Pan_troglodytes,XP_516330.2,refseq,1740,579,PASS,exact | coded_by:XM_516330.6:306..2045
+NR1D2,Panthera_pardus,XP_019278481.2,refseq,1731,576,PASS,exact | coded_by:XM_019422936.2:241..1971
+NR1D2,Peromyscus_eremicus,XP_059130160.1,refseq,1740,579,PASS,exact | coded_by:XM_059274177.1:107..1846
+NR1D2,Phacochoerus_africanus,XP_047625115.1,refseq,1734,577,PASS,exact | coded_by:XM_047769159.1:114..1847
+NR1D2,Phalanger_gymnotis,,miniprot,1704,567,PASS,exact | miniprot-local
+NR1D2,Pipistrellus_pipistrellus,,miniprot,1755,584,PASS,exact | miniprot-local
+NR1D2,Plecturocebus_cupreus,,miniprot,1722,573,PASS,exact | miniprot-local
+NR1D2,Pseudocheirus_occidentalis,,miniprot,1713,570,PASS,exact | miniprot-local
+NR1D2,Puma_concolor,XP_025769601.1,refseq,1731,576,PASS,exact | coded_by:XM_025913816.1:1..1731
+NR1D2,Rattus_norvegicus,NP_671743.2,refseq,1737,578,PASS,exact | coded_by:NM_147210.2:209..1945
+NR1D2,Rhynchocyon_petersi,KAM6222179.1,refseq,1566,521,PASS,exact | elink+fasta_cds_na
+NR1D2,Saccopteryx_bilineata,XP_066100506.1,refseq,1731,576,PASS,exact | coded_by:XM_066244409.1:288..2018
+NR1D2,Sarcophilus_harrisii,XP_031796215.1,refseq,1731,576,PASS,exact | coded_by:XM_031940355.1:382..2112
+NR1D2,Sciurus_vulgaris,XP_078970405.1,refseq,1737,578,PASS,exact | coded_by:XM_079114279.1:294..2030
+NR1D2,Speothos_venaticus,,miniprot,1716,571,PASS,exact | miniprot-local
+NR1D2,Suricata_suricatta,XP_029796219.1,refseq,1506,501,PASS,exact | coded_by:XM_029940359.1:207..1712
+NR1D2,Sylvilagus_floridanus,,miniprot,1719,572,PASS,exact | miniprot-local
+NR1D2,Tapirus_terrestris,,miniprot,1779,592,PASS,exact | miniprot-local
+NR1D2,Tragelaphus_eurycerus,,miniprot,1758,585,PASS,exact | miniprot-local
+NR1D2,Uromys_caudimaculatus,,miniprot,1695,566,DROP,len aa=565 prot=566 | miniprot-local
+NR1D2,Vicugna_pacos,XP_072805592.1,refseq,1737,578,PASS,exact | coded_by:XM_072949491.1:372..2108
+NR1D2,Xerus_rutilus,,miniprot,1779,592,PASS,exact | miniprot-local
+PER1,Acinonyx_jubatus,XP_053068804.1,refseq,4263,1420,PASS,exact | coded_by:XM_053212829.1:626..4888
+PER1,Acomys_cahirinus,,miniprot,3943,1313,DROP,cds not x3 (trim 1); 29 internal stop(s); len aa=1314 prot=1313 | miniprot-local
+PER1,Aepyceros_melampus,,miniprot,3801,1266,PASS,exact | miniprot-local
+PER1,Aotus_nancymaae,XP_064234405.1,refseq,3879,1292,PASS,exact | coded_by:XM_064378335.1:976..4854
+PER1,Arvicanthis_niloticus,XP_076792664.1,refseq,3891,1296,PASS,exact | coded_by:XM_076936549.1:322..4212
+PER1,Bos_taurus,NP_001276701.1,refseq,3855,1284,PASS,exact | coded_by:NM_001289772.1:143..3997
+PER1,Callithrix_jacchus,XP_035155863.1,refseq,3873,1290,PASS,exact | coded_by:XM_035299972.3:536..4408
+PER1,Camelus_bactrianus,XP_010964246.2,refseq,3852,1283,PASS,exact | coded_by:XM_010965944.3:408..4259
+PER1,Caracal_caracal,,miniprot,4425,1474,DROP,cds not x3 (trim 2); 24 internal stop(s); len aa=1473 prot=1474 | miniprot-local
+PER1,Cebus_imitator,XP_037595544.1,refseq,3870,1289,PASS,exact | coded_by:XM_037739616.1:1323..5192
+PER1,Choloepus_hoffmanni,,miniprot,4278,1424,DROP,len aa=1425 prot=1424 | miniprot-local
+PER1,Cynocephalus_volans,XP_062965508.1,refseq,3870,1289,PASS,exact | coded_by:XM_063109438.1:197..4066
+PER1,Cynomys_ludovicianus,,miniprot,3870,1289,PASS,exact | miniprot-local
+PER1,Dasypus_novemcinctus,XP_071066424.1,refseq,3882,1293,PASS,exact | coded_by:XM_071210323.1:260..4141
+PER1,Daubentonia_madagascariensis,,miniprot,4256,1417,DROP,cds not x3 (trim 2); 33 internal stop(s); len aa=1418 prot=1417 | miniprot-local
+PER1,Eira_barbara,,miniprot,4259,1418,DROP,cds not x3 (trim 2); 26 internal stop(s); len aa=1419 prot=1418 | miniprot-local
+PER1,Equus_caballus,XP_001503235.4,refseq,3867,1288,PASS,exact | coded_by:XM_001503185.7:333..4199
+PER1,Giraffa_tippelskirchi,,miniprot,3900,1299,PASS,exact | miniprot-local
+PER1,Gorilla_gorilla_gorilla,XP_004058589.4,refseq,3873,1290,PASS,exact | coded_by:XM_004058541.5:325..4197
+PER1,Homo_sapiens,NP_002607.2,refseq,3873,1290,PASS,exact | coded_by:NM_002616.3:208..4080
+PER1,Hyaena_hyaena,XP_039087430.1,refseq,3876,1291,DROP,1 internal stop(s) | coded_by:XM_039231499.1:219..4094
+PER1,Hylobates_pileatus,,miniprot,3858,1285,PASS,exact | miniprot-local
+PER1,Ictidomys_tridecemlineatus,XP_013217209.1,refseq,3885,1294,PASS,exact | coded_by:XM_013361755.4:256..4140
+PER1,Jaculus_jaculus,XP_044986900.1,refseq,3843,1280,PASS,exact | coded_by:XM_045130965.1:508..4350
+PER1,Lagorchestes_hirsutus,,miniprot,3819,1272,PASS,exact | miniprot-local
+PER1,Leopardus_geoffroyi,XP_045346262.1,refseq,4188,1395,PASS,exact | coded_by:XM_045490306.1:38..4225
+PER1,Macrotis_lagotis,XP_074081659.1,refseq,3777,1258,PASS,exact | coded_by:XM_074225558.1:280..4056
+PER1,Martes_flavigula,,miniprot,4253,1415,DROP,cds not x3 (trim 2); 35 internal stop(s); len aa=1417 prot=1415 | miniprot-local
+PER1,Microcebus_murinus,XP_075850270.1,refseq,3870,1289,PASS,exact | coded_by:XM_075994155.1:803..4672
+PER1,Mirza_zaza,,miniprot,3870,1289,PASS,exact | miniprot-local
+PER1,Myrmecobius_fasciatus,,miniprot,3771,1256,PASS,exact | miniprot-local
+PER1,Nanger_dama,,miniprot,3872,1285,DROP,cds not x3 (trim 2); 20 internal stop(s); len aa=1290 prot=1285 | miniprot-local
+PER1,Nasua_narica,,miniprot,4258,1417,DROP,cds not x3 (trim 1); 31 internal stop(s); len aa=1419 prot=1417 | miniprot-local
+PER1,Nycticebus_coucang,XP_053423819.1,refseq,3870,1289,PASS,exact | coded_by:XM_053567844.1:272..4141
+PER1,Ochotona_princeps,XP_004594821.2,refseq,3909,1302,PASS,exact | coded_by:XM_004594764.4:370..4278
+PER1,Octodon_degus,XP_004638500.2,refseq,4110,1369,PASS,exact | coded_by:XM_004638443.2:364..4473
+PER1,Orycteropus_afer,XP_007950428.1,refseq,3876,1291,PASS,exact | coded_by:XM_007952237.2:1..3876
+PER1,Paguma_larvata,,miniprot,4402,1466,DROP,cds not x3 (trim 1); 32 internal stop(s); len aa=1467 prot=1466 | miniprot-local
+PER1,Pan_troglodytes,XP_016787953.2,refseq,3873,1290,PASS,exact | coded_by:XM_016932464.3:356..4228
+PER1,Panthera_pardus,XP_053748319.1,refseq,4110,1369,PASS,exact | coded_by:XM_053892344.1:45..4154
+PER1,Peromyscus_eremicus,XP_059126938.1,refseq,3993,1330,PASS,exact | coded_by:XM_059270955.1:211..4203
+PER1,Phacochoerus_africanus,XP_047614461.1,refseq,3834,1277,PASS,exact | coded_by:XM_047758505.1:3475..7308
+PER1,Phalanger_gymnotis,,miniprot,3783,1260,PASS,exact | miniprot-local
+PER1,Pipistrellus_pipistrellus,,miniprot,4248,1414,DROP,1 internal stop(s); len aa=1415 prot=1414 | miniprot-local
+PER1,Plecturocebus_cupreus,,miniprot,3867,1288,PASS,exact | miniprot-local
+PER1,Pseudocheirus_occidentalis,,miniprot,3780,1259,PASS,exact | miniprot-local
+PER1,Puma_concolor,XP_025776083.1,refseq,2973,990,PASS,exact | coded_by:XM_025920298.1:1..2973
+PER1,Rattus_norvegicus,NP_001029297.1,refseq,3882,1293,PASS,exact | coded_by:NM_001034125.1:58..3939
+PER1,Rhynchocyon_petersi,KAM6163424.1,refseq,3864,1287,PASS,exact | elink+fasta_cds_na
+PER1,Saccopteryx_bilineata,XP_066120296.1,refseq,3840,1279,PASS,exact | coded_by:XM_066264199.1:695..4534
+PER1,Sarcophilus_harrisii,XP_012404166.1,refseq,3780,1259,PASS,exact | coded_by:XM_012548712.3:313..4092
+PER1,Sciurus_vulgaris,XP_078989359.1,refseq,3897,1298,PASS,exact | coded_by:XM_079133233.1:2022..5918
+PER1,Speothos_venaticus,,miniprot,4264,1420,DROP,cds not x3 (trim 1); 51 internal stop(s); len aa=1421 prot=1420 | miniprot-local
+PER1,Suricata_suricatta,XP_029783618.1,refseq,3873,1290,PASS,exact | coded_by:XM_029927758.1:267..4139
+PER1,Sylvilagus_floridanus,,miniprot,4255,1417,DROP,cds not x3 (trim 1); 37 internal stop(s); len aa=1418 prot=1417 | miniprot-local
+PER1,Tapirus_terrestris,,miniprot,4254,1415,DROP,2 internal stop(s); len aa=1417 prot=1415 | miniprot-local
+PER1,Tragelaphus_eurycerus,,miniprot,3864,1287,PASS,exact | miniprot-local
+PER1,Uromys_caudimaculatus,,miniprot,3879,1292,PASS,exact | miniprot-local
+PER1,Vicugna_pacos,XP_072796774.1,refseq,3852,1283,PASS,exact | coded_by:XM_072940673.1:164..4015
+PER1,Xerus_rutilus,,miniprot,3897,1298,PASS,exact | miniprot-local
+PER2,Acinonyx_jubatus,XP_026902097.2,refseq,3846,1281,PASS,exact | coded_by:XM_027046296.2:1550..5395
+PER2,Acomys_cahirinus,,miniprot,3780,1259,PASS,exact | miniprot-local
+PER2,Aepyceros_melampus,,miniprot,3847,1278,DROP,cds not x3 (trim 1); 9 internal stop(s); len aa=1282 prot=1278 | miniprot-local
+PER2,Aotus_nancymaae,XP_012328903.2,refseq,4065,1354,PASS,exact | coded_by:XM_012473480.3:296..4360
+PER2,Arvicanthis_niloticus,XP_076770882.1,refseq,3774,1257,PASS,exact | coded_by:XM_076914767.1:143..3916
+PER2,Bos_taurus,NP_001179246.1,refseq,3876,1291,PASS,exact | coded_by:NM_001192317.1:1..3876
+PER2,Callithrix_jacchus,XP_035162102.1,refseq,3918,1305,PASS,exact | coded_by:XM_035306211.3:140..4057
+PER2,Camelus_bactrianus,XP_074220722.1,refseq,3825,1274,PASS,exact | coded_by:XM_074364621.1:130..3954
+PER2,Caracal_caracal,,miniprot,3843,1280,DROP,cds not x3 (trim 1); 14 internal stop(s); len aa=1278 prot=1280 | miniprot-local
+PER2,Cebus_imitator,XP_037597703.1,refseq,3750,1249,PASS,exact | coded_by:XM_037741775.1:38..3787
+PER2,Choloepus_hoffmanni,,miniprot,3567,1190,DROP,len aa=1189 prot=1190 | miniprot-local
+PER2,Cynocephalus_volans,XP_062947646.1,refseq,3789,1262,PASS,exact | coded_by:XM_063091576.1:324..4112
+PER2,Cynomys_ludovicianus,,miniprot,3723,1240,PASS,exact | miniprot-local
+PER2,Dasypus_novemcinctus,XP_058155772.1,refseq,3687,1228,PASS,exact | coded_by:XM_058299789.2:136..3822
+PER2,Daubentonia_madagascariensis,,miniprot,3804,1267,PASS,exact | miniprot-local
+PER2,Eira_barbara,,miniprot,3879,1292,PASS,exact | miniprot-local
+PER2,Equus_caballus,XP_023498478.2,refseq,3855,1284,PASS,exact | coded_by:XM_023642710.2:296..4150
+PER2,Giraffa_tippelskirchi,,miniprot,3870,1288,DROP,1 internal stop(s); len aa=1289 prot=1288 | miniprot-local
+PER2,Gorilla_gorilla_gorilla,XP_055235863.1,refseq,3768,1255,PASS,exact | coded_by:XM_055379888.1:423..4190
+PER2,Homo_sapiens,NP_073728.1,refseq,3768,1255,PASS,exact | coded_by:NM_022817.3:282..4049
+PER2,Hyaena_hyaena,XP_039084552.1,refseq,3825,1274,PASS,exact | coded_by:XM_039228621.1:50..3874
+PER2,Hylobates_pileatus,,miniprot,4085,1362,DROP,cds not x3 (trim 2); 44 internal stop(s); len aa=1361 prot=1362 | miniprot-local
+PER2,Ictidomys_tridecemlineatus,XP_013214621.2,refseq,3723,1240,PASS,exact | coded_by:XM_013359167.4:150..3872
+PER2,Jaculus_jaculus,XP_004673026.2,refseq,3771,1256,PASS,exact | coded_by:XM_004672969.2:82..3852
+PER2,Lagorchestes_hirsutus,,miniprot,4181,1390,DROP,cds not x3 (trim 2); 52 internal stop(s); len aa=1393 prot=1390 | miniprot-local
+PER2,Leopardus_geoffroyi,XP_045337895.1,refseq,3783,1260,PASS,exact | coded_by:XM_045481939.1:1..3783
+PER2,Macrotis_lagotis,XP_074045776.1,refseq,4191,1396,PASS,exact | coded_by:XM_074189675.1:3616..7806
+PER2,Martes_flavigula,,miniprot,3849,1282,PASS,exact | miniprot-local
+PER2,Microcebus_murinus,XP_075862223.1,refseq,4257,1418,PASS,exact | coded_by:XM_076006108.1:130..4386
+PER2,Mirza_zaza,,miniprot,2358,787,DROP,len aa=786 prot=787 | miniprot-local
+PER2,Myrmecobius_fasciatus,,miniprot,3957,1318,PASS,exact | miniprot-local
+PER2,Nanger_dama,,miniprot,3892,1293,DROP,cds not x3 (trim 1); 12 internal stop(s); len aa=1297 prot=1293 | miniprot-local
+PER2,Nasua_narica,,miniprot,3865,1287,DROP,cds not x3 (trim 1); 1 internal stop(s); len aa=1288 prot=1287 | miniprot-local
+PER2,Nycticebus_coucang,XP_053452493.1,refseq,3801,1266,PASS,exact | coded_by:XM_053596518.1:180..3980
+PER2,Ochotona_princeps,XP_058521180.1,refseq,3483,1160,PASS,exact | coded_by:XM_058665197.1:213..3695
+PER2,Octodon_degus,XP_023577845.1,refseq,3942,1313,PASS,exact | coded_by:XM_023722077.1:843..4784
+PER2,Orycteropus_afer,XP_007941723.2,refseq,3873,1290,DROP,1 internal stop(s) | coded_by:XM_007943532.2:1..3873
+PER2,Paguma_larvata,,miniprot,3834,1277,PASS,exact | miniprot-local
+PER2,Pan_troglodytes,XP_016806317.1,refseq,3807,1268,PASS,exact | coded_by:XM_016950828.3:371..4177
+PER2,Panthera_pardus,XP_019300912.2,refseq,3816,1271,PASS,exact | coded_by:XM_019445367.2:470..4285
+PER2,Peromyscus_eremicus,XP_059134489.1,refseq,2397,798,PASS,exact | coded_by:XM_059278506.1:118..2514
+PER2,Phacochoerus_africanus,XP_047629888.1,refseq,3777,1258,PASS,exact | coded_by:XM_047773932.1:167..3943
+PER2,Phalanger_gymnotis,,miniprot,3981,1326,PASS,exact | miniprot-local
+PER2,Pipistrellus_pipistrellus,,miniprot,3852,1283,PASS,exact | miniprot-local
+PER2,Plecturocebus_cupreus,,miniprot,4064,1352,DROP,cds not x3 (trim 2); 44 internal stop(s); len aa=1354 prot=1352 | miniprot-local
+PER2,Pseudocheirus_occidentalis,,miniprot,3228,1075,PASS,exact | miniprot-local
+PER2,Puma_concolor,XP_025786423.1,refseq,3204,1067,PASS,exact | coded_by:XM_025930638.1:1..3204
+PER2,Rattus_norvegicus,NP_113866.1,refseq,3774,1257,PASS,exact | coded_by:NM_031678.2:105..3878
+PER2,Rhynchocyon_petersi,KAM6178457.1,refseq,3792,1263,PASS,exact | elink+fasta_cds_na
+PER2,Saccopteryx_bilineata,XP_066136887.1,refseq,3864,1287,PASS,exact | coded_by:XM_066280790.1:129..3992
+PER2,Sarcophilus_harrisii,XP_031824023.1,refseq,3954,1317,PASS,exact | coded_by:XM_031968163.1:207..4160
+PER2,Sciurus_vulgaris,XP_078989141.1,refseq,3771,1256,PASS,exact | coded_by:XM_079133015.1:144..3914
+PER2,Speothos_venaticus,,miniprot,3708,1237,DROP,len aa=1236 prot=1237 | miniprot-local
+PER2,Suricata_suricatta,XP_029789396.1,refseq,3792,1263,PASS,exact | coded_by:XM_029933536.1:96..3887
+PER2,Sylvilagus_floridanus,,miniprot,3733,1243,DROP,cds not x3 (trim 1); 16 internal stop(s); len aa=1244 prot=1243 | miniprot-local
+PER2,Tapirus_terrestris,,miniprot,3843,1280,PASS,exact | miniprot-local
+PER2,Tragelaphus_eurycerus,,miniprot,3876,1291,PASS,exact | miniprot-local
+PER2,Uromys_caudimaculatus,,miniprot,3774,1257,PASS,exact | miniprot-local
+PER2,Vicugna_pacos,XP_072818053.1,refseq,3831,1276,PASS,exact | coded_by:XM_072961952.1:115..3945
+PER2,Xerus_rutilus,,miniprot,3708,1235,PASS,exact | miniprot-local
+PER3,Acinonyx_jubatus,XP_053072087.1,refseq,3828,1275,DROP,1 internal stop(s) | coded_by:XM_053216112.1:316..4143
+PER3,Acomys_cahirinus,,miniprot,3333,1110,PASS,exact | miniprot-local
+PER3,Aepyceros_melampus,,miniprot,2782,919,DROP,cds not x3 (trim 1); 36 internal stop(s); len aa=927 prot=919 | miniprot-local
+PER3,Aotus_nancymaae,XP_064219266.1,refseq,3450,1149,PASS,exact | coded_by:XM_064363196.1:167..3616
+PER3,Arvicanthis_niloticus,XP_034357814.1,refseq,3381,1126,PASS,exact | coded_by:XM_034501923.2:261..3641
+PER3,Bos_taurus,XP_059731607.1,refseq,2763,920,DROP,1 internal stop(s) | coded_by:XM_059875624.1:875..3637
+PER3,Callithrix_jacchus,XP_054092864.2,refseq,3813,1270,PASS,exact | coded_by:XM_054236889.2:522..4334
+PER3,Camelus_bactrianus,XP_074232075.1,refseq,2583,860,DROP,1 internal stop(s) | coded_by:XM_074375974.1:1..2583
+PER3,Caracal_caracal,,miniprot,3835,1276,DROP,24 internal stop(s); len aa=1274 prot=1276 | miniprot-local
+PER3,Cebus_imitator,XP_017353870.1,refseq,3450,1149,PASS,exact | coded_by:XM_017498381.2:116..3565
+PER3,Choloepus_hoffmanni,,miniprot,3596,1196,DROP,cds not x3 (trim 2); 53 internal stop(s); len aa=1198 prot=1196 | miniprot-local
+PER3,Cynocephalus_volans,XP_062961763.1,refseq,3849,1282,DROP,2 internal stop(s) | coded_by:XM_063105693.1:1..3849
+PER3,Cynomys_ludovicianus,,miniprot,3349,1115,DROP,cds not x3 (trim 1); 1 internal stop(s); len aa=1116 prot=1115 | miniprot-local
+PER3,Dasypus_novemcinctus,XP_058160719.1,refseq,3648,1215,PASS,exact | coded_by:XM_058304736.2:1..3648
+PER3,Daubentonia_madagascariensis,,miniprot,3405,1134,PASS,exact | miniprot-local
+PER3,Eira_barbara,,miniprot,3399,1132,PASS,exact | miniprot-local
+PER3,Equus_caballus,XP_005607612.3,refseq,3453,1150,PASS,exact | coded_by:XM_005607555.4:524..3976
+PER3,Giraffa_tippelskirchi,,miniprot,2742,912,DROP,1 internal stop(s); len aa=913 prot=912 | miniprot-local
+PER3,Gorilla_gorilla_gorilla,XP_063559119.1,refseq,3558,1185,PASS,exact | coded_by:XM_063703049.1:359..3916
+PER3,Homo_sapiens,NP_001364204.1,refseq,3633,1210,PASS,exact | coded_by:NM_001377275.1:311..3943
+PER3,Hyaena_hyaena,XP_039090892.1,refseq,3090,1029,DROP,2 internal stop(s) | coded_by:XM_039234961.1:1..3090
+PER3,Hylobates_pileatus,,miniprot,3573,1192,DROP,len aa=1191 prot=1192 | miniprot-local
+PER3,Ictidomys_tridecemlineatus,XP_077881311.1,refseq,3351,1116,PASS,exact | coded_by:XM_078025185.1:457..3807
+PER3,Jaculus_jaculus,XP_045005244.1,refseq,3414,1137,PASS,exact | coded_by:XM_045149309.1:345..3758
+PER3,Lagorchestes_hirsutus,,miniprot,3531,1176,PASS,exact | miniprot-local
+PER3,Leopardus_geoffroyi,XP_045331485.1,refseq,2586,861,PASS,exact | coded_by:XM_045475529.1:763..3348
+PER3,Macrotis_lagotis,XP_074074662.1,refseq,3510,1169,PASS,exact | coded_by:XM_074218561.1:324..3833
+PER3,Martes_flavigula,,miniprot,3399,1132,PASS,exact | miniprot-local
+PER3,Microcebus_murinus,XP_075849795.1,refseq,3384,1127,PASS,exact | coded_by:XM_075993680.1:320..3703
+PER3,Myrmecobius_fasciatus,,miniprot,3474,1157,PASS,exact | miniprot-local
+PER3,Nanger_dama,,miniprot,2753,909,DROP,cds not x3 (trim 2); 22 internal stop(s); len aa=917 prot=909 | miniprot-local
+PER3,Nasua_narica,,miniprot,3378,1127,DROP,len aa=1126 prot=1127 | miniprot-local
+PER3,Nycticebus_coucang,XP_053431024.1,refseq,3462,1153,PASS,exact | coded_by:XM_053575049.1:502..3963
+PER3,Octodon_degus,XP_023555260.1,refseq,3639,1212,PASS,exact | coded_by:XM_023699492.1:392..4030
+PER3,Orycteropus_afer,XP_042637114.1,refseq,3054,1017,PASS,exact | coded_by:XM_042781180.1:1..3054
+PER3,Paguma_larvata,,miniprot,3720,1228,DROP,19 internal stop(s); len aa=1240 prot=1228 | miniprot-local
+PER3,Pan_troglodytes,XP_016808835.2,refseq,3630,1209,PASS,exact | coded_by:XM_016953346.3:339..3968
+PER3,Panthera_pardus,XP_053755000.1,refseq,3333,1110,DROP,1 internal stop(s) | coded_by:XM_053899025.1:290..3622
+PER3,Peromyscus_eremicus,XP_059111427.1,refseq,2409,802,PASS,exact | coded_by:XM_059255444.1:2018..4426
+PER3,Phacochoerus_africanus,XP_047647456.1,refseq,3060,1019,PASS,exact | coded_by:XM_047791500.1:571..3630
+PER3,Phalanger_gymnotis,,miniprot,3516,1171,PASS,exact | miniprot-local
+PER3,Pipistrellus_pipistrellus,,miniprot,3279,1094,DROP,len aa=1093 prot=1094 | miniprot-local
+PER3,Plecturocebus_cupreus,,miniprot,3619,1207,DROP,cds not x3 (trim 1); 3 internal stop(s); len aa=1206 prot=1207 | miniprot-local
+PER3,Pseudocheirus_occidentalis,,miniprot,3501,1166,PASS,exact | miniprot-local
+PER3,Puma_concolor,XP_025768383.1,refseq,3246,1081,PASS,exact | coded_by:XM_025912598.1:281..3526
+PER3,Rattus_norvegicus,NP_076468.2,refseq,3348,1115,PASS,exact | coded_by:NM_023978.2:1..3348
+PER3,Rhynchocyon_petersi,KAM6216893.1,refseq,3378,1125,PASS,"exact | coded_by:join(JBHNZN010000004.1:43047659..43047834, JBHNZN010000004.1:43048608..43048753, JBHNZN010000004.1:43049635..43049750, JBHNZN010000004.1:43050941..43051154, JBHNZN010000004.1:43057048..43057096, JBHNZN010000004.1:43058663..43058805, JBHNZN010000004.1:43069111..43069189, JBHNZN010000004.1:43069998..43070104, JBHNZN010000004.1:43071371..43071527, JBHNZN010000004.1:43079433..43079538, JBHNZN010000004.1:43083621..43083749, JBHNZN010000004.1:43089703..43089829, JBHNZN010000004.1:43105993..43106125, JBHNZN010000004.1:43107146..43107270, JBHNZN010000004.1:43107690..43107863, JBHNZN010000004.1:43116433..43116672, JBHNZN010000004.1:43117212..43117894, JBHNZN010000004.1:43120533..43120644, JBHNZN010000004.1:43132928..43133111, JBHNZN010000004.1:43139845..43139995, JBHNZN010000004.1:43143879..43143905)"
+PER3,Saccopteryx_bilineata,XP_066126650.1,refseq,3408,1135,PASS,exact | coded_by:XM_066270553.1:371..3778
+PER3,Sarcophilus_harrisii,XP_031818800.1,refseq,3480,1159,PASS,exact | coded_by:XM_031962940.1:342..3821
+PER3,Sciurus_vulgaris,XP_078989944.1,refseq,3177,1058,PASS,exact | coded_by:XM_079133818.1:425..3601
+PER3,Speothos_venaticus,,miniprot,1929,642,PASS,exact | miniprot-local
+PER3,Sylvilagus_floridanus,,miniprot,3454,1152,DROP,cds not x3 (trim 1); 18 internal stop(s); len aa=1151 prot=1152 | miniprot-local
+PER3,Tapirus_terrestris,,miniprot,3447,1148,PASS,exact | miniprot-local
+PER3,Tragelaphus_eurycerus,,miniprot,2765,915,DROP,cds not x3 (trim 2); 45 internal stop(s); len aa=921 prot=915 | miniprot-local
+PER3,Uromys_caudimaculatus,,miniprot,3378,1125,PASS,exact | miniprot-local
+PER3,Xerus_rutilus,,miniprot,3298,1100,DROP,cds not x3 (trim 1); 1 internal stop(s); len aa=1099 prot=1100 | miniprot-local
+RORA,Acinonyx_jubatus,XP_053079915.1,refseq,1620,539,PASS,exact | coded_by:XM_053223940.1:8426..10045
+RORA,Acomys_cahirinus,,miniprot,1428,475,PASS,exact | miniprot-local
+RORA,Aepyceros_melampus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Aotus_nancymaae,XP_064217436.1,refseq,1476,491,PASS,exact | coded_by:XM_064361366.1:221..1696
+RORA,Arvicanthis_niloticus,XP_076782288.1,refseq,1572,523,PASS,exact | coded_by:XM_076926173.1:64..1635
+RORA,Bos_taurus,NP_001179790.1,refseq,1572,523,PASS,exact | coded_by:NM_001192861.1:102..1673
+RORA,Callithrix_jacchus,XP_035117665.1,refseq,1572,523,PASS,exact | coded_by:XM_035261774.3:61..1632
+RORA,Camelus_bactrianus,XP_074222324.1,refseq,1704,567,PASS,exact | coded_by:XM_074366223.1:129..1832
+RORA,Caracal_caracal,,miniprot,1536,511,PASS,exact | miniprot-local
+RORA,Cebus_imitator,XP_017373793.1,refseq,1161,386,PASS,exact | coded_by:XM_017518304.1:5157..6317
+RORA,Choloepus_hoffmanni,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Cynocephalus_volans,XP_062945848.1,refseq,1572,523,PASS,exact | coded_by:XM_063089778.1:65..1636
+RORA,Cynomys_ludovicianus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Dasypus_novemcinctus,XP_071070328.1,refseq,1611,536,PASS,exact | coded_by:XM_071214227.1:78..1688
+RORA,Daubentonia_madagascariensis,,miniprot,1578,525,PASS,exact | miniprot-local
+RORA,Eira_barbara,,miniprot,1578,525,PASS,exact | miniprot-local
+RORA,Equus_caballus,XP_023483763.2,refseq,1572,523,PASS,exact | coded_by:XM_023627995.2:297..1868
+RORA,Giraffa_tippelskirchi,,miniprot,1558,518,DROP,cds not x3 (trim 1); 21 internal stop(s); len aa=519 prot=518 | miniprot-local
+RORA,Gorilla_gorilla_gorilla,XP_055219135.1,refseq,1578,525,PASS,exact | coded_by:XM_055363160.2:122..1699
+RORA,Homo_sapiens,NP_599023.1,refseq,1572,523,PASS,exact | coded_by:NM_134261.3:85..1656
+RORA,Hyaena_hyaena,XP_039086523.1,refseq,1572,523,PASS,exact | coded_by:XM_039230592.1:96..1667
+RORA,Hylobates_pileatus,,miniprot,1578,525,PASS,exact | miniprot-local
+RORA,Ictidomys_tridecemlineatus,XP_077905655.1,refseq,1572,523,PASS,exact | coded_by:XM_078049529.1:233..1804
+RORA,Jaculus_jaculus,XP_045016350.1,refseq,1407,468,PASS,exact | coded_by:XM_045160415.1:72..1478
+RORA,Lagorchestes_hirsutus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Leopardus_geoffroyi,XP_045305497.1,refseq,1572,523,PASS,exact | coded_by:XM_045449541.1:79..1650
+RORA,Macrotis_lagotis,XP_074090387.1,refseq,1656,551,PASS,exact | coded_by:XM_074234286.1:217..1872
+RORA,Martes_flavigula,,miniprot,1578,525,PASS,exact | miniprot-local
+RORA,Microcebus_murinus,XP_020141633.1,refseq,1572,523,PASS,exact | coded_by:XM_020286044.2:76..1647
+RORA,Mirza_zaza,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Myrmecobius_fasciatus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Nanger_dama,,miniprot,1424,473,DROP,cds not x3 (trim 2); 14 internal stop(s); len aa=474 prot=473 | miniprot-local
+RORA,Nasua_narica,,miniprot,1547,514,DROP,cds not x3 (trim 2); 20 internal stop(s); len aa=515 prot=514 | miniprot-local
+RORA,Nycticebus_coucang,XP_053451791.1,refseq,1407,468,PASS,exact | coded_by:XM_053595816.1:138..1544
+RORA,Ochotona_princeps,XP_058521735.1,refseq,1572,523,PASS,exact | coded_by:XM_058665752.1:316..1887
+RORA,Octodon_degus,XP_012369618.2,refseq,1380,459,PASS,exact | coded_by:XM_012514164.2:57..1436
+RORA,Orycteropus_afer,XP_007956468.2,refseq,1161,386,PASS,exact | coded_by:XM_007958277.2:241..1401
+RORA,Paguma_larvata,,miniprot,1534,510,DROP,cds not x3 (trim 1); 22 internal stop(s); len aa=511 prot=510 | miniprot-local
+RORA,Pan_troglodytes,XP_063651173.1,refseq,1617,538,PASS,exact | coded_by:XM_063795103.1:68..1684
+RORA,Panthera_pardus,XP_019296858.1,refseq,1572,523,PASS,exact | coded_by:XM_019441313.2:54..1625
+RORA,Phacochoerus_africanus,XP_047622157.1,refseq,1539,512,PASS,exact | coded_by:XM_047766201.1:282..1820
+RORA,Phalanger_gymnotis,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Pipistrellus_pipistrellus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Plecturocebus_cupreus,,miniprot,1578,525,PASS,exact | miniprot-local
+RORA,Pseudocheirus_occidentalis,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Puma_concolor,XP_025774987.1,refseq,1536,511,PASS,exact | coded_by:XM_025919202.1:1..1536
+RORA,Rattus_norvegicus,NP_001414296.1,refseq,1572,523,PASS,exact | coded_by:NM_001427367.2:87..1658
+RORA,Saccopteryx_bilineata,XP_066130932.1,refseq,1572,523,PASS,exact | coded_by:XM_066274835.1:2..1573
+RORA,Sarcophilus_harrisii,XP_031805315.1,refseq,1656,551,PASS,exact | coded_by:XM_031949455.1:105..1760
+RORA,Sciurus_vulgaris,XP_078985463.1,refseq,1572,523,PASS,exact | coded_by:XM_079129337.1:17..1588
+RORA,Speothos_venaticus,,miniprot,1338,445,PASS,exact | miniprot-local
+RORA,Suricata_suricatta,XP_029808287.1,refseq,1407,468,PASS,exact | coded_by:XM_029952427.1:165..1571
+RORA,Sylvilagus_floridanus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Tapirus_terrestris,,miniprot,1572,522,DROP,len aa=523 prot=522 | miniprot-local
+RORA,Tragelaphus_eurycerus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Uromys_caudimaculatus,,miniprot,1425,474,PASS,exact | miniprot-local
+RORA,Vicugna_pacos,XP_072818408.1,refseq,1407,468,PASS,exact | coded_by:XM_072962307.1:130..1536
+RORA,Xerus_rutilus,,miniprot,1578,525,PASS,exact | miniprot-local
+RORB,Acinonyx_jubatus,XP_026896833.1,refseq,1380,459,PASS,exact | coded_by:XM_027041032.2:128..1507
+RORB,Acomys_cahirinus,,miniprot,1413,470,PASS,exact | miniprot-local
+RORB,Aepyceros_melampus,,miniprot,1430,475,DROP,cds not x3 (trim 2); 18 internal stop(s); len aa=476 prot=475 | miniprot-local
+RORB,Aotus_nancymaae,XP_064217713.1,refseq,1413,470,PASS,exact | coded_by:XM_064361643.1:79..1491
+RORB,Arvicanthis_niloticus,XP_034355224.1,refseq,1413,470,PASS,exact | coded_by:XM_034499333.2:73..1485
+RORB,Bos_taurus,NP_001179587.1,refseq,1380,459,PASS,exact | coded_by:NM_001192658.1:372..1751
+RORB,Callithrix_jacchus,XP_078205101.1,refseq,1776,591,PASS,exact | coded_by:XM_078348975.1:16..1791
+RORB,Camelus_bactrianus,XP_010951067.2,refseq,1380,459,PASS,exact | coded_by:XM_010952765.3:774..2153
+RORB,Caracal_caracal,,miniprot,1833,608,DROP,2 internal stop(s); len aa=610 prot=608 | miniprot-local
+RORB,Cebus_imitator,XP_037599663.1,refseq,1413,470,PASS,exact | coded_by:XM_037743735.1:95..1507
+RORB,Choloepus_hoffmanni,,miniprot,1761,584,DROP,4 internal stop(s); len aa=586 prot=584 | miniprot-local
+RORB,Cynocephalus_volans,XP_062936476.1,refseq,1557,518,PASS,exact | coded_by:XM_063080406.1:1..1557
+RORB,Cynomys_ludovicianus,,miniprot,1779,590,DROP,1 internal stop(s); len aa=592 prot=590 | miniprot-local
+RORB,Dasypus_novemcinctus,XP_058157648.1,refseq,1380,459,PASS,exact | coded_by:XM_058301665.2:611..1990
+RORB,Daubentonia_madagascariensis,,miniprot,1770,586,DROP,1 internal stop(s); len aa=589 prot=586 | miniprot-local
+RORB,Eira_barbara,,miniprot,1776,589,DROP,2 internal stop(s); len aa=591 prot=589 | miniprot-local
+RORB,Equus_caballus,XP_014590898.1,refseq,1380,459,PASS,exact | coded_by:XM_014735412.3:697..2076
+RORB,Giraffa_tippelskirchi,,miniprot,1735,576,DROP,cds not x3 (trim 1); 31 internal stop(s); len aa=578 prot=576 | miniprot-local
+RORB,Gorilla_gorilla_gorilla,XP_004048182.3,refseq,1380,459,PASS,exact | coded_by:XM_004048134.5:772..2151
+RORB,Homo_sapiens,NP_008845.2,refseq,1380,459,PASS,exact | coded_by:NM_006914.4:643..2022
+RORB,Hyaena_hyaena,XP_039079074.1,refseq,1395,464,PASS,exact | coded_by:XM_039223143.1:5..1399
+RORB,Hylobates_pileatus,,miniprot,1779,591,DROP,2 internal stop(s); len aa=592 prot=591 | miniprot-local
+RORB,Ictidomys_tridecemlineatus,XP_005324165.1,refseq,1413,470,PASS,exact | coded_by:XM_005324108.4:16..1428
+RORB,Jaculus_jaculus,XP_004653160.1,refseq,1380,459,PASS,exact | coded_by:XM_004653103.3:151..1530
+RORB,Lagorchestes_hirsutus,,miniprot,1351,449,DROP,cds not x3 (trim 1); 11 internal stop(s); len aa=450 prot=449 | miniprot-local
+RORB,Leopardus_geoffroyi,XP_045326211.1,refseq,1413,470,PASS,exact | coded_by:XM_045470255.1:100..1512
+RORB,Macrotis_lagotis,XP_074064647.1,refseq,1380,459,PASS,exact | coded_by:XM_074208546.1:713..2092
+RORB,Martes_flavigula,,miniprot,1776,589,DROP,2 internal stop(s); len aa=591 prot=589 | miniprot-local
+RORB,Microcebus_murinus,XP_075864741.1,refseq,1413,470,PASS,exact | coded_by:XM_076008626.1:297..1709
+RORB,Mirza_zaza,,miniprot,1152,385,DROP,len aa=384 prot=385 | miniprot-local
+RORB,Myrmecobius_fasciatus,,miniprot,1380,459,PASS,exact | miniprot-local
+RORB,Nanger_dama,,miniprot,1778,590,DROP,cds not x3 (trim 2); 33 internal stop(s); len aa=592 prot=590 | miniprot-local
+RORB,Nasua_narica,,miniprot,1795,596,DROP,cds not x3 (trim 1); 20 internal stop(s); len aa=598 prot=596 | miniprot-local
+RORB,Nycticebus_coucang,XP_053432425.1,refseq,1380,459,PASS,exact | coded_by:XM_053576450.1:637..2016
+RORB,Ochotona_princeps,XP_004591830.2,refseq,1380,459,PASS,exact | coded_by:XM_004591773.4:359..1738
+RORB,Octodon_degus,XP_023578763.1,refseq,1413,470,PASS,exact | coded_by:XM_023722995.1:48..1460
+RORB,Orycteropus_afer,XP_042636529.1,refseq,1410,469,PASS,exact | coded_by:XM_042780595.1:1..1410
+RORB,Paguma_larvata,,miniprot,1761,584,DROP,1 internal stop(s); len aa=586 prot=584 | miniprot-local
+RORB,Pan_troglodytes,XP_001144112.3,refseq,1380,459,PASS,exact | coded_by:XM_001144112.7:745..2124
+RORB,Panthera_pardus,XP_019319142.1,refseq,1413,470,PASS,exact | coded_by:XM_019463597.2:103..1515
+RORB,Peromyscus_eremicus,XP_059103677.1,refseq,1158,385,PASS,exact | coded_by:XM_059247694.1:16..1173
+RORB,Phacochoerus_africanus,XP_047623734.1,refseq,1380,459,PASS,exact | coded_by:XM_047767778.1:636..2015
+RORB,Phalanger_gymnotis,,miniprot,1314,437,PASS,exact | miniprot-local
+RORB,Pipistrellus_pipistrellus,,miniprot,1786,593,DROP,cds not x3 (trim 1); 23 internal stop(s); len aa=595 prot=593 | miniprot-local
+RORB,Plecturocebus_cupreus,,miniprot,1774,590,DROP,cds not x3 (trim 1); 29 internal stop(s); len aa=591 prot=590 | miniprot-local
+RORB,Pseudocheirus_occidentalis,,miniprot,1440,479,PASS,exact | miniprot-local
+RORB,Puma_concolor,XP_025787392.1,refseq,1488,495,PASS,exact | coded_by:XM_025931607.1:1..1488
+RORB,Rattus_norvegicus,NP_001257887.1,refseq,1380,459,PASS,exact | coded_by:NM_001270958.1:626..2005
+RORB,Rhynchocyon_petersi,KAM6170354.1,refseq,,470,DROP,"fetch failed: elink failed after retries: NCBI C++ Exception:
+    Error: TXCLIENT(CException::eUnknown) ""/pubmed_gen/rbuild/version/20260413/entrez/2.20/src/internal/txclient/TxClient.cpp"", line 1100: ncbi::CTxRawClientImpl::readAll() --- Read failed: EOF (the other side has unexpectedly closed connection), peer: 130.14.18.86:8064
+"
+RORB,Saccopteryx_bilineata,XP_066113178.1,refseq,1413,470,PASS,exact | coded_by:XM_066257081.1:77..1489
+RORB,Sarcophilus_harrisii,XP_031795413.1,refseq,1380,459,PASS,exact | coded_by:XM_031939553.1:696..2075
+RORB,Sciurus_vulgaris,XP_078968226.1,refseq,1380,459,PASS,exact | coded_by:XM_079112100.1:590..1969
+RORB,Speothos_venaticus,,miniprot,1365,456,DROP,len aa=455 prot=456 | miniprot-local
+RORB,Suricata_suricatta,XP_029776174.1,refseq,1380,459,PASS,exact | coded_by:XM_029920314.1:246..1625
+RORB,Sylvilagus_floridanus,,miniprot,1413,470,PASS,exact | miniprot-local
+RORB,Tapirus_terrestris,,miniprot,1776,589,DROP,2 internal stop(s); len aa=591 prot=589 | miniprot-local
+RORB,Tragelaphus_eurycerus,,miniprot,1788,593,DROP,len aa=595 prot=593 | miniprot-local
+RORB,Uromys_caudimaculatus,,miniprot,1413,470,PASS,exact | miniprot-local
+RORB,Vicugna_pacos,XP_072815700.1,refseq,1380,459,PASS,exact | coded_by:XM_072959599.1:725..2104
+RORB,Xerus_rutilus,,miniprot,1822,604,DROP,cds not x3 (trim 1); 30 internal stop(s); len aa=607 prot=604 | miniprot-local
+RORC,Acinonyx_jubatus,XP_053070792.1,refseq,1587,528,PASS,exact | coded_by:XM_053214817.1:1020..2606
+RORC,Acomys_cahirinus,,miniprot,1509,502,PASS,exact | miniprot-local
+RORC,Aepyceros_melampus,,miniprot,1528,507,DROP,cds not x3 (trim 1); 7 internal stop(s); len aa=509 prot=507 | miniprot-local
+RORC,Aotus_nancymaae,XP_064226911.1,refseq,1548,515,PASS,exact | coded_by:XM_064370841.1:20..1567
+RORC,Arvicanthis_niloticus,XP_076788964.1,refseq,1488,495,PASS,exact | coded_by:XM_076932849.1:514..2001
+RORC,Bos_taurus,NP_001076920.1,refseq,1521,506,PASS,exact | coded_by:NM_001083451.2:11..1531
+RORC,Callithrix_jacchus,XP_054103956.2,refseq,1593,530,PASS,exact | coded_by:XM_054247981.2:105..1697
+RORC,Camelus_bactrianus,XP_074205529.1,refseq,1641,546,PASS,exact | coded_by:XM_074349428.1:3027..4667
+RORC,Caracal_caracal,,miniprot,1587,528,PASS,exact | miniprot-local
+RORC,Cebus_imitator,XP_017401708.1,refseq,1557,518,PASS,exact | coded_by:XM_017546219.2:103..1659
+RORC,Choloepus_hoffmanni,,miniprot,1560,519,PASS,exact | miniprot-local
+RORC,Cynocephalus_volans,XP_062960053.1,refseq,1557,518,PASS,exact | coded_by:XM_063103983.1:73..1629
+RORC,Cynomys_ludovicianus,,miniprot,1404,469,DROP,len aa=468 prot=469 | miniprot-local
+RORC,Dasypus_novemcinctus,XP_004451816.1,refseq,1557,518,PASS,exact | coded_by:XM_004451759.5:114..1670
+RORC,Daubentonia_madagascariensis,,miniprot,1785,593,DROP,1 internal stop(s); len aa=594 prot=593 | miniprot-local
+RORC,Eira_barbara,,miniprot,1527,508,PASS,exact | miniprot-local
+RORC,Equus_caballus,XP_001916080.2,refseq,1557,518,PASS,exact | coded_by:XM_001916045.6:74..1630
+RORC,Giraffa_tippelskirchi,,miniprot,1530,509,PASS,exact | miniprot-local
+RORC,Gorilla_gorilla_gorilla,XP_018878258.3,refseq,1719,572,PASS,exact | coded_by:XM_019022713.3:369..2087
+RORC,Homo_sapiens,NP_005051.2,refseq,1557,518,PASS,exact | coded_by:NM_005060.4:39..1595
+RORC,Hyaena_hyaena,XP_039102164.1,refseq,1572,523,PASS,exact | coded_by:XM_039246233.1:1..1572
+RORC,Hylobates_pileatus,,miniprot,1719,572,PASS,exact | miniprot-local
+RORC,Ictidomys_tridecemlineatus,XP_005331294.2,refseq,1557,518,PASS,exact | coded_by:XM_005331237.4:111..1667
+RORC,Jaculus_jaculus,XP_044994524.1,refseq,1584,527,PASS,exact | coded_by:XM_045138589.1:73..1656
+RORC,Lagorchestes_hirsutus,,miniprot,1539,512,PASS,exact | miniprot-local
+RORC,Leopardus_geoffroyi,XP_045335200.1,refseq,1557,518,PASS,exact | coded_by:XM_045479244.1:79..1635
+RORC,Macrotis_lagotis,XP_074044960.1,refseq,1560,519,PASS,exact | coded_by:XM_074188859.1:105..1664
+RORC,Martes_flavigula,,miniprot,1527,508,PASS,exact | miniprot-local
+RORC,Microcebus_murinus,XP_075856246.1,refseq,1494,497,PASS,exact | coded_by:XM_076000131.1:166..1659
+RORC,Mirza_zaza,,miniprot,1494,497,PASS,exact | miniprot-local
+RORC,Myrmecobius_fasciatus,,miniprot,1446,483,DROP,len aa=482 prot=483 | miniprot-local
+RORC,Nanger_dama,,miniprot,1528,506,DROP,cds not x3 (trim 1); 2 internal stop(s); len aa=509 prot=506 | miniprot-local
+RORC,Nasua_narica,,miniprot,1994,663,DROP,cds not x3 (trim 2); 7 internal stop(s); len aa=664 prot=663 | miniprot-local
+RORC,Nycticebus_coucang,XP_053447535.1,refseq,1545,514,PASS,exact | coded_by:XM_053591560.1:98..1642
+RORC,Ochotona_princeps,XP_058516264.1,refseq,1593,530,PASS,exact | coded_by:XM_058660281.1:64..1656
+RORC,Octodon_degus,XP_004632391.1,refseq,1560,519,PASS,exact | coded_by:XM_004632334.3:96..1655
+RORC,Orycteropus_afer,XP_007949051.2,refseq,1575,524,PASS,exact | coded_by:XM_007950860.2:1..1575
+RORC,Paguma_larvata,,miniprot,1567,521,DROP,cds not x3 (trim 1); 13 internal stop(s); len aa=522 prot=521 | miniprot-local
+RORC,Pan_troglodytes,XP_003308437.1,refseq,1494,497,PASS,exact | coded_by:XM_003308389.6:181..1674
+RORC,Panthera_pardus,XP_019288479.1,refseq,1557,518,PASS,exact | coded_by:XM_019432934.2:67..1623
+RORC,Peromyscus_eremicus,XP_059122570.1,refseq,1602,533,PASS,exact | coded_by:XM_059266587.1:1..1602
+RORC,Phacochoerus_africanus,XP_047640600.1,refseq,1557,518,PASS,exact | coded_by:XM_047784644.1:207..1763
+RORC,Phalanger_gymnotis,,miniprot,1536,511,PASS,exact | miniprot-local
+RORC,Pipistrellus_pipistrellus,,miniprot,1596,531,PASS,exact | miniprot-local
+RORC,Plecturocebus_cupreus,,miniprot,1707,567,DROP,1 internal stop(s); len aa=568 prot=567 | miniprot-local
+RORC,Pseudocheirus_occidentalis,,miniprot,1539,512,PASS,exact | miniprot-local
+RORC,Puma_concolor,XP_025784188.1,refseq,1587,528,PASS,exact | coded_by:XM_025928403.1:1..1587
+RORC,Rattus_norvegicus,NP_001414201.1,refseq,1527,508,PASS,exact | coded_by:NM_001427272.2:55..1581
+RORC,Rhynchocyon_petersi,KAM6217158.1,refseq,1956,651,PASS,exact | elink+fasta_cds_na
+RORC,Saccopteryx_bilineata,XP_066118209.1,refseq,1548,515,PASS,exact | coded_by:XM_066262112.1:83..1630
+RORC,Sarcophilus_harrisii,XP_012405135.2,refseq,1557,518,PASS,exact | coded_by:XM_012549681.3:80..1636
+RORC,Sciurus_vulgaris,XP_078994882.1,refseq,1608,535,PASS,exact | coded_by:XM_079138756.1:42..1649
+RORC,Speothos_venaticus,,miniprot,1557,518,PASS,exact | miniprot-local
+RORC,Suricata_suricatta,XP_029804666.1,refseq,1554,517,PASS,exact | coded_by:XM_029948806.1:54..1607
+RORC,Sylvilagus_floridanus,,miniprot,1608,535,PASS,exact | miniprot-local
+RORC,Tapirus_terrestris,,miniprot,1999,666,DROP,cds not x3 (trim 1); 24 internal stop(s) | miniprot-local
+RORC,Tragelaphus_eurycerus,,miniprot,1530,509,PASS,exact | miniprot-local
+RORC,Uromys_caudimaculatus,,miniprot,1488,495,PASS,exact | miniprot-local
+RORC,Vicugna_pacos,XP_072802660.1,refseq,1581,526,PASS,exact | coded_by:XM_072946559.1:69..1649
+RORC,Xerus_rutilus,,miniprot,1596,531,PASS,exact | miniprot-local
