@@ -103,7 +103,7 @@ def main():
     all_tips = set(sp.get_leaf_names())
 
     qc = []
-    print(f"{'gene':9s} {'taxa':>5s} {'codons':>7s} {'fg':>4s} {'bg':>4s} "
+    print(f"{'gene':9s} {'taxa':>5s} {'codons':>7s} {'allgap':>8s} {'fg':>4s} {'bg':>4s} "
           f"{'fg_tips':>8s} {'flag':>10s}")
     for g in GENES:
         src = os.path.join(CODON_SRC, f"{g}.codon.fasta")
@@ -164,18 +164,44 @@ def main():
         out_tree = os.path.join(TREE_OUT, f"{g}.labelled.nwk")
         t.write(outfile=out_tree, format=1, format_root_node=True)
 
+        # Drop codon columns that are all gaps in the retained taxa. The codon
+        # alignments were built across all 60 species, so a column occupied only
+        # by species without CDS becomes empty once pruned: 13 of the 18 genes
+        # have some, PER3 has 482 of 2122 and CSNK1D 239 of 792. HyPhy does not
+        # merely ignore them, it dies on them with
+        #   ASSERTION FAILED: Non-constant site passed to
+        #   ComputeCompressedSubstitutionConstantSite
+        # inside its constant-site optimisation. An all-gap column carries no
+        # information, so removing it changes no result, but it DOES renumber
+        # the sites, hence the map written alongside.
+        ncod = width // 3
+        keep = [c for c in range(ncod)
+                if not all(s[c * 3:c * 3 + 3] == "---" for s in seqs.values())]
+        dropped = ncod - len(keep)
+
         out_aln = os.path.join(CODON_OUT, f"{g}.codon.fasta")
         with open(out_aln, "w") as fh:
             for name in sorted(seqs):
-                fh.write(f">{name}\n{seqs[name]}\n")
+                s = seqs[name]
+                fh.write(f">{name}\n{''.join(s[c*3:c*3+3] for c in keep)}\n")
+
+        # HyPhy site index (1-based, after cleaning) -> original codon index,
+        # which is also the residue index in the untrimmed protein alignment.
+        # Step 13 needs this to reach human residue numbering.
+        with open(os.path.join(CODON_OUT, f"{g}.codonmap.csv"), "w", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow(["hyphy_site", "original_codon"])
+            for i, c in enumerate(keep, start=1):
+                w.writerow([i, c + 1])
 
         flag = ""
         if fg < MIN_FOREGROUND or bg < MIN_BACKGROUND:
             flag = "LOW_POWER"
-        qc.append(dict(gene=g, taxa=len(seqs), codons=width // 3,
+        qc.append(dict(gene=g, taxa=len(seqs), codons_in=ncod,
+                       codons_used=len(keep), allgap_dropped=dropped,
                        foreground_branches=fg, background_branches=bg,
                        foreground_tips=fg_tips, flag=flag))
-        print(f"{g:9s} {len(seqs):5d} {width//3:7d} {fg:4d} {bg:4d} "
+        print(f"{g:9s} {len(seqs):5d} {len(keep):7d} {dropped:8d} {fg:4d} {bg:4d} "
               f"{fg_tips:8d} {flag:>10s}")
 
     with open(os.path.join(PROJ, "results", "selection", "foreground_qc.csv"),
