@@ -1,13 +1,193 @@
 # Circadian Gene Convergent Evolution Analysis: Progress Report
 
-**Date**: 2026-07-14 (updated; original draft 2026-07-07)
+**Date**: 2026-08-13 (updated; earlier passes 2026-07-14 and 2026-07-07)
 **Status**: Steps 00-08, 10, 11 complete. Step 09 (PCOC) primary run (ER / gains
-of diurnality) complete; three sensitivity sweeps scaffolded and queued but not
-run. See the update log immediately below before reading the older sections.
+of diurnality) complete and returning a null. The 2026-08-13 session was devoted
+to establishing whether that null is real, using a power calibration and three
+independent cross-checks. Three sensitivity sweeps remain scaffolded but unrun.
+CDS and codon alignments have arrived, so the selection track is no longer
+blocked. Read the update logs below, newest first, before the older sections.
 
 ---
 
-## 0. Update log, 2026-07-14 session (READ FIRST)
+## 0A. Update log, 2026-08-13 session (READ FIRST)
+
+The 2026-07-14 session fixed the pipeline and produced a null. A null is not a
+result until the design is shown capable of detecting a signal, so this session
+tested exactly that, from four directions. **The null survived all four.**
+
+Nothing in this section changes the pipeline's conclusions from 0.3; it changes
+how much weight they can carry.
+
+### 0A.1 Headline
+
+There is no detectable convergent amino acid signal associated with independent
+gains of diurnality, in any of the 18 circadian genes. This is now supported by
+four lines of evidence with different assumptions, not by PCOC alone.
+
+| line of evidence | assumes | result |
+|---|---|---|
+| PCOC posteriors (step 09) | profile-shift model | 0 of 11,727 sites; max posterior 0.30 |
+| `pcoc_sim` power calibration | same model | power 1.000, FPR 0.0000 |
+| model-free residue screen | nothing | at the null in all 18 genes |
+| parsimony substitution count | nothing | same-residue rate at the null, pooled |
+
+### 0A.2 Power calibration (`scripts/run_pcoc_sim.sh`, `summarize_pcoc_sim.py`)
+
+Required by CLAUDE.md, which forbids a fixed 0.8 posterior threshold. Each gene
+is calibrated on its OWN tree, because mean branch length spans a 37-fold range
+across genes (ARNTL 0.0035 to CSNK1E 0.130 subs/site) and power depends on it.
+
+**A trap worth knowing about.** `pcoc_sim` reads `-m` only as a POOL of candidate
+events, then simulates a random subset of them whenever `-c` is left at its
+default of 0 (`pcoc_sim.py:496`; the deletion happens in
+`events_placing.py:placeNTransitionsInTree`). A pilot run silently calibrated on
+7 of the 10 real events. `run_pcoc_sim.sh` now passes `-c` equal to the gene's
+real event count, verified by diffing the simulated annotated tree against the
+scenario node by node (10 transitions, 52 branches, exact match).
+
+Result: power 1.000 and FPR 0.0000 at every threshold from 0.7 to 0.99, in every
+gene tested, including ARNTL, whose branches are the shortest in the dataset.
+
+> **SWEEP INCOMPLETE at the time of writing: 10 of 18 genes.** Done: CLOCK,
+> NPAS2, ARNTL, PER1, PER2, PER3, CRY1, CRY2, NR1D1, NR1D2. Remaining: RORA,
+> RORB, RORC, CSNK1D, CSNK1E, FBXL3, BHLHE40, BHLHE41. Every gene finished so
+> far gives power 1.000 (worst single profile couple 0.970, PER2) and FPR
+> 0.0000. Re-run `python scripts/summarize_pcoc_sim.py ER_gain` once the sweep
+> completes and replace this note with the final table.
+
+**Threshold.** Because power and FPR are both saturated across the whole tested
+range, the calibration does NOT identify a threshold. `summarize_pcoc_sim.py`
+says so explicitly and takes the strictest value (0.99) on the grounds that it
+costs no power; it does not return the most permissive value that technically
+meets the FPR budget. This is moot for the current result, since the highest
+posterior observed anywhere in the real data is 0.30.
+
+**Important limitation.** `pcoc_sim` builds the convergent shift with Bio++'s
+`OneChange` model on every transition branch
+(`bpp_lib.py`: `MODEL_OC='OneChange(model=$(MODEL_C))'`), which CONDITIONS on at
+least one substitution occurring there. The simulated change is therefore
+guaranteed regardless of branch length. `pcoc_det` fits the same model, so
+simulation and detection are matched and the calibration is fair, but the
+reported power is CONDITIONAL: given that a convergent substitution occurred in
+each lineage, PCOC finds it. It says nothing about whether there was time for
+those substitutions to occur. That is what 0A.4 and 0A.5 address.
+
+### 0A.3 Model-free residue screen (`scripts/model_free_convergence_screen.py`)
+
+`pcoc_sim` is circular: it simulates under PCOC's own model and checks PCOC finds
+it. This screen removes the model entirely. Per column it scores
+
+    max over residues a of ( freq(a | diurnal) - freq(a | nocturnal) )
+
+so 1.0 is perfectly phenotype-diagnostic. The null re-places diurnal clades OF
+MATCHED SIZE at random on the same gene tree, because diurnality is clumped in 10
+clades and a plain tip-label shuffle would destroy that clumping and make almost
+any clade-restricted residue look significant.
+
+Result: nothing, in all 18 genes. Observed sits on the null throughout, and in
+several genes below it (RORB 0.223 vs 0.305; CSNK1D 0.250 vs 0.326). Only 2 of
+11,727 columns exceed a 0.6 diagnostic score, against a null expectation of about
+the same. Lowest p is CRY1 at 0.043, which does not survive 18-gene correction.
+
+### 0A.4 Direct parsimony count (`scripts/observed_convergent_substitutions.py`)
+
+Fitch parsimony assigns residues to internal nodes, so substitutions on
+transition branches can simply be counted. No evolutionary model, no rate
+assumption.
+
+**A confound that had to be removed first.** The raw counts appeared to show a
+convergent excess: PER2 61 observed against 34.2 null (p=0.015), PER1 21 vs 10.9
+(p=0.040). This is an artifact. Real transition branches carry far more
+substitutions of ANY kind than random branches of matched clade size, because the
+ASR places transitions on real, often long branches (NR1D1: 58 opportunity sites
+against a null of 9.6, a 6-fold excess). More substitutions mechanically produce
+more same-residue coincidences. The test must therefore condition on opportunity
+and ask what FRACTION of sites that changed in 2+ lineages landed on the same
+residue.
+
+Conditioned, the excess disappears completely:
+
+| gene | raw p (confounded) | rate-conditioned p |
+|---|---|---|
+| PER2 | 0.015 | 0.348 |
+| PER1 | 0.040 | 0.587 |
+| CLOCK | 0.085 | 0.538 |
+| NPAS2 | 0.129 | 0.194 |
+
+**Pooled across all 18 genes: 639 sites changed in 2 or more independent diurnal
+lineages; 206 of those changed to the same residue. Rate 0.322 observed against
+0.336 null. No excess.** No gene has a rate-conditioned p below 0.129.
+
+This is the single most informative negative in the report, because it counts
+what actually happened rather than fitting a model to it.
+
+### 0A.5 Opportunity (`scripts/transition_opportunity.py`)
+
+Branch-length estimate of how many sites COULD have shown convergence. Judged on
+the expected number of SITES reaching 2+ changed lineages, not on expected
+lineages per site: the per-site average is below 2 in almost every gene, but that
+is an average over hundreds of columns and condemning the dataset on it would be
+a mistake (a gene with 600 sites and per-site probability 0.05 still expects 30
+usable sites).
+
+Only **2 of 18 genes** are genuinely opportunity-starved: ARNTL (2.1 expected
+sites) and CSNK1D (2.0). The other 16 have ample opportunity. Their nulls are
+therefore meaningful; ARNTL's and CSNK1D's should be treated as uninformative.
+
+This script assumes a uniform per-site rate and so OVERESTIMATES (PER2: 719
+predicted against 196 counted). Prefer the empirical count in 0A.4; use this one
+to see which genes are constrained by branch length alone.
+
+### 0A.6 CDS and codon alignments have arrived (`codon_export/`)
+
+The selection track (steps 02, 12) is no longer blocked. Committed unmodified to
+preserve provenance. Verified independently rather than trusting the bundled
+reports:
+
+- codon alignments are exactly 3x their protein alignments;
+- protein rows are **byte-identical to our own untrimmed alignments**, so codon
+  column i maps to raw protein column i, and the existing trimAl
+  `colnumbering` files bridge that to PCOC's trimmed coordinates;
+- `chronotype.csv` agrees with `data/diel_activity.csv` on all 60 species;
+- diurnal/nocturnal balance is preserved in every gene;
+- all 823 PASS rows are marked "exact"; the 217 DROPs are internal stops,
+  off-by-one lengths, or non-multiples of 3, i.e. dropped rather than fudged.
+
+Two caveats before wiring it in:
+
+1. Tip labels use `Gorilla_gorilla_gorilla` where the rest of the project uses
+   `Gorilla_gorilla`. Rename at the point of consumption, do not edit the files.
+2. Coverage is 32 to 58 of 60 species per gene (weakest: CSNK1D 32, PER3 36,
+   BHLHE40 38), so transitions per gene drop. Re-derive transitions from our ER
+   scenario pruned to each gene's CDS taxa. Do NOT adopt the
+   `full_tree_transitions=14` in their `transition_report.csv`; it does not match
+   our ER reconstruction of 10 gains plus 5 reversals.
+
+### 0A.7 Biological reading
+
+A null here is not a failure, and it is biologically plausible. The core clock is
+deeply conserved; the same machinery runs in a mouse and a human. Shifting
+activity to daylight may require no rewriting of these proteins at all, and may
+instead be achieved by changing WHEN and HOW MUCH they are expressed, by altering
+the light input pathway from the retina, or by changing downstream output
+tissues. None of those would leave a mark on the coding sequences tested here.
+
+The selection track is now the natural next test of that reading: relaxed or
+shifted selection would show up in the codon data even where no convergent
+residue does.
+
+### 0A.8 What remains
+
+1. Finish the calibration sweep and the partial-convergence test (0A.2 caveat).
+2. Re-run TDG09 (step 10); section 6 predates the ASR fix and is SUPERSEDED.
+3. Run the three sensitivity sweeps (ER_reversal, ARD_gain, ARD_reversal).
+4. Wire up the selection track now that CDS exist.
+5. Implement step 13 consensus parsers.
+
+---
+
+## 0. Update log, 2026-07-14 session
 
 This session found and fixed a chain of defects in the ancestral reconstruction
 and the PCOC scenario, then ran the corrected primary PCOC analysis. Several
