@@ -22,15 +22,24 @@ how much weight they can carry.
 ### 0A.1 Headline
 
 There is no detectable convergent amino acid signal associated with independent
-gains of diurnality, in any of the 18 circadian genes. This is now supported by
-four lines of evidence with different assumptions, not by PCOC alone.
+gains of diurnality, in any of the 18 circadian genes.
 
 | line of evidence | assumes | result |
 |---|---|---|
-| PCOC posteriors (step 09) | profile-shift model | 0 of 11,727 sites; max posterior 0.30 |
+| PCOC posteriors (step 09) | profile-shift model, **all 10 lineages converging** | 0 of 11,727 sites; max posterior 0.30 |
 | `pcoc_sim` power calibration | same model | power 1.000, FPR 0.0000 |
 | model-free residue screen | nothing | at the null in all 18 genes |
 | parsimony substitution count | nothing | same-residue rate at the null, pooled |
+
+**Read the PCOC line narrowly.** Per 0A.5b, the step 09 sweep is only sensitive
+to convergence shared by nearly all 10 diurnal lineages: power is 0.000 at 2 or 3
+converging lineages, 0.020 at 5, and reaches 1.000 only at 10. Its zero therefore
+means "no site where all 10 lineages converged together", not "no convergence".
+
+The claim that survives in full generality rests on the two model-free lines,
+which declare no convergent set and so carry no such restriction. The parsimony
+count in particular tested every site where 2 or more lineages changed and found
+the same-residue rate exactly at chance.
 
 ### 0A.2 Power calibration (`scripts/run_pcoc_sim.sh`, `summarize_pcoc_sim.py`)
 
@@ -151,6 +160,76 @@ therefore meaningful; ARNTL's and CSNK1D's should be treated as uninformative.
 This script assumes a uniform per-site rate and so OVERESTIMATES (PER2: 719
 predicted against 196 counted). Prefer the empirical count in 0A.4; use this one
 to see which genes are constrained by branch length alone.
+
+### 0A.5b Partial convergence: the main limitation of the PCOC run
+
+**This is the most consequential finding of the session and it narrows the
+headline claim.** Script: `scripts/pcoc_partial_convergence_sweep.py`.
+Data: `results/pcoc_sim/sweep/CLOCK/power_by_k.csv`,
+figure `results/figures/partial_convergence_CLOCK.pdf`.
+
+The step 09 sweep DECLARES all 10 gains of diurnality convergent, whatever the
+truth. This test simulates convergence in only k of the 10 lineages, then detects
+with the full declared 10-event scenario exactly as the real analysis did, for
+k = 2..10 with 3 independent draws of WHICH lineages at each k. All 25 simulated
+blocks were concatenated and detected in ONE pcoc_det run (the declared scenario
+is identical for every k, and detection cost is dominated by fixed per-tree setup
+rather than column count).
+
+| converging lineages of 10 | power at 0.9 |
+|---|---|
+| 2 | 0.000 |
+| 3 | 0.000 |
+| 4 | 0.007 |
+| 5 | 0.020 |
+| 6 | 0.088 |
+| 7 | 0.250 |
+| 8 | 0.548 |
+| 9 | 0.463 |
+| 10 | 1.000 |
+
+An earlier 5-point run confirmed the mechanism directly: with k=2, detection with
+the declared 10-event scenario found **0 of 600** planted sites, while the SAME
+data detected with the correct 2-event scenario found **600 of 600**. Perfect
+detection against total blindness, on identical data.
+
+**The driver is the number of FALSELY declared events, not branch length.**
+Equal-branch comparisons settle it:
+
+| draw | branches | falsely declared | power |
+|---|---|---|---|
+| k=2 | 25 | 8 | 0.000 |
+| k=6 | 25 | 4 | 0.135 |
+| k=4 | 46 | 6 | 0.015 |
+| k=8 | 37 | 2 | 0.545 |
+
+Same evolutionary material, order-of-magnitude different power. PCOC's convergent
+model requires the derived profile on EVERY declared branch, so each declared
+lineage that did not converge actively penalizes the fit. The cost is
+contaminating evidence, not missing evidence. (An earlier expectation that branch
+length would be the controlling variable is contradicted by these numbers.)
+
+**Consequence for the headline.** The step 09 result should be read as *no site
+where all 10 diurnal lineages converged together*, which is a much narrower and
+biologically less likely claim than "no convergence associated with diurnality".
+
+**Why the overall conclusion nonetheless survives.** The parsimony count (0A.4)
+declares no scenario at all. It examined every site where 2 or more independent
+lineages changed and found same-residue changes at exactly the chance rate
+(206 of 639, null 0.336). Convergence confined to 2 or 3 lineages would have
+surfaced there and did not. The negative therefore rests on the model-free
+evidence, not on PCOC.
+
+**Caveats.** Run on CLOCK only, 3 replicates per k. The k=9 point (0.463) falls
+below k=8 (0.548), which is probably replicate noise, but the jump from 0.463 to
+1.000 at k=10 is abrupt enough that the exact shape near the top needs more
+replicates before it is quoted. The overall trend is not in doubt. Worth
+repeating on a long-branch gene such as CSNK1E.
+
+**What to do about it.** Testing all 1,013 lineage subsets is infeasible at
+roughly 30 min per detection. Prefer methods that do not require declaring a
+fixed convergent set, and treat PCOC as a test of universal convergence
+specifically.
 
 ### 0A.6 CDS and codon alignments have arrived (`codon_export/`)
 

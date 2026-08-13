@@ -69,3 +69,30 @@ that from the data side.
 - `transition_opportunity.csv` branch-length estimate of how many sites could
   have shown convergence. Only ARNTL and CSNK1D are genuinely
   opportunity-starved; their nulls should be treated as uninformative.
+
+## partial_convergence/
+
+The main limitation of the step 09 PCOC run. See PROGRESS_REPORT.md 0A.5b.
+
+The sweep declares all 10 gains of diurnality convergent regardless of truth.
+These files measure what that costs when only some lineages actually converged.
+
+- `power_by_k.csv` power for k = 2..10 converging lineages, 3 draws each, always
+  detected with the full declared 10-event scenario. Power is 0.000 at k=2 and 3,
+  0.020 at k=5, 0.250 at k=7, and reaches 1.000 only at k=10.
+- `blocks.csv` which lineages each draw used, with branch counts and lengths.
+- `partial_convergence_CLOCK.pdf` power against lineage count and against
+  convergent branch length.
+
+The controlling variable is the number of FALSELY declared events, not branch
+length: draws with equal branches but fewer false declarations score far higher
+(25 branches with 8 false = 0.000; 25 branches with 4 false = 0.135). PCOC's
+convergent model requires the derived profile on every declared branch, so a
+declared lineage that did not converge actively penalizes the fit.
+
+Consequence: read the step 09 zero as "no site where all 10 lineages converged
+together", not as "no convergence". The general claim rests on the two model-free
+checks above, which declare no convergent set.
+
+Run on CLOCK only, 3 replicates per k. The k=9 point sits below k=8, likely
+replicate noise; the shape near the top needs more replicates before quoting.
