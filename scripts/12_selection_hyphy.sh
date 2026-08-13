@@ -63,15 +63,29 @@ for g in $GENES; do
     tail -2 "$OUT/logs/$g.contrastfel.log"
   fi
 
+  # RELAX fails intermittently on this data, and the SAME inputs can succeed on a
+  # retry (NPAS2 failed twice then completed). The cause is its own diagnostic:
+  # "Potential convergence issues due to flat likelihood surfaces". RELAX fits a
+  # separate rate parameter per branch, so on trees carrying many near-zero
+  # branches the surface for K is close to unidentifiable and the optimizer can
+  # wander off. Retry rather than lose the gene, and treat any K that only
+  # appears on some attempts as unreliable (see results/selection/replicates/).
   rx="$OUT/$g.relax.json"
   if [[ -s "$rx" ]]; then
     echo "SKIP $g relax (done)"
   else
-    echo "== RELAX: $g == $(date)"
-    hyphy CPU="$CPU" relax --alignment "$aln" --tree "$tre" \
-          --test Foreground --output "$rx" > "$OUT/logs/$g.relax.log" 2>&1 \
-      || echo "  FAILED relax $g, see $OUT/logs/$g.relax.log"
-    tail -2 "$OUT/logs/$g.relax.log"
+    for attempt in 1 2 3; do
+      echo "== RELAX: $g (attempt $attempt) == $(date)"
+      hyphy CPU="$CPU" relax --alignment "$aln" --tree "$tre" \
+            --test Foreground --output "$rx" \
+            > "$OUT/logs/$g.relax.attempt$attempt.log" 2>&1
+      if [[ -s "$rx" ]]; then
+        cp "$OUT/logs/$g.relax.attempt$attempt.log" "$OUT/logs/$g.relax.log"
+        break
+      fi
+      echo "  attempt $attempt failed"
+    done
+    [[ -s "$rx" ]] || echo "  RELAX GAVE UP on $g after 3 attempts"
   fi
 done
 
