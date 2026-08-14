@@ -22,10 +22,28 @@ find where the signal dies.
 
 Design
 ------
-Convergence is planted by writing the SAME residue into every species descending
-from a chosen set of diurnal transition events, at a chosen column. The residue
-is picked to be absent, or nearly absent, at that column so the planted signal is
-unambiguous, and columns are chosen to be variable but not saturated.
+Convergence is planted by writing the SAME residue into the DIURNAL species
+descending from a chosen set of gain events, at a chosen column. The residue is
+picked to be absent at that column so the planted signal is unambiguous, and
+columns are chosen to be variable but not saturated.
+
+The word DIURNAL is the whole correction. The first version of this script wrote
+the residue into every species descending from each event, which sounds
+equivalent but is not: a convergent event's membership includes descendant nodes
+whose subtrees contain nocturnal species from nested reversals. That planted the
+residue into 41 of 60 species rather than the intended 30, making it the MAJORITY
+state across the tree in 36 of 36 sites at the 'all' level. A new consensus
+residue is not convergence, so the control was asking the detectors to find
+something that was not there, and PCOC was correct to miss it. Every conclusion
+drawn from that run was withdrawn.
+
+Each planted site is now verified before it is kept:
+  - the residue must remain a MINORITY state overall, so it cannot be read as
+    ancestral;
+  - freq(residue | diurnal) - freq(residue | nocturnal) must exceed
+    MIN_GAP, so the signal is genuinely phenotype-associated;
+  - at least two independent events must contribute.
+Sites failing any of these are reverted and a different column is tried.
 
 Sites are planted at three difficulty levels, because the k-curve
 (PROGRESS_REPORT.md 0A.5b) showed PCOC only detects near-universal convergence:
@@ -68,6 +86,17 @@ AAS = "ACDEFGHIKLMNPQRSTVWY"
 LEVELS = {"all": 2, "most": 1, "few": 2}
 EVENTS_PER_LEVEL = {"all": None, "most": 7, "few": 3}   # None means every event
 
+# A planted residue must be essentially absent from nocturnal species. Planting
+# into diurnal descendants only guarantees this, so the check is a guard rather
+# than a filter.
+#
+# Do NOT raise this into a large gap requirement: a 'few' level site touches
+# about 10 of 30 diurnal species and so has a gap near 0.33 BY CONSTRUCTION.
+# Requiring 0.5 silently discarded every one of them, which is exactly the level
+# the control exists to test.
+MAX_NOCTURNAL_FREQ = 0.02
+MIN_GAP = 0.10
+
 SEED = 20260814
 rng = random.Random(SEED)
 
@@ -100,6 +129,11 @@ def numbered(tree_file):
 
 def main():
     os.makedirs(os.path.join(OUT, "trim"), exist_ok=True)
+    diel = {}
+    with open(os.path.join(PROJ, "data", "diel_activity.csv")) as fh:
+        for r in csv.DictReader(fh):
+            diel[r["species"]] = r["activity"]
+    diurnal = {s for s, v in diel.items() if v == "diurnal"}
     key = []
 
     for g in GENES:
@@ -141,9 +175,8 @@ def main():
         chosen = []
         seqs_out = dict(seqs)
         for level, n_sites in LEVELS.items():
-            for _ in range(n_sites):
-                if not candidates:
-                    break
+            placed = 0
+            while placed < n_sites and candidates:
                 c = candidates.pop()
                 col = [seqs[s][c] for s in order]
                 present = {ch for ch in col if ch not in GAPS}
@@ -156,22 +189,45 @@ def main():
 
                 k = EVENTS_PER_LEVEL[level]
                 idx = usable if k is None else sorted(rng.sample(usable, min(k, len(usable))))
+                # DIURNAL descendants only. Event membership includes nodes whose
+                # subtrees contain nocturnal species from nested reversals, and
+                # writing into those destroys the phenotype association.
                 targets = set()
                 for i in idx:
-                    targets |= event_tips[i]
+                    targets |= (event_tips[i] & diurnal)
+                targets = {s for s in targets if seqs_out[s][c] not in GAPS}
                 if len(targets) < 2:
                     continue
 
-                for s in targets:
-                    if seqs_out[s][c] in GAPS:
-                        continue        # never overwrite a gap: that invents data
-                    seqs_out[s] = seqs_out[s][:c] + aa + seqs_out[s][c + 1:]
+                trial = {s: seqs_out[s][:c] + aa + seqs_out[s][c + 1:] for s in targets}
 
+                # Verify the result actually looks like convergence before keeping it.
+                after = {s: trial.get(s, seqs_out[s]) for s in order}
+                counts = Counter(after[s][c] for s in order if after[s][c] not in GAPS)
+                n_tot = sum(counts.values())
+                di = [after[s][c] for s in order if s in diurnal and after[s][c] not in GAPS]
+                no = [after[s][c] for s in order if s not in diurnal and after[s][c] not in GAPS]
+                gap = (di.count(aa) / len(di) if di else 0) - (no.count(aa) / len(no) if no else 0)
+                no_freq = no.count(aa) / len(no) if no else 0.0
+                # Absence from nocturnal species is the criterion, NOT minority
+                # status among tips. At the 'all' level 30 diurnal species share
+                # the residue and it becomes the plurality, which is what real
+                # convergence across half a clade looks like; rejecting on that
+                # threw away every 'all' site. Absence from all 30 nocturnal
+                # species, the marsupial outgroup included, is what makes the
+                # residue impossible to reconstruct at the root.
+                if gap < MIN_GAP or no_freq > MAX_NOCTURNAL_FREQ:
+                    continue
+
+                seqs_out.update(trial)
                 chosen.append(c)
+                placed += 1
                 key.append(dict(gene=g, trimmed_col=c + 1, planted_residue=aa,
                                 level=level, n_events=len(idx),
                                 events=";".join(map(str, idx)),
-                                n_species_changed=len(targets)))
+                                n_species_changed=len(targets),
+                                diurnal_gap=round(gap, 3),
+                                pct_of_tree=round(counts[aa] / n_tot, 3)))
 
         with open(os.path.join(OUT, "trim", f"{g}.trim.fa"), "w") as fh:
             for s in order:
