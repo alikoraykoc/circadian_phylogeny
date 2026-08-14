@@ -19,7 +19,7 @@ for g in $GENES; do
   java -cp "$TDG09_JAR" tdg09.Analyse \
     -alignment "$INPUT_DIR/$g.phy" \
     -tree      "$INPUT_DIR/$g.tree" \
-    -groups    Di No \
+    -groups    No Di \
     -threads   2 \
     > "$RES/tdg09/$g.tdg09.out" 2>&1
   echo "  done: $g"

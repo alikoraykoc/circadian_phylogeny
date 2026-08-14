@@ -110,7 +110,12 @@ for gene in GENES:
 
     # Write tree with internal node labels (format=8: all names, all distances)
     tree_out = os.path.join(out_dir, f"{gene}.tree")
-    t.write(outfile=tree_out, format=8)
+    # format_root_node=True so the ROOT's label is actually serialised; ete3 omits
+    # it otherwise. TDG09 turns out not to read it (see 10_tdg09.sh, where the
+    # root group is set by the ORDER of -groups), but writing a tree whose root
+    # is unlabelled while every other node is labelled is a trap for the next
+    # reader, and for any other tool pointed at these files.
+    t.write(outfile=tree_out, format=8, format_root_node=True)
 
     # A non-zero fallback count means some internal node could not be matched to
     # any corHMM node and was labelled by majority rule instead. That is a
@@ -120,6 +125,6 @@ for gene in GENES:
 
 # Write groups file
 with open(os.path.join(out_dir, "groups.txt"), "w") as f:
-    f.write("Di No\n")
+    f.write("No Di\n")
 
 print(f"\nTDG09 inputs written to {out_dir}")
