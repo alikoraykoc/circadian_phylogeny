@@ -37,6 +37,9 @@ import sys
 from collections import OrderedDict
 from ete3 import Tree
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lib_checks import check_scenario_against_tree
+
 PROJ = os.environ.get("PROJ", os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 RES = os.path.join(PROJ, "results")
 GENES = "CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41".split()
@@ -165,6 +168,27 @@ def main():
                 scenario, n_ev, n_br, n_drop = build_scenario(
                     events, tipset_to_pcoc, gene_tips
                 )
+
+                # The scenario is the single most defect-prone artefact in the
+                # pipeline: it silently lost events to exact tip-set matching,
+                # and later began a group with a DESCENDANT instead of its
+                # transition node because the two trees disagreed on the root.
+                # Both failures produced a well-formed file, so verify against
+                # the tree rather than trusting the string.
+                # load_events puts the transition node's tipset first in each
+                # event, which is the invariant PCOC's -m format depends on.
+                transition_ids = set()
+                for _k, nodes in events.items():
+                    if not nodes:
+                        continue
+                    pid = tipset_to_pcoc.get(nodes[0] & gene_tips)
+                    if pid is not None:
+                        transition_ids.add(pid)
+                if scenario.strip() and transition_ids:
+                    check_scenario_against_tree(
+                        scenario, set(pcoc_map), transition_ids,
+                        expected_branches=None,
+                        context=f"{gene} [{model}/{direction}]")
 
                 with open(os.path.join(out_dir, f"{gene}.scenario"), "w") as f:
                     f.write(scenario + "\n")

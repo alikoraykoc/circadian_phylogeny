@@ -20,8 +20,12 @@ the rooting bug (PROGRESS_REPORT.md 0A.9), where tip-set matching silently
 failed because two trees disagreed about what a clade was.
 """
 import os
+import sys
 import csv
 from ete3 import Tree
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lib_checks import check_no_fallbacks, check_same_taxa
 
 PROJ = os.environ.get("PROJ", os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 RES = os.path.join(PROJ, "results")
@@ -117,11 +121,16 @@ for gene in GENES:
     # reader, and for any other tool pointed at these files.
     t.write(outfile=tree_out, format=8, format_root_node=True)
 
-    # A non-zero fallback count means some internal node could not be matched to
-    # any corHMM node and was labelled by majority rule instead. That is a
-    # warning, not a routine outcome: it is how the rooting bug hid for so long.
-    flag = f"  WARNING: {fallback} nodes labelled by majority-rule fallback" if fallback else ""
-    print(f"{gene}: {ntaxa} taxa, {nsites} sites{flag}")
+    # The fallback must not fire. Under the rooting bug it fired routinely and
+    # silently, mislabelling 7 internal nodes per gene and overcounting diurnal
+    # ancestors by a third, which corrupted every TDG09 result without any
+    # outward sign. It now raises.
+    #
+    # If a future gene trips this, the fix is to investigate that clade (most
+    # likely genuine taxon loss leaving a gene-tree clade with no species-tree
+    # counterpart), NOT to soften this back to a warning.
+    check_no_fallbacks(fallback, f"{gene}: internal node labelling")
+    print(f"{gene}: {ntaxa} taxa, {nsites} sites")
 
 # Write groups file
 with open(os.path.join(out_dir, "groups.txt"), "w") as f:

@@ -39,8 +39,12 @@ import csv
 import glob
 import json
 import os
+import sys
 
 import plotly.graph_objects as go
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lib_checks import check_coordinate_map, check_parsed_rows
 
 PROJ = os.environ.get("PROJ", os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 RES = os.path.join(PROJ, "results")
@@ -93,11 +97,19 @@ def load_pcoc(gene):
 
 
 def load_tdg09(gene):
-    """{trimmed_col: FDR} from the FullResults block, NOT the # Result lines."""
+    """({trimmed_col: FDR}, n_rows_seen) from FullResults, NOT the # Result lines.
+
+    n_rows_seen counts EVERY row in the block, including the NA rows for
+    invariant sites that cannot be tested. That is the number to validate
+    against the alignment length: the tested subset is legitimately smaller
+    (CLOCK tests 177 of 841), so comparing the retained count would raise on
+    correct output. What must not happen is the block being short, which is the
+    signature of having parsed the progress log instead.
+    """
     p = os.path.join(RES, "tdg09", f"{gene}.tdg09.out")
     if not os.path.exists(p):
-        return {}
-    out, inblock = {}, False
+        return {}, 0
+    out, inblock, seen = {}, False, 0
     for line in open(p):
         if line.startswith("FullResults:"):
             inblock = True
@@ -105,6 +117,7 @@ def load_tdg09(gene):
         if not inblock:
             continue
         if line.startswith("- ["):
+            seen += 1
             parts = [x.strip() for x in line.strip()[3:-1].split(",")]
             if len(parts) < 2 or parts[-1] == "NA":
                 continue
@@ -114,7 +127,7 @@ def load_tdg09(gene):
                 continue
         elif line.strip() and not line.startswith("#"):
             break
-    return out
+    return out, seen
 
 
 def load_contrastfel(gene):
@@ -182,11 +195,31 @@ def main():
     tallies = []
     for g in GENES:
         pcoc = load_pcoc(g)
-        tdg = load_tdg09(g)
+        tdg, tdg_rows = load_tdg09(g)
         cfel = load_contrastfel(g)
         t2u = trimmed_to_untrimmed(g)
         c2u = codon_to_untrimmed(g)
         u2r = untrimmed_to_ref(g)
+
+        # Validate the coordinate chain before using it. A map that quietly
+        # loses keys yields a results table with sites simply missing, which is
+        # indistinguishable from a negative result. This script previously had
+        # no checks at all on any of these three frames.
+        aln = os.path.join(PROJ, "data", "alignments", f"{g}_aligned.fa")
+        untrimmed_len = 0
+        if os.path.exists(aln):
+            untrimmed_len = len(next(iter(read_fasta(aln).values())))
+        if t2u and untrimmed_len:
+            check_coordinate_map(t2u, len(pcoc) or None, untrimmed_len,
+                                 f"{g}: trimmed -> untrimmed")
+        if c2u and untrimmed_len:
+            check_coordinate_map(c2u, None, untrimmed_len,
+                                 f"{g}: codon site -> untrimmed")
+        # TDG09 declares its own site count; if the parser read the progress log
+        # instead of FullResults it comes back short and silent.
+        if tdg_rows and pcoc:
+            check_parsed_rows(tdg_rows, len(pcoc),
+                              f"{g}: TDG09 FullResults rows vs alignment columns")
 
         # everything keyed on untrimmed column
         by_untrimmed = {}
@@ -219,6 +252,7 @@ def main():
                              **hits, n_methods=n, high_confidence=n >= MIN_METHODS))
         tallies.append(dict(gene=g,
                             pcoc_sites=sum(1 for v in pcoc.values() if v >= PCOC_THRESHOLD),
+                            tdg09_tested=len(tdg),
                             tdg09_sites=sum(1 for v in tdg.values() if v <= FDR_THRESHOLD),
                             contrastfel_sites=sum(1 for v in cfel.values() if v <= FDR_THRESHOLD),
                             mapped_positions=len(by_untrimmed)))

@@ -36,6 +36,9 @@ import sys
 
 from ete3 import Tree
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lib_checks import PipelineCheckError, check_same_rooting, check_same_taxa
+
 PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TREES = os.path.join(PROJ, "results", "branchlengths", "pcoc")
 SPTREE = os.path.join(PROJ, "data", "species_tree.nwk")
@@ -86,8 +89,17 @@ def main():
                 continue
             target = t.get_common_ancestor(list(here))
 
+        tips_before = set(t.get_leaf_names())
         t.set_outgroup(target)
         after = sorted(len(c) for c in t.children)
+
+        # Re-rooting must move the root and nothing else. ete3's set_outgroup
+        # rearranges the topology around the new root, so verify the taxon set
+        # survived and that the result now agrees with the species tree, which
+        # is the whole point of doing this.
+        check_same_taxa(t.get_leaf_names(), tips_before,
+                        f"{g}: after re-rooting", "re-rooted", "original")
+        check_same_rooting(t, Tree(SPTREE, format=1), f"{g}: after re-rooting")
 
         if not CHECK:
             backup = path + ".unrooted"
