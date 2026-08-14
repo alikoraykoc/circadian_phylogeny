@@ -1,12 +1,17 @@
 # Circadian Gene Convergent Evolution Analysis: Progress Report
 
-**Date**: 2026-08-13 (updated; earlier passes 2026-07-14 and 2026-07-07)
-**Status**: Steps 00-08, 10, 11 complete. PCOC power calibration complete (all 18 genes). Step 09 (PCOC) primary run (ER / gains
-of diurnality) complete and returning a null. The 2026-08-13 session was devoted
-to establishing whether that null is real, using a power calibration and three
-independent cross-checks. Three sensitivity sweeps remain scaffolded but unrun.
-CDS and codon alignments have arrived, so the selection track is no longer
-blocked. Read the update logs below, newest first, before the older sections.
+**Date**: 2026-08-14 (updated; earlier passes 2026-07-14 and 2026-07-07)
+**Status**: Steps 00-09, 11, 12 complete. The PCOC primary run (ER / gains of
+diurnality) returns a null, its power calibration is complete for all 18 genes,
+and the selection track has now run for the first time. A fifth defect, unrooted
+per-gene trees, was found and fixed on 2026-08-13 (see 0A.9); everything keyed to
+scenario node ids was re-run and the null held.
+
+Still open: the three PCOC sensitivity sweeps (ER_reversal, ARD_gain,
+ARD_reversal), the TDG09 re-run on the corrected reconstruction (section 6 is
+SUPERSEDED), and step 13 consensus.
+
+Read the update logs below, newest first, before the older sections.
 
 ---
 
@@ -14,7 +19,12 @@ blocked. Read the update logs below, newest first, before the older sections.
 
 The 2026-07-14 session fixed the pipeline and produced a null. A null is not a
 result until the design is shown capable of detecting a signal, so this session
-tested exactly that, from four directions. **The null survived all four.**
+tested exactly that, from several independent directions, and ran the selection
+track for the first time. **The null survived every one of them.**
+
+It also turned up a fifth defect in the primary analysis (0A.9) and one apparent
+positive result that did not replicate (0A.6b). Both are documented in full,
+because each is the kind of thing that would otherwise reach a manuscript.
 
 Nothing in this section changes the pipeline's conclusions from 0.3; it changes
 how much weight they can carry.
@@ -26,10 +36,12 @@ gains of diurnality, in any of the 18 circadian genes.
 
 | line of evidence | assumes | result |
 |---|---|---|
-| PCOC posteriors (step 09) | profile-shift model, **all 10 lineages converging** | 0 of 11,727 sites; max posterior 0.30 |
+| PCOC posteriors (step 09) | profile-shift model, **all 10 lineages converging** | 0 of 11,727 sites; max posterior 0.098 |
 | `pcoc_sim` power calibration | same model | power 1.000, FPR 0.0000 |
 | model-free residue screen | nothing | at the null in all 18 genes |
-| parsimony substitution count | nothing | same-residue rate at the null, pooled |
+| parsimony substitution count | nothing | same-residue rate at the null, pooled (0.330 vs 0.364) |
+| Contrast-FEL (step 12) | codon model | 0 of 15,349 sites with different dN/dS |
+| RERconverge (step 11) | rate model | no gene significant, all adjusted p > 0.67 |
 
 **Read the PCOC line narrowly.** Per 0A.5b, the step 09 sweep is only sensitive
 to convergence shared by nearly all 10 diurnal lineages: power is 0.000 at 2 or 3
@@ -53,26 +65,29 @@ default of 0 (`pcoc_sim.py:496`; the deletion happens in
 `events_placing.py:placeNTransitionsInTree`). A pilot run silently calibrated on
 7 of the 10 real events. `run_pcoc_sim.sh` now passes `-c` equal to the gene's
 real event count, verified by diffing the simulated annotated tree against the
-scenario node by node (10 transitions, 52 branches, exact match).
+scenario node by node (10 transitions, 55 branches after the 0A.9 rooting fix,
+exact match).
 
 Sweep COMPLETE, all 18 genes, 10 profile couples each, 100 simulated convergent
-sites and 100 null sites per couple:
+sites and 100 null sites per couple. Numbers below are the RE-RUN on the
+rooting-corrected scenarios (0A.9); the pre-fix run is superseded.
 
 | threshold | worst-gene FPR | worst-gene power | mean power |
 |---|---|---|---|
-| 0.70 | 0.0000 | 0.997 | 1.000 |
-| 0.80 | 0.0000 | 0.997 | 1.000 |
-| 0.85 | 0.0000 | 0.997 | 1.000 |
-| 0.90 | 0.0000 | 0.997 | 1.000 |
-| 0.95 | 0.0000 | 0.997 | 1.000 |
-| 0.99 | 0.0000 | 0.997 | 1.000 |
+| 0.70 | 0.0000 | 1.000 | 1.000 |
+| 0.80 | 0.0000 | 1.000 | 1.000 |
+| 0.85 | 0.0000 | 1.000 | 1.000 |
+| 0.90 | 0.0000 | 1.000 | 1.000 |
+| 0.95 | 0.0000 | 1.000 | 1.000 |
+| 0.99 | 0.0000 | 1.000 | 1.000 |
 
-17 of 18 genes score power exactly 1.000 with every profile couple. PER2 is the
-only exception at 0.997 (worst couple 0.970). FPR is 0.0000 everywhere. ARNTL
-and CSNK1D, the two genes with the least evolutionary opportunity (0A.5), score
-1.000 like the rest, which is precisely the OneChange caveat below in action:
-the simulation guarantees the substitution those genes would rarely get in
-reality.
+All 18 genes score power exactly 1.000 with every profile couple, and FPR is
+0.0000 everywhere. (On the pre-fix scenarios PER2 was the sole exception at
+0.997, so the corrected scenarios calibrate marginally better as well as
+producing lower posteriors on the real data.) ARNTL and CSNK1D, the two genes
+with the least evolutionary opportunity (0A.5), score 1.000 like the rest, which
+is precisely the OneChange caveat below in action: the simulation guarantees the
+substitution those genes would rarely get in reality.
 
 Figure: `results/figures/pcoc_sim_power_ER_gain.pdf`.
 Tables: `results/pcoc_sim/ER_gain/summary_by_gene.csv`,
@@ -83,7 +98,7 @@ range, the calibration does NOT identify a threshold. `summarize_pcoc_sim.py`
 says so explicitly and takes the strictest value (0.99) on the grounds that it
 costs no power; it does not return the most permissive value that technically
 meets the FPR budget. This is moot for the current result, since the highest
-posterior observed anywhere in the real data is 0.30.
+posterior observed anywhere in the real data is 0.098.
 
 **Important limitation.** `pcoc_sim` builds the convergent shift with Bio++'s
 `OneChange` model on every transition branch
@@ -137,9 +152,10 @@ Conditioned, the excess disappears completely:
 | CLOCK | 0.085 | 0.538 |
 | NPAS2 | 0.129 | 0.194 |
 
-**Pooled across all 18 genes: 639 sites changed in 2 or more independent diurnal
-lineages; 206 of those changed to the same residue. Rate 0.322 observed against
-0.336 null. No excess.** No gene has a rate-conditioned p below 0.129.
+**Pooled across all 18 genes: 645 sites changed in 2 or more independent diurnal
+lineages; 213 of those changed to the same residue. Rate 0.330 observed against
+0.364 null. No excess.** (Numbers are the re-run on rooting-corrected scenarios,
+0A.9; pre-fix they were 639, 206, 0.322 against 0.336, i.e. the same conclusion.) No gene has a rate-conditioned p below 0.129.
 
 This is the single most informative negative in the report, because it counts
 what actually happened rather than fitting a model to it.
@@ -304,6 +320,60 @@ of a positive result on identical inputs is what caught it.
 `scripts/12_selection_hyphy.sh` now runs Contrast-FEL to completion first and
 RELAX second as best effort, with up to 3 attempts per gene and per-attempt logs,
 so a gene that only succeeds sometimes stays visible.
+
+### 0A.9 Rooting bug, and the re-run it forced
+
+Found while building the selection track, on 2026-08-13. **A fifth defect, in the
+primary analysis.**
+
+CLAUDE.md states the invariant plainly: "Re-root each per-gene tree to the Upham
+rooting before scenario building." It was never implemented.
+`05_branchlengths_fixed.sh` merely echoed a reminder, so the trees were used as
+IQ-TREE emitted them: unrooted, with a trifurcating basal node (children 1, 1, 58)
+against the species tree's 6, 54.
+
+Scenario building matches species-tree clades onto gene trees by descendant tip
+set, and that is not preserved under a different rooting. In EVERY gene:
+
+- 3 of the 55 gain branches failed to match, and
+- one of the three was the transition node of event 1, the largest gain event
+  (24 of the 55 branches), so each scenario group began with a descendant rather
+  than the transition branch PCOC requires.
+
+`prep_pcoc_scenarios.py` carried a comment asserting this could not happen, that
+the transition node "cannot be dropped while a descendant survives". That holds
+only if both trees share a rooting.
+
+**Fixed** by `scripts/reroot_gene_trees.py` (marsupial outgroup, monophyletic in
+all 18 trees, originals kept as `<gene>.treefile.unrooted`), with the re-rooting
+now performed by step 05 rather than described by it. Verified: 55 of 55 branches
+match, and all 175 event groups across the 18 genes begin with their true
+transition node.
+
+**Everything keyed to scenario node ids was re-run.** The result held, and
+improved on every axis:
+
+| | pre-fix | corrected |
+|---|---|---|
+| gain branches declared | 52 of 55 | 55 of 55 |
+| event groups with wrong transition node | 18 | 0 |
+| PCOC sites at or above 0.80 | 0 | 0 |
+| highest PCOC posterior anywhere | 0.3011 (RORB) | **0.0979** (RORB) |
+| genes at calibration power 1.000 | 17 of 18 | **18 of 18** |
+| parsimony same-residue rate | 0.322 vs null 0.336 | 0.330 vs null 0.364 |
+
+The RORB posterior that section 0A.1 previously called the dataset maximum, and
+attributed to an edge artifact, drops by two thirds once its transition branch is
+correctly placed. 15 of 18 genes now return exactly 0.0000.
+
+This matters beyond bookkeeping. Section 0A.5b established that misspecifying
+WHICH branches converged is the single thing that destroys PCOC's power, so a
+misassigned transition branch on the largest event was the most plausible
+remaining way for a real signal to have been suppressed. It was not suppressing
+one.
+
+`model_free_convergence_screen.py` was unaffected throughout; it uses only tip
+states and the tree.
 
 ### 0A.7 Biological reading
 

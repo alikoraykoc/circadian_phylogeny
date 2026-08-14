@@ -2,21 +2,21 @@ PCOC posterior threshold calibration, set ER_gain
 FPR budget: 0.001
 
    thr  worst_gene_FPR  min_gene_power  mean_power
-  0.70          0.0000           0.997       1.000
-  0.80          0.0000           0.997       1.000
-  0.85          0.0000           0.997       1.000
-  0.90          0.0000           0.997       1.000
-  0.95          0.0000           0.997       1.000
-  0.99          0.0000           0.997       1.000  <== chosen
+  0.70          0.0000           1.000       1.000
+  0.80          0.0000           1.000       1.000
+  0.85          0.0000           1.000       1.000
+  0.90          0.0000           1.000       1.000
+  0.95          0.0000           1.000       1.000
+  0.99          0.0000           1.000       1.000  <== chosen
 
 CHOSEN_THRESHOLD=0.99
 basis: power and FPR are saturated across the whole tested range, so the calibration does not identify a threshold; the strictest value is taken because it costs no power
 
 Per-gene power at the chosen threshold:
-  PER2       power=0.997 (worst couple 0.970)  FPR=0.0000  events=10
   ARNTL      power=1.000 (worst couple 1.000)  FPR=0.0000  events=10
   RORA       power=1.000 (worst couple 1.000)  FPR=0.0000  events=9
   PER3       power=1.000 (worst couple 1.000)  FPR=0.0000  events=8
+  PER2       power=1.000 (worst couple 1.000)  FPR=0.0000  events=10
   PER1       power=1.000 (worst couple 1.000)  FPR=0.0000  events=10
   NR1D2      power=1.000 (worst couple 1.000)  FPR=0.0000  events=10
   NR1D1      power=1.000 (worst couple 1.000)  FPR=0.0000  events=10
