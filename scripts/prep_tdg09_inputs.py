@@ -3,8 +3,21 @@
 Prepare TDG09 inputs: prefix-labelled PHYLIP alignments and trees with
 pre-labelled internal nodes. TDG09 determines groups by a two-letter prefix
 on each sequence/tip name, and also reads internal node labels if present.
-We use 'Di' for diurnal and 'No' for nocturnal, and label internal nodes
-using the MAP ancestral states from corHMM (step 07).
+We use 'Di' for diurnal and 'No' for nocturnal.
+
+Internal node states come straight from corHMM's marginal reconstruction, via
+the tip-set table `results/scenario/node_tipsets_ER.csv` written by step 07.
+
+The previous version re-derived them instead, by starting at an assumed
+nocturnal root and flipping state at every branch listed in
+transition_branches.csv. That was fragile in two ways. It rebuilt a hand-rolled
+ape node numbering (assuming ete3's leaf order matches ape's tip order, which is
+not guaranteed) and it propagated any single error in the transition list
+through the whole subtree below it. Reading the states directly removes both,
+and matching by DESCENDANT TIP SET rather than node id makes the lookup
+invariant to numbering and to per-gene pruning. That is the same defect class as
+the rooting bug (PROGRESS_REPORT.md 0A.9), where tip-set matching silently
+failed because two trees disagreed about what a clade was.
 """
 import os
 import csv
@@ -21,70 +34,16 @@ with open(os.path.join(PROJ, "data", "diel_activity.csv")) as f:
         prefix = "Di" if row["activity"] == "diurnal" else "No"
         diel[row["species"]] = prefix
 
-# Load transition branches to reconstruct internal node states
-# We rebuild ancestral states: start from root (nocturnal = ancestral),
-# then flip at each transition branch
-trans_csv = os.path.join(RES, "scenario", "transition_branches.csv")
-transitions = set()
-with open(trans_csv) as f:
+# corHMM's marginal ancestral states, keyed by descendant tip set.
+# Written by 07_scenario.R; see this module's docstring for why the states are
+# read rather than re-derived by flipping at transitions.
+tipset_state = {}
+with open(os.path.join(RES, "scenario", "node_tipsets_ER.csv")) as f:
     for row in csv.DictReader(f):
-        transitions.add(int(row["child"]))
+        tips = frozenset(t for t in row["tips"].split(";") if t)
+        tipset_state[tips] = "Di" if row["state"] == "diurnal" else "No"
 
-# Build ape-style node states on the species tree
 sptree = Tree(os.path.join(PROJ, "data", "species_tree.nwk"), format=1)
-tip_order = [l.name for l in sptree.get_leaves()]
-ntip = len(tip_order)
-
-# Assign ape-style IDs
-ape_id_map = {}  # ete3 node id -> ape id
-for i, name in enumerate(tip_order):
-    for leaf in sptree.get_leaves():
-        if leaf.name == name:
-            ape_id_map[id(leaf)] = i + 1
-            break
-
-counter = ntip + 1
-ape_id_map[id(sptree)] = counter
-counter += 1
-for node in sptree.traverse("preorder"):
-    if node.is_leaf():
-        continue
-    if id(node) not in ape_id_map:
-        ape_id_map[id(node)] = counter
-        counter += 1
-
-# Propagate states: root is nocturnal (0), transitions flip
-# state 1 = nocturnal (corHMM coding: 0+1=1), state 2 = diurnal (1+1=2)
-# In our binary: 0 = nocturnal, 1 = diurnal
-node_state = {}  # ape_id -> "Di" or "No"
-
-# First set tip states
-for leaf in sptree.get_leaves():
-    ape_id = ape_id_map[id(leaf)]
-    node_state[ape_id] = diel.get(leaf.name, "No")
-
-# For internal nodes, reconstruct from transitions
-# Root is nocturnal (ancestral state)
-def assign_states(node, parent_state):
-    ape_id = ape_id_map[id(node)]
-    if ape_id in transitions:
-        # Flip state
-        current = "Di" if parent_state == "No" else "No"
-    else:
-        current = parent_state
-    if not node.is_leaf():
-        node_state[ape_id] = current
-        for child in node.children:
-            assign_states(child, current)
-
-assign_states(sptree, "No")  # root = nocturnal
-
-# Build reverse map: ete3 node -> state
-ete_node_state = {}
-for node in sptree.traverse():
-    ape_id = ape_id_map[id(node)]
-    if ape_id in node_state:
-        ete_node_state[id(node)] = node_state[ape_id]
 
 out_dir = os.path.join(RES, "tdg09", "inputs")
 os.makedirs(out_dir, exist_ok=True)
@@ -119,40 +78,45 @@ for gene in GENES:
     tree_path = os.path.join(RES, "branchlengths", "pcoc", f"{gene}.treefile")
     t = Tree(tree_path, format=1)
 
-    # Map species tree internal node states onto gene tree by descendant tip matching
-    sp_bip_state = {}
-    for node in sptree.traverse():
-        if node.is_leaf():
-            continue
-        tips = frozenset(l.name for l in node.get_leaves())
-        ape_id = ape_id_map[id(node)]
-        if ape_id in node_state:
-            sp_bip_state[tips] = node_state[ape_id]
-
     # Prefix tip labels
     for leaf in t.get_leaves():
         prefix = diel.get(leaf.name, "No")
         leaf.name = f"{prefix}_{leaf.name}"
 
-    # Label internal nodes by matching bipartitions
     gene_tips_orig = {l.name.split("_", 1)[1] for l in t.get_leaves()}
+
+    # Label internal nodes from the corHMM states, matched by descendant tip set.
+    # The gene trees are now re-rooted to the Upham rooting (0A.9), so a clade
+    # here is the same clade there and the exact lookup succeeds; before that fix
+    # it silently fell through to the majority-rule fallback below.
+    fallback = 0
     for node in t.traverse():
         if node.is_leaf():
             continue
-        desc_tips = frozenset(l.name.split("_", 1)[1] for l in node.get_leaves())
-        state = sp_bip_state.get(desc_tips)
-        if state:
-            node.name = state
-        else:
-            # Fallback: majority rule from descendant tips
-            di_count = sum(1 for l in node.get_leaves() if l.name.startswith("Di_"))
-            node.name = "Di" if di_count > len(list(node.get_leaves())) / 2 else "No"
+        desc = frozenset(l.name.split("_", 1)[1] for l in node.get_leaves())
+        state = tipset_state.get(desc)
+        if state is None:
+            # The node is not a species-tree clade in its own right, which
+            # happens when a gene is missing taxa. Fall back to the smallest
+            # species-tree clade containing exactly these tips.
+            cand = [(s, st) for s, st in tipset_state.items()
+                    if (s & set(gene_tips_orig)) == desc]
+            state = min(cand, key=lambda x: len(x[0]))[1] if cand else None
+        if state is None:
+            di = sum(1 for l in node.get_leaves() if l.name.startswith("Di_"))
+            state = "Di" if di > len(node) / 2 else "No"
+            fallback += 1
+        node.name = state
 
     # Write tree with internal node labels (format=8: all names, all distances)
     tree_out = os.path.join(out_dir, f"{gene}.tree")
     t.write(outfile=tree_out, format=8)
 
-    print(f"{gene}: {ntaxa} taxa, {nsites} sites")
+    # A non-zero fallback count means some internal node could not be matched to
+    # any corHMM node and was labelled by majority rule instead. That is a
+    # warning, not a routine outcome: it is how the rooting bug hid for so long.
+    flag = f"  WARNING: {fallback} nodes labelled by majority-rule fallback" if fallback else ""
+    print(f"{gene}: {ntaxa} taxa, {nsites} sites{flag}")
 
 # Write groups file
 with open(os.path.join(out_dir, "groups.txt"), "w") as f:
