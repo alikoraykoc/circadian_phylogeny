@@ -71,10 +71,10 @@ from collections import defaultdict
 from ete3 import Tree
 
 PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TRIM = os.path.join(PROJ, "results", "trim")
+TRIM = os.environ.get("TRIM_DIR", os.path.join(PROJ, "results", "trim"))
 TREES = os.path.join(PROJ, "results", "branchlengths", "pcoc")
 SCEN = os.path.join(PROJ, "results", "pcoc", "scenarios", "ER_gain")
-OUT = os.path.join(PROJ, "results", "pcoc_sim")
+OUT = os.environ.get("OUT_DIR", os.path.join(PROJ, "results", "pcoc_sim"))
 
 GENES = ("CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 "
          "RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41").split()

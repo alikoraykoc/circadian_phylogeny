@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Nocturnal Bottleneck Test</title>
+<style>
+  :root {
+    --paper:   #F5F6F4;
+    --surface: #FFFFFF;
+    --ink:     #1A1F24;
+    --muted:   #6A7280;
+    --rule:    #DFE2DE;
+    --day:     #A8751A;
+    --night:   #3B5B7A;
+    --warn-bg: #FBF1E8;
+    --warn-br: #C98A4B;
+    --good-br: #5F7D4F;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #12161B; --surface: #1A1F26; --ink: #E4E7EA; --muted: #97A0AA;
+      --rule: #2A313A; --day: #D9A441; --night: #7FA8CE;
+      --warn-bg: #241B12; --warn-br: #A9713A; --good-br: #7E9C6C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161B; --surface: #1A1F26; --ink: #E4E7EA; --muted: #97A0AA;
+    --rule: #2A313A; --day: #D9A441; --night: #7FA8CE;
+    --warn-bg: #241B12; --warn-br: #A9713A; --good-br: #7E9C6C;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    font-size: 18px; line-height: 1.62; margin: 0; padding: 0 1.5rem 6rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 40rem; margin: 0 auto; }
+
+  header { padding: 4.5rem 0 2.5rem; border-bottom: 1px solid var(--rule); margin-bottom: 2rem; }
+  .eyebrow, .label, th, figcaption, nav, .glossary dt small {
+    font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  }
+  .eyebrow { font-size: .72rem; letter-spacing: .13em; text-transform: uppercase;
+             color: var(--muted); margin: 0 0 1.1rem; }
+  h1 { font-size: clamp(2.1rem, 5.5vw, 3rem); line-height: 1.1; font-weight: 600;
+       margin: 0 0 1.2rem; text-wrap: balance; letter-spacing: -.015em; }
+  .standfirst { font-size: 1.18rem; color: var(--muted); margin: 0; text-wrap: pretty; }
+
+  nav { background: var(--surface); border: 1px solid var(--rule); padding: 1.2rem 1.4rem;
+        margin: 0 0 3rem; font-size: .88rem; }
+  nav p { margin: 0 0 .6rem; font-size: .7rem; letter-spacing: .12em;
+          text-transform: uppercase; color: var(--muted); }
+  nav ol { margin: 0; padding-left: 1.2rem; columns: 2; column-gap: 2rem; }
+  nav li { margin-bottom: .3rem; break-inside: avoid; }
+  nav a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  nav a:hover, nav a:focus { border-bottom-color: var(--day); }
+
+  h2 { font-size: 1.6rem; font-weight: 600; line-height: 1.2; margin: 3.5rem 0 1rem;
+       text-wrap: balance; letter-spacing: -.01em; scroll-margin-top: 1rem; }
+  h3 { font-size: 1.12rem; font-weight: 600; margin: 2.2rem 0 .6rem; text-wrap: balance; }
+  p { margin: 0 0 1.15rem; }
+  ul, ol { margin: 0 0 1.15rem; padding-left: 1.3rem; }
+  li { margin-bottom: .5rem; }
+  a { color: var(--night); }
+  code, .gene, .n {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .87em;
+  }
+  .lead-in::first-letter { float: left; font-size: 3.4rem; line-height: .82;
+    padding: .1rem .5rem .2rem 0; color: var(--night); font-weight: 600; }
+  .day { color: var(--day); font-weight: 600; }
+  .night { color: var(--night); font-weight: 600; }
+
+  .callout { background: var(--surface); border: 1px solid var(--rule);
+             border-left: 3px solid var(--night); padding: 1.4rem 1.5rem;
+             margin: 2rem 0; font-size: .97rem; }
+  .callout.finding { border-left-color: var(--day); }
+  .callout.caution { border-left-color: var(--warn-br); background: var(--warn-bg); }
+  .callout.good    { border-left-color: var(--good-br); }
+  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+  .label { display: block; font-size: .7rem; letter-spacing: .12em;
+           text-transform: uppercase; color: var(--muted); margin-bottom: .55rem; }
+
+  .tablewrap { overflow-x: auto; margin: 1.6rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { text-align: left; padding: .5rem .75rem .5rem 0; border-bottom: 1px solid var(--rule);
+           vertical-align: top; }
+  th { font-weight: 600; font-size: .7rem; letter-spacing: .09em; text-transform: uppercase;
+       color: var(--muted); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:hover { background: var(--surface); }
+
+  figure { margin: 2.5rem 0; }
+  figcaption { font-size: .8rem; color: var(--muted); margin-top: .9rem; line-height: 1.5; }
+  svg { display: block; width: 100%; height: auto; }
+
+  .glossary { background: var(--surface); border: 1px solid var(--rule);
+              padding: 1.5rem 1.6rem; margin: 2rem 0; }
+  .glossary dt { font-weight: 600; margin-top: 1.1rem; font-size: .99rem; }
+  .glossary dt:first-of-type { margin-top: 0; }
+  .glossary dd { margin: .25rem 0 0; color: var(--muted); font-size: .93rem; }
+
+  footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);
+           color: var(--muted); font-size: .85rem; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Circadian genes &middot; 60 mammals &middot; Analysis summary</p>
+  <h1>Did the clock change when mammals moved into daylight?</h1>
+  <p class="standfirst">A detailed account for biologists: what we asked, how each method
+  works, what the numbers actually say, and how far they can currently be trusted.</p>
+</header>
+
+<nav>
+  <p>Contents</p>
+  <ol>
+    <li><a href="#question">The biological question</a></li>
+    <li><a href="#clock">How the clock works</a></li>
+    <li><a href="#convergence">What convergence means here</a></li>
+    <li><a href="#data">The data</a></li>
+    <li><a href="#asr">Finding the transitions</a></li>
+    <li><a href="#methods">The six methods</a></li>
+    <li><a href="#results">Results, gene by gene</a></li>
+    <li><a href="#tdg09">The method that disagreed</a></li>
+    <li><a href="#trust">How far to trust this</a></li>
+    <li><a href="#bugs">Ten defects</a></li>
+    <li><a href="#meaning">What it means</a></li>
+    <li><a href="#untested">What is untested</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ol>
+</nav>
+
+<h2 id="question">The biological question</h2>
+
+<p class="lead-in">Mammals spent their first hundred million years in the dark. While
+dinosaurs occupied the daytime, early mammals were small and night-active, and that long
+confinement left permanent marks: a rod-dominated retina, the loss of two of the four
+ancestral cone opsins, elaborate whiskers, acute hearing, and a poor sense of colour
+relative to birds and reptiles. This is the <em>nocturnal bottleneck</em> hypothesis
+(Maor et al. 2017).</p>
+
+<p>After the end-Cretaceous extinction, some lineages moved into daytime niches. Primates
+did. Ground squirrels did. Antelope, meerkats, cheetahs and diurnal rodents did. Crucially
+they did it <strong>separately</strong>, each from a night-active ancestor, at different
+times and on different continents.</p>
+
+<p>That is a natural replicated experiment, and it is the experiment this project
+interrogates. If a shift to daytime activity requires particular changes in the circadian
+machinery, then lineages that made the shift independently should show those changes
+independently. Nature would have run the same trial ten times.</p>
+
+<div class="callout">
+  <span class="label">The question, stated precisely</span>
+  <p>Across ten independent origins of day-activity in mammals, do the same amino acid
+  positions in the same circadian genes change to the same residues?</p>
+</div>
+
+<h2 id="clock">How the mammalian clock works, briefly</h2>
+
+<p>The eighteen genes tested are not an arbitrary panel. They constitute the core
+transcription-translation feedback loop that generates roughly 24-hour rhythms in nearly
+every mammalian cell.</p>
+
+<p>The positive arm is a heterodimer of <span class="gene">CLOCK</span> (or its paralogue
+<span class="gene">NPAS2</span>) with <span class="gene">ARNTL</span> (BMAL1). This complex
+binds E-box elements and drives transcription. Among its targets are the genes of the
+negative arm, the Period family (<span class="gene">PER1</span>,
+<span class="gene">PER2</span>, <span class="gene">PER3</span>) and the Cryptochromes
+(<span class="gene">CRY1</span>, <span class="gene">CRY2</span>). PER and CRY proteins
+accumulate, dimerise, re-enter the nucleus and shut down the very complex that produced
+them. As they are degraded, repression lifts and the cycle restarts.</p>
+
+<p>Three accessory sets tune that loop, and all are included here because a change in
+period or phase could plausibly arise in any of them:</p>
+
+<ul>
+  <li><strong>Stabilising loop:</strong> <span class="gene">NR1D1</span> and
+  <span class="gene">NR1D2</span> (REV-ERB&alpha;/&beta;) repress
+  <span class="gene">ARNTL</span>, while <span class="gene">RORA</span>,
+  <span class="gene">RORB</span> and <span class="gene">RORC</span> activate it. Together
+  they set the amplitude and stability of the oscillation.</li>
+  <li><strong>Post-translational timing:</strong> <span class="gene">CSNK1D</span> and
+  <span class="gene">CSNK1E</span> phosphorylate PER proteins and thereby set how fast they
+  are degraded. These are the classic period-length genes; the <em>tau</em> mutation in
+  hamsters sits in <span class="gene">CSNK1E</span>. <span class="gene">FBXL3</span>
+  targets CRY for degradation and does the same job on the other side.</li>
+  <li><strong>Output and light response:</strong> <span class="gene">BHLHE40</span> and
+  <span class="gene">BHLHE41</span> (DEC1/DEC2) are light-inducible repressors involved in
+  resetting the clock after a light pulse.</li>
+</ul>
+
+<p>If day-activity required a faster clock, a phase shift, or a different light-resetting
+response, the post-translational timing genes and the light-response genes are where one
+would most expect to see it. That expectation is testable and is one reason the panel spans
+all four functional modules rather than the core loop alone.</p>
+
+<h2 id="convergence">What convergence means here</h2>
+
+<p>The word is used loosely in the literature, and the whole analysis turns on being precise
+about it.</p>
+
+<figure>
+<svg viewBox="0 0 640 250" role="img" aria-label="Two trees contrasting inherited similarity with independent convergent change">
+  <g stroke="currentColor" stroke-width="1.6" fill="none" opacity=".5">
+    <path d="M40 195 L40 65 M40 65 L105 65 M40 130 L105 130 M40 195 L105 195"/>
+    <path d="M335 195 L335 65 M335 65 L400 65 M335 130 L400 130 M335 195 L400 195"/>
+  </g>
+  <text x="20" y="28" font-size="12.5" font-family="ui-sans-serif, system-ui, sans-serif"
+        letter-spacing="1.7" fill="currentColor" opacity=".6">INHERITED, NOT CONVERGENT</text>
+  <circle cx="40" cy="65" r="5.5" fill="var(--day)"/>
+  <text x="115" y="70" font-size="13" fill="currentColor">lineage A <tspan font-family="ui-monospace, Menlo, monospace" fill="var(--day)">V</tspan></text>
+  <text x="115" y="135" font-size="13" fill="currentColor">lineage B <tspan font-family="ui-monospace, Menlo, monospace" fill="var(--day)">V</tspan></text>
+  <text x="115" y="200" font-size="13" fill="currentColor">lineage C <tspan font-family="ui-monospace, Menlo, monospace" opacity=".5">L</tspan></text>
+  <text x="20" y="230" font-size="12.5" fill="currentColor" opacity=".7">One change, in a shared ancestor.</text>
+
+  <text x="315" y="28" font-size="12.5" font-family="ui-sans-serif, system-ui, sans-serif"
+        letter-spacing="1.7" fill="var(--day)">CONVERGENT</text>
+  <circle cx="400" cy="65" r="5.5" fill="var(--day)"/>
+  <circle cx="400" cy="195" r="5.5" fill="var(--day)"/>
+  <text x="412" y="70" font-size="13" fill="currentColor">lineage A <tspan font-family="ui-monospace, Menlo, monospace" fill="var(--day)">V</tspan></text>
+  <text x="412" y="135" font-size="13" fill="currentColor">lineage B <tspan font-family="ui-monospace, Menlo, monospace" opacity=".5">L</tspan></text>
+  <text x="412" y="200" font-size="13" fill="currentColor">lineage C <tspan font-family="ui-monospace, Menlo, monospace" fill="var(--day)">V</tspan></text>
+  <text x="315" y="230" font-size="12.5" fill="currentColor" opacity=".7">Two changes, arrived at separately.</text>
+</svg>
+<figcaption>Identical observations at the tips, opposite histories. Only the right-hand
+pattern is evidence that a position matters functionally, and distinguishing the two
+requires the phylogeny. This is why no method here simply compares day-active species
+against night-active ones.</figcaption>
+</figure>
+
+<p>A naive comparison would mostly rediscover relatedness. All primates share thousands of
+residues with each other because they are primates. Since most diurnal mammals in any
+sample are phylogenetically clustered, a test that ignores the tree will report a large,
+entirely spurious signal. Several of the false positives encountered during this project
+were exactly that failure in different disguises.</p>
+
+<h2 id="data">The data</h2>
+
+<ul>
+  <li><strong>60 mammal species</strong>, balanced 30 <span class="day">day-active</span> to
+  30 <span class="night">night-active</span>. The balance is deliberate for statistical
+  power but is not representative: real mammals are predominantly nocturnal, and this
+  matters (see below).</li>
+  <li><strong>18 core clock genes</strong>, protein alignments, one per gene.</li>
+  <li><strong>11,727 aligned amino acid positions</strong> after trimming poorly aligned
+  regions. Each is an independent test.</li>
+  <li><strong>Coding DNA</strong> for all 18 genes, matched by transcript accession and
+  verified to translate exactly to the protein used. Coverage is 32 to 58 species per gene,
+  lower than the protein data.</li>
+  <li><strong>A dated species tree</strong> from Upham et al. 2019, used as a fixed
+  scaffold so all genes share one evolutionary history.</li>
+</ul>
+
+<div class="callout caution">
+  <span class="label">A sampling caveat that already caused an error</span>
+  <p>The 30/30 balance is artificial. When ancestral states were first reconstructed with a
+  model allowing different rates in each direction, it inferred a <strong>day-active</strong>
+  ancestral placental mammal, inverting the premise of the study. The balanced sample had
+  fed the model a false impression of how common day-activity is. The analysis now uses an
+  equal-rates model, which fits better on this data and recovers a night-active ancestor
+  without that assumption being imposed.</p>
+</div>
+
+<h2 id="asr">Finding the ten transitions</h2>
+
+<p>Nobody observed the ancestors, so the branches where activity pattern changed must be
+inferred. This is ancestral state reconstruction, done here with a continuous-time Markov
+model fitted across the whole tree, taking the state at each internal node with the highest
+marginal probability.</p>
+
+<p>The result is <strong>10 independent gains of day-activity</strong> and
+<strong>5 reversions</strong> back to night-activity. Some gains are single species
+(<em>Suricata suricatta</em>, <em>Acinonyx jubatus</em>, <em>Ochotona princeps</em>,
+<em>Octodon degus</em>, <em>Arvicanthis niloticus</em>, <em>Rhynchocyon petersi</em>);
+others are whole radiations, the largest subtending 24 species.</p>
+
+<p>Two consequences follow, and both shape the interpretation:</p>
+
+<ul>
+  <li>Gains and reversions are analysed as <strong>separate</strong> convergent classes.
+  Merging them would be incoherent, since a method fitting a single shared signature cannot
+  accommodate two opposite phenotypic directions at once; they would cancel.</li>
+  <li>The reconstructed transitions are read off the model, never hand-coded from the tips.
+  A single species that is day-active within a night-active clade is a transition on its
+  terminal branch; a day-active radiation is one transition deep in the tree, not many.</li>
+</ul>
+
+<h2 id="methods">The six methods, and how each can fail</h2>
+
+<p>No method is trustworthy alone, so the same question was asked six ways, chosen because
+they fail differently.</p>
+
+<div class="glossary">
+<dl>
+  <dt>PCOC <small>&mdash; profile change on convergent branches</small></dt>
+  <dd>At any position, evolution tolerates only certain amino acids; that set of tolerances
+  is a "profile". PCOC asks whether a position switched from one profile to a different,
+  shared profile on the branches where day-activity arose. <strong>Failure mode:</strong> it
+  fits one shared convergent profile, so it has power only when nearly all ten lineages
+  converge together. Convergence in three of ten is effectively invisible to it.</dd>
+
+  <dt>Direct substitution counting <small>&mdash; parsimony</small></dt>
+  <dd>Reconstruct each ancestor's residue, then count how often two or more day-active
+  lineages independently changed to the same amino acid. No evolutionary model and no rate
+  assumptions. <strong>Failure mode:</strong> the branches where transitions occur are real
+  branches that carry more substitutions of every kind than random branches, which
+  mechanically produces more same-residue coincidences. The test must condition on that.</dd>
+
+  <dt>Residue screen <small>&mdash; model-free</small></dt>
+  <dd>For each column, is there an amino acid much commoner in day-active species than
+  night-active ones? <strong>Failure mode:</strong> phylogenetic clustering. Corrected here
+  by a null that re-places day-active clades of matched size at random on the same tree,
+  preserving the clumping and randomising only the phenotype.</dd>
+
+  <dt>TDG09 <small>&mdash; site-specific fitness shifts</small></dt>
+  <dd>Tests whether amino acid frequencies at a position differ between the two branch sets.
+  <strong>Failure mode:</strong> any position whose residues track taxonomy will differ
+  between the groups without convergence being involved. This turned out to matter enormously
+  (see below).</dd>
+
+  <dt>RERconverge <small>&mdash; relative evolutionary rate</small></dt>
+  <dd>Asks whether whole genes evolve faster or slower in day-active lineages, rather than
+  examining individual positions. <strong>Failure mode:</strong> a gene-level average can
+  hide a handful of important sites.</dd>
+
+  <dt>Contrast-FEL and RELAX <small>&mdash; selection</small></dt>
+  <dd>Ask a genuinely different question: not whether the same residue recurred, but whether
+  the strength or direction of natural selection differs on day-active branches. Selection
+  can shift with no residue repeating at all. <strong>Failure mode:</strong> these need
+  codon data and are sensitive to branches carrying little change.</dd>
+</dl>
+</div>
+
+<h2 id="results">Results, gene by gene</h2>
+
+<div class="callout finding">
+  <span class="label">Headline</span>
+  <p><strong>No convergent amino acid change is associated with the independent origins of
+  day-activity, and no detectable shift in selective pressure either.</strong> Across roughly
+  27,000 position-level tests, five of six methods return nothing. The sixth returns so much
+  that it cannot be believed.</p>
+</div>
+
+<p>The table below is the substance of the result. "Opportunity" counts positions where two
+or more day-active lineages independently changed at all, which is the honest denominator:
+convergence is undefined below two. "Same residue" counts how many of those landed on the
+same amino acid, and the rate is compared against what chance predicts on this tree.</p>
+
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr>
+      <th>Gene</th><th class="n">Sites</th><th class="n">Opportunity</th>
+      <th class="n">Same residue</th><th class="n">Rate</th><th class="n">Chance</th>
+      <th class="n">PCOC max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="gene">ARNTL</td><td class="n">620</td><td class="n">2</td><td class="n">1</td><td class="n">0.50</td><td class="n">0.58</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">BHLHE40</td><td class="n">407</td><td class="n">22</td><td class="n">10</td><td class="n">0.45</td><td class="n">0.39</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">BHLHE41</td><td class="n">582</td><td class="n">8</td><td class="n">3</td><td class="n">0.38</td><td class="n">0.44</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">CLOCK</td><td class="n">841</td><td class="n">27</td><td class="n">9</td><td class="n">0.33</td><td class="n">0.36</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">CRY1</td><td class="n">582</td><td class="n">19</td><td class="n">10</td><td class="n">0.53</td><td class="n">0.50</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">CRY2</td><td class="n">592</td><td class="n">15</td><td class="n">5</td><td class="n">0.33</td><td class="n">0.37</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">CSNK1D</td><td class="n">401</td><td class="n">0</td><td class="n">0</td><td class="n">&mdash;</td><td class="n">0.33</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">CSNK1E</td><td class="n">509</td><td class="n">33</td><td class="n">20</td><td class="n">0.61</td><td class="n">0.57</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">FBXL3</td><td class="n">426</td><td class="n">6</td><td class="n">1</td><td class="n">0.17</td><td class="n">0.33</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">NPAS2</td><td class="n">814</td><td class="n">49</td><td class="n">21</td><td class="n">0.43</td><td class="n">0.39</td><td class="n">0.003</td></tr>
+    <tr><td class="gene">NR1D1</td><td class="n">610</td><td class="n">56</td><td class="n">7</td><td class="n">0.13</td><td class="n">0.13</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">NR1D2</td><td class="n">562</td><td class="n">14</td><td class="n">4</td><td class="n">0.29</td><td class="n">0.33</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">PER1</td><td class="n">1233</td><td class="n">61</td><td class="n">19</td><td class="n">0.31</td><td class="n">0.33</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">PER2</td><td class="n">1208</td><td class="n">191</td><td class="n">58</td><td class="n">0.30</td><td class="n">0.29</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">PER3</td><td class="n">897</td><td class="n">94</td><td class="n">23</td><td class="n">0.24</td><td class="n">0.30</td><td class="n">0.001</td></tr>
+    <tr><td class="gene">RORA</td><td class="n">466</td><td class="n">10</td><td class="n">1</td><td class="n">0.10</td><td class="n">0.63</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">RORB</td><td class="n">459</td><td class="n">5</td><td class="n">3</td><td class="n">0.60</td><td class="n">0.63</td><td class="n">0.000</td></tr>
+    <tr><td class="gene">RORC</td><td class="n">518</td><td class="n">36</td><td class="n">6</td><td class="n">0.17</td><td class="n">0.31</td><td class="n">0.000</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Pooled across all genes: <strong>648 positions</strong> had two or more day-active
+lineages change independently; <strong>201</strong> of those landed on the same residue.
+The observed rate is <strong>0.310</strong> against a chance expectation of
+<strong>0.337</strong>. Marginally below chance, and in no gene meaningfully above it.</p>
+
+<p>PCOC is even starker. Its posterior probability that a site is convergent never exceeds
+<strong>0.098</strong> anywhere in the dataset, against a detection threshold of 0.99.
+Fifteen of eighteen genes return exactly zero at every position.</p>
+
+<h3>Two genes cannot answer the question at all</h3>
+
+<p><span class="gene">CSNK1D</span> shows <strong>zero</strong> positions with even two
+independent changes, and <span class="gene">ARNTL</span> shows two. Their branches carry so
+little evolutionary change that convergence could not have been detected there whatever the
+biology. Their nulls are uninformative rather than negative, and should be reported that
+way.</p>
+
+<h3>Gene-level rate and selection</h3>
+
+<p>RERconverge finds no gene significantly accelerated or decelerated in day-active
+lineages after correction for testing eighteen genes (all adjusted p &gt; 0.67). The
+strongest is <span class="gene">BHLHE40</span> at raw p = 0.051, with a negative
+correlation implying slightly <em>stronger</em> constraint in day-active lineages. Thirteen
+of eighteen genes trend in that same direction, which is suggestive of mildly increased
+purifying selection on the system as a whole, but is not individually significant.</p>
+
+<p>Site-level selection testing across 15,349 codon positions finds <strong>no site</strong>
+with significantly different dN/dS between day-active branches and the rest. The lowest raw
+p-values (about 0.0002) are what 15,000 tests produce by chance.</p>
+
+<h2 id="tdg09">The one method that disagreed, and why it lost</h2>
+
+<p>TDG09 flagged <strong>885 of 3,820</strong> tested positions, roughly a quarter of
+everything variable, spread across all eighteen genes. Taken at face value this would be a
+spectacular result.</p>
+
+<p>It should not be taken at face value. A quarter of all variable sites showing
+phenotype-associated fitness shifts is not a plausible biological rate, and no other method
+corroborates a single one of the 885. The explanation is the confound described earlier:
+TDG09 asks whether amino acid frequencies differ between the two branch sets, day-active
+species are phylogenetically clustered, and so any position whose residues track taxonomy
+differs between the groups with no convergence involved.</p>
+
+<div class="callout">
+  <span class="label">Why this was anticipated</span>
+  <p>The project specified in advance that a site counts as high-confidence only when
+  <strong>two or more independent methods</strong> flag it. That rule was written before any
+  of these results existed, and it is what prevents 885 uncorroborated hits from becoming
+  the headline. Applied here, the final list is <strong>empty</strong>.</p>
+</div>
+
+<p>Note also that correcting an earlier defect in how TDG09's inputs were built cut its hit
+rate substantially: <span class="gene">CLOCK</span> fell from 51 significant sites to 28.
+The fix removed a large artefact and left a large anomaly.</p>
+
+<h2 id="trust">How far to trust this</h2>
+
+<p>A negative result is worth only as much as the demonstrated ability to detect a positive
+one. Two things were done about that.</p>
+
+<h3>Simulation on the real tree</h3>
+
+<p>A known convergent signal was simulated onto the actual tree at the actual transition
+branches, then the detector was asked to recover it. Power came back at essentially 1.0
+with a false positive rate of 0 for all eighteen genes. That is reassuring but
+<strong>circular</strong>: the simulator generates data under the detector's own model using
+the detector's own machinery, so it cannot reveal a scenario that was constructed wrongly.</p>
+
+<h3>Planting signal in the real data</h3>
+
+<p>The stronger test implants artificial convergent sites into the real alignments and
+re-runs the entire pipeline blind. This exercises everything the simulation cannot: how
+transitions are matched onto each gene tree, how coordinates are mapped between file
+formats, how each tool's output is parsed.</p>
+
+<div class="callout caution">
+  <span class="label">Status &mdash; read before quoting any strength claim</span>
+  <p>The first attempt at this control was <strong>faulty</strong>. It wrote the artificial
+  residue into 41 of 60 species rather than the intended 30, because the set of species
+  descending from a converging lineage includes night-active species nested inside it. That
+  made the planted residue the commonest amino acid in the tree, which is a new consensus
+  rather than convergence, and the methods were right not to flag it. Every conclusion drawn
+  from that run was withdrawn.</p>
+  <p>A corrected control is running now: 90 sites, planted only in day-active species,
+  verified absent from all 30 night-active species, at three difficulty levels (all ten
+  lineages converging, seven, and three). <strong>Its results are not yet available.</strong>
+  Until they are, the <em>direction</em> of the result above is well supported but its
+  <em>strength</em> is not established.</p>
+</div>
+
+<h2 id="bugs">Ten defects, and what they have in common</h2>
+
+<p>This section exists because a collaborator reading the result deserves to know how it was
+produced. Over the course of the analysis, <strong>ten separate defects</strong> were found
+in the pipeline, the last of them in the tool built specifically to check for defects.</p>
+
+<p><strong>None of them produced an error message.</strong> Every one produced a confident,
+plausible, wrong number. Several sat in code that had already been reviewed. Among them:</p>
+
+<ul>
+  <li>An ancestral reconstruction that inferred a <span class="day">day-active</span>
+  ancestral mammal, inverting the study's premise.</li>
+  <li>Gains and reversions merged into one class, so opposite signals cancelled.</li>
+  <li>Convergent lineages described by their founding branch only, omitting the descendants
+  that actually carry the residues.</li>
+  <li>Gene trees never re-rooted to match the species tree, so the founding branch of the
+  largest day-active radiation was misidentified in all eighteen genes.</li>
+  <li>A tool taking the ancestral state from the <em>order of two words</em> on its command
+  line, which had it assuming a day-active ancestor.</li>
+  <li>A parser reading a progress log rather than the results table, where every value is
+  printed as zero.</li>
+</ul>
+
+<p>All ten share one shape: <strong>an unchecked assumption that two representations of the
+same object agreed</strong>. The tree numbered one way in one program and differently in the
+next. A label present in memory but never written to the file. Alignment columns before
+pruning versus after.</p>
+
+<p>They are fixed, and the pipeline now asserts these boundaries and refuses to proceed when
+they disagree; each assertion has been verified to fire on the original defect. But the
+honest summary remains: the direction of this result is well supported, and its precise
+strength is still being established.</p>
+
+<h2 id="meaning">What a null result would mean</h2>
+
+<p>It is not a failure, and it is biologically plausible. The core clock is among the most
+conserved systems in animals; essentially the same machinery runs in a mouse and a human,
+and the proteins are under strong purifying selection everywhere in the tree. Shifting
+activity into daylight may simply not require rewriting them.</p>
+
+<p>The more likely mechanisms are ones this dataset cannot observe:</p>
+
+<ul>
+  <li><strong>Regulatory change.</strong> Altering when and how strongly clock genes are
+  expressed, rather than altering the proteins. This is the leading hypothesis and would
+  leave coding sequence untouched.</li>
+  <li><strong>Input pathway change.</strong> Retinal photoreception and the retinohypothalamic
+  projection involve a different gene set entirely, including the melanopsin system.</li>
+  <li><strong>Output pathway change.</strong> The same clock signal interpreted differently
+  by downstream tissues, producing opposite behavioural phase with an unchanged oscillator.</li>
+  <li><strong>Masking rather than entrainment.</strong> Some diurnal behaviour reflects direct
+  behavioural responses to light rather than a re-phased clock at all.</li>
+</ul>
+
+<p>The mild trend toward stronger constraint in day-active lineages (13 of 18 genes) is
+consistent with the idea that daytime species depend more tightly on precise clock function,
+since they rely more heavily on light-mediated entrainment. It is suggestive only.</p>
+
+<h2 id="untested">What has not been tested</h2>
+
+<ul>
+  <li><strong>The five reversions to night-activity.</strong> A separate convergence test,
+  not yet run. Power analysis indicates it would be interpretable, so this is a real gap
+  rather than a hopeless one.</li>
+  <li><strong>Robustness to the ancestral reconstruction model.</strong> The alternative
+  model is retained as a sensitivity analysis and has not been swept.</li>
+  <li><strong>Anything outside these 18 genes</strong>, and anything outside protein-coding
+  sequence.</li>
+  <li><strong>Gene expression</strong>, the leading candidate mechanism, for which no data
+  exist here.</li>
+  <li><strong>Two genes are uninformative</strong> even within scope
+  (<span class="gene">CSNK1D</span>, <span class="gene">ARNTL</span>).</li>
+</ul>
+
+<h2 id="glossary">Glossary</h2>
+
+<div class="glossary">
+<dl>
+  <dt>Alignment column / site</dt>
+  <dd>One amino acid position, compared across all species. Column 47 in the cheetah is the
+  same position as column 47 in the mouse.</dd>
+  <dt>Ancestral state reconstruction</dt>
+  <dd>Inferring what an unobserved ancestor was like, here whether it was day- or
+  night-active, by fitting a model of how often the trait changes.</dd>
+  <dt>Transition branch</dt>
+  <dd>A branch of the tree on which the activity pattern changed. These ten branches, not the
+  species, are the units of the experiment.</dd>
+  <dt>Homoplasy</dt>
+  <dd>Similarity not inherited from a common ancestor. Convergence is homoplasy that is
+  associated with a trait; the rest is noise, and separating them is the central difficulty.</dd>
+  <dt>Purifying selection</dt>
+  <dd>Selection removing changes. Most positions in these proteins are under it, which is why
+  so few positions vary at all.</dd>
+  <dt>dN/dS</dt>
+  <dd>Ratio of amino-acid-changing to silent substitutions. Below 1 indicates constraint;
+  above 1 indicates positive selection. These genes sit far below 1.</dd>
+  <dt>False discovery rate</dt>
+  <dd>When thousands of positions are tested, some pass any threshold by chance. FDR
+  correction adjusts for that; an uncorrected p-value across 15,000 tests means little.</dd>
+</dl>
+</div>
+
+<footer>
+  <p>Sampling: 60 species, 30 day-active and 30 night-active, balanced by design rather than
+  representative. Ancestral states under an equal-rates model; an all-rates-different model
+  retained as sensitivity analysis. Species tree from Upham et al. 2019. Nocturnal bottleneck
+  framing after Maor et al. 2017. Convergence detection after Rey et al. 2018. Hemiplasy
+  considerations after Mendes and Hahn.</p>
+  <p>Generated from the analysis in this repository. Numbers reflect the corrected pipeline
+  as of the date of writing; the end-to-end validation control is still running and its
+  outcome should be appended here before any strength claim is made.</p>
+</footer>
+
+</div>
+</body>
+</html>
