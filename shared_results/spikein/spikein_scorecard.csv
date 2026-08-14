@@ -1,0 +1,13 @@
+method,level,recovered,planted,false_positives
+PCOC,all,16,36,0
+PCOC,most,5,18,0
+PCOC,few,0,36,0
+TDG09,all,36,36,878
+TDG09,most,16,18,878
+TDG09,few,18,36,878
+parsimony (flagged),all,36,36,198
+parsimony (flagged),most,18,18,198
+parsimony (flagged),few,35,36,198
+parsimony (phenotype-specific),all,36,36,26
+parsimony (phenotype-specific),most,18,18,26
+parsimony (phenotype-specific),few,12,36,26
