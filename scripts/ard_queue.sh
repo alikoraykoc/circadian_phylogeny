@@ -19,8 +19,10 @@
 # reported as conditional on a reconstruction the study otherwise argues against,
 # not as a finding. Say so in any write-up.
 #
-# Calibration comes first for each direction because ARD's event counts differ
-# enough from ER's to change power, and CLAUDE.md forbids assuming a threshold.
+# Calibration comes first because ARD's event counts differ enough from ER's to
+# change power, and CLAUDE.md forbids assuming a threshold.
+#
+# Scope: ARD_gain only. See the note at the SETS assignment below.
 #
 # NOT set -u: conda's activate-gfortran script references an unbound GFORTRAN.
 set -o pipefail
@@ -50,7 +52,19 @@ if ! grep -q "QUEUE COMPLETE" "$RES/finish_queue.log" 2>/dev/null; then
   exit 1
 fi
 
-for SET in ARD_gain ARD_reversal; do
+# ARD_reversal was dropped by the user on 2026-08-28 to reclaim 9 hours of the
+# 31-hour queue. ARD_gain is the direction that bears on the study's premise:
+# ER and ARD disagree about whether diurnality is derived at all, so the gain
+# direction is where the ASR model choice actually changes the question. The
+# reversal direction under a model that already places a diurnal ancestor tests
+# a scenario the study argues against, twice over.
+#
+# To restore it: add ARD_reversal back to the SETS list below. Scenarios are
+# already built (results/pcoc/scenarios/ARD_reversal/, 18 files, 10 events and
+# 44 branches on CLOCK), so nothing needs regenerating.
+SETS="ARD_gain"
+
+for SET in $SETS; do
   say "CALIBRATE $SET"
   bash scripts/run_pcoc_sim.sh "$SET" >> "$LOG" 2>&1 \
     || { say "FATAL: calibration failed for $SET"; exit 1; }

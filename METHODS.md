@@ -226,7 +226,7 @@ CLOCK):
 | `ER_gain` | 10 | 55 | primary analysis |
 | `ER_reversal` | 5 | 19 | reversals to nocturnality, the second convergent class |
 | `ARD_gain` | 6 | 64 | ASR model sensitivity |
-| `ARD_reversal` | 10 | 44 | ASR model sensitivity |
+| `ARD_reversal` | 10 | 44 | built but not run (see below) |
 
 Gains and reversals are never merged into one set, for the reason given in
 Section 5. The two ARD sets are sensitivity analyses on the reconstruction model
@@ -234,6 +234,13 @@ rather than independent hypothesis tests: ARD places a diurnal ancestral
 placental mammal, so a null under ARD adds robustness, while a positive under
 ARD would have to be reported as conditional on a reconstruction this study
 otherwise argues against.
+
+Only `ARD_gain` was run. The gain direction is where the reconstruction model
+actually changes the question, since ER and ARD disagree about whether diurnality
+is derived at all; testing the reversal direction under a model that already
+places a diurnal ancestor examines a scenario the study argues against twice
+over, at a cost of nine hours of computation. `ARD_reversal` scenarios were built
+and retained so the analysis can be run if a reviewer asks.
 
 ## 8. PCOC power calibration
 

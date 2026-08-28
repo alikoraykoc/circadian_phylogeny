@@ -26,7 +26,10 @@ direction before sweeping it:
 | stage | what |
 |---|---|
 | 4 | calibrate + sweep `ARD_gain` (6 events, 64 branches) |
-| 5 | calibrate + sweep `ARD_reversal` (10 events, 44 branches) |
+
+`ARD_reversal` was dropped on 2026-08-28 to reclaim 9 hours. Its scenarios are
+already built (18 files, 10 events / 44 branches on CLOCK), so restoring it means
+adding it back to the `SETS` line in `scripts/ard_queue.sh`, nothing more.
 
 ARD reconstructs a **diurnal** ancestral placental mammal. A null under ARD adds
 robustness; a positive under ARD would have to be reported as conditional on a
@@ -93,14 +96,11 @@ projection is the only honest way to do this.
 | score control | ~0 | Fri 18:05 |
 | k-curve re-run | 2.5 | Fri 20:35 |
 | ER_reversal sweep | 6.2 | Sat 02:50 |
-| ARD_gain calibrate + sweep | 8.9 | Sat 11:45 |
-| ARD_reversal calibrate + sweep | 8.9 | Sat 20:40 |
+| ARD_gain calibrate + sweep | 8.9 | Sat 11:25 |
 
-**Total about 31 h.** A full 18-gene PCOC sweep measured 6.2 h, not the ~2 h an
-earlier version of this file claimed; `pcoc_sim` calibration measures 9 min per
-gene, so 2.7 h per set. ARD is 18 of the 31 hours. Dropping `ARD_reversal` alone
-would save 9 h and still leave a stated sensitivity analysis on the gain
-direction.
+**Total about 22 h**, finishing Saturday around midday. A full 18-gene PCOC sweep
+measured 6.2 h, not the ~2 h an earlier version of this file claimed; `pcoc_sim`
+calibration measures 9 min per gene, so 2.7 h per set.
 
 ## Push status
 
