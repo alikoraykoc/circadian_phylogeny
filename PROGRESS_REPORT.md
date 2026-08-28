@@ -39,7 +39,7 @@ gains of diurnality, in any of the 18 circadian genes.
 | PCOC posteriors (step 09) | profile-shift model, **all 10 lineages converging** | 0 of 11,727 sites; max posterior 0.098 |
 | `pcoc_sim` power calibration | same model | power 1.000, FPR 0.0000 |
 | model-free residue screen | nothing | at the null in all 18 genes |
-| parsimony substitution count | nothing | same-residue rate at the null, pooled (0.330 vs 0.364) |
+| parsimony substitution count | nothing | same-residue rate at the null, pooled (0.310 vs 0.337) |
 | Contrast-FEL (step 12) | codon model | 0 of 15,349 sites with different dN/dS |
 | RERconverge (step 11) | rate model | no gene significant, all adjusted p > 0.67 |
 
@@ -152,10 +152,52 @@ Conditioned, the excess disappears completely:
 | CLOCK | 0.085 | 0.538 |
 | NPAS2 | 0.129 | 0.194 |
 
-**Pooled across all 18 genes: 645 sites changed in 2 or more independent diurnal
-lineages; 213 of those changed to the same residue. Rate 0.330 observed against
-0.364 null. No excess.** (Numbers are the re-run on rooting-corrected scenarios,
-0A.9; pre-fix they were 639, 206, 0.322 against 0.336, i.e. the same conclusion.) No gene has a rate-conditioned p below 0.129.
+**Pooled across all 18 genes: 648 sites changed in 2 or more independent diurnal
+lineages; 201 of those changed to the same residue. Rate 0.310 observed against
+a null of 0.337. No excess.** The lowest rate-conditioned p across all 18 genes
+is 0.282 (CSNK1E); no gene approaches significance.
+
+These are the numbers from the final hardened run
+(`shared_results/pcoc_sim_calibration/observed_convergent_substitutions.csv`),
+with 2000 permutations, 10 tie-broken parsimony resolutions per site, and
+branch-length-matched null draws. Two earlier number sets are superseded and
+should not be quoted: 639 / 206 / 0.322 against 0.336 (pre-rooting-fix), and
+645 / 213 / 0.330 against 0.364 (post-rooting-fix, pre-hardening). All three
+support the same conclusion.
+
+**Per-site testing, and the filter it forced.** The pooled rate is well powered
+against a pervasive signal but blind to a handful of real sites, which is the
+more likely biology, so every site also gets a permutation p-value and a
+Benjamini-Hochberg q across all genes. **12 of the 201 same-residue sites reach
+q <= 0.05. None of them survives inspection.**
+
+On examination, 9 of the 12 carried a residue as common in nocturnal species as
+in diurnal ones. The clearest is CLOCK site 675: residue V in 2 diurnal and 2
+nocturnal species, a diurnal-minus-nocturnal frequency gap of -0.002, and two of
+the four carriers are nocturnal marsupials.
+
+The reason is structural, not a coding error. The permutation test asks only
+whether 2 or more TRANSITION branches changed to the same residue more often
+than randomly placed branches would. At a tolerant site a residue arises
+repeatedly all over the tree; some of those changes land on transition branches
+by chance; and because the real transitions are a phylogenetically clustered set
+while the null scatters branches more widely, the coincidence looks unusual.
+That is homoplasy unrelated to diel activity.
+
+Every candidate site therefore also carries `diurnal_gap`, the frequency of the
+convergent residue among diurnal species minus among nocturnal species, and a
+site is reported as convergent only if it is BOTH statistically unusual AND
+phenotype-specific (gap >= 0.25). Applying it:
+
+| filter | sites |
+|---|---|
+| same residue in 2+ independent diurnal lineages | 201 |
+| ... and q <= 0.05 | 12 |
+| ... and phenotype-specific (gap >= 0.25) | **0** |
+
+The largest gap among the 12 is 0.232 (PER1 876), which falls below the
+threshold; the median is 0.067. Table:
+`shared_results/pcoc_sim_calibration/observed_convergent_sites.csv`.
 
 This is the single most informative negative in the report, because it counts
 what actually happened rather than fitting a model to it.
@@ -232,7 +274,7 @@ biologically less likely claim than "no convergence associated with diurnality".
 **Why the overall conclusion nonetheless survives.** The parsimony count (0A.4)
 declares no scenario at all. It examined every site where 2 or more independent
 lineages changed and found same-residue changes at exactly the chance rate
-(206 of 639, null 0.336). Convergence confined to 2 or 3 lineages would have
+(201 of 648, null 0.337). Convergence confined to 2 or 3 lineages would have
 surfaced there and did not. The negative therefore rests on the model-free
 evidence, not on PCOC.
 
@@ -360,7 +402,7 @@ improved on every axis:
 | PCOC sites at or above 0.80 | 0 | 0 |
 | highest PCOC posterior anywhere | 0.3011 (RORB) | **0.0979** (RORB) |
 | genes at calibration power 1.000 | 17 of 18 | **18 of 18** |
-| parsimony same-residue rate | 0.322 vs null 0.336 | 0.330 vs null 0.364 |
+| parsimony same-residue rate | 0.322 vs null 0.336 | 0.310 vs null 0.337 |
 
 The RORB posterior that section 0A.1 previously called the dataset maximum, and
 attributed to an edge artifact, drops by two thirds once its transition branch is

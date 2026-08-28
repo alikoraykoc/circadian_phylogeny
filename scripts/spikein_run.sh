@@ -30,6 +30,16 @@ mkdir -p "$SPIKE/pcoc" "$SPIKE/tdg09"
 
 echo "########## SPIKE-IN RUN $(date) ##########"
 
+# Preflight: PCOC runs in Docker and its output is sent to /dev/null, so a dead
+# daemon makes every gene "succeed" in under a second while producing nothing.
+# That happened on 2026-08-28 and silently skipped 12 of 18 genes. Fail here
+# instead, and check each gene's output below.
+if ! docker info > /dev/null 2>&1; then
+  echo "FATAL: Docker daemon is not reachable. Start Docker Desktop, then re-run." >&2
+  echo "  open -a Docker" >&2
+  exit 1
+fi
+
 # ---- 1. PCOC, same tree and scenario as the real sweep ---------------------
 echo "### PCOC $(date)"
 for g in $GENES; do
@@ -45,6 +55,12 @@ for g in $GENES; do
     -m  "$SCEN" \
     -o  "/proj/results/spikein/pcoc/$g" \
     -f  0.0 -cpu 4 --gamma --no_cleanup > /dev/null 2>&1
+  # Verify PCOC actually wrote a results table. Without this, a container that
+  # fails to start is indistinguishable from a gene that ran.
+  if ! compgen -G "$SPIKE/pcoc/$g/RUN_*/$g.trim.results.tsv" > /dev/null; then
+    echo "FATAL: PCOC produced no results table for $g" >&2
+    exit 1
+  fi
   echo "  done: $g $(date)"
 done
 
