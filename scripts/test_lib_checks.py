@@ -17,6 +17,7 @@ from ete3 import Tree
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib_checks import (PipelineCheckError, check_coordinate_map,  # noqa: E402
                         check_no_fallbacks, check_parsed_rows,
+                        check_pcoc_hit_credible,
                         check_same_rooting, check_same_taxa,
                         check_scenario_against_tree)
 
@@ -39,6 +40,23 @@ def expect_pass(name, fn, *a, **kw):
         PASS.append(f"{name}: passes on corrected input")
     except PipelineCheckError as e:
         FAIL.append(f"{name}: FALSE ALARM on good input -> {e}")
+
+
+def _rorb_column_1():
+    """Real residues at RORB trimmed column 1, or {} if the alignment is absent."""
+    import os
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                        "results", "trim", "RORB.trim.fa")
+    if not os.path.exists(path):
+        return {}
+    col, name = {}, None
+    for line in open(path):
+        line = line.rstrip()
+        if line.startswith(">"):
+            name = line[1:].split()[0]
+        elif line and name and name not in col:
+            col[name] = line[0]
+    return col
 
 
 def main():
@@ -102,6 +120,40 @@ def main():
     expect_pass("no fallbacks used", check_no_fallbacks, 0, "prep_tdg09_inputs")
     expect_raise("majority-rule fallback fired (hid the rooting bug)",
                  check_no_fallbacks, 7, "prep_tdg09_inputs: 7 nodes")
+
+    # ---- 7. the RORB column-1 artefact (ER_reversal, 2026-08-28) -----------
+    # The one site above threshold in the whole study: RORB trimmed column 1 at
+    # posterior 0.99999963. Trimmed col 1 is untrimmed col 204, and 20 of 60
+    # species have their annotated protein BEGIN there, so the column is an
+    # initiator residue for a third of the data and internal for the rest.
+    # Real residues, read from results/trim/RORB.trim.fa.
+    rorb_col1 = _rorb_column_1()
+    rorb_conv = ["Pipistrellus_pipistrellus", "Saccopteryx_bilineata",
+                 "Acinonyx_jubatus", "Caracal_caracal", "Hyaena_hyaena",
+                 "Leopardus_geoffroyi", "Paguma_larvata", "Panthera_pardus",
+                 "Puma_concolor", "Suricata_suricatta",
+                 "Tapirus_terrestris", "Tragelaphus_eurycerus", "Aotus_nancymaae"]
+    if rorb_col1:
+        # Signature 1: the profile-change term sat at chance while OC carried it.
+        expect_raise("PCOC hit with PC at chance (RORB col 1)",
+                     check_pcoc_hit_credible, "RORB", 1, 0.5, 0.9999994,
+                     rorb_col1, rorb_conv)
+        # Signature 2: 14 distinct residues in a supposedly convergent column.
+        # PC is set clean so the residue-count check is the one that must fire.
+        expect_raise("PCOC hit on a hypervariable column (RORB col 1)",
+                     check_pcoc_hit_credible, "RORB", 1, 0.99, 0.9999994,
+                     rorb_col1, rorb_conv)
+        # Signature 3: convergent leaves share no residue. PC clean and the
+        # residue cap lifted, so only the diagnostic-gap check can fire.
+        expect_raise("PCOC hit whose convergent leaves share no residue",
+                     check_pcoc_hit_credible, "RORB", 1, 0.99, 0.9999994,
+                     rorb_col1, rorb_conv, 99)
+        # And a synthetic column that IS real convergence must pass all three.
+        good = dict(rorb_col1)
+        for t in good:
+            good[t] = "W" if t in rorb_conv else "G"
+        expect_pass("credible PCOC hit passes", check_pcoc_hit_credible,
+                    "RORB", 1, 0.99, 0.9999994, good, rorb_conv)
 
     # ---- report ------------------------------------------------------------
     for line in PASS:

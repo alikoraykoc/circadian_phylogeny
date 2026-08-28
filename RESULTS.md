@@ -11,15 +11,19 @@ below refer to it. Result tables cited by filename live in `shared_results/`.
 ## 1. Headline
 
 **There is no detectable convergent amino acid signal associated with
-independent gains of diurnality in any of the 18 circadian genes tested.**
+independent gains of diurnality, or with reversals to nocturnality, in any of the
+18 circadian genes tested.**
 
-Six independent lines of evidence, resting on different assumptions, agree:
+Seven independent lines of evidence, resting on different assumptions, agree.
+The single site that crossed threshold anywhere in the study is a demonstrable
+alignment artefact and is set out in full rather than dropped quietly:
 
 | line of evidence | what it assumes | result |
 |---|---|---|
 | Direct parsimony substitution count | nothing | same-residue rate 0.310 against a null of 0.337; 0 phenotype-specific sites |
 | Model-free diagnostic residue screen | nothing | at the null in all 18 genes |
-| PCOC posteriors | profile-shift model, all 10 lineages converging | 0 of 11,727 sites; maximum posterior 0.098 |
+| PCOC, gains of diurnality | profile-shift model, all 10 lineages converging | 0 of 11,727 sites; maximum posterior 0.098 |
+| PCOC, reversals to nocturnality | same | 1 of 11,727 sites, shown to be an N-terminal alignment artefact (Section 4) |
 | Contrast-FEL | codon model | 0 of 15,349 sites with different dN/dS |
 | RERconverge | rate model | no gene significant; all adjusted p > 0.67 |
 | TDG09 | site-specific fitness model | 885 of 3,820 sites flagged, 0 corroborated by any other method |
@@ -184,6 +188,66 @@ than *no convergence*. Convergence confined to two or three lineages would be
 invisible to PCOC here, which is exactly why the parsimony count of Section 3,
 which examined every site where two or more lineages changed, carries the general
 negative.
+
+### Reversals to nocturnality, and the study's only non-null result
+
+The reversal direction had never been tested, though it is part of the study's
+premise. The equal-rates reconstruction gives 5 independent reversals, and
+calibration on those scenarios gives power 1.000 and FPR 0.0000 across all 18
+genes, so the sweep is interpretable rather than uninformative.
+
+Result: **1 site of 11,727 above threshold**, RORB trimmed column 1, posterior
+0.99999963. Every other gene's maximum is 0.119 or below, and 11 of 18 are
+exactly 0.0000.
+
+**That one site is an alignment artefact, not convergence.** It is worth setting
+out in full, because it is a concrete and reproducible PCOC failure mode.
+
+The trimmed alignment's first column maps to untrimmed column 204, and **20 of
+the 60 species have their annotated protein begin at exactly that position.** The
+column is therefore the initiator residue for a third of the dataset and an
+internal residue for the rest. Its composition reflects that: 14 distinct
+residues, methionine most common at 18 of 60, while columns 4 through 8
+immediately following carry a single residue in 59 of 60 species.
+
+trimAl retained the column because it has only one gap, 98 percent occupancy. But
+**occupancy is not homology**: those 20 sequences are not aligned there, they
+simply start there. The residues come from wherever each RefSeq or `miniprot`
+annotation happened to place the start codon.
+
+There is no shared convergent residue. The 13 leaves descending from the five
+reversal events carry **eight different residues** at that column:
+
+| event | tips | residues at column 1 |
+|---|---|---|
+| 0 | 2 | R, A |
+| 1 | 8 | M, C, T, A, K, A, L, M |
+| 2 | 1 | S |
+| 3 | 1 | L |
+| 4 | 1 | A |
+
+The best achievable reversal-diagnostic score at that column is **0.137**, against
+1.000 for a planted spike-in site and against RORB's own null expectation of
+0.305. On the model-free statistic this column is *below* chance.
+
+**PCOC's own decomposition shows the mechanism.** The posterior splits into a
+profile-change component and a one-change component, and at this site they read
+`PC = 0.5`, `OC = 0.9999994`. The profile-change term, which is the part that
+tests for a shared derived amino acid preference, is at exactly chance. The
+entire posterior comes from the one-change term, which asks only whether
+substitutions occurred on the declared branches. At a column carrying 14 residues
+across 60 species that is trivially true.
+
+So the failure mode is specific and diagnosable: **a hypervariable column with
+high occupancy can drive the OneChange component to near-certainty while the
+profile component says nothing, and the combined posterior still reaches 1.0.**
+Any PCOC hit should be checked against its `PC` and `OC` components separately,
+and against the residue composition of its column, before being believed. A hit
+with `PC` at 0.5 is not evidence of convergence.
+
+This does not change the study's conclusion. It removes the single apparent
+exception to it, and it does so on evidence independent of the methods that
+generated it.
 
 ## 5. Model-free residue screen
 

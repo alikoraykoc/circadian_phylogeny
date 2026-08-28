@@ -176,3 +176,68 @@ def check_no_fallbacks(n_fallbacks, context):
         _fail(context, f"{n_fallbacks} positions used the fallback path",
               "the primary lookup failed; investigate rather than accept the "
               "fallback's answer")
+
+
+def check_pcoc_hit_credible(gene, site, pc, oc, column, convergent_leaves,
+                            max_residues=8, min_pc=0.8, min_gap=0.20):
+    """Raise unless a PCOC hit looks like convergence rather than an artefact.
+
+    Written after the ER_reversal sweep returned exactly one site above
+    threshold, RORB trimmed column 1 at posterior 0.99999963, which turned out
+    to be an alignment artefact rather than a finding.
+
+    Trimmed column 1 mapped to untrimmed column 204, and 20 of 60 species had
+    their annotated protein BEGIN at that position. The column was the initiator
+    residue for a third of the dataset and an internal residue for the rest, so
+    it carried 14 distinct residues while the columns immediately after it
+    carried one residue in 59 of 60 species. trimAl had kept it because it has
+    only one gap, but occupancy is not homology: those sequences are not aligned
+    there, they start there.
+
+    Three independent signatures caught it, and this function checks all three:
+
+    1. `pc` was exactly 0.5, chance. PCOC's posterior decomposes into a
+       profile-change term (the part that tests for a shared derived amino acid
+       preference) and a one-change term (which asks only whether substitutions
+       occurred on the declared branches). The whole posterior came from `oc`.
+       A hit whose PC is at chance is not evidence of convergence, whatever the
+       combined posterior says.
+
+    2. The column carried 14 distinct residues. A genuine convergent column has
+       few states, since convergence means lineages arriving at the SAME residue.
+
+    3. The 13 convergent leaves carried 8 different residues, giving a best
+       diagnostic score of 0.137 against 1.000 for a planted spike-in site.
+
+    Args:
+      column: residues at this column for every taxon, dict {taxon: residue}.
+      convergent_leaves: taxa descending from the declared convergent events.
+    """
+    gaps = set("-X?*BZJU")
+    ctx = f"{gene} site {site}"
+
+    if pc is not None and pc < min_pc:
+        raise PipelineCheckError(
+            f"{ctx}: profile-change component is {pc:.3f} (< {min_pc}), so the "
+            f"posterior rests on the one-change term (OC={oc}). This is the RORB "
+            f"column-1 signature: substitutions happened on the declared branches "
+            f"but no shared preference shift did.")
+
+    present = [r for r in column.values() if r not in gaps]
+    n_states = len(set(present))
+    if n_states > max_residues:
+        raise PipelineCheckError(
+            f"{ctx}: column carries {n_states} distinct residues (> {max_residues}). "
+            f"Convergence means lineages reaching the SAME residue; a hypervariable "
+            f"column is usually a ragged terminus or a misaligned region.")
+
+    conv = [column[t] for t in convergent_leaves if t in column and column[t] not in gaps]
+    bg = [r for t, r in column.items() if t not in convergent_leaves and r not in gaps]
+    if conv and bg:
+        best = max((conv.count(a) / len(conv)) - (bg.count(a) / len(bg)) for a in set(present))
+        if best < min_gap:
+            raise PipelineCheckError(
+                f"{ctx}: best convergent-vs-background residue gap is {best:.3f} "
+                f"(< {min_gap}). The declared convergent leaves do not share a "
+                f"residue, so there is nothing for 'convergence' to refer to.")
+    return True
