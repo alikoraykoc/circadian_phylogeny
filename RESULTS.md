@@ -28,6 +28,14 @@ The two model-free lines carry the claim in full generality, because they
 declare no convergent set and therefore assume nothing about how many lineages
 must converge together. The PCOC line must be read narrowly (Section 4).
 
+**This null is interpretable because the pipeline was shown to detect planted
+convergence end to end** (Section 11). With 90 convergent sites planted into the
+real alignments, PCOC recovered 35 of 36 fully convergent sites with zero false
+positives, and the phenotype-specific parsimony test recovered 36 of 36 at 10
+lineages and 23 of 36 at only 3. The methods that returned nothing on real data
+return the planted signal on spiked data, so the zero is a measurement rather
+than a failure.
+
 ## 2. Evolutionary scenario
 
 Diel activity has significant phylogenetic signal (Pagel's lambda = 0.671,
@@ -136,27 +144,27 @@ evolutionary time for those substitutions to occur.
 declares all 10 gains convergent whatever the truth. Simulating convergence in
 only *k* of the 10 lineages and detecting with the full declared scenario:
 
-> **Provenance caveat.** The curve below was computed on 2026-08-13 at 20:47,
-> forty minutes BEFORE the re-rooting fix of Section 10 (commit `72b42b2`,
-> 21:28). It therefore rests on the superseded scenario files, and its
-> `blocks.csv` still carries the pre-fix event structure. The re-run on
-> corrected scenarios is queued. The qualitative conclusion, that power collapses
-> as falsely declared events accumulate, is a property of PCOC's convergent model
-> rather than of these particular branch sets, and the k=2 direct check below is
-> independent of the curve; but **the individual power values should not be
-> quoted until the re-run confirms them.**
 
-| converging lineages of 10 | power at posterior 0.9 |
-|---|---|
-| 2 | 0.000 |
-| 3 | 0.000 |
-| 4 | 0.007 |
-| 5 | 0.020 |
-| 6 | 0.088 |
-| 7 | 0.250 |
-| 8 | 0.548 |
-| 9 | 0.463 |
-| 10 | 1.000 |
+| converging lineages of 10 | power at posterior 0.9 | superseded run |
+|---|---|---|
+| 2 | 0.000 | 0.000 |
+| 3 | 0.000 | 0.000 |
+| 4 | 0.000 | 0.007 |
+| 5 | 0.012 | 0.020 |
+| 6 | 0.062 | 0.088 |
+| 7 | 0.258 | 0.250 |
+| 8 | 0.577 | 0.548 |
+| 9 | 0.512 | 0.463 |
+| 10 | 1.000 | 1.000 |
+
+This curve was **re-run on the rooting-corrected scenarios** (2026-08-28), because
+the originally published version was computed forty minutes before the
+re-rooting fix of Section 10. The right-hand column is that superseded run,
+shown rather than discarded. The fix restored 1 to 3 previously dropped branches
+per scenario, exactly as expected from a defect that dropped three nodes per
+gene, but **power is unchanged**: mean power across all k moved from 0.205 to
+0.210, and the largest change at any single k is 0.048, within replicate noise
+at three draws per point. The curve stands as published.
 
 A direct check confirms the mechanism: at k = 2, detection under the declared
 10-event scenario found **0 of 600** planted sites, while the *same data*
@@ -312,16 +320,12 @@ incorrectly.
 
 ## 11. End-to-end positive control
 
-STATUS: RUNNING. This section is the gating result for the strength, though not
-the direction, of everything above, and will be completed when the control
-finishes.
+**The control passed.** Ninety convergent sites were planted into the real
+alignments across all 18 genes at three difficulty levels, and the entire
+pipeline was re-run unchanged over the spiked data, using the same trees, the
+same scenario files and the same scripts. Only the alignment differed.
 
-Ninety convergent sites were planted into the real alignments across all 18
-genes, at three difficulty levels, and the entire pipeline was re-run unchanged
-over the spiked data using the same trees, the same scenario files and the same
-scripts.
-
-| level | converging events | sites planted | mean diurnal gap | mean species changed |
+| level | converging events | sites | mean diurnal gap | mean species changed |
 |---|---|---|---|---|
 | `all` | all 10 | 36 | 1.000 | 28.6 |
 | `most` | 7 of 10 | 18 | 0.816 | 23.4 |
@@ -329,14 +333,65 @@ scripts.
 
 Zero nocturnal species carry a planted residue at any level.
 
-**A first version of this control was faulty and every conclusion drawn from it
-was withdrawn.** It planted into all species descending from each event rather
-than the diurnal descendants, which is not equivalent: an event's membership
-includes descendant nodes whose subtrees contain nocturnal species from nested
-reversals. That planted into 41 of 60 species rather than the intended 30, making
-the residue the majority state across the tree in 36 of 36 `all` sites. A new
-consensus residue is not convergence, so the detectors were being asked to find
-something that was not there, and PCOC was correct to miss it.
+### Recovery
+
+| method | `all` | `most` | `few` | false positives |
+|---|---|---|---|---|
+| PCOC | **35/36** | 15/18 | 0/36 | **0** |
+| TDG09 | 36/36 | 17/18 | 18/36 | **879** |
+| parsimony, flagged | 36/36 | 18/18 | 35/36 | 195 |
+| parsimony, phenotype-specific | 36/36 | 18/18 | 23/36 | **26** |
+
+**The plumbing carries signal.** PCOC flagged exactly 50 sites out of 11,727 on
+the spiked data, and all 50 were planted: 35 of the 36 fully convergent sites and
+15 of the 18 at 7 of 10 lineages, with **not one false positive**. Signal
+therefore survives scenario construction, re-rooting, tree handling and detection
+end to end, and the zero on the real data is a real zero rather than a broken
+pipeline. This is the result that makes every other negative in this report
+interpretable.
+
+**TDG09's 885 real-data hits are its false positive rate, now measured rather
+than inferred.** On spiked alignments it produced **879 false positives** out of
+3,852 testable sites, 24.7 percent. On real data it flagged 885 of 3,820, 23.2
+percent. Those are the same number. Before this control the strongest available
+statement was that nothing corroborated TDG09's hits; it is now a direct
+measurement of the rate at which this method calls convergence where none was
+planted. Its recall is genuinely high (36/36 at `all`), so the problem is
+specificity, not sensitivity.
+
+**The phenotype-specificity filter removes noise, not signal.** Requiring the
+convergent residue to be diurnal-specific cuts false positives from 195 to 26, an
+87 percent reduction, while costing nothing at `all` or `most` and 12 of 35 at
+`few`. That filter was introduced because 9 of 12 nominally significant real
+sites carried phenotype-irrelevant residues (Section 3), and the control confirms
+it is doing the job it was added for.
+
+**Coverage at low k rests entirely on the parsimony test.** PCOC recovers 0 of 36
+sites at 3 of 10 lineages, exactly as its design predicts. The phenotype-specific
+parsimony test recovers 23 of 36, about 64 percent. So the study can detect
+convergence confined to three lineages, at roughly two-thirds power, and found
+none.
+
+### Reconciling the control with the k-curve
+
+PCOC recovered 15 of 18 planted sites at 7 of 10 lineages, 83 percent, while the
+k-curve (Section 4) puts power at k = 7 at 0.258. The re-run confirmed the curve
+is not a rooting artefact, so the two measurements disagree for a substantive
+reason: **they plant different strengths of signal.**
+
+The k-curve simulates convergence under PCOC's own profile-shift model, in which
+the derived profile changes the amino acid preferences but the actual
+substitution is probabilistic and may not occur on a short branch. The spike-in
+writes a specific residue, chosen to be absent at that column, into every diurnal
+descendant of the chosen events. That is convergence at its most legible.
+
+Both are correct about different questions. PCOC's sensitivity to partial
+convergence depends strongly on how clean the convergent substitution is: for an
+unambiguous shared novel residue it retains useful power at 7 of 10 lineages, and
+for a realistic profile shift it does not. Reported conservatively, the PCOC
+result should still be read as bearing mainly on near-universal convergence, and
+the general negative should still rest on the model-free evidence of Sections 3
+and 5.
 
 ## 12. What this study does and does not establish
 

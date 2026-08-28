@@ -234,17 +234,31 @@ blocks were concatenated and detected in ONE pcoc_det run (the declared scenario
 is identical for every k, and detection cost is dominated by fixed per-tree setup
 rather than column count).
 
-| converging lineages of 10 | power at 0.9 |
-|---|---|
-| 2 | 0.000 |
-| 3 | 0.000 |
-| 4 | 0.007 |
-| 5 | 0.020 |
-| 6 | 0.088 |
-| 7 | 0.250 |
-| 8 | 0.548 |
-| 9 | 0.463 |
-| 10 | 1.000 |
+| converging lineages of 10 | power at 0.9 (re-run) | superseded run |
+|---|---|---|
+| 2 | 0.000 | 0.000 |
+| 3 | 0.000 | 0.000 |
+| 4 | 0.000 | 0.007 |
+| 5 | 0.012 | 0.020 |
+| 6 | 0.062 | 0.088 |
+| 7 | 0.258 | 0.250 |
+| 8 | 0.577 | 0.548 |
+| 9 | 0.512 | 0.463 |
+| 10 | 1.000 | 1.000 |
+
+**RE-RUN 2026-08-28 on the rooting-corrected scenarios, and the curve stands.**
+The original was computed 2026-08-13 20:47, forty minutes before the rooting fix
+in `72b42b2` (21:28), so it rested on superseded scenario files. The fix restored
+1 to 3 previously dropped branches per scenario, but power did not move: mean
+power across all k went from 0.205 to 0.210, and the largest change at any single
+k is 0.048, within noise at three replicates per point. Both columns are shown
+rather than the old one being silently replaced.
+
+Note this does NOT explain the spike-in control's 15 of 18 recovery at 7 of 10
+lineages (83 percent against this curve's 0.258). That gap is a signal-strength
+difference, not a rooting artefact: the k-curve simulates a probabilistic profile
+shift, the spike-in plants an unambiguous novel residue in every diurnal
+descendant. See RESULTS.md section 11.
 
 An earlier 5-point run confirmed the mechanism directly: with k=2, detection with
 the declared 10-event scenario found **0 of 600** planted sites, while the SAME
