@@ -74,10 +74,13 @@ PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRIM = os.path.join(PROJ, "results", "trim")
 TREES = os.path.join(PROJ, "results", "branchlengths", "pcoc")
 SCEN = os.path.join(PROJ, "results", "pcoc", "scenarios", "ER_gain")
-OUT = os.path.join(PROJ, "results", "spikein")
+# SPIKE_OUT lets the fast regression control (spikein_quick.sh) write to its own
+# directory so it can never overwrite the full control's alignments or answer key.
+OUT = os.environ.get("SPIKE_OUT", os.path.join(PROJ, "results", "spikein"))
 
-GENES = ("CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 "
-         "RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41").split()
+ALL_GENES = ("CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 "
+             "RORA RORB RORC CSNK1D CSNK1E FBXL3 BHLHE40 BHLHE41").split()
+GENES = os.environ.get("SPIKE_GENES", "").split() or ALL_GENES
 
 GAPS = set("-X?*BZJU")
 AAS = "ACDEFGHIKLMNPQRSTVWY"
@@ -85,6 +88,18 @@ AAS = "ACDEFGHIKLMNPQRSTVWY"
 # Sites planted per gene at each difficulty level.
 LEVELS = {"all": 2, "most": 1, "few": 2}
 EVENTS_PER_LEVEL = {"all": None, "most": 7, "few": 3}   # None means every event
+
+# SPIKE_LEVELS restricts which difficulty levels are planted. The fast
+# regression control plants 'all' only, because it is a pass/fail smoke test of
+# the plumbing, not a measurement of each method's sensitivity.
+_want = os.environ.get("SPIKE_LEVELS", "").split()
+if _want:
+    LEVELS = {k: v for k, v in LEVELS.items() if k in _want}
+    if not LEVELS:
+        raise SystemExit(f"SPIKE_LEVELS={_want} matches no known level")
+_n = os.environ.get("SPIKE_SITES_PER_LEVEL", "")
+if _n:
+    LEVELS = {k: int(_n) for k in LEVELS}
 
 # A planted residue must be essentially absent from nocturnal species. Planting
 # into diurnal descendants only guarantees this, so the check is a guard rather

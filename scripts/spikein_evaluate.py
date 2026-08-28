@@ -34,7 +34,7 @@ import os
 from collections import defaultdict
 
 PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SPIKE = os.path.join(PROJ, "results", "spikein")
+SPIKE = os.environ.get("SPIKE_OUT", os.path.join(PROJ, "results", "spikein"))
 
 PCOC_THRESHOLD = 0.99
 FDR_THRESHOLD = 0.05

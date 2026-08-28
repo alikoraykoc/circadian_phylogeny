@@ -136,6 +136,16 @@ evolutionary time for those substitutions to occur.
 declares all 10 gains convergent whatever the truth. Simulating convergence in
 only *k* of the 10 lineages and detecting with the full declared scenario:
 
+> **Provenance caveat.** The curve below was computed on 2026-08-13 at 20:47,
+> forty minutes BEFORE the re-rooting fix of Section 10 (commit `72b42b2`,
+> 21:28). It therefore rests on the superseded scenario files, and its
+> `blocks.csv` still carries the pre-fix event structure. The re-run on
+> corrected scenarios is queued. The qualitative conclusion, that power collapses
+> as falsely declared events accumulate, is a property of PCOC's convergent model
+> rather than of these particular branch sets, and the k=2 direct check below is
+> independent of the curve; but **the individual power values should not be
+> quoted until the re-run confirms them.**
+
 | converging lineages of 10 | power at posterior 0.9 |
 |---|---|
 | 2 | 0.000 |
