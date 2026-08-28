@@ -224,6 +224,18 @@ q = 0.0595 is the nearest miss and is equally untrustworthy on a nine-gene subse
 selected by which runs happened to converge, which is not a random subset. The
 honest summary is that this test did not run successfully on this dataset.
 
+**The obvious remedy was considered and rejected.** RELAX's failures all name the
+same four deeply divergent lineages, so dropping *Lagorchestes hirsutus*,
+*Phalanger gymnotis*, *Choloepus hoffmanni* and *Dasypus novemcinctus* would
+probably let the remaining genes converge. That was not done. It would not
+produce a valid test, only a differently biased one: the nine genes that
+converged are already not a random sample but the sample that happened to
+converge, and removing taxa until an optimiser cooperates selects on the outcome
+rather than on the biology. Had it been done, the removal would have to be
+declared in the methods and every RELAX result reported as conditional on it.
+RELAX is therefore reported as not estimable on this dataset, and no conclusion
+in this study rests on it.
+
 ## 7. Gene-level rate association
 
 RERconverge finds **no gene with relative evolutionary rates significantly

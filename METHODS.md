@@ -216,6 +216,25 @@ convergent event table, with the transition node placed first in each
 `/`-separated group as PCOC requires, and validated node by node against the
 gene tree (175 of 175 groups correct after the re-rooting fix of Section 4).
 
+Four scenario sets were built, one per combination of reconstruction model and
+transition direction, and each is calibrated and swept independently because
+event counts differ enough between them to change power (counts shown for
+CLOCK):
+
+| set | events | convergent branches | role |
+|---|---|---|---|
+| `ER_gain` | 10 | 55 | primary analysis |
+| `ER_reversal` | 5 | 19 | reversals to nocturnality, the second convergent class |
+| `ARD_gain` | 6 | 64 | ASR model sensitivity |
+| `ARD_reversal` | 10 | 44 | ASR model sensitivity |
+
+Gains and reversals are never merged into one set, for the reason given in
+Section 5. The two ARD sets are sensitivity analyses on the reconstruction model
+rather than independent hypothesis tests: ARD places a diurnal ancestral
+placental mammal, so a null under ARD adds robustness, while a positive under
+ARD would have to be reported as conditional on a reconstruction this study
+otherwise argues against.
+
 ## 8. PCOC power calibration
 
 The project's design rules forbid a fixed posterior threshold. Each gene was
@@ -406,7 +425,7 @@ dN/dS differs between the diurnal-transition branch set and the rest of the
 tree. p-values were corrected both within gene and across all genes.
 
 **RELAX is not reliably estimable on this dataset and its results are reported
-as such.** Nine of 18 genes converged; five gave up after three attempts, all
+as such, and no attempt was made to force convergence by removing taxa.** Nine of 18 genes converged; five gave up after three attempts, all
 failing inside ancestral reconstruction on deeply divergent lineages
 (*Lagorchestes hirsutus* nine times, *Phalanger gymnotis* and *Choloepus
 hoffmanni* three times each, *Dasypus novemcinctus* once). Its one nominally

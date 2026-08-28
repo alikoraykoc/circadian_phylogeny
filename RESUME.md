@@ -8,7 +8,7 @@ Last updated 2026-08-28. Everything below is committed.
 stops rather than building on a bad stage. Watch it with:
 
 ```
-tail -f results/finish_queue.log
+tail -f results/finish_queue.log     # then results/ard_queue.log
 ```
 
 | stage | what | status |
@@ -18,11 +18,26 @@ tail -f results/finish_queue.log
 | 2 | re-run the k-curve on corrected scenarios | queued |
 | 3 | ER_reversal PCOC sweep | queued |
 
+Then `scripts/ard_queue.sh` (a separate file, because bash re-reads a running
+script and editing one corrupts it) waits for the above to reach
+`QUEUE COMPLETE` and runs the ARD sensitivity analysis, calibrating each
+direction before sweeping it:
+
+| stage | what |
+|---|---|
+| 4 | calibrate + sweep `ARD_gain` (6 events, 64 branches) |
+| 5 | calibrate + sweep `ARD_reversal` (10 events, 44 branches) |
+
+ARD reconstructs a **diurnal** ancestral placental mammal. A null under ARD adds
+robustness; a positive under ARD would have to be reported as conditional on a
+reconstruction this study otherwise argues against, not as a finding.
+
 If the machine is restarted, relaunch with:
 
 ```
 nohup caffeinate -i bash scripts/spikein_run.sh >> results/spikein/run.log 2>&1 &
 nohup caffeinate -i bash scripts/finish_queue.sh > /dev/null 2>&1 &
+nohup caffeinate -i bash scripts/ard_queue.sh > /dev/null 2>&1 &
 ```
 
 Both skip completed genes, so restarting costs nothing.
@@ -87,19 +102,18 @@ level, zero nocturnal carriers. See commit `d1fb5c7`.
 
 ## Deliberately not queued, and why
 
-- **ARD sensitivity sweeps** (~12 h). ARD places a diurnal ancestral placental
-  mammal, contradicting the literature the study rests on; it is a robustness
-  check on a modelling choice, not a hypothesis test. Calibrate before sweeping
-  if it is ever run.
 - **RELAX remainder.** The test does not run reliably on this data. 9 of 18
   converged, 5 gave up after 3 attempts each, all failing in ancestral
   reconstruction on deeply divergent lineages (`Lagorchestes_hirsutus` 9x,
   `Phalanger_gymnotis` 3x, `Choloepus_hoffmanni` 3x, `Dasypus_novemcinctus` 1x).
   Adding more non-converging genes does not fix that. Its one significant result,
   NPAS2 K = 0.352, replicated 1 time in 11 attempts and is an artefact.
-- **RELAX taxon-dropping experiment.** User deferred. If dropping those four
-  lineages does let RELAX converge, **the removal must be declared in the
-  methods, not done quietly**, and the result reported as conditional on it.
+- **RELAX taxon-dropping experiment. CLOSED 2026-08-28, will not do.** Dropping
+  the four lineages would probably let RELAX converge, but it would select on the
+  outcome rather than on the biology: the nine genes that converged are already
+  the subset that happened to converge, not a random one. RELAX is reported as
+  not estimable on this dataset and nothing rests on it. See RESULTS.md
+  section 6.
 
 ## Standing context
 
