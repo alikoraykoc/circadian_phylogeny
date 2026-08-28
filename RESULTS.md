@@ -198,12 +198,31 @@ either within gene or across all 18 genes. The smallest uncorrected p anywhere i
 
 **RELAX is not reliably estimable on this dataset and its results should not be
 quoted as findings.** Nine of 18 genes converged; five gave up after three
-attempts, all failing inside ancestral reconstruction on deeply divergent
+attempts each, all failing inside ancestral reconstruction on deeply divergent
 lineages (*Lagorchestes hirsutus* nine times, *Phalanger gymnotis* and *Choloepus
-hoffmanni* three times each, *Dasypus novemcinctus* once). Its one nominally
-significant result, NPAS2 with K = 0.352 at p < 1e-6, **replicated once in eleven
-attempts** and is treated as an optimiser artefact on a flat likelihood surface
-rather than as evidence of relaxed selection.
+hoffmanni* three times each, *Dasypus novemcinctus* once). The remaining four
+were not attempted.
+
+Among the nine that did converge:
+
+| gene | K | direction | p | q |
+|---|---|---|---|---|
+| NPAS2 | 0.352 | relaxed | 4.8e-7 | 0.0000 |
+| CRY1 | 1.265 | intensified | 0.0132 | 0.0595 |
+| PER1 | 1.077 | intensified | 0.1135 | 0.3406 |
+| RORB | 1.230 | intensified | 0.2001 | 0.4503 |
+| NR1D1 | 1.048 | intensified | 0.3690 | 0.6641 |
+| NR1D2 | 0.895 | relaxed | 0.5075 | 0.7613 |
+| CLOCK | 0.983 | relaxed | 0.6695 | 0.8608 |
+| RORC | 0.989 | relaxed | 0.9052 | 1.0000 |
+| ARNTL | 1.000 | relaxed | 1.0000 | 1.0000 |
+
+Only NPAS2 survives correction, and it should not be believed: **it replicated
+once in eleven attempts**, and is treated as an optimiser artefact on a flat
+likelihood surface rather than as evidence of relaxed selection. CRY1 at
+q = 0.0595 is the nearest miss and is equally untrustworthy on a nine-gene subset
+selected by which runs happened to converge, which is not a random subset. The
+honest summary is that this test did not run successfully on this dataset.
 
 ## 7. Gene-level rate association
 
