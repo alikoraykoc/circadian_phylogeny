@@ -80,6 +80,37 @@ from it were withdrawn. The current version plants into day-active species only,
 verified against the sealed key: mean diurnal gap 1.000 / 0.816 / 0.374 by
 level, zero nocturnal carriers. See commit `d1fb5c7`.
 
+## Expected wall-clock, measured
+
+Projected 2026-08-28 13:35 from per-gene times in the completed ER_gain sweep,
+not from estimates. PCOC's per-gene cost varies 25-fold and does NOT track
+alignment size (PER1 74 min, CSNK1E 64 min, BHLHE41 7 min), so per-gene
+projection is the only honest way to do this.
+
+| stage | hours | ends |
+|---|---|---|
+| spike-in PCOC (11 genes left) + model-free | 4.5 | Fri 18:05 |
+| score control | ~0 | Fri 18:05 |
+| k-curve re-run | 2.5 | Fri 20:35 |
+| ER_reversal sweep | 6.2 | Sat 02:50 |
+| ARD_gain calibrate + sweep | 8.9 | Sat 11:45 |
+| ARD_reversal calibrate + sweep | 8.9 | Sat 20:40 |
+
+**Total about 31 h.** A full 18-gene PCOC sweep measured 6.2 h, not the ~2 h an
+earlier version of this file claimed; `pcoc_sim` calibration measures 9 min per
+gene, so 2.7 h per set. ARD is 18 of the 31 hours. Dropping `ARD_reversal` alone
+would save 9 h and still leave a stated sensitivity analysis on the gain
+direction.
+
+## Push status
+
+**Commits are local.** The user asked for a push once everything finishes, after
+the write-up is folded in, so do not push a half-written RESULTS.md. Check with:
+
+```
+git status -sb && git log --oneline origin/main..HEAD
+```
+
 ## Documents
 
 | file | what it is |
