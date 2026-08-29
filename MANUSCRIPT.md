@@ -406,11 +406,41 @@ uninformative rather than negative and are reported separately throughout.
 
 ## Tables and figures
 
-**Table 1.** Gene set, taxon occupancy, and untrimmed and trimmed alignment
-lengths. Data: `shared_results/`.
+**Table 1. Gene set, taxon occupancy and alignment dimensions.**
 
-**Table 2.** Transition counts and convergent branch coverage for each
-reconstruction and direction, with calibrated power and false positive rate.
+Trimmed columns are those retained by trimAl `-automated1`. TDG09 testable sites are the variable columns for which a likelihood ratio could be computed. Codons analysed are those remaining after removal of all-gap columns.
+
+| Gene | Module | Taxa | Untrimmed columns | Trimmed columns | TDG09 testable sites | Codons analysed |
+|---|---|---|---|---|---|---|
+| CLOCK | Positive arm | 59 | 991 | 841 | 177 | 991 |
+| NPAS2 | Positive arm | 58 | 1145 | 814 | 351 | 1120 |
+| ARNTL | Positive arm | 60 | 778 | 620 | 50 | 750 |
+| PER1 | Negative arm | 60 | 1643 | 1233 | 409 | 1584 |
+| PER2 | Negative arm | 60 | 1726 | 1208 | 801 | 1704 |
+| PER3 | Negative arm | 56 | 2122 | 897 | 637 | 1640 |
+| CRY1 | Negative arm | 59 | 670 | 582 | 80 | 666 |
+| CRY2 | Negative arm | 60 | 665 | 592 | 211 | 661 |
+| NR1D1 | Auxiliary loop | 60 | 760 | 610 | 144 | 731 |
+| NR1D2 | Auxiliary loop | 60 | 660 | 562 | 156 | 660 |
+| RORA | Auxiliary loop | 58 | 602 | 466 | 25 | 602 |
+| RORB | Auxiliary loop | 60 | 665 | 459 | 34 | 609 |
+| RORC | Auxiliary loop | 60 | 790 | 518 | 210 | 753 |
+| CSNK1D | Post-translational | 40 | 792 | 401 | 12 | 553 |
+| CSNK1E | Post-translational | 52 | 564 | 509 | 174 | 564 |
+| FBXL3 | Post-translational | 60 | 442 | 426 | 34 | 442 |
+| BHLHE40 | Output repressors | 60 | 666 | 407 | 132 | 599 |
+| BHLHE41 | Output repressors | 58 | 768 | 582 | 183 | 720 |
+
+**Table 2. Convergent scenarios, calibrated detection power and outcome.**
+
+Branch and leaf counts are on the 60-taxon species tree (118 branches). Power and false positive rate are the worst value across the 18 genes at the calibrated posterior threshold of 0.99. All sites above threshold were subsequently rejected as alignment artefacts.
+
+| Reconstruction | Direction | Events | Convergent branches | Percent of branches | Convergent leaves | Minimum gene power | Worst gene FPR | Sites above threshold |
+|---|---|---|---|---|---|---|---|---|
+| ER | Gains of diurnality | 10 | 55 | 46.6 | 41 | 1.000 | 0.0000 | 0 |
+| ER | Reversals to nocturnality | 5 | 19 | 16.1 | 13 | 0.996 | 0.0000 | 1 |
+| ARD | Gains of diurnality | 6 | 64 | 54.2 | 55 | 0.990 | 0.0000 | 2 |
+| ARD | Reversals to nocturnality | 10 | 44 | 37.3 | 29 |  |  | not run |
 
 **Table 3.** Positive control recovery by method and difficulty level, with false
 positive counts. Data: `shared_results/spikein/spikein_scorecard.csv`.
@@ -438,3 +468,86 @@ sets. Existing: `results/figures/pcoc_sim_power_{ER_gain,ER_reversal,ARD_gain}.p
 
 **Supplementary Figure S2.** Selection analysis summary.
 Existing: `results/figures/selection_summary.pdf`.
+
+---
+
+# Supplementary Methods S1. Distinguishing convergence from substitution rate in PCOC output
+
+## The problem
+
+PCOC reports a combined posterior probability that a site has undergone
+convergent evolution on a declared set of branches. That posterior is a
+combination of two components which the software also reports separately:
+
+- **PC**, the profile-change component, which asks whether the site's amino acid
+  preference profile shifted to a shared derived profile on the declared
+  branches. This is the component that tests convergence in the sense usually
+  intended.
+- **OC**, the one-change component, which asks whether at least one substitution
+  occurred on the declared branches.
+
+The combined posterior can approach 1.0 when OC alone is near-certain and PC sits
+at chance. Such a site has experienced substitutions on the convergent branches
+but shows no shared derived preference, which is not convergence. Because the
+combined posterior is what is conventionally thresholded, these sites pass
+filtering.
+
+This is not a rare edge case in practice. Every site that crossed a calibrated
+posterior threshold of 0.99 in the present study, across three scenario sets and
+35,181 site tests, had this signature.
+
+## Worked example
+
+*RORB* trimmed column 1 reached a posterior of 0.99999963 in the reversal
+analysis, with PC = 0.500 and OC = 0.9999994. Inspection showed the column to be
+an alignment artefact rather than a convergent site:
+
+- The trimmed column maps to untrimmed column 204, and 20 of the 60 sequences
+  have their annotated protein begin at exactly that position. The column is the
+  initiator residue for a third of the dataset and an internal residue for the
+  remainder.
+- It carries 14 distinct amino acids, whereas the five columns immediately
+  following each carry a single residue in 59 of 60 sequences.
+- The 13 leaves descending from the declared convergent events carry eight
+  different residues. The best achievable diagnostic score, defined as
+  freq(residue | convergent) minus freq(residue | background), is 0.137, against
+  a null expectation of 0.305 for that gene.
+
+The column had been retained by trimAl because it contains only one gap. High
+occupancy is not evidence of homology: those sequences are not aligned at that
+position, they begin there.
+
+## Recommended screen
+
+We suggest three criteria, applied to any site passing a posterior threshold.
+They are independent, and in our data no single criterion was sufficient.
+
+1. **PC must not be at chance.** We used PC >= 0.8. A site whose posterior derives
+   from OC alone should not be reported as convergent regardless of the combined
+   value. This was the only criterion that rejected all three artefactual sites we
+   encountered.
+2. **The column must not be hypervariable.** We used at most 8 distinct residues.
+   Convergence entails independent lineages arriving at the same residue, so a
+   column with many states is more consistent with a ragged terminus or a
+   misaligned region.
+3. **The declared convergent leaves must share a residue.** We required a best
+   diagnostic score of at least 0.20. Without this, a site can pass on the
+   strength of substitution counts alone.
+
+The value of applying all three is illustrated by the second artefactual site we
+found, *RORB* column 2 in the ARD analysis, which had 8 distinct residues and a
+diagnostic score of 0.278. Both fell inside the tolerances of criteria 2 and 3,
+and only criterion 1 rejected it.
+
+## Implementation
+
+The screen is implemented as `check_pcoc_hit_credible` in `scripts/lib_checks.py`
+and is exercised by four regression cases built from the real *RORB* column in
+`scripts/test_lib_checks.py`.
+
+## Scope
+
+These thresholds were chosen against a single dataset of 18 genes and 60 taxa and
+should be treated as a starting point rather than as calibrated values. The
+general recommendation, that PC and OC be inspected separately rather than only
+their combination, does not depend on the specific cutoffs.

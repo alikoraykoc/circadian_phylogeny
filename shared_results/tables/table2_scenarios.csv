@@ -1,0 +1,5 @@
+reconstruction,direction,events,convergent_branches,pct_of_branches,convergent_leaves,min_gene_power,worst_gene_fpr,sites_above_threshold
+ER,Gains of diurnality,10,55,46.6,41,1.000,0.0000,0
+ER,Reversals to nocturnality,5,19,16.1,13,0.996,0.0000,1
+ARD,Gains of diurnality,6,64,54.2,55,0.990,0.0000,2
+ARD,Reversals to nocturnality,10,44,37.3,29,,,not run
