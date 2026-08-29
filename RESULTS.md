@@ -24,6 +24,7 @@ alignment artefact and is set out in full rather than dropped quietly:
 | Model-free diagnostic residue screen | nothing | at the null in all 18 genes |
 | PCOC, gains of diurnality | profile-shift model, all 10 lineages converging | 0 of 11,727 sites; maximum posterior 0.098 |
 | PCOC, reversals to nocturnality | same | 1 of 11,727 sites, shown to be an N-terminal alignment artefact (Section 4) |
+| PCOC, ARD sensitivity | ASR model varied | 2 of 11,727 sites, same artefact, both rejected by the credibility check |
 | Contrast-FEL | codon model | 0 of 15,349 sites with different dN/dS |
 | RERconverge | rate model | no gene significant; all adjusted p > 0.67 |
 | TDG09 | site-specific fitness model | 885 of 3,820 sites flagged, 0 corroborated by any other method |
@@ -248,6 +249,49 @@ with `PC` at 0.5 is not evidence of convergence.
 This does not change the study's conclusion. It removes the single apparent
 exception to it, and it does so on evidence independent of the methods that
 generated it.
+
+### Sensitivity to the ancestral-state model (ARD)
+
+The whole analysis was repeated under the all-rates-different reconstruction,
+which is the sensitivity analysis for the ASR model choice. Calibration on the
+ARD scenarios gives power 0.990 to 1.000 and FPR 0.0000 across all 18 genes, so
+the sweep is interpretable.
+
+Result: **2 sites of 11,727 above threshold, both RORB, both in the same ragged
+N-terminal region as the reversal artefact, and both rejected by the credibility
+check.**
+
+| gene | site | posterior | PC | OC | verdict |
+|---|---|---|---|---|---|
+| RORB | 1 | 0.9979 | **0.500** | 0.99951 | rejected, PC at chance |
+| RORB | 2 | 0.9996 | **0.500** | 0.99985 | rejected, PC at chance |
+
+Every other gene's maximum is 0.284 or below, and 12 of 18 are exactly 0.0000.
+
+Both hits carry a profile-change component of exactly 0.5, the signature
+established in the reversal sweep: the posterior rests entirely on the one-change
+term. Column 1 is the artefact already described. Column 2 is its neighbour in
+the same ragged region and carries 8 residues.
+
+Site 2 is worth noting as a validation of the check itself. Its residue count (8)
+and its convergent-versus-background gap (0.278) both sit inside the tolerances,
+so the residue-diversity and diagnostic-gap tests would have passed it. **Only the
+profile-change test caught it.** A hit whose PC is at chance is not evidence of
+convergence, and that is now the load-bearing criterion rather than a heuristic
+about column composition.
+
+**One caveat limits how much weight this sensitivity analysis can carry.** ARD
+declares **55 of 60 leaves and 54 percent of branches convergent**, against ER's
+41 leaves and 47 percent, because it roots diurnality at a 54-tip clade. That
+leaves thin ancestral contrast for PCOC to work against. The pipeline's own
+scenario builder warns when a convergent class exceeds 60 percent of branches, on
+the grounds that the run becomes uninformative rather than negative; ARD_gain
+sits just below that line. The ARD null should therefore be read as consistent
+with the ER result rather than as independent confirmation of it.
+
+`ARD_reversal` scenarios were built but deliberately not run. Under a
+reconstruction that already places a diurnal ancestral mammal, the reversal
+direction tests a scenario the study argues against twice over.
 
 ## 5. Model-free residue screen
 
