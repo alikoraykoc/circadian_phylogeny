@@ -67,3 +67,22 @@ Fill in the data/ directory (species_tree.nwk, diel_activity.csv, alignments/,
 and optionally cds/), then edit config.sh (tip labels, gene list, reference).
 Every script has `EDIT` / `TODO` markers where project-specific choices go.
 See TODO.md for the working checklist.
+
+## Checks
+
+Run these after touching anything in the tree, scenario or alignment path, and
+before sharing results.
+
+```
+python scripts/test_lib_checks.py          # unit tests for the interface guards
+python scripts/check_reported_numbers.py   # write-ups still match the data
+bash   scripts/spikein_quick.sh            # ~5 min end-to-end positive control
+```
+
+`check_reported_numbers.py` exists because three separate documents were found
+quoting numbers that had been superseded by a later run: the parsimony counts
+(213 against the current 201), the partial-convergence k-curve, and a stale set
+of figures. It recomputes each headline number from the data, fails if a
+write-up no longer states it, and flags any known-superseded number that appears
+without a marker saying so. Superseded results live under
+`shared_results/superseded/`, which has a README giving the provenance of each.

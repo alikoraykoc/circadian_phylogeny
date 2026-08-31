@@ -164,8 +164,10 @@ branch-length-matched null draws. Two earlier number sets are superseded and
 should not be quoted: 639 / 206 / 0.322 against 0.336 (pre-rooting-fix), and
 645 / 213 / 0.330 against 0.364 (post-rooting-fix, pre-hardening). All three
 support the same conclusion. Those two runs are archived under
-`results/pcoc_sim/superseded/`, with a README giving the provenance of each; if
-you encounter 213 or 206 anywhere, that is where the number came from. The
+`shared_results/superseded/parsimony_runs/`, with a README giving the provenance
+of each; if you encounter 213 or 206 anywhere, that is where the number came
+from. (`results/` is gitignored, so anything filed only there is invisible to
+anyone reading the repository; provenance belongs in `shared_results/`.) The
 current run is distinguishable from the inside by its `n_perm`,
 `n_resolutions` and `null_draws_needing_relaxed_bl` columns, which the
 superseded ones lack.

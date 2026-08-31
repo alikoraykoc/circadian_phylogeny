@@ -62,10 +62,12 @@ that from the data side.
   diagnosticity, no evolutionary model at all. At the null in all 18 genes.
 - `observed_convergent_substitutions.csv` direct parsimony count of
   substitutions on transition branches. Use `obs_same_residue_rate` and
-  `p_rate`, NOT `p_count_confounded`: real transition branches carry far more
-  substitutions of any kind than matched random branches, so the raw count
-  measures branch length rather than convergence. Pooled, 206 of 639
-  opportunity sites are same-residue, against a null rate of 0.336. No excess.
+  `p_rate`. Do not use a raw count of changed sites: real transition branches
+  carry far more substitutions of any kind than matched random branches, so the
+  raw count measures branch length rather than convergence. (Superseded copies
+  of this table expose that raw count as `p_count_confounded`; the current table
+  omits it deliberately.) Pooled, 201 of 648 opportunity sites are same-residue,
+  against a null rate of 0.337. No excess.
 - `transition_opportunity.csv` branch-length estimate of how many sites could
   have shown convergence. Only ARNTL and CSNK1D are genuinely
   opportunity-starved; their nulls should be treated as uninformative.
@@ -74,19 +76,25 @@ that from the data side.
 
 The main limitation of the step 09 PCOC run. See PROGRESS_REPORT.md 0A.5b.
 
+This is the corrected re-run, computed after the tree re-rooting fix. The
+pre-rooting-fix curve it replaced is in `superseded/partial_convergence_prereroot/`;
+until 2026-08-31 that superseded curve held this plain directory name, so check
+which one you are reading. The corrected curve has 55 convergent branches at
+k=10, matching Table 2; the superseded one has 52.
+
 The sweep declares all 10 gains of diurnality convergent regardless of truth.
 These files measure what that costs when only some lineages actually converged.
 
 - `power_by_k.csv` power for k = 2..10 converging lineages, 3 draws each, always
-  detected with the full declared 10-event scenario. Power is 0.000 at k=2 and 3,
-  0.020 at k=5, 0.250 at k=7, and reaches 1.000 only at k=10.
+  detected with the full declared 10-event scenario. Power is 0.000 at k=2, 3
+  and 4, 0.012 at k=5, 0.258 at k=7, and reaches 1.000 only at k=10.
 - `blocks.csv` which lineages each draw used, with branch counts and lengths.
 - `partial_convergence_CLOCK.pdf` power against lineage count and against
   convergent branch length.
 
 The controlling variable is the number of FALSELY declared events, not branch
 length: draws with equal branches but fewer false declarations score far higher
-(25 branches with 8 false = 0.000; 25 branches with 4 false = 0.135). PCOC's
+(28 branches with 8 false = 0.000; 25 branches with 4 false = 0.125). PCOC's
 convergent model requires the derived profile on every declared branch, so a
 declared lineage that did not converge actively penalizes the fit.
 
@@ -96,3 +104,10 @@ checks above, which declare no convergent set.
 
 Run on CLOCK only, 3 replicates per k. The k=9 point sits below k=8, likely
 replicate noise; the shape near the top needs more replicates before quoting.
+
+## superseded/
+
+Earlier generations of results, kept for provenance and not to be quoted. See
+`superseded/README.md`, which gives the provenance of each file and the column
+signature that distinguishes a superseded table from a current one. If you meet
+a number that does not match this README, look there first.

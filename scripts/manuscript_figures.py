@@ -28,6 +28,18 @@ except Exception:
 
 PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FIG = os.path.join(PROJ, "results", "figures")
+# results/ is gitignored, so a figure written only there is invisible to anyone
+# reading the repository. Every figure is mirrored into shared_results/figures,
+# which is tracked, so the two cannot drift apart the way they did before.
+SHARED_FIG = os.path.join(PROJ, "shared_results", "figures")
+
+
+def write_fig(fig, name):
+    for d in (FIG, SHARED_FIG):
+        os.makedirs(d, exist_ok=True)
+        out = os.path.join(d, name)
+        fig.write_image(out)
+        print("wrote", out)
 os.makedirs(FIG, exist_ok=True)
 
 S1, S2, S3, S4 = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
@@ -96,9 +108,7 @@ def figure2():
         legend=dict(orientation="h", y=-0.20, x=0, font=dict(size=10)),
         width=760, height=440,
     )
-    out = os.path.join(FIG, "fig2_positive_control.pdf")
-    fig.write_image(out)
-    print("wrote", out)
+    write_fig(fig, "fig2_positive_control.pdf")
 
 
 # ---------------------------------------------------------------- Figure 3
@@ -143,9 +153,7 @@ def figure3():
         legend=dict(orientation="h", y=-0.13, x=0, font=dict(size=10)),
         width=720, height=560,
     )
-    out = os.path.join(FIG, "fig3_parsimony_rates.pdf")
-    fig.write_image(out)
-    print("wrote", out)
+    write_fig(fig, "fig3_parsimony_rates.pdf")
 
 
 # ---------------------------------------------------------------- Figure 1
@@ -250,9 +258,7 @@ def figure1():
             x=xpos[lf], y=ypos[lf], text=f"<i>{lf.name.replace('_', ' ')}</i>",
             xanchor="left", yanchor="middle", xshift=7, showarrow=False,
             font=dict(size=7, color=INK if diel.get(lf.name) == "diurnal" else INK2))
-    out = os.path.join(FIG, "fig1_tree.pdf")
-    fig.write_image(out)
-    print("wrote", out)
+    write_fig(fig, "fig1_tree.pdf")
 
 
 if __name__ == "__main__":
