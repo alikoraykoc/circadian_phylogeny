@@ -163,7 +163,12 @@ with 2000 permutations, 10 tie-broken parsimony resolutions per site, and
 branch-length-matched null draws. Two earlier number sets are superseded and
 should not be quoted: 639 / 206 / 0.322 against 0.336 (pre-rooting-fix), and
 645 / 213 / 0.330 against 0.364 (post-rooting-fix, pre-hardening). All three
-support the same conclusion.
+support the same conclusion. Those two runs are archived under
+`results/pcoc_sim/superseded/`, with a README giving the provenance of each; if
+you encounter 213 or 206 anywhere, that is where the number came from. The
+current run is distinguishable from the inside by its `n_perm`,
+`n_resolutions` and `null_draws_needing_relaxed_bl` columns, which the
+superseded ones lack.
 
 **Per-site testing, and the filter it forced.** The pooled rate is well powered
 against a pervasive signal but blind to a handful of real sites, which is the
