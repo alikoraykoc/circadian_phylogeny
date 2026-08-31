@@ -44,6 +44,37 @@ def fasta_dims(path):
     return n, len(first)
 
 
+AA = set("ACDEFGHIKLMNPQRSTVWY")
+
+
+def site_classes(path):
+    """Constant, variable and parsimony-informative column counts.
+
+    A column is parsimony-informative when at least two distinct amino acids
+    each occur in at least two sequences. Gaps and ambiguity codes are ignored,
+    matching the convention IQ-TREE reports under the same name.
+    """
+    rows, cur = [], []
+    for line in open(path):
+        line = line.rstrip()
+        if line.startswith(">"):
+            if cur:
+                rows.append("".join(cur)); cur = []
+        elif line:
+            cur.append(line)
+    if cur:
+        rows.append("".join(cur))
+    L = len(rows[0])
+    const = pinf = 0
+    for j in range(L):
+        cnt = Counter(r[j] for r in rows if r[j] in AA)
+        if len(cnt) <= 1:
+            const += 1
+        if sum(1 for v in cnt.values() if v >= 2) >= 2:
+            pinf += 1
+    return const, L - const, pinf
+
+
 def tdg09_testable(gene, root):
     p = os.path.join(root, f"{gene}.tdg09.out")
     if not os.path.exists(p):
@@ -75,10 +106,20 @@ def table1():
             continue
         n_un, l_un = fasta_dims(un)
         n_tr, l_tr = fasta_dims(tr)
+        _const, n_var, n_pinf = site_classes(tr)
+        # TDG09 returns NA at every column that is not parsimony-informative, so
+        # its testable set must equal the parsimony-informative set exactly.
+        # Verified site by site across all 18 genes; asserted here so a change in
+        # trimming, taxon sampling or TDG09 version cannot silently break it.
+        n_td = tdg09_testable(g, os.path.join(PROJ, "results", "tdg09"))
+        if n_td is not None and n_td != n_pinf:
+            raise SystemExit(
+                f"{g}: TDG09 testable sites ({n_td}) != parsimony-informative "
+                f"columns ({n_pinf}); the two are expected to be identical")
         rows.append(dict(
             gene=g, module=MODULE.get(g, ""), taxa=n_tr,
             untrimmed_columns=l_un, trimmed_columns=l_tr,
-            tdg09_testable_sites=tdg09_testable(g, os.path.join(PROJ, "results", "tdg09")) or "",
+            variable_columns=n_var, parsimony_informative_sites=n_pinf,
             codons_analysed=qc.get(g, {}).get("codons_used", "")))
     with open(os.path.join(OUT, "table1_genes.csv"), "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
@@ -169,12 +210,16 @@ if __name__ == "__main__":
     t2 = table2()
     blocks = [
         md(t1, ["Gene", "Module", "Taxa", "Untrimmed columns", "Trimmed columns",
-                "TDG09 testable sites", "Codons analysed"],
+                "Variable columns", "Parsimony-informative sites",
+                "Codons analysed"],
            "Table 1. Gene set, taxon occupancy and alignment dimensions.",
-           "Trimmed columns are those retained by trimAl `-automated1`. TDG09 "
-           "testable sites are the variable columns for which a likelihood ratio "
-           "could be computed. Codons analysed are those remaining after removal "
-           "of all-gap columns."),
+           "Trimmed columns are those retained by trimAl `-automated1`. A column "
+           "is variable when it holds more than one amino acid, and "
+           "parsimony-informative when at least two amino acids each occur in at "
+           "least two sequences. The parsimony-informative columns are exactly "
+           "the sites TDG09 could test; it returns NA at every other column. "
+           "Codons analysed are those remaining after removal of all-gap "
+           "columns."),
         "",
         md(t2, ["Reconstruction", "Direction", "Events", "Convergent branches",
                 "Percent of branches", "Convergent leaves", "Minimum gene power",

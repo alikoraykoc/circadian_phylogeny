@@ -97,7 +97,12 @@ trimmed column index back to a human residue number when sites are reported.
 | BHLHE40 | 60 | 666 | 407 |
 | BHLHE41 | 58 | 768 | 582 |
 
-Total analysed protein alignment: 11,727 trimmed columns.
+Total analysed protein alignment: 11,727 trimmed columns, of which 5,970 are
+constant, 5,757 variable and 3,820 parsimony-informative (at least two amino
+acids each present in at least two sequences, gaps ignored). The
+parsimony-informative set is exactly the set of sites TDG09 was able to test;
+it returns NA at every other column. Verified site by site across all 18
+genes, and asserted in `scripts/manuscript_tables.py` so it cannot drift.
 
 Coding sequences for the selection track were retrieved separately and matched
 to each protein by **transcript accession, not by gene name**, since isoform
