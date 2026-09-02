@@ -32,7 +32,8 @@ repressors (*BHLHE40*, *BHLHE41*). Taxon occupancy is incomplete for some genes;
 per-gene alignments contain between 40 and 60 species (Table 1).
 
 Alignment headers were verified against species tree tip labels before any
-downstream analysis. Alignments were trimmed with trimAl v1.5.rev1 under the
+downstream analysis. Alignments were trimmed with trimAl v1.5.rev1 (Capella-Gutierrez et al. 2009)
+under the
 `-automated1` heuristic, retaining for each gene a map from every trimmed column
 to its index in the untrimmed alignment. That map, combined with the *Homo
 sapiens* alignment row, converts trimmed column indices to human residue
@@ -43,23 +44,23 @@ The parsimony-informative columns are exactly the sites TDG09 was able to test.
 Coding sequences for the selection analyses were retrieved by matching transcript
 accession rather than gene name, since isoform mismatch is the principal failure
 mode in codon back-translation. Sequences came from RefSeq where a curated
-transcript existed and from `miniprot` genome alignment otherwise. Every coding
+transcript existed and from `miniprot` genome alignment (Li 2023) otherwise. Every coding
 sequence was verified to translate to its corresponding protein alignment row,
 and sequences failing that check were excluded. Codon alignments were generated
-by back-translating protein alignments with pal2nal.
+by back-translating protein alignments with pal2nal (Suyama et al. 2006).
 
 ## Phylogenetic framework
 
 The topology was pruned from the mammalian supertree of Upham et al. (2019) and
 held fixed for every analysis, so that transition branches occupy identical nodes
-across all 18 genes. Branch lengths were estimated in IQ-TREE v3.1.1 under this
+across all 18 genes. Branch lengths were estimated in IQ-TREE v3.1.1 (Wong et al. 2026) under this
 fixed topology (`-te`), which optimises lengths without topology search. Where a
 gene lacked taxa present in the species tree, the tree was pruned to that gene's
 taxa before estimation.
 
 Two branch length sets were produced. Analyses treating genes independently
 (PCOC, TDG09, the selection tests) used per-gene best-fit models selected by
-ModelFinder. RERconverge, which compares rates across genes, used a single
+ModelFinder (Kalyaanamoorthy et al. 2017). RERconverge, which compares rates across genes, used a single
 uniform model (Q.MAMMAL+F+R6) selected by running ModelFinder once on the
 concatenation of all 18 trimmed alignments; differing rate-heterogeneity models
 across genes would otherwise introduce systematic differences in branch length
@@ -79,9 +80,10 @@ analysis backbone.
 
 ## Ancestral state reconstruction and definition of convergent events
 
-Ancestral diel states were reconstructed with corHMM v2.8 using marginal
+Ancestral diel states were reconstructed with corHMM v2.8 (Boyko and Beaulieu
+2021) using marginal
 reconstruction, one rate category and a free root. Phylogenetic signal in the
-trait was assessed with Pagel's lambda in phytools v2.5.2.
+trait was assessed with Pagel's lambda in phytools v2.5.2 (Revell 2024).
 
 Two models were fitted. The equal-rates (ER) model was the primary analysis, and
 the all-rates-different (ARD) model was retained as a sensitivity analysis on the
@@ -113,13 +115,15 @@ For each transition, the convergent event comprises the transition branch plus
 every descendant branch remaining in the derived state. Descent terminates at any
 node that reverts, so nested reversals are excluded from the convergent group.
 Node identity was keyed by descendant tip set rather than node index, since node
-numbering differs between `ape`, `ete3`/IQ-TREE and PCOC and is not preserved
+numbering differs between `ape` (Paradis and Schliep 2019), `ete3`
+(Huerta-Cepas et al. 2016)/IQ-TREE and PCOC and is not preserved
 under pruning. A node state table keyed by tip set was published once and read by
 every downstream consumer.
 
 ## Hemiplasy control
 
-Gene and site concordance factors were computed in IQ-TREE from the unconstrained
+Gene and site concordance factors (Minh et al. 2020) were computed in IQ-TREE
+from the unconstrained
 per-gene trees against the species tree, and each diel transition branch was
 matched to its concordance values by descendant tip set. A branch was flagged
 when both gCF and sCFL fell below 50 percent; either alone is commonly estimation
@@ -152,7 +156,8 @@ draws of which lineages at each k.
 
 ## Site-specific fitness shifts
 
-TDG09 v1.1.2 was used to test, per site, whether amino acid fitness differs
+TDG09 v1.1.2 (Tamuri et al. 2009) was used to test, per site, whether amino acid
+fitness differs
 between nocturnal and diurnal lineages. Tree nodes were labelled from the
 published node state table rather than by propagating states from an assumed
 root, and the group argument order was set so that the nocturnal group is
@@ -234,7 +239,8 @@ study.
 
 ## Relative evolutionary rates
 
-RERconverge v0.3.0 was used to test gene-level association between relative
+RERconverge v0.3.0 (Kowalczyk et al. 2019) was used to test gene-level
+association between relative
 evolutionary rate and diel activity, consuming the uniform-model fixed-topology
 trees. Relative rates were computed with a square-root transform. The foreground
 was defined as diurnal tip branches only, the conservative choice. Association
@@ -253,14 +259,16 @@ the null corresponds to the analysis actually performed.
 
 ## Selection analyses
 
-Codon-level analyses were run in HyPhy v2.5.93 on the codon alignments. Branch
+Codon-level analyses were run in HyPhy v2.5.93 (Kosakovsky Pond et al. 2020) on
+the codon alignments. Branch
 lengths were taken from the per-gene substitution trees rather than the
 time-calibrated species tree, and all-gap codon columns were removed, with a
 per-gene coordinate map retained so that post-filtering codon indices map back to
-protein and human residue coordinates. Contrast-FEL tested, per site, whether the
+protein and human residue coordinates. Contrast-FEL (Kosakovsky Pond et al. 2021) tested, per site, whether the
 ratio of nonsynonymous to synonymous substitution rates differs between the
 diurnal-transition branch set and the remainder of the tree, with correction
-applied both within gene and across genes. RELAX was run to test for relaxed or
+applied both within gene and across genes. RELAX (Wertheim et al. 2015) was run
+to test for relaxed or
 intensified selection on the same branch set.
 
 ## Multi-method consensus
@@ -292,8 +300,10 @@ against a withheld key.
 
 IQ-TREE v3.1.1; trimAl v1.5.rev1; corHMM v2.8; phytools v2.5.2; ape v5.8.1;
 RERconverge v0.3.0; PCOC (`carinerey/pcoc` container); TDG09 v1.1.2; HyPhy
-v2.5.93; pal2nal; miniprot; R v4.4.1; Python v3.11.3 with ete3 v3.1.3. Figures
-were produced with Plotly and exported as vector PDF. Analysis code, scenario
+v2.5.93; pal2nal; miniprot; R v4.4.1; Python v3.11.3 with ete3 v3.1.3 and
+NumPy v1.25.2 (Harris et al. 2020). Figures
+were produced with Plotly (Plotly Technologies Inc. 2015) and exported as vector
+PDF. Analysis code, scenario
 files and result tables are available at the project repository.
 
 ---
@@ -565,6 +575,8 @@ Existing: `results/figures/selection_summary.pdf`.
 
 # References
 
+## Literature
+
 Bennie JJ, Duffy JP, Inger R, Gaston KJ (2014). Biogeography of time
 partitioning in mammals. *Proceedings of the National Academy of Sciences*
 111(38): 13727-13732. doi:10.1073/pnas.1216063110
@@ -595,8 +607,80 @@ Upham NS, Esselstyn JA, Jetz W (2019). Inferring the mammal tree: species-level
 sets of phylogenies for questions in ecology, evolution, and conservation.
 *PLoS Biology* 17(12): e3000494. doi:10.1371/journal.pbio.3000494
 
-Software versions are listed in the Software and data availability section.
-Formal citations for the analysis software are still to be added.
+## Software
+
+Boyko JD, Beaulieu JM (2021). Generalized hidden Markov models for phylogenetic
+comparative datasets. *Methods in Ecology and Evolution* 12: 468-478.
+doi:10.1111/2041-210X.13534
+
+Capella-Gutierrez S, Silla-Martinez JM, Gabaldon T (2009). trimAl: a tool for
+automated alignment trimming in large-scale phylogenetic analyses.
+*Bioinformatics* 25(15): 1972-1973. doi:10.1093/bioinformatics/btp348
+
+Harris CR, Millman KJ, van der Walt SJ, et al. (2020). Array programming with
+NumPy. *Nature* 585: 357-362. doi:10.1038/s41586-020-2649-2
+
+Huerta-Cepas J, Serra F, Bork P (2016). ETE 3: reconstruction, analysis, and
+visualization of phylogenomic data. *Molecular Biology and Evolution* 33(6):
+1635-1638. doi:10.1093/molbev/msw046
+
+Kalyaanamoorthy S, Minh BQ, Wong TKF, von Haeseler A, Jermiin LS (2017).
+ModelFinder: fast model selection for accurate phylogenetic estimates. *Nature
+Methods* 14: 587-589. doi:10.1038/nmeth.4285
+
+Kosakovsky Pond SL, Poon AFY, Velazquez R, et al. (2020). HyPhy 2.5: a
+customizable platform for evolutionary hypothesis testing using phylogenies.
+*Molecular Biology and Evolution* 37(1): 295-299. doi:10.1093/molbev/msz197
+
+Kosakovsky Pond SL, Wisotsky SR, Escalante A, Magalis BR, Weaver S (2021).
+Contrast-FEL: a test for differences in selective pressures at individual sites
+among clades and sets of branches. *Molecular Biology and Evolution* 38(3):
+1184-1198. doi:10.1093/molbev/msaa263
+
+Kowalczyk A, Meyer WK, Partha R, Mao W, Clark NL, Chikina M (2019).
+RERconverge: an R package for associating evolutionary rates with convergent
+traits. *Bioinformatics* 35(22): 4815-4817. doi:10.1093/bioinformatics/btz468
+
+Li H (2023). Protein-to-genome alignment with miniprot. *Bioinformatics* 39(1):
+btad014. doi:10.1093/bioinformatics/btad014
+
+Minh BQ, Hahn MW, Lanfear R (2020). New methods to calculate concordance
+factors for phylogenomic datasets. *Molecular Biology and Evolution* 37:
+2727-2733. doi:10.1093/molbev/msaa106
+
+Paradis E, Schliep K (2019). ape 5.0: an environment for modern phylogenetics
+and evolutionary analyses in R. *Bioinformatics* 35(3): 526-528.
+doi:10.1093/bioinformatics/bty633
+
+Plotly Technologies Inc. (2015). *Collaborative data science.* Montreal, QC.
+https://plot.ly
+
+R Core Team (2024). *R: a language and environment for statistical computing.*
+R Foundation for Statistical Computing, Vienna.
+
+Revell LJ (2024). phytools 2.0: an updated R ecosystem for phylogenetic
+comparative methods (and other things). *PeerJ* 12: e16505.
+doi:10.7717/peerj.16505
+
+Suyama M, Torrents D, Bork P (2006). PAL2NAL: robust conversion of protein
+sequence alignments into the corresponding codon alignments. *Nucleic Acids
+Research* 34: W609-W612. doi:10.1093/nar/gkl315
+
+Tamuri AU, dos Reis M, Hay AJ, Goldstein RA (2009). Identifying changes in
+selective constraints: host shifts in influenza. *PLoS Computational Biology*
+5(11): e1000564. doi:10.1371/journal.pcbi.1000564
+
+Wertheim JO, Murrell B, Smith MD, Kosakovsky Pond SL, Scheffler K (2015).
+RELAX: detecting relaxed selection in a phylogenetic framework. *Molecular
+Biology and Evolution* 32(3): 820-832. doi:10.1093/molbev/msu400
+
+Wong TKF, Ly-Trong N, Ren H, et al. (2026). IQ-TREE 3: phylogenomic inference
+software using complex evolutionary models. *Molecular Biology and Evolution*
+43(5): msag117. doi:10.1093/molbev/msag117
+
+PCOC is cited above (Rey et al. 2018) and was run from the `carinerey/pcoc`
+container. Versions of every tool are listed in the Software and data
+availability section.
 
 ---
 

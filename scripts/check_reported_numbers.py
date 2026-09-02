@@ -264,6 +264,46 @@ def check_permulations():
                  r"anticonservative in) ([\d]+) of (?:the )?18", [n_anti])
 
 
+# Surnames that are two words, so the "X et al." form ends on the second word
+# while the reference entry begins on the first.
+COMPOUND_SURNAMES = {"Pond": "Kosakovsky"}
+
+
+def check_references():
+    """Every in-text citation must be listed, and every entry must be cited."""
+    txt = doc_text("MANUSCRIPT.md")
+    if "# References" not in txt:
+        problems.append("MANUSCRIPT.md has no References section")
+        return
+    body, refs = txt.split("# References", 1)
+    # Collapse wrapping so "Boyko and Beaulieu\n2021" reads as one citation.
+    flat = re.sub(r"\s+", " ", body)
+
+    cited = set()
+    # "Surname et al. 2018" and "Surname and Surname (2015)".
+    for m in re.finditer(
+            r"\b([A-Z][a-zA-Z-]+) (?:et al\.?|and [A-Z][a-zA-Z-]+) \(?(\d{4})\)?", flat):
+        cited.add((COMPOUND_SURNAMES.get(m.group(1), m.group(1)), m.group(2)))
+    # Single-author and corporate forms, always parenthesised as "(Name 2023)".
+    # The lookbehind keeps this off the second surname of "X and Y 2015".
+    for m in re.finditer(
+            r"\((?![^()]*\band\b)([A-Z][a-zA-Z-]+)(?: [A-Z][A-Za-z.]+)* (\d{4})\)", flat):
+        cited.add((COMPOUND_SURNAMES.get(m.group(1), m.group(1)), m.group(2)))
+
+    listed = set()
+    for line in refs.split("\n"):
+        m = re.match(r"^([A-Z][a-zA-Z-]+)[^(]*\((\d{4})\)", line)
+        if m:
+            listed.add((m.group(1), m.group(2)))
+
+    for name, year in sorted(cited - listed):
+        problems.append(f"MANUSCRIPT.md cites {name} {year} but the References "
+                        f"section does not list it")
+    for name, year in sorted(listed - cited):
+        problems.append(f"References lists {name} {year} but nothing in the text "
+                        f"cites it")
+
+
 # ---------------------------------------------------------------- Part B
 # Numbers that were correct in an earlier generation of the analysis. They may
 # appear only next to a marker saying so.
@@ -319,6 +359,7 @@ if __name__ == "__main__":
     check_contrastfel()
     check_spikein()
     check_permulations()
+    check_references()
     check_superseded_numbers()
 
     if problems:
