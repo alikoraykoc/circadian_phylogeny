@@ -188,13 +188,27 @@ a null result and would need reporting were the result positive.
 Fitch parsimony was used to assign amino acids to internal nodes, so that a
 substitution on a branch is simply a difference between parent and child states.
 Because transition branches carry more substitutions of any kind than randomly
-chosen branches of matched clade size, raw counts are confounded; the test
-statistic was therefore the proportion of sites changing in two or more
-independent lineages that changed to the same residue. Null branches were
-additionally matched on branch length to within a factor of two. Parsimony ties
-were resolved ten times per site with random tie-breaking to propagate ancestral
-state uncertainty. Each site received a permutation p-value from 2000
-permutations and a Benjamini-Hochberg q-value across all genes.
+chosen branches of matched clade size, raw counts are confounded. This is the
+confound identified by Thomas and Hahn (2015), whose reanalysis of echolocating
+mammals showed a reported excess of convergence to disappear once a null
+accounting for non-adaptive convergence was applied. Their null uses the
+correlation between convergent and divergent substitutions across species pairs;
+the null used here is a different implementation of the same principle. The test
+statistic was the proportion of sites changing in two or more independent
+lineages that changed to the same residue, and null branches were drawn matched
+both on clade size and on branch length to within a factor of two. Conditioning
+on opportunity addresses the symptom and matching branch length addresses the
+cause, so the two are reported together and are expected to agree.
+
+Parsimony ties were resolved ten times per site with random tie-breaking to
+propagate ancestral state uncertainty. This is not standard practice; most
+applications commit to a single reconstruction. It was included because the
+choice is consequential: an earlier run of these data taking one arbitrary
+resolution per site returned 213 same-residue sites where the ten-resolution
+procedure reported below returns 201, a 6 percent shift arising entirely from
+which of several equally parsimonious histories happens to be selected. Each
+site received a permutation p-value from 2000 permutations and a
+Benjamini-Hochberg q-value across all genes.
 
 Sites were additionally required to be phenotype-specific: the frequency of the
 convergent residue among diurnal species minus its frequency among nocturnal
@@ -203,6 +217,20 @@ homoplasy unrelated to diel activity, because a residue arising repeatedly acros
 the tree will by chance fall on some transition branches, and the real
 transitions form a phylogenetically clustered set while the null scatters
 branches more widely.
+
+This second criterion is an addition to the standard procedure rather than part
+of it, and it was introduced in response to a diagnosed failure rather than
+imposed in advance. Applying the permutation test alone returned 12 sites at
+q <= 0.05 whose residues were not diagnostic of the phenotype: the median
+frequency gap among them was 0.067, three were negative, meaning the residue was
+commoner in nocturnal than in diurnal species, and half were serine, the most
+substitution-tolerant residue in the genetic code. The clearest case, *CLOCK*
+site 675, carried valine in two diurnal and two nocturnal species, two of the
+four being nocturnal marsupials. The requirement that a convergent residue also
+be phenotype-diagnostic is implicit in the logic of Forward Genomics
+(Hiller et al. 2012), which likewise conditions a genomic signal on matching the
+phenotype pattern, but the frequency-gap form used here is specific to this
+study.
 
 ## Relative evolutionary rates
 
@@ -328,6 +356,14 @@ two nocturnal species, a frequency gap of -0.002, with two of the four carriers
 being nocturnal marsupials. The largest diurnal minus nocturnal gap among the
 twelve is 0.232 and the median is 0.067, so **no site is both statistically
 unusual and phenotype-specific**.
+
+The two criteria are close to orthogonal in these data, which is what makes the
+empty intersection informative rather than an artefact of a strict threshold. Of
+the 201 same-residue sites, 12 reach q <= 0.05 and 31 exceed the 0.25
+phenotype-specificity gap, but no site belongs to both sets. The result therefore
+does not turn on where the gap threshold is placed: the statistically unusual
+sites are not merely below the cutoff, they include three whose convergent
+residue is commoner in nocturnal than in diurnal species.
 
 The model-free residue screen agrees. Observed maximum diagnostic scores sit on
 the permutation null in all 18 genes and below it in several (*RORB* 0.223
@@ -524,6 +560,43 @@ sets. Existing: `results/figures/pcoc_sim_power_{ER_gain,ER_reversal,ARD_gain}.p
 
 **Supplementary Figure S2.** Selection analysis summary.
 Existing: `results/figures/selection_summary.pdf`.
+
+---
+
+# References
+
+Bennie JJ, Duffy JP, Inger R, Gaston KJ (2014). Biogeography of time
+partitioning in mammals. *Proceedings of the National Academy of Sciences*
+111(38): 13727-13732. doi:10.1073/pnas.1216063110
+
+Hiller M, Schaar BT, Indjeian VB, Kingsley DM, Hagey LR, Bejerano G (2012). A
+"forward genomics" approach links genotype to phenotype using independent
+phenotypic losses among related species. *Cell Reports* 2(4): 817-823.
+doi:10.1016/j.celrep.2012.08.032
+
+Maor R, Dayan T, Ferguson-Gow H, Jones KE (2017). Temporal niche expansion in
+mammals from a nocturnal ancestor after dinosaur extinction. *Nature Ecology &
+Evolution* 1(12): 1889-1895. doi:10.1038/s41559-017-0366-5
+
+Rey C, Guéguen L, Sémon M, Boussau B (2018). Accurate detection of convergent
+amino-acid evolution with PCOC. *Molecular Biology and Evolution* 35(9):
+2296-2306. doi:10.1093/molbev/msy114
+
+Saputra E, Kowalczyk A, Cusick L, Clark NL, Chikina M (2021). Phylogenetic
+permulations: a statistically rigorous approach to measure confidence in
+associations in a phylogenetic context. *Molecular Biology and Evolution* 38(7):
+3004. doi:10.1093/molbev/msab068
+
+Thomas GWC, Hahn MW (2015). Determining the null model for detecting adaptive
+convergence from genomic data: a case study using echolocating mammals.
+*Molecular Biology and Evolution* 32: 1232-1236. doi:10.1093/molbev/msv013
+
+Upham NS, Esselstyn JA, Jetz W (2019). Inferring the mammal tree: species-level
+sets of phylogenies for questions in ecology, evolution, and conservation.
+*PLoS Biology* 17(12): e3000494. doi:10.1371/journal.pbio.3000494
+
+Software versions are listed in the Software and data availability section.
+Formal citations for the analysis software are still to be added.
 
 ---
 

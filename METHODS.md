@@ -391,6 +391,14 @@ features of the implementation are load-bearing:
    The test statistic is therefore the *fraction* of sites changing in two or
    more independent lineages that landed on the same residue, not the count.
 
+   This is the confound of Thomas and Hahn (2015, MBE 32:1232-1236), whose
+   reanalysis of echolocating mammals showed a published excess of convergence
+   to vanish once a null accounting for non-adaptive convergence was used. Their
+   null is built from the correlation between convergent and divergent
+   substitutions across species pairs; ours is a permutation with matched
+   branches. Same principle, different implementation, and the citation belongs
+   in the write-up so a reader does not think the confound went unnoticed.
+
 2. **The null is matched on branch length as well as clade size.** Null branches
    must fall within a factor of 2.0 of the real branch length. Conditioning on
    opportunity corrects the symptom; length-matched sampling removes the cause.
@@ -399,6 +407,13 @@ features of the implementation are load-bearing:
 3. **Ancestral-state uncertainty is propagated.** Fitch leaves ties, and
    resolving them deterministically silently commits to one history. Each site
    is resolved 10 times with random tie-breaking.
+
+   This is *not* standard practice; most applications take a single
+   reconstruction. It is here because the choice turned out to be consequential:
+   resolving ties once rather than ten times moves the same-residue count from
+   213 to 201, a 6 percent shift produced entirely by which of several equally
+   parsimonious histories happens to be picked. The superseded 213 run is in
+   `shared_results/superseded/parsimony_runs/`.
 
 4. **Individual sites are tested, not only the aggregate.** The pooled rate is
    well powered against a pervasive signal but blind to a handful of real sites,
@@ -421,6 +436,21 @@ features of the implementation are load-bearing:
    transitions are a phylogenetically clustered set while the null scatters
    branches more widely, the coincidence looks unusual. That is homoplasy
    unrelated to diel activity, not convergence.
+
+   **This criterion is our addition, not standard procedure.** The concern it
+   addresses is thoroughly established (Thomas and Hahn 2015 above; the general
+   problem of non-adaptive homoplasy in convergence studies), and requiring a
+   genomic signal to match the phenotype pattern is the same logic as Forward
+   Genomics (Hiller et al. 2012), but the frequency-gap form with a 0.25
+   threshold is specific to this study and must be presented as such.
+
+   Two facts make it defensible rather than arbitrary. First, it was introduced
+   after diagnosing a failure, not before: the 12 sites are real output, 3 have
+   *negative* gaps, and 6 of 12 are serine, the most substitution-tolerant
+   residue. Second, the two criteria are close to orthogonal here: 12 sites
+   reach q <= 0.05, 31 of the 201 exceed the 0.25 gap, and the intersection is
+   empty. Moving the threshold does not rescue a positive result, so the zero is
+   not an artefact of where the cutoff was placed.
 
 For efficiency, the parsimony reconstruction does not depend on which branches
 are called transitions, so it is computed once per site and each permutation
