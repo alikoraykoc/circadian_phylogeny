@@ -90,6 +90,25 @@ toward opposite phenotypes, they were analysed as separate convergent classes
 throughout; PCOC fits a single convergent amino acid profile per run, so merging
 them would be self-cancelling.
 
+Two properties of the model make that merge unsound rather than merely
+inefficient. First, the derived profile is shared. PCOC assigns one amino acid
+profile to every branch declared convergent and a second profile to the
+remainder, then asks whether the declared branches all shifted to that same
+derived profile; the question is whether the lineages arrived at one destination,
+not whether each moved. Gains and reversals move toward opposite states, so no
+single derived profile describes both. At a site where the derived diurnal state
+favours one residue and the ancestral nocturnal state another, a merged run must
+either take the diurnal profile, which the reversal branches then contradict, or
+take the ancestral profile, in which case the convergent model collapses into the
+null. The cancellation is not a loss of sensitivity in weak data: the sharper the
+true signal in each direction, the more exactly the two offset. Second, a merged
+class would span 74 of the 118 branches on the species tree, 62.7 percent,
+leaving the background profile to be estimated from a minority of the tree and
+inverting the partition the model assumes.
+
+Analysed separately, both directions are well powered at the calibrated
+threshold (Table 2), so keeping them apart costs no sensitivity.
+
 For each transition, the convergent event comprises the transition branch plus
 every descendant branch remaining in the derived state. Descent terminates at any
 node that reverts, so nested reversals are excluded from the convergent group.

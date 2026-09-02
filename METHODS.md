@@ -176,6 +176,28 @@ per run. Placing branches that move toward opposite phenotypes into one
 convergent class is incoherent and self-cancelling, so gains of diurnality and
 reversals to nocturnality are analysed as separate convergent classes throughout.
 
+Two properties of the model make this a correctness issue, not a tuning choice.
+
+1. *The derived profile is shared.* One profile is assigned to every declared
+   convergent branch and a second to the remainder; the model then asks whether
+   the declared branches all shifted to that same derived profile. The question
+   is whether the lineages reached one destination, not whether each of them
+   moved. Opposite directions have no common destination. At a site where the
+   derived diurnal state favours one residue and the ancestral nocturnal state
+   another, a merged run either takes the diurnal profile, which the reversal
+   branches contradict, or takes the ancestral profile, at which point the
+   convergent model is the null model. Note the direction of the effect: the
+   sharper the real signal in each direction, the more exactly the two offset,
+   so the merge fails hardest on exactly the sites it is meant to find.
+
+2. *The merged class would be most of the tree.* 55 gain branches plus 19
+   reversal branches is 74 of 118, or 62.7 percent. The background profile would
+   be estimated from the minority, which inverts the partition the model assumes.
+
+Analysed separately, both directions clear calibration comfortably (worst gene
+power 1.000 for gains and 0.996 for reversals), so the separation buys coherence
+at no cost in sensitivity.
+
 **Convergent event membership.** For each transition onto a child node, the
 convergent event comprises that node plus every descendant branch that remains
 in the derived state. Descent stops at any node that reverts, so a nested
