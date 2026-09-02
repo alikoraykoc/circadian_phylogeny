@@ -27,6 +27,7 @@ alignment artefact and is set out in full rather than dropped quietly:
 | PCOC, ARD sensitivity | ASR model varied | 2 of 11,727 sites, same artefact, both rejected by the credibility check |
 | Contrast-FEL | codon model | 0 of 15,349 sites with different dN/dS |
 | RERconverge | rate model | no gene significant; all adjusted p > 0.67 |
+| RERconverge, permulation null | calibrated null preserving phylogeny | no gene reaches p = 0.05; smallest 0.114 (BHLHE40, from parametric 0.051) |
 | TDG09 | site-specific fitness model | 885 of 3,820 sites flagged, 0 corroborated by any other method |
 
 The two model-free lines carry the claim in full generality, because they
@@ -358,6 +359,17 @@ RERconverge finds **no gene with relative evolutionary rates significantly
 associated with diel activity**. All 18 adjusted p-values exceed 0.67. The
 strongest raw signal is BHLHE40 (rho = -0.178, p = 0.051, adjusted p = 0.677),
 which is what one expects as the best of 18 null tests.
+
+**Permulation null.** Parametric p-values from this test are not calibrated under
+phylogenetic non-independence, so the association was re-tested against 1000
+permulations (`scripts/11b_rerconverge_permulations.R`). No gene reaches p = 0.05.
+BHLHE40's 0.051 becomes **0.114**, and the smallest adjusted value is 0.728.
+Complete-case permulations agree (0.104, adjusted 0.764). The parametric p-value
+is smaller than the permulation p-value in 10 of 18 genes, most sharply NPAS2
+(0.127 against 0.673) and ARNTL (0.137 against 0.361), confirming the parametric
+test was anticonservative here. The single gene that flirted with significance
+does not survive calibration, so this line of evidence is now measured rather
+than assumed.
 
 Notably, the sign of the correlation is negative in 13 of 18 genes, meaning
 diurnal lineages tend to show slightly *slower* relative rates, the opposite of

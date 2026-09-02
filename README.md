@@ -79,6 +79,13 @@ python scripts/check_reported_numbers.py   # write-ups still match the data
 bash   scripts/spikein_quick.sh            # ~5 min end-to-end positive control
 ```
 
+Optional, roughly 8 minutes each, not part of the routine loop:
+
+```
+NUMPERMS=1000 PERMMODE=ssm Rscript scripts/11b_rerconverge_permulations.R
+NUMPERMS=1000 PERMMODE=cc  Rscript scripts/11b_rerconverge_permulations.R
+```
+
 `check_reported_numbers.py` exists because three separate documents were found
 quoting numbers that had been superseded by a later run: the parsimony counts
 (213 against the current 201), the partial-convergence k-curve, and a stale set

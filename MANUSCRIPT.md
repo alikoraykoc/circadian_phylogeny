@@ -170,6 +170,19 @@ clades of the observed sizes at random positions on the same gene tree, 1000
 permutations per gene, so that the null retains the same autocorrelation
 structure and only the phenotype assignment is randomised.
 
+This is a size-matched block permutation, a direct variant of the permulation
+principle of Saputra et al. (2021), which generates null phenotypes preserving
+both the number of foreground species and their phylogenetic relationships.
+Published permulations obtain that structure by simulating the trait on the tree
+under a fitted transition model and then binarising; the screen instead
+reproduces the observed clade size profile directly, because introducing a
+fitted evolutionary model would reimport the assumption the screen exists to
+avoid. The candidate pool constrains large blocks: in *CLOCK*, for instance, the
+tree offers 5 clades of size five against 59 of size one, so a permutation
+occasionally redraws an observed clade. That inflates the null toward the
+observed value and makes the test conservative, which is the safe direction for
+a null result and would need reporting were the result positive.
+
 ## Direct counting of convergent substitutions
 
 Fitch parsimony was used to assign amino acids to internal nodes, so that a
@@ -199,6 +212,16 @@ trees. Relative rates were computed with a square-root transform. The foreground
 was defined as diurnal tip branches only, the conservative choice. Association
 was tested with a binary phenotype correlation requiring at least 10 species and
 2 foreground branches per gene, and p-values were corrected across the 18 genes.
+
+Because parametric p-values from phylogenetic association tests are miscalibrated
+under phylogenetic non-independence, the association was also assessed against a
+permulation null (Saputra et al. 2021), which generates null phenotypes
+preserving both the number of foreground species and their phylogenetic
+relationships. One thousand permulations were generated in species-subset-match
+mode, which regenerates the null separately against each gene's own taxon set,
+and repeated in complete-case mode as a check. The foreground was constructed
+with terminal branches only in the permulations as in the observed test, so that
+the null corresponds to the analysis actually performed.
 
 ## Selection analyses
 
@@ -403,6 +426,18 @@ The strongest raw signal is *BHLHE40* (rho = -0.178, p = 0.051, adjusted
 p = 0.677). The correlation sign is negative in 13 of 18 genes, indicating
 marginally slower relative rates in diurnal lineages, the opposite of the
 expectation under accelerated adaptive evolution, though far from significance.
+
+The permulation null confirms this and shows the parametric p-values to have been
+anticonservative. Under 1000 species-subset-match permulations no gene reaches
+p = 0.05, the smallest permulation p-value being 0.114 for *BHLHE40* against its
+parametric 0.051, and the smallest adjusted value 0.728. The parametric p-value
+is smaller than the permulation p-value in 10 of the 18 genes, in two cases
+substantially (*NPAS2* 0.127 against 0.673; *ARNTL* 0.137 against 0.361).
+Complete-case permulations give the same picture (smallest p 0.104, smallest
+adjusted 0.764). The one gene whose parametric value approached conventional
+significance therefore does not survive a null that accounts for phylogenetic
+structure, and the negative result is strengthened rather than weakened by
+calibration.
 
 ## Cross-method integration
 

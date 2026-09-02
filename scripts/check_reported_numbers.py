@@ -32,7 +32,8 @@ GENES = ("CLOCK NPAS2 ARNTL PER1 PER2 PER3 CRY1 CRY2 NR1D1 NR1D2 "
 # Narrative documents whose numbers must track the data. The archive README is
 # excluded on purpose: quoting superseded numbers is its entire job.
 DOCS = ["MANUSCRIPT.md", "RESULTS.md", "PROGRESS_REPORT.md", "METHODS.md",
-        "RESUME.md", "shared_results/README.md"]
+        "RESUME.md", "shared_results/README.md",
+        "shared_results/rerconverge/README.md"]
 
 problems = []
 
@@ -224,6 +225,45 @@ def check_spikein():
             break
 
 
+def check_permulations():
+    """The permulation null must still say what the write-ups claim it says."""
+    mins = {}
+    for mode in ("ssm", "cc"):
+        p = os.path.join(SHARED, "rerconverge", f"rer_permulation_pvalues_{mode}.csv")
+        if not os.path.exists(p):
+            return
+        rows = list(csv.DictReader(open(p)))
+        n_sig = sum(1 for r in rows if float(r["permulation_P"]) < 0.05)
+        if n_sig:
+            problems.append(
+                f"{mode} permulations: {n_sig} gene(s) now below p = 0.05, but the "
+                f"write-ups state that none reach it")
+        mins[mode] = (min(float(r["permulation_P"]) for r in rows),
+                      min(float(r["permulation_p_adj"]) for r in rows),
+                      min(rows, key=lambda r: float(r["permulation_P"]))["gene"])
+
+    ssm_p, ssm_adj, ssm_gene = mins["ssm"]
+    cc_p, cc_adj, _ = mins["cc"]
+    claims_check("smallest ssm permulation p",
+                 r"(?:permulation p-value being|permulation p is|"
+                 r"permulation p-value of|becomes \*\*)(\d+\.\d+)", [f"{ssm_p:.3f}"])
+    claims_check("smallest cc permulation p",
+                 r"[Cc]omplete-case permulations (?:agree|give)[^(]*\((\d+\.\d+)",
+                 [f"{cc_p:.3f}"], required=False)
+    claims_check("smallest ssm adjusted permulation p",
+                 r"smallest adjusted value(?:s)? (?:is|are) (\d+\.\d+)",
+                 [f"{ssm_adj:.3f}"], required=False)
+
+    # The anticonservatism claim is a count, so recompute it rather than trust it.
+    par = {r["gene"]: (float(r["parametric_P"]), float(r["permulation_P"]))
+           for r in csv.DictReader(open(os.path.join(
+               SHARED, "rerconverge", "rer_permulation_pvalues_ssm.csv")))}
+    n_anti = sum(1 for a, b in par.values() if a < b)
+    claims_check("genes where the parametric p is smaller",
+                 r"(?:smaller than the permulation p-value in|"
+                 r"anticonservative in) ([\d]+) of (?:the )?18", [n_anti])
+
+
 # ---------------------------------------------------------------- Part B
 # Numbers that were correct in an earlier generation of the analysis. They may
 # appear only next to a marker saying so.
@@ -278,6 +318,7 @@ if __name__ == "__main__":
     check_scenario()
     check_contrastfel()
     check_spikein()
+    check_permulations()
     check_superseded_numbers()
 
     if problems:

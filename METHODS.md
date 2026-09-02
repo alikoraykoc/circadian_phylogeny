@@ -348,6 +348,30 @@ null re-places clades *of the observed sizes* at random positions on the same
 gene tree (1000 permutations per gene), so the null carries the same
 autocorrelation structure and only the phenotype assignment is randomised.
 
+**Relation to permulations.** This is not an invented principle. Saputra,
+Kowalczyk et al. (MBE 2021) published *permulations* for exactly this problem,
+and their binary permulations preserve the same two things: the number of
+foreground species and their phylogenetic relationships. The implementation here
+is a size-matched block variant rather than their algorithm. Published binary
+permulations simulate the trait on the tree under a fitted transition model and
+binarise the result, so the clumping emerges from the process; this screen
+reproduces the observed clade size profile directly. The reason is deliberate:
+the screen exists to answer the convergence question without an evolutionary
+model, and drawing the null from a fitted Mk model would put that model back in
+through the null.
+
+Measured cost of getting this wrong, on CLOCK: observed max diagnostic score
+0.348; tip-label shuffle null mean 0.264, giving p = 0.077; clade re-placement
+null mean 0.352, giving p = 0.483. The naive null would have produced a number
+people report as a trend.
+
+**Known limitation.** The candidate pool shrinks with block size. CLOCK's tree
+offers 59 clades of size 1, 18 of size 2, 9 of size 4 and only 5 of size 5, so
+roughly one permutation in five redraws the observed five-species clade. This
+pulls the null toward the observed value, inflating p. The bias is conservative,
+which is the safe direction here because the result is null; a positive result
+would have to report it.
+
 ## 11. Direct parsimony count of convergent substitutions
 
 `scripts/observed_convergent_substitutions.py` is the study's primary evidence,
@@ -434,6 +458,30 @@ diurnal tips with `clade = "terminal"`, the conservative choice, which uses tip
 branches only rather than also including ancestral branches leading into diurnal
 clades. Association was tested with `correlateWithBinaryPhenotype`
 (`min.sp = 10`, `min.pos = 2`), and p-values corrected across the 18 genes.
+
+**Permulation null** (`scripts/11b_rerconverge_permulations.R`). The parametric
+p-values from `correlateWithBinaryPhenotype` are not calibrated under
+phylogenetic non-independence; the RERconverge authors published permulations
+(Saputra, Kowalczyk et al., MBE 2021) for exactly this reason. `getPermsBinary`
+was run with 1000 permulations in `ssm` (species subset match) mode, which
+rebuilds the null against each gene's own taxon set, a genuine concern here since
+gene occupancy ranges from 40 to 60 taxa. `cc` (complete case) mode was run as a
+robustness check.
+
+`sisters_list = NULL` is passed deliberately. Reading the source of
+`getForegroundInfoClades` shows that NULL builds the foreground tree with
+`clade = "terminal"`, which is exactly what step 11 used; supplying a
+`sisters_list` would switch it to `clade = "all"` and the permulation would then
+be the null for a different analysis than the one under test.
+
+Result: no gene reaches p = 0.05 under either mode. Smallest permulation p is
+0.114 (BHLHE40, ssm) and 0.104 (cc), against its parametric 0.051; smallest
+adjusted values are 0.728 and 0.764. The parametric p-value is *smaller* than the
+permulation p-value in 10 of 18 genes, in two cases by a wide margin (NPAS2 0.127
+against 0.673, ARNTL 0.137 against 0.361), so the parametric test was
+anticonservative on this tree as expected. This strengthens the null result: the
+one gene that approached conventional significance does not survive a calibrated
+null.
 
 ## 14. Selection: Contrast-FEL and RELAX
 
