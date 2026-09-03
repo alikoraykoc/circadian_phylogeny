@@ -217,11 +217,19 @@ Benjamini-Hochberg q-value across all genes.
 
 Sites were additionally required to be phenotype-specific: the frequency of the
 convergent residue among diurnal species minus its frequency among nocturnal
-species was required to exceed 0.25. Without this criterion the test identifies
-homoplasy unrelated to diel activity, because a residue arising repeatedly across
-the tree will by chance fall on some transition branches, and the real
-transitions form a phylogenetically clustered set while the null scatters
-branches more widely.
+species was required to exceed 0.25. The threshold was set by judgment rather
+than calibrated, so two things about it are worth stating. It was fixed before
+the positive control existed and never subsequently adjusted, and the control,
+run two weeks later, provides independent evidence that it does not remove real
+signal: with the criterion applied, all 36 planted sites at ten converging
+lineages and all 18 at seven were still recovered, while false positives fell
+from 195 to 26. The cost falls on weak convergence, where recovery at three
+converging lineages drops from 35 of 36 to 23 of 36. Sensitivity of the result
+to the threshold is reported in Results. Without this criterion the test
+identifies homoplasy unrelated to diel activity, because a residue arising
+repeatedly across the tree will by chance fall on some transition branches, and
+the real transitions form a phylogenetically clustered set while the null
+scatters branches more widely.
 
 This second criterion is an addition to the standard procedure rather than part
 of it, and it was introduced in response to a diagnosed failure rather than
@@ -367,13 +375,36 @@ being nocturnal marsupials. The largest diurnal minus nocturnal gap among the
 twelve is 0.232 and the median is 0.067, so **no site is both statistically
 unusual and phenotype-specific**.
 
-The two criteria are close to orthogonal in these data, which is what makes the
-empty intersection informative rather than an artefact of a strict threshold. Of
-the 201 same-residue sites, 12 reach q <= 0.05 and 31 exceed the 0.25
-phenotype-specificity gap, but no site belongs to both sets. The result therefore
-does not turn on where the gap threshold is placed: the statistically unusual
-sites are not merely below the cutoff, they include three whose convergent
-residue is commoner in nocturnal than in diurnal species.
+The two criteria are close to orthogonal in these data. Of the 201 same-residue
+sites, 12 reach q <= 0.05 and 31 exceed the 0.25 phenotype-specificity gap, but
+no site belongs to both sets.
+
+Because the 0.25 threshold was set by judgment, the result is reported as a
+function of it rather than at that value alone. The largest gap among the 12
+statistically unusual sites is 0.232, so every threshold above that value
+returns zero, and the count rises only as the threshold is relaxed below it:
+
+| phenotype-specificity threshold | sites passing both criteria |
+|---|---|
+| 0.30 | 0 |
+| 0.25 (used here) | 0 |
+| 0.232 | 1 |
+| 0.20 | 2 |
+| 0.15 | 2 |
+| 0.10 | 4 |
+| 0.00 | 9 |
+
+The two sites that would survive a more permissive threshold are named rather
+than left implicit: *PER1* site 876 (serine, three events, gap 0.232) and
+*BHLHE40* site 359 (serine, three events, gap 0.200). Both are weakly
+phenotype-associated by construction, since a gap of 0.2 means the residue is
+20 percentage points commoner in diurnal than in nocturnal species, and both are
+serine. Three of the 12 have negative gaps and so fail at any positive
+threshold.
+
+The claim this supports is therefore narrower than "no site passes" and more
+robust: across the plausible range of the threshold there is at most one weak
+candidate per gene in two genes, and none at the value chosen in advance.
 
 The model-free residue screen agrees. Observed maximum diagnostic scores sit on
 the permutation null in all 18 genes and below it in several (*RORB* 0.223

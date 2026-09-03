@@ -449,8 +449,29 @@ features of the implementation are load-bearing:
    *negative* gaps, and 6 of 12 are serine, the most substitution-tolerant
    residue. Second, the two criteria are close to orthogonal here: 12 sites
    reach q <= 0.05, 31 of the 201 exceed the 0.25 gap, and the intersection is
-   empty. Moving the threshold does not rescue a positive result, so the zero is
-   not an artefact of where the cutoff was placed.
+   empty.
+
+   **The 0.25 itself was a judgment call, not a calibration.** Neither the code
+   comment nor the commit that introduced it justifies the number. Two things
+   are on the record instead. It was set on 2026-08-14 and never touched again
+   (`git log -S"MIN_DIURNAL_GAP = 0.25"` returns exactly one commit), so it was
+   not tuned toward an answer. And the spike-in control, built two weeks later
+   on 2026-08-28 and therefore independent of the choice, shows the threshold
+   does not discard real convergence: with it applied, 36 of 36 planted sites at
+   ten converging lineages and 18 of 18 at seven are still recovered, while
+   false positives drop from 195 to 26. It costs sensitivity only at weak
+   convergence, 35 of 36 falling to 23 of 36 at three lineages.
+
+   **Sensitivity, which the write-up must report rather than hide.** The largest
+   gap among the 12 significant sites is 0.232, only 0.018 below the threshold.
+   Any threshold above 0.232 returns zero; below it the count rises: 1 site at
+   0.232, 2 at 0.20 and 0.15, 4 at 0.10, 9 at 0.00 (3 of the 12 have negative
+   gaps and fail at any positive threshold). The two sites that a more
+   permissive threshold would admit are PER1 876 (S, 3 events, gap 0.232) and
+   BHLHE40 359 (S, 3 events, gap 0.200). Both are named in the manuscript
+   instead of being left below a cutoff, because "no site passes 0.25" is a
+   weaker and less honest claim than "at most two weak candidates exist across
+   the plausible range of the threshold".
 
 For efficiency, the parsimony reconstruction does not depend on which branches
 are called transitions, so it is computed once per site and each permutation

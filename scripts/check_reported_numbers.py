@@ -304,6 +304,50 @@ def check_references():
                         f"cites it")
 
 
+def check_gap_sensitivity():
+    """The threshold-sensitivity table must match a recount from the site table.
+
+    The 0.25 phenotype-specificity cutoff was a judgment call, so the manuscript
+    reports the result as a function of it. That table is the part a reviewer
+    will check, and it must not drift.
+    """
+    p = os.path.join(SHARED, "pcoc_sim_calibration", "observed_convergent_sites.csv")
+    if not os.path.exists(p):
+        return
+    rows = list(csv.DictReader(open(p)))
+    sig = [r for r in rows if float(r["q_site"]) <= 0.05]
+    if not sig:
+        problems.append("no sites at q <= 0.05; the sensitivity table assumes 12")
+        return
+
+    txt = doc_text("MANUSCRIPT.md")
+    # Scope to the sensitivity table itself; other tables also hold decimals.
+    head = "| phenotype-specificity threshold | sites passing both criteria |"
+    if head not in txt:
+        problems.append("MANUSCRIPT.md no longer carries the gap-sensitivity table")
+        return
+    block = txt.split(head, 1)[1].split("\n\n", 1)[0]
+    for m in re.finditer(r"\| (0\.\d+)(?: \(used here\))? \| (\d+) \|", block):
+        thr, claimed = float(m.group(1)), int(m.group(2))
+        actual = sum(1 for r in sig if float(r["diurnal_gap"]) >= thr)
+        if actual != claimed:
+            problems.append(
+                f"gap-sensitivity table: at threshold {thr} the manuscript says "
+                f"{claimed} sites, the data give {actual}")
+
+    top = max(float(r["diurnal_gap"]) for r in sig)
+    claims_check("largest gap among significant sites",
+                 r"largest gap among the 12\s+statistically unusual sites is (\d+\.\d+)",
+                 [f"{top:g}"], required=False)
+
+    # Named borderline sites must still be the ones a relaxed threshold admits.
+    for gene, site in (("PER1", "876"), ("BHLHE40", "359")):
+        hit = [r for r in sig if r["gene"] == gene and r["site"] == site]
+        if not hit:
+            problems.append(f"{gene} site {site} is named in the manuscript as a "
+                            f"borderline candidate but is no longer significant")
+
+
 # ---------------------------------------------------------------- Part B
 # Numbers that were correct in an earlier generation of the analysis. They may
 # appear only next to a marker saying so.
@@ -360,6 +404,7 @@ if __name__ == "__main__":
     check_spikein()
     check_permulations()
     check_references()
+    check_gap_sensitivity()
     check_superseded_numbers()
 
     if problems:
