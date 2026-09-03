@@ -379,7 +379,8 @@ because it counts what actually happened rather than fitting a model to it, and
 because it declares no convergent set and so carries none of the restriction
 described in Section 9.
 
-Fitch parsimony assigns an amino acid to every internal node per column, so a
+Fitch parsimony (Fitch 1971, Syst Zool 20:406-416) assigns an amino acid to
+every internal node per column, so a
 substitution on a branch is simply parent state not equal to child state. Five
 features of the implementation are load-bearing:
 

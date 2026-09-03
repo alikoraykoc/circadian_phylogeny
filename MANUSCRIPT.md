@@ -190,20 +190,21 @@ a null result and would need reporting were the result positive.
 
 ## Direct counting of convergent substitutions
 
-Fitch parsimony was used to assign amino acids to internal nodes, so that a
-substitution on a branch is simply a difference between parent and child states.
-Because transition branches carry more substitutions of any kind than randomly
-chosen branches of matched clade size, raw counts are confounded. This is the
-confound identified by Thomas and Hahn (2015), whose reanalysis of echolocating
-mammals showed a reported excess of convergence to disappear once a null
-accounting for non-adaptive convergence was applied. Their null uses the
-correlation between convergent and divergent substitutions across species pairs;
-the null used here is a different implementation of the same principle. The test
-statistic was the proportion of sites changing in two or more independent
-lineages that changed to the same residue, and null branches were drawn matched
-both on clade size and on branch length to within a factor of two. Conditioning
-on opportunity addresses the symptom and matching branch length addresses the
-cause, so the two are reported together and are expected to agree.
+Fitch parsimony (Fitch 1971) was used to assign amino acids to internal nodes,
+so that a substitution on a branch is simply a difference between parent and
+child states. Because transition branches carry more substitutions of any kind
+than randomly chosen branches of matched clade size, raw counts are confounded.
+This is the confound identified by Thomas and Hahn (2015), whose reanalysis of
+echolocating mammals showed a reported excess of convergence to disappear once
+a null accounting for non-adaptive convergence was applied. Their null uses the
+correlation between convergent and divergent substitutions across species
+pairs; the null used here is a different implementation of the same principle.
+The test statistic was the proportion of sites changing in two or more
+independent lineages that changed to the same residue, and null branches were
+drawn matched both on clade size and on branch length to within a factor of
+two. Conditioning on opportunity addresses the symptom and matching branch
+length addresses the cause, so the two are reported together and are expected
+to agree.
 
 Parsimony ties were resolved ten times per site with random tie-breaking to
 propagate ancestral state uncertainty. This is not standard practice; most
@@ -615,6 +616,9 @@ Existing: `results/figures/selection_summary.pdf`.
 Bennie JJ, Duffy JP, Inger R, Gaston KJ (2014). Biogeography of time
 partitioning in mammals. *Proceedings of the National Academy of Sciences*
 111(38): 13727-13732. doi:10.1073/pnas.1216063110
+
+Fitch WM (1971). Toward defining the course of evolution: minimum change for a
+specific tree topology. *Systematic Zoology* 20(4): 406-416. doi:10.2307/2412116
 
 Hiller M, Schaar BT, Indjeian VB, Kingsley DM, Hagey LR, Bejerano G (2012). A
 "forward genomics" approach links genotype to phenotype using independent
