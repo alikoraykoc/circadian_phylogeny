@@ -57,7 +57,11 @@ def claims_check(label, pattern, allowed, *, required=True):
         txt = doc_text(name)
         if not txt:
             continue
-        for m in re.finditer(pattern, txt):
+        # These documents are hard-wrapped, so a claim regularly straddles a line
+        # break. Swap newlines for spaces rather than collapsing whitespace, so
+        # character offsets survive and line numbers stay exact.
+        flat = txt.replace("\n", " ")
+        for m in re.finditer(pattern, flat):
             seen += 1
             got = m.group(1)
             if got.replace(",", "") not in {a.replace(",", "") for a in allowed}:
@@ -348,6 +352,46 @@ def check_gap_sensitivity():
                             f"borderline candidate but is no longer significant")
 
 
+def check_clock675():
+    """The CLOCK 675 worked example must still describe the actual column.
+
+    Three write-ups quote it as the clearest case of homoplasy, with specific
+    counts. Those counts are recomputed here rather than trusted.
+    """
+    aln = os.path.join(PROJ, "results", "trim", "CLOCK.trim.fa")
+    diel = os.path.join(PROJ, "data", "diel_activity.csv")
+    if not (os.path.exists(aln) and os.path.exists(diel)):
+        return
+    lab = {r["species"]: r["activity"] for r in csv.DictReader(open(diel))}
+
+    names, rows, cur = [], [], []
+    for line in open(aln):
+        line = line.rstrip()
+        if line.startswith(">"):
+            if cur:
+                rows.append("".join(cur)); cur = []
+            names.append(line[1:].split()[0])
+        elif line:
+            cur.append(line)
+    if cur:
+        rows.append("".join(cur))
+
+    col = 675 - 1
+    states = Counter(r[col] for r in rows)
+    n_met, n_tax = states.get("M", 0), len(rows)
+    claims_check("CLOCK 675 methionine count",
+                 r"fixed for\s+methionine in (\d+) of \d+ species", [n_met])
+    claims_check("CLOCK 675 taxon count",
+                 r"methionine in \d+ of (\d+)\s+species", [n_tax])
+
+    carriers = [names[i] for i, r in enumerate(rows) if r[col] == "V"]
+    by_diel = Counter(lab.get(t, "?") for t in carriers)
+    if by_diel.get("diurnal") != 2 or by_diel.get("nocturnal") != 2:
+        problems.append(
+            f"CLOCK 675 valine carriers are now {dict(by_diel)}, but the "
+            f"write-ups say two diurnal and two nocturnal")
+
+
 # ---------------------------------------------------------------- Part B
 # Numbers that were correct in an earlier generation of the analysis. They may
 # appear only next to a marker saying so.
@@ -405,6 +449,7 @@ if __name__ == "__main__":
     check_permulations()
     check_references()
     check_gap_sensitivity()
+    check_clock675()
     check_superseded_numbers()
 
     if problems:

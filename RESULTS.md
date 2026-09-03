@@ -98,7 +98,8 @@ significance.
 **Per-site testing, and the filter it forced.** Twelve of the 201 same-residue
 sites reach q <= 0.05. **None survives inspection.** Nine of the twelve carry a
 residue as common in nocturnal species as in diurnal ones; the clearest is
-CLOCK 675, residue V in two diurnal and two nocturnal species, a
+CLOCK 675, a column otherwise fixed for methionine in 54 of 59
+species, residue V in two diurnal and two nocturnal species, a
 diurnal-minus-nocturnal frequency gap of -0.002, with two of the four carriers
 being nocturnal marsupials.
 

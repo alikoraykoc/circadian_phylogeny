@@ -428,7 +428,9 @@ features of the implementation are load-bearing:
    statistically unusual and phenotype-specific (gap >= 0.25). The necessity of
    this filter is empirical: without it, 12 sites reached q <= 0.05, and 9 of
    them carried a residue as common in nocturnal species as in diurnal ones
-   (CLOCK 675, residue V in two diurnal and two nocturnal species, gap -0.002).
+   (CLOCK 675, a column otherwise fixed for methionine in 54 of 59 species,
+   residue V in two diurnal and two nocturnal species, gap -0.002, both
+   nocturnal carriers marsupial).
    The permutation test alone asks only whether two or more transition branches
    changed to the same residue more often than randomly placed branches would;
    at a tolerant site a residue arises repeatedly across the tree, some of those

@@ -233,17 +233,20 @@ scatters branches more widely.
 
 This second criterion is an addition to the standard procedure rather than part
 of it, and it was introduced in response to a diagnosed failure rather than
-imposed in advance. Applying the permutation test alone returned 12 sites at
-q <= 0.05 whose residues were not diagnostic of the phenotype: the median
-frequency gap among them was 0.067, three were negative, meaning the residue was
-commoner in nocturnal than in diurnal species, and half were serine, the most
-substitution-tolerant residue in the genetic code. The clearest case, *CLOCK*
-site 675, carried valine in two diurnal and two nocturnal species, two of the
-four being nocturnal marsupials. The requirement that a convergent residue also
-be phenotype-diagnostic is implicit in the logic of Forward Genomics
-(Hiller et al. 2012), which likewise conditions a genomic signal on matching the
-phenotype pattern, but the frequency-gap form used here is specific to this
-study.
+imposed in advance. Applying the permutation test alone returned 12 sites at q
+<= 0.05 whose residues were not diagnostic of the phenotype: the median
+frequency gap among them was 0.067, three were negative, meaning the residue
+was commoner in nocturnal than in diurnal species, and half were serine, the
+most substitution-tolerant residue in the genetic code. The clearest case,
+*CLOCK* site 675, is a column otherwise fixed for methionine in 54 of 59
+species: valine appears in four, two diurnal and two nocturnal, and the two
+nocturnal carriers are marsupials, the lineages most distant from the placental
+diurnal transitions. A rare variant arising independently in four scattered
+lineages is homoplasy, not convergence toward a phenotype. The requirement that
+a convergent residue also be phenotype-diagnostic is implicit in the logic of
+Forward Genomics (Hiller et al. 2012), which likewise conditions a genomic
+signal on matching the phenotype pattern, but the frequency-gap form used here
+is specific to this study.
 
 ## Relative evolutionary rates
 
@@ -368,9 +371,10 @@ lineages, and 201 of those changed to the same residue**, an observed rate of
 rate-conditioned p-value below 0.282.
 
 Twelve of the 201 same-residue sites reached q <= 0.05, but none is
-phenotype-specific. Nine of the twelve carry a residue as common in nocturnal as
-in diurnal species; the clearest example carries the residue in two diurnal and
-two nocturnal species, a frequency gap of -0.002, with two of the four carriers
+phenotype-specific. Nine of the twelve carry a residue as common in nocturnal
+as in diurnal species; the clearest example sits in a column otherwise fixed
+for methionine in 54 of 59 species and carries valine in two diurnal and two
+nocturnal species, a frequency gap of -0.002, with two of the four carriers
 being nocturnal marsupials. The largest diurnal minus nocturnal gap among the
 twelve is 0.232 and the median is 0.067, so **no site is both statistically
 unusual and phenotype-specific**.
