@@ -61,11 +61,29 @@ balanced 30/30 taxon sample was expected to produce (Methods Section 1), and it
 is why the equal-rates model is primary. Any result quoted under ARD inherits a
 premise that contradicts the published mammalian literature.
 
-**Hemiplasy is not driving anything.** Of the 15 transition branches, none sits
-on a branch that is weak on both concordance axes (gCF < 50% and sCFL < 50%).
-The two closest cases (gCF 56.2 / sCFL 48.1; gCF 50.0 / sCFL 42.0) are weak on
-one axis only. Gene-tree discordance therefore cannot plausibly be manufacturing
-false convergence at any transition.
+**Hemiplasy is not driving anything.** Ten of the 15 transitions are on tip
+branches, where discordance cannot arise at all: a tip sits in every gene tree,
+so there is no bipartition to conflict over. Of the 5 internal transitions,
+none is weak on both concordance axes (gCF < 50% and sCFL < 50%) and none is
+flagged. Three are weak on one axis:
+
+| edge | branch | gCF | sCFL | gN | weak axis |
+|---|---|---|---|---|---|
+| 3 | event 1, gain, 24-taxon clade | **38.9** | 75.7 | 18 | gCF |
+| 16 | event 3, reversal, 8-taxon carnivore clade | 50.0 | **42.0** | 18 | sCFL |
+| 4 | event 2, reversal, Pipistrellus + Saccopteryx | 56.2 | **48.1** | 16 | sCFL |
+
+Edge 3 deserves naming because it carries the largest gain of diurnality in the
+scenario and has the lowest gCF of any transition. Its sCFL is 75.7, so the
+sites support the clade strongly even though only about 7 of 18 gene trees
+recover it. Low gCF with high sCFL is gene-tree estimation error, not conflict:
+a single gene rarely has enough informative sites to resolve a clade, while the
+concatenated sites do. This is exactly the case the conjunctive rule is built to
+let through, and flagging on gCF alone would have removed the study's largest
+convergent event for no good reason.
+
+Gene-tree discordance therefore cannot plausibly be manufacturing false
+convergence at any transition.
 
 ## 3. Primary evidence: direct count of convergent substitutions
 

@@ -337,10 +337,20 @@ reframes the history as 6 gains and 10 reversals. This is the expected
 consequence of the deliberately balanced diel sample and is the reason the
 equal-rates model is treated as primary.
 
-No transition branch falls on a branch that is weak on both concordance axes
-(gCF below 50 percent and sCFL below 50 percent). The two closest cases are weak
-on one axis only. Gene tree discordance therefore cannot plausibly generate false
-convergence at any transition in this dataset.
+Ten of the 15 transitions sit on tip branches, where gene tree discordance
+cannot arise: a tip is present in every gene tree, so there is no bipartition
+to conflict over. Of the five internal transitions, none is weak on both
+concordance axes (gCF below 50 percent and sCFL below 50 percent) and none was
+flagged. Three are weak on one axis. Two are weak on the site axis and sit
+close to the flagging corner (gCF 56.2 with sCFL 48.1; gCF 50.0 with sCFL
+42.0). The third is the largest gain of diurnality in the scenario, the branch
+subtending 24 taxa, where gCF is 38.9, the lowest of any transition, against
+sCFL of 75.7. Low gene concordance with high site concordance is the signature
+of gene tree estimation error rather than genuine conflict: individual genes
+carry too few informative sites to recover the clade, while the sites
+themselves support it strongly. That combination is what the conjunctive
+criterion exists to pass. Gene tree discordance therefore cannot plausibly
+generate false convergence at any transition in this dataset.
 
 ## The analysis detects planted convergence
 

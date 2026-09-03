@@ -392,6 +392,65 @@ def check_clock675():
             f"write-ups say two diurnal and two nocturnal")
 
 
+def check_hemiplasy():
+    """The concordance control must still say what the write-ups claim."""
+    p = os.path.join(SHARED, "scenario", "transition_branches_flagged.csv")
+    if not os.path.exists(p):
+        return
+    rows = list(csv.DictReader(open(p)))
+
+    def num(v):
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return None
+
+    internal = [r for r in rows if num(r["gCF"]) is not None]
+    terminal = [r for r in rows if num(r["gCF"]) is None]
+    both_weak = [r for r in internal
+                 if num(r["gCF"]) < 50 and num(r["sCFL"]) < 50]
+    one_weak = [r for r in internal
+                if (num(r["gCF"]) < 50) != (num(r["sCFL"]) < 50)]
+    flagged = [r for r in rows if r["hemiplasy_flag"] == "True"]
+
+    if both_weak or flagged:
+        problems.append(
+            f"hemiplasy control: {len(both_weak)} transition(s) weak on both axes "
+            f"and {len(flagged)} flagged, but the write-ups state none")
+
+    # The write-ups spell these counts as words, so match either form.
+    words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+             "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11,
+             "twelve": 12, "fifteen": 15}
+
+    def written(pattern, expected, label):
+        for name in DOCS:
+            txt = doc_text(name)
+            if not txt:
+                continue
+            for m in re.finditer(pattern, txt.replace("\n", " "), re.I):
+                tok = m.group(1)
+                got = words.get(tok.lower(), None) if not tok.isdigit() else int(tok)
+                if got is not None and got != expected:
+                    line = txt[:m.start()].count("\n") + 1
+                    problems.append(f"{name}:{line} {label}: says {tok}, "
+                                    f"data give {expected}")
+
+    written(r"(\w+) of the 15 transitions (?:sit|are) on tip",
+            len(terminal), "transitions on tip branches")
+    written(r"(\w+) are weak on one axis", len(one_weak),
+            "internal transitions weak on one axis")
+
+    # The branch the write-ups single out as the lowest gCF must still be it.
+    worst = min(internal, key=lambda r: num(r["gCF"]))
+    claims_check("lowest transition gCF",
+                 r"gCF is (\d+\.\d+), the lowest of any transition",
+                 [f"{num(worst['gCF']):g}"], required=False)
+    claims_check("lowest-gCF branch sCFL",
+                 r"the lowest of any\s+transition, against\s+sCFL of (\d+\.\d+)",
+                 [f"{num(worst['sCFL']):g}"], required=False)
+
+
 # ---------------------------------------------------------------- Part B
 # Numbers that were correct in an earlier generation of the analysis. They may
 # appear only next to a marker saying so.
@@ -450,6 +509,7 @@ if __name__ == "__main__":
     check_references()
     check_gap_sensitivity()
     check_clock675()
+    check_hemiplasy()
     check_superseded_numbers()
 
     if problems:

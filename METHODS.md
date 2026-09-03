@@ -225,8 +225,17 @@ branch was matched to its concordance values by descendant tip set
 A branch is flagged only when **both** gCF < 50% and sCFL < 50%, since either
 alone is usually estimation noise; missing values never flag. Of the 15 ER
 transitions (10 on tip branches, 5 internal), **none was flagged**. The two
-closest cases (gCF 56.2 / sCFL 48.1, and gCF 50.0 / sCFL 42.0) are weak on one
-axis only.
+closest cases (gCF 56.2 / sCFL 48.1, and gCF 50.0 / sCFL 42.0) are weak on the
+site axis only.
+
+A third internal transition is weak on the gene axis and is worth naming rather
+than leaving in the table: edge 3, node 64, the 24-taxon gain that is event 1
+and the largest transition in the scenario, has gCF 38.9, the lowest of any
+transition, against sCFL 75.7. Only about 7 of 18 gene trees recover that clade
+while the sites support it strongly. That pattern is gene-tree estimation error,
+not genuine conflict, and it is the reason the rule is conjunctive: flagging on
+gCF alone would have discarded the study's largest convergent event on the
+strength of per-gene resolution rather than evidence.
 
 ## 7. Convergence detection: PCOC
 
