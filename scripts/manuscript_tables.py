@@ -4,6 +4,8 @@
 Generated rather than hand-typed, so the tables cannot drift from the data.
 
 Outputs: shared_results/tables/table1_genes.csv
+         shared_results/tables/table4_concordance.csv
+         shared_results/tables/table5_gap_sensitivity.csv
          shared_results/tables/table2_scenarios.csv
          shared_results/tables/tables.md
 """
@@ -205,9 +207,79 @@ def md(rows, header, title, note):
     return "\n".join(out)
 
 
+def table4():
+    """Concordance at every internal transition branch (the hemiplasy control).
+
+    Tip branches are excluded: a tip is in every gene tree, so there is no
+    bipartition to conflict over and no concordance factor is defined.
+    """
+    flagged = os.path.join(PROJ, "shared_results", "scenario",
+                           "transition_branches_flagged.csv")
+    events = os.path.join(PROJ, "shared_results", "scenario",
+                          "convergent_events_ER.csv")
+    if not (os.path.exists(flagged) and os.path.exists(events)):
+        return []
+
+    ev = {}
+    for r in csv.DictReader(open(events)):
+        if r["node_role"].strip('"') == "transition":
+            ev[r["node"]] = (r["event_id"], r["direction"].strip('"'),
+                             len(r["tips"].strip('"').split(";")))
+
+    rows = []
+    for r in csv.DictReader(open(flagged)):
+        try:
+            gcf, scf = float(r["gCF"]), float(r["sCFL"])
+        except ValueError:
+            continue  # tip branch, no concordance defined
+        eid, direction, ntips = ev.get(r["child"], ("", "", ""))
+        weak = [a for a, v in (("gCF", gcf), ("sCFL", scf)) if v < 50]
+        rows.append(dict(
+            event=eid, direction=direction, descendant_taxa=ntips,
+            gCF=f"{gcf:.1f}", sCFL=f"{scf:.1f}", decisive_gene_trees=r["gN"],
+            weak_axis=", ".join(weak) or "none",
+            flagged=r["hemiplasy_flag"]))
+    rows.sort(key=lambda x: float(x["gCF"]))
+    with open(os.path.join(OUT, "table4_concordance.csv"), "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+        w.writeheader(); w.writerows(rows)
+    return rows
+
+
+def table5():
+    """Sensitivity of the convergent-site count to the phenotype-specificity cutoff.
+
+    The 0.25 threshold was set by judgment, so the result is reported across the
+    range rather than at that one value. The pivot point, the largest gap among
+    the statistically unusual sites, is computed rather than hardcoded.
+    """
+    p = os.path.join(PROJ, "shared_results", "pcoc_sim_calibration",
+                     "observed_convergent_sites.csv")
+    if not os.path.exists(p):
+        return []
+    sig = [r for r in csv.DictReader(open(p)) if float(r["q_site"]) <= 0.05]
+    if not sig:
+        return []
+    pivot = max(float(r["diurnal_gap"]) for r in sig)
+
+    thresholds = [0.30, 0.25, pivot, 0.20, 0.15, 0.10, 0.00]
+    rows = []
+    for t in thresholds:
+        label = f"{t:g}" + (" (used here)" if abs(t - 0.25) < 1e-9 else "")
+        rows.append(dict(threshold=label,
+                         sites_passing_both=sum(1 for r in sig
+                                                if float(r["diurnal_gap"]) >= t)))
+    with open(os.path.join(OUT, "table5_gap_sensitivity.csv"), "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+        w.writeheader(); w.writerows(rows)
+    return rows
+
+
 if __name__ == "__main__":
     t1 = table1()
     t2 = table2()
+    t4 = table4()
+    t5 = table5()
     blocks = [
         md(t1, ["Gene", "Module", "Taxa", "Untrimmed columns", "Trimmed columns",
                 "Variable columns", "Parsimony-informative sites",
@@ -229,6 +301,27 @@ if __name__ == "__main__":
            "Power and false positive rate are the worst value across the 18 genes at "
            "the calibrated posterior threshold of 0.99. All sites above threshold "
            "were subsequently rejected as alignment artefacts."),
+        "",
+        md(t4, ["Event", "Direction", "Descendant taxa", "gCF", "sCFL",
+                "Decisive gene trees", "Weak axis", "Flagged"],
+           "Table 4. Gene and site concordance at every internal transition "
+           "branch.",
+           "The remaining 10 of the 15 transitions are on tip branches, where a "
+           "concordance factor is undefined because a tip appears in every gene "
+           "tree. A branch is flagged as a hemiplasy risk only when gCF and sCFL "
+           "are both below 50 percent, since either alone is usually gene-tree "
+           "estimation error rather than genuine conflict. No transition is "
+           "flagged."),
+        "",
+        md(t5, ["phenotype-specificity threshold", "sites passing both criteria"],
+           "Table 5. Convergent sites as a function of the phenotype-specificity "
+           "threshold.",
+           "Sites counted are those that are both statistically unusual "
+           "(q <= 0.05) and phenotype-specific at the given threshold. The 0.25 "
+           "cutoff was fixed by judgment before the positive control existed and "
+           "never adjusted; the row between 0.25 and 0.20 is the largest gap "
+           "observed among the statistically unusual sites, so every threshold "
+           "above it returns zero."),
     ]
     with open(os.path.join(OUT, "tables.md"), "w") as fh:
         fh.write("\n".join(blocks) + "\n")

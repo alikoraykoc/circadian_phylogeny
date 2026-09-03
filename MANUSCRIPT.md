@@ -338,19 +338,20 @@ consequence of the deliberately balanced diel sample and is the reason the
 equal-rates model is treated as primary.
 
 Ten of the 15 transitions sit on tip branches, where gene tree discordance
-cannot arise: a tip is present in every gene tree, so there is no bipartition
-to conflict over. Of the five internal transitions, none is weak on both
+cannot arise: a tip is present in every gene tree, so there is no bipartition to
+conflict over. Of the five internal transitions, none is weak on both
 concordance axes (gCF below 50 percent and sCFL below 50 percent) and none was
-flagged. Three are weak on one axis. Two are weak on the site axis and sit
-close to the flagging corner (gCF 56.2 with sCFL 48.1; gCF 50.0 with sCFL
-42.0). The third is the largest gain of diurnality in the scenario, the branch
-subtending 24 taxa, where gCF is 38.9, the lowest of any transition, against
-sCFL of 75.7. Low gene concordance with high site concordance is the signature
-of gene tree estimation error rather than genuine conflict: individual genes
-carry too few informative sites to recover the clade, while the sites
-themselves support it strongly. That combination is what the conjunctive
-criterion exists to pass. Gene tree discordance therefore cannot plausibly
-generate false convergence at any transition in this dataset.
+flagged; three are weak on one axis (Table 4). The one worth naming is the
+largest gain of diurnality in the scenario, the branch subtending 24 taxa, where
+gCF is 38.9, the lowest of any transition, against sCFL of 75.7. Low gene
+concordance with high site concordance is the signature of gene tree estimation
+error rather than genuine conflict: individual genes carry too few informative
+sites to recover the clade, while the sites themselves support it strongly. That
+combination is what the conjunctive criterion exists to pass, and flagging on
+gCF alone would have discarded the study's largest convergent event on the
+strength of per-gene resolution rather than evidence. Gene tree discordance
+therefore cannot plausibly generate false convergence at any transition in this
+dataset.
 
 ## The analysis detects planted convergence
 
@@ -397,17 +398,8 @@ no site belongs to both sets.
 Because the 0.25 threshold was set by judgment, the result is reported as a
 function of it rather than at that value alone. The largest gap among the 12
 statistically unusual sites is 0.232, so every threshold above that value
-returns zero, and the count rises only as the threshold is relaxed below it:
-
-| phenotype-specificity threshold | sites passing both criteria |
-|---|---|
-| 0.30 | 0 |
-| 0.25 (used here) | 0 |
-| 0.232 | 1 |
-| 0.20 | 2 |
-| 0.15 | 2 |
-| 0.10 | 4 |
-| 0.00 | 9 |
+returns zero, and the count rises only as the threshold is relaxed below it
+(Table 5).
 
 The two sites that would survive a more permissive threshold are named rather
 than left implicit: *PER1* site 876 (serine, three events, gap 0.232) and
@@ -592,6 +584,32 @@ Branch and leaf counts are on the 60-taxon species tree (118 branches). Power an
 
 **Table 3.** Positive control recovery by method and difficulty level, with false
 positive counts. Data: `shared_results/spikein/spikein_scorecard.csv`.
+
+**Table 4. Gene and site concordance at every internal transition branch.**
+
+The remaining 10 of the 15 transitions are on tip branches, where a concordance factor is undefined because a tip appears in every gene tree. A branch is flagged as a hemiplasy risk only when gCF and sCFL are both below 50 percent, since either alone is usually gene-tree estimation error rather than genuine conflict. No transition is flagged.
+
+| Event | Direction | Descendant taxa | gCF | sCFL | Decisive gene trees | Weak axis | Flagged |
+|---|---|---|---|---|---|---|---|
+| 1 | gain | 24 | 38.9 | 75.7 | 18 | gCF | False |
+| 3 | reversal | 8 | 50.0 | 42.0 | 18 | sCFL | False |
+| 8 | gain | 8 | 55.6 | 60.8 | 18 | none | False |
+| 2 | reversal | 2 | 56.2 | 48.1 | 16 | sCFL | False |
+| 11 | gain | 4 | 58.8 | 55.4 | 17 | none | False |
+
+**Table 5. Convergent sites as a function of the phenotype-specificity threshold.**
+
+Sites counted are those that are both statistically unusual (q <= 0.05) and phenotype-specific at the given threshold. The 0.25 cutoff was fixed by judgment before the positive control existed and never adjusted; the row between 0.25 and 0.20 is the largest gap observed among the statistically unusual sites, so every threshold above it returns zero.
+
+| phenotype-specificity threshold | sites passing both criteria |
+|---|---|
+| 0.3 | 0 |
+| 0.25 (used here) | 0 |
+| 0.232 | 1 |
+| 0.2 | 2 |
+| 0.15 | 2 |
+| 0.1 | 4 |
+| 0 | 9 |
 
 **Figure 1.** Species tree of the 60 sampled mammals with diel activity states at
 the tips and reconstructed transitions marked: gains of diurnality in blue,

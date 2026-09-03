@@ -33,3 +33,29 @@ Branch and leaf counts are on the 60-taxon species tree (118 branches). Power an
 | ER | Reversals to nocturnality | 5 | 19 | 16.1 | 13 | 0.996 | 0.0000 | 1 |
 | ARD | Gains of diurnality | 6 | 64 | 54.2 | 55 | 0.990 | 0.0000 | 2 |
 | ARD | Reversals to nocturnality | 10 | 44 | 37.3 | 29 |  |  | not run |
+
+**Table 4. Gene and site concordance at every internal transition branch.**
+
+The remaining 10 of the 15 transitions are on tip branches, where a concordance factor is undefined because a tip appears in every gene tree. A branch is flagged as a hemiplasy risk only when gCF and sCFL are both below 50 percent, since either alone is usually gene-tree estimation error rather than genuine conflict. No transition is flagged.
+
+| Event | Direction | Descendant taxa | gCF | sCFL | Decisive gene trees | Weak axis | Flagged |
+|---|---|---|---|---|---|---|---|
+| 1 | gain | 24 | 38.9 | 75.7 | 18 | gCF | False |
+| 3 | reversal | 8 | 50.0 | 42.0 | 18 | sCFL | False |
+| 8 | gain | 8 | 55.6 | 60.8 | 18 | none | False |
+| 2 | reversal | 2 | 56.2 | 48.1 | 16 | sCFL | False |
+| 11 | gain | 4 | 58.8 | 55.4 | 17 | none | False |
+
+**Table 5. Convergent sites as a function of the phenotype-specificity threshold.**
+
+Sites counted are those that are both statistically unusual (q <= 0.05) and phenotype-specific at the given threshold. The 0.25 cutoff was fixed by judgment before the positive control existed and never adjusted; the row between 0.25 and 0.20 is the largest gap observed among the statistically unusual sites, so every threshold above it returns zero.
+
+| phenotype-specificity threshold | sites passing both criteria |
+|---|---|
+| 0.3 | 0 |
+| 0.25 (used here) | 0 |
+| 0.232 | 1 |
+| 0.2 | 2 |
+| 0.15 | 2 |
+| 0.1 | 4 |
+| 0 | 9 |

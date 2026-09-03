@@ -1,0 +1,6 @@
+event,direction,descendant_taxa,gCF,sCFL,decisive_gene_trees,weak_axis,flagged
+1,gain,24,38.9,75.7,18,gCF,False
+3,reversal,8,50.0,42.0,18,sCFL,False
+8,gain,8,55.6,60.8,18,none,False
+2,reversal,2,56.2,48.1,16,sCFL,False
+11,gain,4,58.8,55.4,17,none,False
