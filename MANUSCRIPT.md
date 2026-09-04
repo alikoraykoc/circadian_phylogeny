@@ -206,6 +206,26 @@ two. Conditioning on opportunity addresses the symptom and matching branch
 length addresses the cause, so the two are reported together and are expected
 to agree.
 
+Fitch parsimony treats the twenty amino acids as unordered and equally weighted,
+so a change from valine to isoleucine and one from valine to tryptophan both
+count as a single step. That is biologically false in two ways: the first
+requires one nucleotide substitution and the second at least two, and the first
+is chemically conservative while the second is not. The assumption is retained
+deliberately. Weighting the steps would require a substitution matrix, that is,
+a model of amino acid exchangeability, and this test exists as a model-free
+cross-check on the profile-based PCOC analysis; adopting a model of the same
+kind would remove its independence. The bias it introduces is also carried by
+the null, since observed and permuted branches are scored by the same counting,
+so it inflates the absolute number of apparent convergences without affecting
+the contrast on which the test rests.
+
+The one place the matched null does not absorb it is the per-site test, where
+the null is matched on branches but not on how easily a residue can be reached.
+This is visible in the results below: half of the sites reaching q <= 0.05
+converge on serine, which has six codons and sits one nucleotide from a large
+fraction of the other amino acids, so it is the residue most readily arrived at
+by chance.
+
 Parsimony ties were resolved ten times per site with random tie-breaking to
 propagate ancestral state uncertainty. This is not standard practice; most
 applications commit to a single reconstruction. It was included because the
@@ -238,7 +258,8 @@ imposed in advance. Applying the permutation test alone returned 12 sites at q
 <= 0.05 whose residues were not diagnostic of the phenotype: the median
 frequency gap among them was 0.067, three were negative, meaning the residue
 was commoner in nocturnal than in diurnal species, and half were serine, the
-most substitution-tolerant residue in the genetic code. The clearest case,
+residue most easily reached by chance under the unordered counting described
+above. The clearest case,
 *CLOCK* site 675, is a column otherwise fixed for methionine in 54 of 59
 species: valine appears in four, two diurnal and two nocturnal, and the two
 nocturnal carriers are marsupials, the lineages most distant from the placental

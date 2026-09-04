@@ -388,6 +388,38 @@ because it counts what actually happened rather than fitting a model to it, and
 because it declares no convergent set and so carries none of the restriction
 described in Section 9.
 
+**What Fitch assumes, and why we keep it.** Fitch treats the 20 amino acids as
+*unordered and equally weighted*: every state change costs exactly 1. V to I and
+V to W are the same single step. This is false twice over. V to I is one
+nucleotide (GUN to AUH) while V to W needs at least two (GUG to UGG), and V and
+I are interchangeable branched hydrophobics while W is not. Every empirical
+matrix (BLOSUM, PAM, LG, WAG) encodes exactly the inequality Fitch discards.
+
+It is kept anyway, for two reasons.
+
+1. *Weighting would import a model.* Weighted steps mean a substitution matrix,
+   which is a model of amino acid exchangeability. PCOC already supplies one.
+   This test's entire value is being an independent, model-free cross-check on
+   PCOC; giving it a model of the same family would forfeit that.
+
+2. *The matched null carries the same bias.* Observed transition branches and
+   permuted null branches are scored with identical unordered counting, so the
+   inflation applies to both sides. The assumption distorts the absolute count
+   of apparent convergences, not the contrast that the test actually reports.
+
+**Where the null does NOT absorb it.** The per-site test. There the question is
+whether 2+ lineages reached the same residue, and the null is matched on
+branches, not on residue accessibility. A residue that is easy to reach will be
+over-detected with no compensation.
+
+This is not hypothetical. Of the 12 sites reaching q <= 0.05, **6 are serine**.
+Serine has 6 codons across two disjoint families (UCN and AGY) and sits one
+nucleotide from Ala, Thr, Pro, Cys, Phe, Tyr, Leu, Asn, Gly, Arg and Ile. It is
+the residue chance arrives at most often. The serine pile-up is the observable
+fingerprint of the unordered assumption, and the phenotype-specificity filter of
+point 5 below is what removes it. The two limitations are complementary: Fitch
+generates the failure mode, the filter catches it.
+
 Fitch parsimony (Fitch 1971, Syst Zool 20:406-416) assigns an amino acid to
 every internal node per column, so a
 substitution on a branch is simply parent state not equal to child state. Five
@@ -458,8 +490,8 @@ features of the implementation are load-bearing:
 
    Two facts make it defensible rather than arbitrary. First, it was introduced
    after diagnosing a failure, not before: the 12 sites are real output, 3 have
-   *negative* gaps, and 6 of 12 are serine, the most substitution-tolerant
-   residue. Second, the two criteria are close to orthogonal here: 12 sites
+   *negative* gaps, and 6 of 12 are serine, the residue chance reaches most
+   readily, for the reason set out under the unordered assumption above. Second, the two criteria are close to orthogonal here: 12 sites
    reach q <= 0.05, 31 of the 201 exceed the 0.25 gap, and the intersection is
    empty.
 

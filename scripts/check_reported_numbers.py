@@ -344,6 +344,16 @@ def check_gap_sensitivity():
                  r"largest gap among the 12\s+statistically unusual sites is (\d+\.\d+)",
                  [f"{top:g}"], required=False)
 
+    # The serine enrichment is load-bearing: it is presented as the observable
+    # signature of Fitch's unordered counting, so it must still hold.
+    n_ser = sum(1 for r in sig if r["residue"] == "S")
+    claims_check("serine count among significant sites",
+                 r"(\d+)(?: of \d+)? are serine", [n_ser], required=False)
+    if n_ser * 2 != len(sig):
+        problems.append(
+            f"{n_ser} of {len(sig)} significant sites are serine, but the "
+            f"write-ups describe them as half")
+
     # Named borderline sites must still be the ones a relaxed threshold admits.
     for gene, site in (("PER1", "876"), ("BHLHE40", "359")):
         hit = [r for r in sig if r["gene"] == gene and r["site"] == site]
